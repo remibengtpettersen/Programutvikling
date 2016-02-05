@@ -1,7 +1,13 @@
 # Programutvikling
-************************************
-Semesteroppgave for programutvikling
-************************************
+**************************************
+# Semesteroppgave for programutvikling
+**************************************
+
+s305080 Truls Stenrud
+s305061 Andreas Berg Ophus
+s305073 - Remi Bengt Pettersen
+
+**************************************
 
 160205 17:38
 
