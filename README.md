@@ -13,3 +13,8 @@ s305073 - Remi Bengt Pettersen
 
 Created GoL JavaFx project in git repository named "Programutvikling". Shared repository with Truls Stendrud - "Stenrud" and Andreas Berg Ophus - "Andoph" 
 
+160212 12:30
+
+Added packages: controller, model, test, view
+Added classes: MasterController, FrontPageController, GameController, ClassicRule, CustomRule, GameBoard, GameBoardTest
+Project contains a running verison of GoL, only with gameboard and no functionality other launch.

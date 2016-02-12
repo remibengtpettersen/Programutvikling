@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+   <children>
+      <Canvas fx:id="canvas" height="400.0" width="400.0" />
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="Speed:" />
+                  <Slider prefHeight="16.0" prefWidth="150.0" />
+               </children></HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="20.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="Zoom:" />
+                  <Slider nodeOrientation="LEFT_TO_RIGHT" prefHeight="16.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="80.0" text="Cells:" />
+                  <ColorPicker fx:id="cellColor" prefHeight="30.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="80.0" text="Background:" />
+                  <ColorPicker fx:id="backgroundColor" prefHeight="30.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="80.0" text="Rules:" />
+                  <ChoiceBox prefHeight="27.0" prefWidth="120.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="30.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <TextField prefHeight="30.0" prefWidth="200.0" promptText="URL here..." />
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="100.0" spacing="20.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Save" />
+                              <Button fx:id="loadBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" text="Load" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Go to Editor" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</HBox>
