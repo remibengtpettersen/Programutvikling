@@ -3,9 +3,8 @@ package model;
 /**
  * Created by remibengtpettersen on 12.02.2016.
  */
-public interface Rule {
+public abstract class Rule {
 
-    boolean shouldLive(int neighbours);
+    abstract boolean evolve(int neighbours, boolean isAlive);
 
-    boolean shouldDie(int neighbours);
 }

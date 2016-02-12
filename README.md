@@ -18,3 +18,6 @@ Created GoL JavaFx project in git repository named "Programutvikling". Shared re
 Added packages: controller, model, test, view
 Added classes: MasterController, FrontPageController, GameController, ClassicRule, CustomRule, GameBoard, GameBoardTest
 Project contains a running verison of GoL, only with gameboard and no functionality other launch.
+
+Changed Rule from interface to abstract
+Added unit test for checking the evolve logic.

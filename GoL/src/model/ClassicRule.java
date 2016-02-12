@@ -3,34 +3,18 @@ package model;
 /**
  * Created by remibengtpettersen on 12.02.2016.
  */
-public class ClassicRule implements Rule {
+public class ClassicRule extends Rule {
 
-    /**
-     *
-     * Checs if dead cells should live
-     * if it has 3 neighbours it should live
-     * @param neighbours
-     * @return true if it should live
-     */
+    private int neighbour;
+
     @Override
-    public boolean shouldLive(int neighbours) {
+    public boolean evolve(int neighbours, boolean isAlive) {
+
         if(neighbours == 3)
-            return true;
+            return true;                //will live
+        else if(neighbours != 2)
+            return false;               //will die
         else
-            return false;
-    }
-
-    /**
-     * Checks if live cells should die
-     * if it has 2 ore 3 neighbours it should not die
-     * @param neighbours
-     * @return true if it should die
-     */
-    @Override
-    public boolean shouldDie(int neighbours) {
-        if(neighbours == 2 || neighbours == 3)
-            return false;
-        else
-            return true;
+            return isAlive;             //wont change
     }
 }

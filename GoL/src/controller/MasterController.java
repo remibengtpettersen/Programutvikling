@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -25,36 +26,49 @@ public class MasterController {
      *
      * @param primaryStage
      */
-    public MasterController(Stage primaryStage) throws IOException {
+    public MasterController(Stage primaryStage){
         theStage = primaryStage;
         theStage.setTitle("Game of Life");
         openFrontPage();
     }
 
-    void openFrontPage() throws IOException {
+    /**
+     * Loads and opens the front page
+     */
+    void openFrontPage(){
 
         loadResource("../view/FrontPage.fxml");
         frontPageController = loader.getController();
         frontPageController.setMaster(this);
-
     }
 
-    void launchGame() throws IOException {
+    /**
+     * Loads and open the game page
+     */
+    void launchGame(){
 
         loadResource("../view/GamePage.fxml");
         gameController = loader.getController();
         gameController.setMaster(this);
-
     }
 
     /**
      * Loads a FXML-file onto the primaryStage
      * @param path relative path to FXML-file
-     * @throws IOException
      */
-    private void loadResource(String path) throws IOException {
+    private void loadResource(String path) {
+
         loader = new FXMLLoader(getClass().getResource(path));
-        root = loader.load();
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("En IO feil");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("En annen feil");
+        }
         theScene = new Scene(root, stageWidth, stageHeight);
         theStage.setScene(theScene);
         theStage.show();

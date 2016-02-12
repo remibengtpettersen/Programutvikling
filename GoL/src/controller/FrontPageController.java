@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
+
 /**
  * Created by remibengtpettersen on 12.02.2016.
  */
@@ -28,7 +30,8 @@ public class FrontPageController {
      *
      * @param actionEvent
      */
-    public void startGame(ActionEvent actionEvent) {
+    public void startGame(ActionEvent actionEvent) throws IOException {
+        master.launchGame();
     }
 
     /**

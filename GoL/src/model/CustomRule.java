@@ -3,14 +3,10 @@ package model;
 /**
  * Created by remibengtpettersen on 12.02.2016.
  */
-public class CustomRule implements Rule {
-    @Override
-    public boolean shouldLive(int neighbours) {
-        return false;
-    }
+public class CustomRule extends Rule {
 
     @Override
-    public boolean shouldDie(int neighbours) {
+    boolean evolve(int neighbours, boolean isAlive) {
         return false;
     }
 }
