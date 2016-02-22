@@ -27,7 +27,7 @@ public class FrontPageController {
     }
 
     /**
-     *
+     *Launches the game
      * @param actionEvent
      */
     public void startGame(ActionEvent actionEvent) throws IOException {

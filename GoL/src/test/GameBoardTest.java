@@ -1,6 +1,6 @@
 package test;
 
-import model.GameBoard;
+import model.GameOfLife;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
  */
 public class GameBoardTest {
 
-    GameBoard gameBoard;
+    GameOfLife gol;
 
     @Before
     public void setUp() throws Exception {
-        gameBoard = new GameBoard();
+        gol = new GameOfLife(535);
     }
 
     @After
@@ -27,11 +27,11 @@ public class GameBoardTest {
     @Test
     public void testCreateGameBoard(){
 
-        gameBoard.createGameBoard(535);
 
-        assertEquals(535, gameBoard.grid.length, 0.1d);
-        assertEquals(535, gameBoard.neighbours.length, 0.1d);
+        assertEquals(535, gol.getGrid().length, 0.1d);
+        assertEquals(535, gol.getNeighbours().length, 0.1d);
     }
+
 
 
 
