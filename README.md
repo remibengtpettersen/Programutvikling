@@ -21,3 +21,7 @@ Project contains a running verison of GoL, only with gameboard and no functional
 
 Changed Rule from interface to abstract
 Added unit test for checking the evolve logic.
+
+160224 13:06
+
+Added two unit test for Game of life class. In GameOfLife added listeners for MouseMove, MouseClick, MouseDrag and key pressed. Cleaned up comments and added more data fields. Test application and verified that GUI is behaving as expected.    

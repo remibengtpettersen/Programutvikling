@@ -10,19 +10,14 @@ public class GameOfLife {
     private boolean[][] grid;
     private byte[][] neighbours;
 
-    private AnimationTimer animationTimer;
+    Rule rule = new ClassicRule();
+    
 
-    long last;
 
     public GameOfLife(int gameSize) {
 
         createGameBoard(gameSize);
-        initializeAnimation();
-        startAnimation();
     }
-
-
-
 
     //region startup-sequence
     /**
@@ -33,39 +28,68 @@ public class GameOfLife {
     public void createGameBoard(int gameSize) {
         grid = new boolean[gameSize][gameSize];
         neighbours = new byte[gameSize][gameSize];
+
+        grid[3][1] = true;
+        grid[3][2] = true;
+        grid[3][3] = true;
+        grid[2][3] = true;
+        grid[1][2] = true;
+
     }
-    private void initializeAnimation() {
-        animationTimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                if(now/1000000 - last > 500) {
-                    System.out.println((now/1000000)+"\n"+System.currentTimeMillis());
-                    last = now/1000000;
+
+    //endregion
+
+    //region NextGeneration
+    /**
+     * Evolves the game board one generation ahead.
+     */
+    public void nextGeneration(){
+        aggregateNeighbours();
+        evolve();
+    }
+
+    /**
+     * For each alive cell, it increments the adjacent cells neighbour count.
+     */
+    private void aggregateNeighbours() {
+
+        for(int x = 1; x < grid.length -1; x++){
+
+            for(int y = 1; y < grid[x].length -1; y++){
+
+                if(grid[x][y]){
+                    for(int a = x-1; a <= x+1; a++){
+
+                        for(int b = y - 1; b <= y+1; b++){
+
+                            if( a != x || b != y){
+                                neighbours[a][b]++;
+                            }
+                        }
+                    }
+
                 }
 
-
             }
-        };
-    }
-
-    //endregion
-
-    //region Animation-controlls
-
-    /**
-     * Starts the animation
-     */
-    private void startAnimation() {
-        animationTimer.start();
+        }
     }
 
     /**
-     * Stops the animation
+     * Given the number of neighbours for each cell, decides if it should live or die.
      */
-    private void stopAnimation() {
-        animationTimer.stop();
+    private void evolve() {
+
+        for(int x = 0; x < grid.length; x++){
+            for(int y = 0; y < grid[x].length; y++){
+
+                grid[x][y] = rule.evolve(neighbours[x][y], grid[x][y]);
+
+                neighbours[x][y] = 0;
+            }
+        }
     }
     //endregion
+    
 
     //region Getters
     /**
@@ -83,7 +107,17 @@ public class GameOfLife {
     public boolean[][] getGrid() {
         return grid;
     }
+
+   
     //endregion
+
+    //region Setters
+    public void setGrid(boolean[][] grid) {
+        this.grid = grid;
+    }
+
+    //endregion
+
 
 
 }

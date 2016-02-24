@@ -50,6 +50,7 @@ public class MasterController {
         loadResource("../view/GamePage.fxml");
         gameController = loader.getController();
         gameController.setMaster(this);
+        gameController.initialize();
     }
 
     /**

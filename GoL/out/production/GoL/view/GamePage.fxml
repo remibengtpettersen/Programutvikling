@@ -29,13 +29,13 @@
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <Label alignment="CENTER" prefHeight="17.0" prefWidth="80.0" text="Cells:" />
-                  <ColorPicker fx:id="cellColor" prefHeight="30.0" prefWidth="120.0" />
+                  <ColorPicker fx:id="cellColorPicker" prefHeight="30.0" prefWidth="120.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <Label alignment="CENTER" prefHeight="17.0" prefWidth="80.0" text="Background:" />
-                  <ColorPicker fx:id="backgroundColor" prefHeight="30.0" prefWidth="120.0" />
+                  <ColorPicker fx:id="backgroundColorPicker" prefHeight="30.0" prefWidth="120.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
