@@ -1,10 +1,11 @@
 package test;
 
-import model.ClassicRule;
+import model.rules.ClassicRule;
+import model.rules.Rule2D;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import tools.Utilities;
 
 import static org.junit.Assert.*;
 
@@ -13,11 +14,29 @@ import static org.junit.Assert.*;
  */
 public class ClassicRuleTest {
 
-    private ClassicRule classicRule;
+    private Rule2D rule;
 
     @Before
     public void setUp() throws Exception {
-        classicRule = new ClassicRule();
+
+        // Creates a mock grid to be tested
+        boolean[][] grid = new boolean[][]{
+                new boolean[]{false, false, false, false, false},
+                new boolean[]{false, false, true, false, false},
+                new boolean[]{false, false, true, false, false},
+                new boolean[]{false, false, true, false, false},
+                new boolean[]{false, false, false, false, false}};
+
+        // Creates a neighbour count array manually
+        byte[][] neighbours = new byte[][]{
+                new byte[]{0, 1, 1, 1, 0},
+                new byte[]{0, 2, 1, 2, 0},
+                new byte[]{0, 3, 2, 3, 0},
+                new byte[]{0, 2, 1, 2, 0},
+                new byte[]{0, 1, 1, 1, 0}};
+
+        // Constructs classicRule
+        rule = new ClassicRule(grid, neighbours);
     }
 
     @After
@@ -28,13 +47,16 @@ public class ClassicRuleTest {
     @Test
     public void testEvolve() throws Exception {
 
-        //Checks if the cell should live
-        assertTrue(classicRule.evolve(3, false));
-        assertTrue(classicRule.evolve(2, true));
+        rule.evolve();
 
-        //Checks if the cell should die
-        assertFalse(classicRule.evolve(2, false));
-        assertFalse(classicRule.evolve(4, true));
+        Utilities.print2DArray(rule.getGrid());
+
+        assertArrayEquals(new boolean[][]{
+                new boolean[]{false, false, false, false, false},
+                new boolean[]{false, false, false, false, false},
+                new boolean[]{false, true, true, true, false},
+                new boolean[]{false, false, false, false, false},
+                new boolean[]{false, false, false, false, false}}, rule.getGrid());
     }
 
 }

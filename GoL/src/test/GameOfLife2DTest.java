@@ -1,6 +1,6 @@
 package test;
 
-import model.GameOfLife;
+import model.GameOfLife2D;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,22 +8,22 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by remibengtpettersen on 12.02.2016.
+ * Created by Andreas on 29.02.2016.
  */
-public class GameBoardTest {
+public class GameOfLife2DTest {
 
-    GameOfLife gol;
+    GameOfLife2D gol;
 
     @Before
     public void setUp() throws Exception {
-        gol = new GameOfLife(5);
+        gol = new GameOfLife2D(5);
         gol.setGrid(new boolean[][]{
                 new boolean[]{false, false, false, false, false},
                 new boolean[]{false, false, false, false, false},
                 new boolean[]{false, true, true, true, false},
                 new boolean[]{false, false, false, false, false},
                 new boolean[]{false, false, false, false, false}});
-        gol.nextGeneration();
+        gol.aggregateNeighbours();
     }
 
     @After
@@ -37,14 +37,13 @@ public class GameBoardTest {
         assertEquals(5, gol.getNeighbours().length, 0.1d);
     }
 
-    public void testCountNeighbours(){
-
-
+    @Test
+    public void testNextGeneration() throws Exception {
+        assertTrue(false);
     }
 
     @Test
-    public void testAggregateNeighbours(){
-
+    public void testAggregateNeighbours() throws Exception {
         assertArrayEquals(new byte[][]{
                 new byte[]{0, 0, 0, 0, 0},
                 new byte[]{1, 2, 3, 2, 1},
@@ -54,17 +53,17 @@ public class GameBoardTest {
     }
 
     @Test
-    public void testEvolve(){
+    public void testGetNeighbours() throws Exception {
+        assertTrue(false);
+    }
 
-    assertArrayEquals(new boolean[][]{
-            new boolean[]{false, false, false, false, false},
-            new boolean[]{false, false, true, false, false},
-            new boolean[]{false, false, true, false, false},
-            new boolean[]{false, false, true, false, false},
-            new boolean[]{false, false, false, false, false}}, gol.getGrid());
+    @Test
+    public void testGetGrid() throws Exception {
+        assertTrue(false);
+    }
 
-}
-
-
-
+    @Test
+    public void testSetGrid() throws Exception {
+        assertTrue(false);
+    }
 }

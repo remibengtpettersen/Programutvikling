@@ -3,8 +3,6 @@ package controller;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -14,11 +12,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import model.GameOfLife;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+import model.GameOfLife2D;
 
 /**
  * Created by remibengtpettersen on 12.02.2016.
@@ -26,7 +20,7 @@ import java.util.ResourceBundle;
 public class GameController{
 
     MasterController master;
-    GameOfLife gol;
+    GameOfLife2D gol;
     GraphicsContext gc;
 
     //region FXML-properties
@@ -71,12 +65,12 @@ public class GameController{
 
 
     /**
-     * Creates an instance of the GameOfLife object and prepares the grid and gets the Graphics Content of the canvas.
+     * Creates an instance of the GameOfLife2D object and prepares the grid and gets the Graphics Content of the canvas.
      * Also it sets up listeners and prepare the animation. Final it launches the animation.
      */
     void initialize() {
 
-        gol = new GameOfLife(boardSize);
+        gol = new GameOfLife2D(boardSize);
         grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
 

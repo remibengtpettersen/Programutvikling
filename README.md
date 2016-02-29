@@ -25,3 +25,7 @@ Added unit test for checking the evolve logic.
 160224 13:06
 
 Added two unit test for Game of life class. In GameOfLife added listeners for MouseMove, MouseClick, MouseDrag and key pressed. Cleaned up comments and added more data fields. Test application and verified that GUI is behaving as expected.    
+
+160229 11:39
+
+Implemented support for both 2D and 3D gameboards. Changed Rule to interface. Created the abstract class Rule2D, which implements Rule. Added tests for ClassicRule and GameOfLife2D.
