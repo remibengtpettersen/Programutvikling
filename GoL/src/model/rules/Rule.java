@@ -5,9 +5,5 @@ package model.rules;
  */
 public interface Rule {
 
-    //boolean evolve(int neighbours, boolean isAlive);
-
-    public void evolve();
-
-
+    void evolve();
 }

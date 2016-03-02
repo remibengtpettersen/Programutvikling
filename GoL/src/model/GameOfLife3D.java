@@ -29,7 +29,7 @@ public class GameOfLife3D extends GameOfLife {
     }
 
     @Override
-    protected void aggregateNeighbours() {
+    public void aggregateNeighbours() {
 
     }
 

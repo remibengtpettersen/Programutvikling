@@ -16,7 +16,7 @@ public abstract class GameOfLife {
     public abstract void createGameBoard(int gameSize);
 
     public abstract void nextGeneration();
-    protected abstract void aggregateNeighbours();
+    public abstract void aggregateNeighbours();
 
 
     public abstract byte[][] getNeighbours();

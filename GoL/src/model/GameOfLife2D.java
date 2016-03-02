@@ -3,17 +3,18 @@ package model;
 import model.rules.ClassicRule;
 
 /**
- * Created by remibengtpettersen on 12.02.2016.
+ * Created on 12.02.2016.
+ * @Author The group through pair programing.
  */
 public class GameOfLife2D extends GameOfLife{
 
    private boolean[][] grid;
    private byte[][] neighbours;
 
+
     public GameOfLife2D(int gameSize) {
 
         super(gameSize);
-
 
         rule = new ClassicRule(grid, neighbours);
     }
@@ -102,7 +103,35 @@ public class GameOfLife2D extends GameOfLife{
         this.grid = grid;
     }
 
+    /**
+     * Will set cell state to true regardless of current state.
+     * @param x the x coordinate in the grid.
+     * @param y the y coordinate in the grid.
+     */
+    public void setCellAlive(int x, int y){
+        grid[x][y] = true;
+    }
+
+    /**
+     * Will set cell state to false regardless of current state.
+     * @param x the x coordinate in the grid.
+     * @param y the y coordinate in the grid.
+     */
+    public void setCellDead(int x, int y){
+        grid[x][y] = false;
+    }
+
+    /**
+     * Changes the state of a cell based on the grid coordinate.
+     * @param x the x coordinate in the grid.
+     * @param y the y coordinate in the grid.
+     */
+    public void changeCellState(int x, int y) {
+        grid[x][y] = !grid[x][y];
+    }
+
     //endregion
+
 
 
 

@@ -29,3 +29,7 @@ Added two unit test for Game of life class. In GameOfLife added listeners for Mo
 160229 11:39
 
 Implemented support for both 2D and 3D gameboards. Changed Rule to interface. Created the abstract class Rule2D, which implements Rule. Added tests for ClassicRule and GameOfLife2D.
+
+160302 11:43
+
+Added mouse input to pan the grid, and to draw on grid/add new cells. Follow-up on javadoc for classes and methods. 
