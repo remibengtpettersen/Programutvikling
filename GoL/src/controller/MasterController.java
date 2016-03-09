@@ -64,7 +64,10 @@ public class MasterController {
     }
 
     private void setEvents(){
-
+        canvasController.getCanvas().widthProperty().bind(
+                scene.widthProperty());
+        canvasController.getCanvas().heightProperty().bind(
+                scene.heightProperty().subtract(100));      
     }
 
 

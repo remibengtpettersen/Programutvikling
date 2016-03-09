@@ -54,6 +54,7 @@ public class CanvasController {
     int boardOffsetX = 50;
     int boardOffsetY = 50;
 
+    public Canvas getCanvas(){ return canvas; }
 
     /**
      * Sets master controller, creates an instance of the GameOfLife2D object and prepares the grid and gets the Graphics Content of the canvas.
@@ -111,7 +112,10 @@ public class CanvasController {
 
         //master.theScene.setOnKeyPressed(this::keyPressed);
 
-
+        canvas.widthProperty().addListener(evt -> {
+            System.out.println(canvas.getWidth()); renderLife();});
+        canvas.heightProperty().addListener(evt -> {
+            System.out.println(canvas.getHeight()); renderLife();});
 
 
     }
