@@ -1,45 +1,28 @@
 package controller;
 
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Slider;
-import javafx.scene.input.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import model.GameOfLife2D;
 
 /**
- * Created on 12.02.2016.
- * The controller for the GamePage.fxml document.
- *
+ * Created by Andreas on 09.03.2016.
  */
-public class GameController{
+public class CanvasController {
 
-    //region FXML-properties
-    @FXML
-    Canvas canvas;
-    @FXML
-    Slider speedSlider;
-    @FXML
-    Slider zoomSlider;
-    @FXML
-    ColorPicker cellColorPicker;
-    @FXML
-    ColorPicker backgroundColorPicker;
-    @FXML
-    ChoiceBox ruleChoiceBox;
-    @FXML
-    Button saveBtn;
-    @FXML
-    Button loadBtn;
-    //endregion
+    private MasterController masterController;
 
-    MasterController master;
+    @FXML
+    private Canvas canvas;
+
+    public Color cellColor = Color.BLACK;        //these should be private, etc etc
+    public Color backgroundColor = Color.WHITE;
+
     GameOfLife2D gol;
     GraphicsContext gc;
 
@@ -49,8 +32,6 @@ public class GameController{
     private short boardSize = 500;
     private double cellSize = 10;
     private boolean[][] grid;
-    private Color backgroundColor = Color.WHITE;
-    private Color cellColor = Color.BLACK;
 
     private int frameDelay = 30;
     private boolean running = true;
@@ -75,29 +56,21 @@ public class GameController{
 
 
     /**
-     * To pass reference between controllers
-     * @param master
-     */
-    public void setMaster(MasterController master) {
-        this.master = master;
-    }
-
-
-    /**
-     * Creates an instance of the GameOfLife2D object and prepares the grid and gets the Graphics Content of the canvas.
+     * Sets master controller, creates an instance of the GameOfLife2D object and prepares the grid and gets the Graphics Content of the canvas.
      * Also it sets up listeners and prepare the animation. Final it launches the animation.
      */
-    void initialize() {
+    public void initialize(MasterController masterController) {
+
+        this.masterController = masterController;
 
         gol = new GameOfLife2D(boardSize);
         grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
 
-        cellColorPicker.setValue(Color.BLACK);
-
         initializeListeners();
         initializeAnimation();
         startAnimation();
+
     }
 
     /**
@@ -128,16 +101,19 @@ public class GameController{
     private void initializeListeners() {
         canvas.setOnMouseClicked(this::mouseClick);
         canvas.setOnMouseDragged(this::mouseDrag);
-        canvas.setOnMouseMoved(this::mouseTrace);
-        canvas.setOnScroll(this::mouseScroll);
+        //canvas.setOnMouseMoved(this::mouseTrace);
+        //canvas.setOnScroll(this::mouseScroll);
         canvas.setOnMouseExited(this::mouseCanvasExit);
         canvas.setOnMouseEntered(this::mouseCanvasEnter);
 
-        backgroundColorPicker.setOnAction(this::changeBackgroundColor);
-        cellColorPicker.setOnAction(this::changeCellColor);
+        //backgroundColorPicker.setOnAction(this::changeBackgroundColor);
+        //cellColorPicker.setOnAction(this::changeCellColor);
 
-        master.theScene.setOnKeyPressed(this::keyPressed);
-        
+        //master.theScene.setOnKeyPressed(this::keyPressed);
+
+
+
+
     }
 
     /**
@@ -158,24 +134,6 @@ public class GameController{
         prevMousePosX = 0;
         prevMousePosY = 0;
     }
-
-
-    private void changeBackgroundColor(ActionEvent event) {
-        backgroundColor = backgroundColorPicker.getValue();
-    }
-
-    private void changeCellColor(ActionEvent event) {
-        cellColor = cellColorPicker.getValue();
-    }
-
-
-    private void keyPressed(KeyEvent keyEvent) {
-    }
-
-    private void mouseTrace(MouseEvent mouseEvent) {
-    }
-
-
 
     /**
      * Handles mouse click on canvas. Calculates which cell is clicked on canvas.
@@ -218,7 +176,6 @@ public class GameController{
             gridClickX = getGridPosX(mouseEvent.getX());
             gridClickY = getGridPosY(mouseEvent.getY());
             gol.setCellAlive(gridClickX, gridClickY);
-
         }
         else if(mouseEvent.getButton() == MouseButton.SECONDARY){
             // gets mouse coordinates on canvas.
@@ -229,8 +186,6 @@ public class GameController{
                 boardOffsetX += prevMousePosX - currMousePosX;
                 boardOffsetY += prevMousePosY - currMousePosY;
             }
-
-
 
             prevMousePosX = currMousePosX;
             prevMousePosY = currMousePosY;
@@ -246,8 +201,7 @@ public class GameController{
     private void clampView() {
 
         boardOffsetX = clamp(boardOffsetX, 0 , (int)(cellSize * boardSize - canvas.getWidth()));
-        boardOffsetY = clamp(boardOffsetY, 0 , (int)(cellSize * boardSize - canvas.getWidth()));
-
+        boardOffsetY = clamp(boardOffsetY, 0 , (int)(cellSize * boardSize - canvas.getHeight()));
     }
 
     /**
@@ -259,9 +213,6 @@ public class GameController{
      */
     public int clamp(int val, int min, int max) {
         return Math.max(min, Math.min(max, val));
-    }
-
-    private void mouseScroll(ScrollEvent scrollEvent) {
     }
 
     // region canvas to grid converter
@@ -294,21 +245,38 @@ public class GameController{
     }
     //endregion
 
+    public void testDraw(){
+
+        int w = canvas.widthProperty().intValue();
+        int h = canvas.heightProperty().intValue();
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        //gc.clearRect(0, 0, w, h);
+
+        gc.setFill(backgroundColor);
+        gc.fillRect(0, 0, w, h);        //draws background color
+
+        gc.setStroke(Color.BLACK);
+        gc.strokeRect(0, 0, w, h);      //draws a border around the entire canvas
+
+        gc.setFill(cellColor);
+        gc.fillOval(0, 0, w, h);        //draws an oval
+    }
 
     /**
      * Renders the current state of the game of life simulation to the canvas.
      * Sets background color and cell color.
      */
-    private void renderLife() {
+    public void renderLife() {
         gc.setFill(backgroundColor);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         gc.setFill(cellColor);
         for(int x = 0; x < boardSize; x++){
             for(int y = 0; y < boardSize; y++){
-               
+
                 if(grid[x][y])
-                drawCell(x, y);
+                    drawCell(x, y);
             }
         }
     }
@@ -319,7 +287,7 @@ public class GameController{
      * @param y The y coordinate in the game of life grid.
      */
     private void drawCell(int x, int y) {
-         gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize * 0.9, cellSize * 0.9);
+        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize * 0.9, cellSize * 0.9);
 
         // TBD ....Check cycle time for different algo.
         //gc.fillRect(x * cellSize - boardOffsetX, y * cellSize - boardOffsetY, cellSize * 0.9, cellSize * 0.9);

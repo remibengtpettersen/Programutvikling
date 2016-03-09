@@ -1,0 +1,41 @@
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<MenuBar fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml">
+    <Menu text="GoL">
+        <MenuItem text="About" onAction="#onAbout"/>
+        <MenuItem text="Preferences"/>
+        <MenuItem text="Hide GoL"/>
+    </Menu>
+    <Menu text="File">
+        <MenuItem text="Open"/>
+        <MenuItem text="Save"/>
+    </Menu>
+    <Menu text="Edit">
+        <MenuItem text="Cut"/>
+        <MenuItem text="Copy"/>
+        <MenuItem text="Paste"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="Open editor"/>
+    </Menu>
+    <Menu text="View">
+        <RadioMenuItem text="Static board"/>
+        <RadioMenuItem text="Dynamic board"/>
+    </Menu>
+    <Menu text="Stats">
+        <MenuItem text="Show history"/>
+        <MenuItem text="Show evolution"/>
+    </Menu>
+    <Menu text="Music">
+        <CheckMenuItem text="Enable"/>
+        <CheckMenuItem text="Dynamic sound"/>
+        <MenuItem text="Load file"/>
+    </Menu>
+    <Menu text="Help">
+        <MenuItem text="Tips"/>
+    </Menu>
+</MenuBar>

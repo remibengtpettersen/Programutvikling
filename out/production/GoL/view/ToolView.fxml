@@ -1,0 +1,34 @@
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.lang.String?>
+<ToolBar fx:controller="controller.ToolController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml">
+
+    <VBox>
+        <HBox>
+            <Label text="Speed"/>
+            <Slider/>
+        </HBox>
+        <HBox>
+            <Label text="Zoom"/>
+            <Slider/>
+        </HBox>
+    </VBox>
+
+    <ColorPicker fx:id="frontColorPicker" onAction="#changeFrontColor"/>
+    <ColorPicker/>
+
+    <ChoiceBox value="Cell">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Cell"/>
+                <String fx:value="Glider"/>
+                <String fx:value="Block"/>
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+
+    <Label text="Living cells: 0" />
+
+</ToolBar>

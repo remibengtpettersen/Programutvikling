@@ -1,16 +1,23 @@
 package controller;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        new MasterController(primaryStage);
+
+        try {
+            new MasterController(primaryStage);
+        } catch (IOException e){
+            System.out.println("Failed to load FXML documents");
+        } catch (Exception e) {
+            System.out.println("Something happened!");
+        }
     }
 
 
