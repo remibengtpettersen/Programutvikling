@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.animation.AnimationTimer;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -176,25 +175,32 @@ public class CanvasController {
 
         MouseButton b = mouseEvent.getButton();
         mouseDrag = true;
+
+        // gets mouse coordinates on canvas.
+        currMousePosX = (int)mouseEvent.getX();
+        currMousePosY = (int)mouseEvent.getY();
+
         if(b == MouseButton.PRIMARY) {
-            gridClickX = getGridPosX(mouseEvent.getX());
-            gridClickY = getGridPosY(mouseEvent.getY());
-            gol.setCellAlive(gridClickX, gridClickY);
+
+            if(prevMousePosX != 0 || prevMousePosY != 0){
+                drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY), getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
+            }
+            //gol.setCellAlive(gridClickX, gridClickY);
         }
         else if(mouseEvent.getButton() == MouseButton.SECONDARY){
-            // gets mouse coordinates on canvas.
-            currMousePosX = (int)mouseEvent.getX();
-            currMousePosY = (int)mouseEvent.getY();
+
 
             if(prevMousePosX != 0 || prevMousePosY != 0){
                 boardOffsetX += prevMousePosX - currMousePosX;
                 boardOffsetY += prevMousePosY - currMousePosY;
             }
 
-            prevMousePosX = currMousePosX;
-            prevMousePosY = currMousePosY;
+
             clampView();
         }
+
+        prevMousePosX = currMousePosX;
+        prevMousePosY = currMousePosY;
 
         renderLife();
     }
@@ -295,6 +301,54 @@ public class CanvasController {
 
         // TBD ....Check cycle time for different algo.
         //gc.fillRect(x * cellSize - boardOffsetX, y * cellSize - boardOffsetY, cellSize * 0.9, cellSize * 0.9);
+    }
+
+    public void drawLine(int x, int y, int x2, int y2) {
+
+
+        //region Bresenham Algorithm
+        /*
+        int w = x2 - x;
+        int h = y2 - y;
+        int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
+        if (w < 0) dx1 = -1;
+        else if (w > 0) dx1 = 1;
+        if (h < 0) dy1 = -1;
+        else if (h > 0) dy1 = 1;
+        if (w < 0) dx2 = -1;
+        else if (w > 0) dx2 = 1;
+        int longest = Math.abs(w);
+        int shortest = Math.abs(h);
+        if (!(longest > shortest)) {
+            longest = Math.abs(h);
+            shortest = Math.abs(w);
+            if (h < 0) dy2 = -1;
+            else if (h > 0) dy2 = 1;
+            dx2 = 0;
+        }
+        int numerator = longest >> 1;
+        for (int i = 0; i <= longest; i++) {
+                setAlive(x, y);
+                numerator += shortest;
+            if (!(numerator < longest)) {
+                numerator -= longest;
+                x += dx1;
+                y += dy1;
+            } else {
+                x += dx2;
+                y += dy2;
+            }
+        }*/
+        //endregion
+        int width = x2 -x;
+        int height = y2 - y;
+
+        int lineLength = Math.abs((Math.abs(width) < Math.abs(height))? height : width);
+
+        for(int i = 0; i < lineLength; i++){
+            gol.setCellAlive(x + i * width / lineLength, y + i * height / lineLength);
+        }
+
     }
 
 

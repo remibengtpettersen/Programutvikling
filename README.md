@@ -33,3 +33,7 @@ Implemented support for both 2D and 3D gameboards. Changed Rule to interface. Cr
 160302 11:43
 
 Added mouse input to pan the grid, and to draw on grid/add new cells. Follow-up on javadoc for classes and methods. 
+
+160309 11:32 
+
+Changed GUI, added menubar and toolbar, minimal design. Added dynamic canvas to fit window when size is altered. Implemented draw line method for continuous drawing on the game of life grid. 
