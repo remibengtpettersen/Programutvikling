@@ -24,6 +24,7 @@ public class CanvasController {
 
     private Color cellColor = Color.BLACK;        //these should be private, etc etc
     public Color backgroundColor = Color.WHITE;
+    private Color ghostColor;
 
     GameOfLife2D gol;
     GraphicsContext gc;
@@ -31,7 +32,7 @@ public class CanvasController {
     private AnimationTimer animationTimer;
     private long timer;
 
-    private short boardSize = 1000;
+    private short boardSize = 1500;
     private double cellSize = 5;
     private boolean[][] grid;
 
@@ -53,6 +54,9 @@ public class CanvasController {
 
     int boardOffsetX = 50;
     int boardOffsetY = 50;
+
+    boolean[][] importPattern;
+    boolean importing = false;
 
 
 
@@ -89,7 +93,12 @@ public class CanvasController {
                 if(now/1000000 - timer > frameDelay) {
 
                         gol.nextGeneration();
+
                         renderLife();
+
+                    if(importing)
+                        renderImport();
+
 
                     timer = now/1000000;
                     masterController.toolController.giveCellCount(gol.getCellCount());
@@ -104,7 +113,7 @@ public class CanvasController {
     private void initializeListeners() {
         canvas.setOnMouseClicked(this::mouseClick);
         canvas.setOnMouseDragged(this::mouseDrag);
-        //canvas.setOnMouseMoved(this::mouseTrace);
+        canvas.setOnMouseMoved(this::mouseTrace);
         canvas.setOnScroll(this::mouseScroll);
         canvas.setOnMouseExited(this::mouseCanvasExit);
         canvas.setOnMouseEntered(this::mouseCanvasEnter);
@@ -130,6 +139,19 @@ public class CanvasController {
 
 
     }
+
+    private void mouseTrace(MouseEvent mouseEvent) {
+        if(importing){
+            currMousePosX = (int) mouseEvent.getX();
+            currMousePosY = (int) mouseEvent.getY();
+            if(!running){
+                renderLife();
+                renderImport();
+            }
+        }
+    }
+
+
 
 
     /**
@@ -168,6 +190,12 @@ public class CanvasController {
 
         mouseButton = mouseEvent.getButton();
         if (mouseButton == MouseButton.PRIMARY) {
+            if(importing){
+                insertImport();
+                importing = false;
+                return;
+            }
+
             gridClickX = getGridPosX(mouseEvent.getX());
             gridClickY = getGridPosY(mouseEvent.getY());
             gol.changeCellState(gridClickX, gridClickY);
@@ -318,6 +346,36 @@ public class CanvasController {
         }
     }
 
+    public void renderImport() {
+
+        gc.setFill(ghostColor);
+        for (int x = 0; x < importPattern.length; x++) {
+            for (int y = 0; y < importPattern[x].length; y++) {
+                if (importPattern[x][y] == true) {
+
+                    //drawGhost(x + (int) (currMousePosX / cellSize) - importPattern.length / 2 - boardOffsetX, y + (int) (currMousePosY / cellSize) - importPattern[x].length / 2 - boardOffsetY);
+                    drawGhost(getGridPosX(currMousePosX)-importPattern.length / 2 + x, getGridPosY(currMousePosY) - importPattern[x].length/2 + y);
+
+                }
+            }
+        }
+    }
+
+    private void insertImport() {
+
+        for (int x = 0; x < importPattern.length; x++) {
+            for (int y = 0; y < importPattern[x].length; y++) {
+                if (importPattern[x][y] == true) {
+
+                    //drawGhost(x + (int) (currMousePosX / cellSize) - importPattern.length / 2 - boardOffsetX, y + (int) (currMousePosY / cellSize) - importPattern[x].length / 2 - boardOffsetY);
+                    gol.setCellAlive(getGridPosX(currMousePosX)-importPattern.length / 2 + x, getGridPosY(currMousePosY) - importPattern[x].length/2 + y);
+
+                }
+            }
+        }
+        importing = false;
+    }
+
     /**
      * Draws the cell at the x, y coordinate in the grid
      * @param x The x coordinate in the game of life grid.
@@ -328,6 +386,10 @@ public class CanvasController {
 
         // TBD ....Check cycle time for different algo.
         //gc.fillRect(x * cellSize - boardOffsetX, y * cellSize - boardOffsetY, cellSize * 0.9, cellSize * 0.9);
+    }
+
+    private void drawGhost(int x, int y){
+        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize * 0.9, cellSize * 0.9);
     }
 
     /**
@@ -409,10 +471,25 @@ public class CanvasController {
 
     public void setCellColor(Color cellColor) {
         this.cellColor = cellColor;
+        calculateGhostColor();
     }
 
     public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
+        calculateGhostColor();
+    }
+
+    private void calculateGhostColor() {
+        double blue = (cellColor.getBlue() + backgroundColor.getBlue()) / 2;
+        double red = (cellColor.getRed() + backgroundColor.getRed()) / 2;
+        double green = (cellColor.getGreen() + backgroundColor.getGreen()) / 2;
+
+        ghostColor = cellColor;
+    }
+
+    public void setImportPattern(boolean[][] importPattern) {
+        this.importPattern = importPattern;
+        importing = true;
     }
 
 

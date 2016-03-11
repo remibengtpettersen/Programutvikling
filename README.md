@@ -41,3 +41,6 @@ Changed GUI, added menubar and toolbar, minimal design. Added dynamic canvas to 
 160311 12:56
 
 Added support for zooming with mouse scroll and a cell counter. 
+
+160311 16:34
+Added file-parser to import game of life patterns.
