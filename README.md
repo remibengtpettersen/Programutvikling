@@ -37,3 +37,7 @@ Added mouse input to pan the grid, and to draw on grid/add new cells. Follow-up 
 160309 11:32 
 
 Changed GUI, added menubar and toolbar, minimal design. Added dynamic canvas to fit window when size is altered. Implemented draw line method for continuous drawing on the game of life grid. 
+
+160311 12:56
+
+Added support for zooming with mouse scroll and a cell counter. 

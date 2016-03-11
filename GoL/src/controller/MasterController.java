@@ -71,6 +71,8 @@ public class MasterController {
     }
 
 
+
+
     /**
      * Loads a FXML-file onto the primaryStage
      * @param path relative path to FXML-file

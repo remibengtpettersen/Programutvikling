@@ -1,11 +1,14 @@
 package controller;
 
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.Property;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import model.GameOfLife2D;
 
@@ -19,7 +22,7 @@ public class CanvasController {
     @FXML
     private Canvas canvas;
 
-    public Color cellColor = Color.BLACK;        //these should be private, etc etc
+    private Color cellColor = Color.BLACK;        //these should be private, etc etc
     public Color backgroundColor = Color.WHITE;
 
     GameOfLife2D gol;
@@ -28,8 +31,8 @@ public class CanvasController {
     private AnimationTimer animationTimer;
     private long timer;
 
-    private short boardSize = 500;
-    private double cellSize = 10;
+    private short boardSize = 1000;
+    private double cellSize = 5;
     private boolean[][] grid;
 
     private int frameDelay = 30;
@@ -48,10 +51,10 @@ public class CanvasController {
     private boolean mouseDrag;
     private boolean mouseOnCanvas;
 
-
-
     int boardOffsetX = 50;
     int boardOffsetY = 50;
+
+
 
     public Canvas getCanvas(){ return canvas; }
 
@@ -85,11 +88,11 @@ public class CanvasController {
                 //To control game speed
                 if(now/1000000 - timer > frameDelay) {
 
-                    if(running) {
                         gol.nextGeneration();
                         renderLife();
-                    }
+
                     timer = now/1000000;
+                    masterController.toolController.giveCellCount(gol.getCellCount());
                 }
             }
         };
@@ -102,7 +105,7 @@ public class CanvasController {
         canvas.setOnMouseClicked(this::mouseClick);
         canvas.setOnMouseDragged(this::mouseDrag);
         //canvas.setOnMouseMoved(this::mouseTrace);
-        //canvas.setOnScroll(this::mouseScroll);
+        canvas.setOnScroll(this::mouseScroll);
         canvas.setOnMouseExited(this::mouseCanvasExit);
         canvas.setOnMouseEntered(this::mouseCanvasEnter);
 
@@ -112,12 +115,22 @@ public class CanvasController {
         //master.theScene.setOnKeyPressed(this::keyPressed);
 
         canvas.widthProperty().addListener(evt -> {
-            System.out.println(canvas.getWidth()); renderLife();});
+            clampCellSize();
+            clampView();
+            if(!running)
+            renderLife();
+        });
         canvas.heightProperty().addListener(evt -> {
-            System.out.println(canvas.getHeight()); renderLife();});
+            clampCellSize();
+            clampView();
+            if(!running)
+            renderLife();
+
+        });
 
 
     }
+
 
     /**
      * To keep track if mouse is located on the canvas.
@@ -160,7 +173,14 @@ public class CanvasController {
             gol.changeCellState(gridClickX, gridClickY);
             renderLife();
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY)
-            running = !running;
+            if(running){
+                stopAnimation();
+                running = false;
+            }
+        else{
+                startAnimation();
+                running = true;
+            }
     }
 
     /**
@@ -202,7 +222,32 @@ public class CanvasController {
         prevMousePosX = currMousePosX;
         prevMousePosY = currMousePosY;
 
-        renderLife();
+        if(!running)
+            renderLife();
+    }
+
+    /**
+     * Changes the cellSize to give the effect of zooming.
+     * @param scrollEvent
+     */
+    private void mouseScroll(ScrollEvent scrollEvent) {
+        double ratio1 = (boardOffsetX + scrollEvent.getX()) / cellSize;
+        double ratio2 = (boardOffsetY + scrollEvent.getY()) / cellSize;
+        cellSize += cellSize * (scrollEvent.getDeltaY() / 150);
+        clampCellSize();
+        boardOffsetX = (int) (cellSize * ratio1 - scrollEvent.getX());
+        boardOffsetY = (int) (cellSize * ratio2 - scrollEvent.getY());
+
+        clampView();
+        if(!running)
+            renderLife();
+    }
+
+    private void clampCellSize() {
+        double limit = (canvas.getWidth() > canvas.getHeight()) ? canvas.getWidth() : canvas.getHeight();
+        if(cellSize * boardSize < limit){
+            cellSize = limit / boardSize;
+        }
     }
 
     /**
@@ -255,24 +300,6 @@ public class CanvasController {
     }
     //endregion
 
-    public void testDraw(){
-
-        int w = canvas.widthProperty().intValue();
-        int h = canvas.heightProperty().intValue();
-
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        //gc.clearRect(0, 0, w, h);
-
-        gc.setFill(backgroundColor);
-        gc.fillRect(0, 0, w, h);        //draws background color
-
-        gc.setStroke(Color.BLACK);
-        gc.strokeRect(0, 0, w, h);      //draws a border around the entire canvas
-
-        gc.setFill(cellColor);
-        gc.fillOval(0, 0, w, h);        //draws an oval
-    }
-
     /**
      * Renders the current state of the game of life simulation to the canvas.
      * Sets background color and cell color.
@@ -303,6 +330,13 @@ public class CanvasController {
         //gc.fillRect(x * cellSize - boardOffsetX, y * cellSize - boardOffsetY, cellSize * 0.9, cellSize * 0.9);
     }
 
+    /**
+     * creates a line of alive cells on the grid from cell (x,y) to cell (x2, y2)
+     * @param x THe first coordinate of the first cell
+     * @param y The second coordinate of the first cell
+     * @param x2 The first coordinate of the end cell
+     * @param y2 The second coordinate of the end cell
+     */
     public void drawLine(int x, int y, int x2, int y2) {
 
 
@@ -340,6 +374,7 @@ public class CanvasController {
             }
         }*/
         //endregion
+
         int width = x2 -x;
         int height = y2 - y;
 
@@ -367,5 +402,19 @@ public class CanvasController {
     private void stopAnimation() {
         animationTimer.stop();
     }
+
+    //endregion
+
+    //region Setters
+
+    public void setCellColor(Color cellColor) {
+        this.cellColor = cellColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+
     //endregion
 }

@@ -57,11 +57,12 @@ public class GameOfLife2D extends GameOfLife{
      */
     @Override
     public void aggregateNeighbours() {
-
+        cellCount=0;
         for(int x = 1; x < grid.length -1; x++){
             for(int y = 1; y < grid[x].length -1; y++){
 
                 if(grid[x][y]){
+                    cellCount++;
                     for(int a = x-1; a <= x+1; a++){
                         for(int b = y - 1; b <= y+1; b++){
 

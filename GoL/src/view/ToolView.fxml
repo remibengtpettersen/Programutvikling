@@ -8,16 +8,16 @@
     <HBox spacing="10">
         <HBox  spacing="5" alignment="CENTER">
             <Label text="Speed"/>
-            <Slider/>
+            <Slider fx:id="speedSlider"/>
         </HBox>
         <HBox  spacing="5" alignment="CENTER">
             <Label text="Zoom"/>
-            <Slider/>
+            <Slider fx:id="zoomSlider" onMouseDragged="#zoomSliderDragged"/>
         </HBox>
     </HBox>
 
-    <ColorPicker fx:id="frontColorPicker" onAction="#changeFrontColor"/>
-    <ColorPicker/>
+    <ColorPicker fx:id="cellColorPicker" prefWidth="100" onAction="#changeCellColor"/>
+    <ColorPicker fx:id="backgroundColorPicker" prefWidth="100" onAction="#changeBackgroundColor"/>
 
     <ChoiceBox value="Cell">
         <items>
@@ -29,6 +29,6 @@
         </items>
     </ChoiceBox>
 
-    <Label text="Living cells: 0" />
+    <Label fx:id="cellCountLabel"/>
 
 </ToolBar>
