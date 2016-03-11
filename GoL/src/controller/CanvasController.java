@@ -73,7 +73,6 @@ public class CanvasController {
         initializeListeners();
         initializeAnimation();
         startAnimation();
-
     }
 
     /**
