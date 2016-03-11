@@ -10,20 +10,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * An utility class to make the link between a RLE file
- * and an integers array.
- */
+
 public class FileParser {
 
     /**
-     * Read a RLE file and convert it into an integers array.
-     *
-     * @param file the File to write into
-     * @return the integers array produced from the file
+     * Reads a Game of Life pattern file and returns an array of the pattern
+     * @param file the file to read frome
+     * @return the boolean array produced from the file
      */
-
-
     static public boolean[][] read(File file){
 
         if(file.toString().endsWith(".cells")){
@@ -32,12 +26,17 @@ public class FileParser {
         else if(file.toString().endsWith(".rle")){
             return readRLE(file);
         }
-        else if(file.toString().endsWith(".lif")){
+        else if(file.toString().endsWith(".lif")||file.toString().endsWith(".life")){
             return readLife(file);
         }
         return null;
     }
 
+    /**
+     * Reads
+     * @param file a .lif or .life file
+     * @return the boolean array produced from the file
+     */
     private static boolean[][] readLife(File file) {
 
 
@@ -62,6 +61,11 @@ public class FileParser {
     }
 
 
+    /**
+     * reads the string content from a Life 1.05 file
+     * @param list a list of strings red from a .lif file
+     * @return the boolean array produced from the list
+     */
     private static boolean[][] life05(List<String> list) {
 
         while (!list.get(0).startsWith("#P")){
@@ -75,12 +79,23 @@ public class FileParser {
         Pattern p = Pattern.compile("#P (.+) (.+)");
         Matcher m = p.matcher(list.get(0));
 
-        if(!m.matches()){
-            System.out.println("feil av enellerannen grunn");
-        }
+        int startPosX = 0;
+        int startPosY = 0;
 
-        int startPosX = Integer.parseInt(m.group(1));
-        int startPosY = Integer.parseInt(m.group(2));
+
+        for(int i = 0; i < list.size(); i++) {
+            if (list.get(i).startsWith("#P")) {
+                m = p.matcher(list.get(i));
+                if (m.matches()) {
+                   if(Integer.parseInt(m.group(1)) < startPosX){
+                       startPosX = Integer.parseInt(m.group(1));
+                   }
+                    if(Integer.parseInt(m.group(2)) < startPosY){
+                        startPosY= Integer.parseInt(m.group(2));
+                    }
+                }
+            }
+        }
 
         int offSetX = 0;
         int offSetY = 0;
@@ -90,11 +105,11 @@ public class FileParser {
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).startsWith("#P")){
                 m = p.matcher(list.get(i));
-                if(!m.matches()){
-                    System.out.println("Didnt match");
+                if(m.matches()){
+                    offSetX = Integer.parseInt(m.group(1));
+                    offSetY = Integer.parseInt(m.group(2));
                 }
-                offSetX = Integer.parseInt(m.group(1));
-                offSetY = Integer.parseInt(m.group(2));
+
                 unknownInt = i;
             }
             if(list.get(i).length() - startPosX + offSetX > width){
@@ -118,13 +133,14 @@ public class FileParser {
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).startsWith("#P")){
                 m = p.matcher(list.get(i));
-                if(!m.matches()){
-                    System.out.println("Didnt match");
+                if(m.matches()){
+                    System.out.println("Did match");
+                    offSetX = Integer.parseInt(m.group(1));
+                    offSetY = Integer.parseInt(m.group(2));
+                    x = offSetX - startPosX;
+                    y = offSetY - startPosY;
                 }
-                offSetX = Integer.parseInt(m.group(1));
-                offSetY = Integer.parseInt(m.group(2));
-                x = offSetX - startPosX;
-                y = offSetY - startPosY;
+
                 System.out.println("x: "+x);
                 System.out.println("y: "+y);
 
@@ -154,8 +170,11 @@ public class FileParser {
     }
 
 
-
-
+    /**
+     * reads the string content from a Life 1.06 file
+     * @param list a list of strings red from a .lif file
+     * @return the boolean array produced from the list
+     */
     private static boolean[][] life06(List<String> list) {
 
         while(list.get(0).startsWith("#")){
@@ -220,6 +239,11 @@ public class FileParser {
         return imp;
     }
 
+    /**
+     * Reads a RLE file
+     * @param file the RLE file
+     * @return the boolean array produced from the file
+     */
     private static boolean[][] readRLE(File file) {
         int width;
         int height;
@@ -322,6 +346,11 @@ public class FileParser {
 
     }
 
+    /**
+     * Reads a .cells / plain text file
+     * @param file The .cells file
+     * @return the boolean array produced from the file
+     */
     private static boolean[][] readPlainText(File file) {
         int width;
         int height;

@@ -77,7 +77,9 @@ public class MasterController {
 
     public void choosePattern(){
         File file = patternChooser.showOpenDialog(stage);
-        canvasController.setImportPattern(FileParser.read(file));
+        if(file != null) {
+            canvasController.setImportPattern(FileParser.read(file));
+        }
     }
 
 

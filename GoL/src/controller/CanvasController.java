@@ -32,11 +32,11 @@ public class CanvasController {
     private AnimationTimer animationTimer;
     private long timer;
 
-    private short boardSize = 1500;
+    private short boardSize = 2500;
     private double cellSize = 5;
     private boolean[][] grid;
 
-    private int frameDelay = 30;
+    private int frameDelay = 0;
     private boolean running = true;
 
     int gridClickX;
@@ -271,6 +271,9 @@ public class CanvasController {
             renderLife();
     }
 
+    /**
+     * Keeps the cell size within it´s boundaries.
+     */
     private void clampCellSize() {
         double limit = (canvas.getWidth() > canvas.getHeight()) ? canvas.getWidth() : canvas.getHeight();
         if(cellSize * boardSize < limit){
@@ -346,6 +349,9 @@ public class CanvasController {
         }
     }
 
+    /**
+     * Renders the imported pattern on the canvas around the mouse position
+     */
     public void renderImport() {
 
         gc.setFill(ghostColor);
@@ -361,6 +367,9 @@ public class CanvasController {
         }
     }
 
+    /**
+     * Inserts the imported pattern into the cell grid
+     */
     private void insertImport() {
 
         for (int x = 0; x < importPattern.length; x++) {
@@ -469,6 +478,7 @@ public class CanvasController {
 
     //region Setters
 
+
     public void setCellColor(Color cellColor) {
         this.cellColor = cellColor;
         calculateGhostColor();
@@ -479,17 +489,29 @@ public class CanvasController {
         calculateGhostColor();
     }
 
+    /**
+     * Calculates the color just in between the background color and the cell color
+     */
     private void calculateGhostColor() {
         double blue = (cellColor.getBlue() + backgroundColor.getBlue()) / 2;
         double red = (cellColor.getRed() + backgroundColor.getRed()) / 2;
         double green = (cellColor.getGreen() + backgroundColor.getGreen()) / 2;
 
-        ghostColor = cellColor;
+        ghostColor = new Color(red, green, blue, 1);
     }
 
+    /**
+     * Sets the pattern that is importet from a file
+     * @param importPattern the pattern that is imported from a file
+     */
     public void setImportPattern(boolean[][] importPattern) {
         this.importPattern = importPattern;
-        importing = true;
+        if(importPattern != null) {
+            importing = true;
+        }
+        else{
+            System.out.println("ISNULL");
+        }
     }
 
 
