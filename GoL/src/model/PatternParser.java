@@ -320,7 +320,7 @@ public class PatternParser {
         patternWidth = 0;
 
         for(int x = 0; x < lineList.size(); x++){
-            if(lineList.get(x).length() > patternHeight){
+            if(lineList.get(x).length() > patternWidth){
                 patternWidth = lineList.get(x).length();
             }
         }
