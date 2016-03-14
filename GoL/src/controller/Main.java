@@ -1,6 +1,9 @@
 package controller;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -9,17 +12,25 @@ import java.io.IOException;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage stage) throws Exception{
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("../view/MainView.fxml"));
 
         try {
-            new MasterController(primaryStage);
-        } catch (IOException e){
+            BorderPane root = loader.load();
+            MasterController rootController = loader.getController();
+
+            rootController.initialize(stage, root);
+
+        } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Failed to load FXML documents");
         } catch (Exception e) {
-            System.out.println("Something happened!");
+            e.printStackTrace();
+            System.out.println("");
         }
     }
-
 
     public static void main(String[] args) {
         launch(args);

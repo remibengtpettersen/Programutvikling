@@ -28,6 +28,6 @@ public class MenuController {
         masterController.choosePattern();
     }
     public void onAbout(ActionEvent actionEvent) {
-        System.out.println("About pressed");
+        System.out.println("About clicked");
     }
 }
