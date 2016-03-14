@@ -11,15 +11,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class FileParser {
+public class PatternParser {
 
-    private static final byte FIRSTLINE = 0;
+    private static final byte FIRST_LINE = 0;
     private static Pattern patternParameters;
     private static Matcher patternMatcher;
     private static int patternHeight;
     private static int patternWidth;
     private static boolean[][] patternArray;
     private static List<String> lineList;
+    private static char currentCharacter;
 
     /**
      * Reads a Game of Life pattern file and returns an array of the pattern
@@ -49,10 +50,10 @@ public class FileParser {
 
         lineList = Files.readAllLines(patternFile.toPath());
 
-        if(lineList.get(FIRSTLINE).contains("Life 1.05")){
+        if(lineList.get(FIRST_LINE).contains("Life 1.05")){
             return life05(lineList);
         }
-        else if(lineList.get(FIRSTLINE).contains("Life 1.06")) {
+        else if(lineList.get(FIRST_LINE).contains("Life 1.06")) {
             return life06(lineList);
         }
         return null;
@@ -60,25 +61,24 @@ public class FileParser {
 
     /**
      * reads the string content from a Life 1.05 file
-     * @param list a list of strings red from a .lif file
+     * @param lineList a list of strings red from a .lif file
      * @return the boolean array produced from the list
      */
-    private static boolean[][] life05(List<String> list) {
-
+    private static boolean[][] life05(List<String> lineList) {
         patternWidth = 0;
         patternHeight = 0;
         patternParameters = Pattern.compile("#P (.+) (.+)");
 
-        while (!list.get(FIRSTLINE).startsWith("#P")){
-            list.remove(FIRSTLINE);
+        while (!lineList.get(FIRST_LINE).startsWith("#P")){
+            lineList.remove(FIRST_LINE);
         }
 
         int startPosX = 0;
         int startPosY = 0;
 
-        for(int i = 0; i < list.size(); i++) {
-            if (list.get(i).startsWith("#P")) {
-                patternMatcher = patternParameters.matcher(list.get(i));
+        for(int i = 0; i < lineList.size(); i++) {
+            if (lineList.get(i).startsWith("#P")) {
+                patternMatcher = patternParameters.matcher(lineList.get(i));
                 if (patternMatcher.matches()) {
                    if(Integer.parseInt(patternMatcher.group(1)) < startPosX){
                        startPosX = Integer.parseInt(patternMatcher.group(1));
@@ -95,9 +95,9 @@ public class FileParser {
 
         int unknownInt = 0;
 
-        for(int i = 0; i < list.size(); i++){
-            if(list.get(i).startsWith("#P")){
-                patternMatcher = patternParameters.matcher(list.get(i));
+        for(int i = 0; i < lineList.size(); i++){
+            if(lineList.get(i).startsWith("#P")){
+                patternMatcher = patternParameters.matcher(lineList.get(i));
                 if(patternMatcher.matches()){
                     offSetX = Integer.parseInt(patternMatcher.group(1));
                     offSetY = Integer.parseInt(patternMatcher.group(2));
@@ -105,26 +105,23 @@ public class FileParser {
 
                 unknownInt = i;
             }
-            if(list.get(i).length() - startPosX + offSetX > patternWidth){
-                patternWidth = list.get(i).length() - startPosX + offSetX;
+            if(lineList.get(i).length() - startPosX + offSetX > patternWidth){
+                patternWidth = lineList.get(i).length() - startPosX + offSetX;
             }
             if((i-unknownInt) - startPosY + offSetY > patternHeight){
                 patternHeight = i - unknownInt - startPosY + offSetY;
             }
         }
 
-        boolean[][] patternArray = new boolean[patternWidth][patternHeight];
-
-        char currentCharacter;
+        patternArray = new boolean[patternWidth][patternHeight];
 
         int x = 0;
         int y = 0;
 
-        for(int i = 0; i < list.size(); i++){
-            if(list.get(i).startsWith("#P")){
-                patternMatcher = patternParameters.matcher(list.get(i));
+        for(int i = 0; i < lineList.size(); i++){
+            if(lineList.get(i).startsWith("#P")){
+                patternMatcher = patternParameters.matcher(lineList.get(i));
                 if(patternMatcher.matches()){
-                    System.out.println("Did match");
                     offSetX = Integer.parseInt(patternMatcher.group(1));
                     offSetY = Integer.parseInt(patternMatcher.group(2));
                     x = offSetX - startPosX;
@@ -132,8 +129,8 @@ public class FileParser {
                 }
             }
             else{
-                for(int j = 0; j < list.get(i).length(); j++){
-                    currentCharacter = list.get(i).charAt(j);
+                for(int j = 0; j < lineList.get(i).length(); j++){
+                    currentCharacter = lineList.get(i).charAt(j);
 
                     if(currentCharacter == '.'){
                         patternArray[x][y] = false;
@@ -151,35 +148,32 @@ public class FileParser {
         return patternArray;
     }
 
-
     /**
      * reads the string content from a Life 1.06 file
      * @param list a list of strings red from a .lif file
      * @return the boolean array produced from the list
      */
-    private static boolean[][] life06(List<String> list) {
+    private static boolean[][] life06(List<String> list) throws PatternFormatException {
 
-        while(list.get(FIRSTLINE).startsWith("#")){
-            list.remove(FIRSTLINE);
+        while(list.get(FIRST_LINE).startsWith("#")){
+            list.remove(FIRST_LINE);
         }
         patternParameters = Pattern.compile("(.+) (.+)");
-        //Matcher m;
 
-        patternMatcher = patternParameters.matcher(list.get(FIRSTLINE));
+        patternMatcher = patternParameters.matcher(list.get(FIRST_LINE));
 
         if(!patternMatcher.matches()){
-
-            return null;
+            throw new PatternFormatException();
         }
+
         int startPosX = Integer.parseInt(patternMatcher.group(1));
         int startPosY = Integer.parseInt(patternMatcher.group(2));
-
 
         int possibleHeight;
         int possibleWidth;
 
-        int width = startPosX;
-        int height = startPosY;
+        patternWidth = startPosX;
+        possibleHeight = startPosY;
 
         for(int i =0; i < list.size(); i++){
             patternMatcher = patternParameters.matcher(list.get(i));
@@ -190,12 +184,12 @@ public class FileParser {
             possibleWidth = Integer.parseInt(patternMatcher.group(1));
             possibleHeight = Integer.parseInt(patternMatcher.group(2));
 
-            if(possibleHeight > height){
-                height = possibleHeight;
+            if(possibleHeight > patternHeight){
+                patternHeight = possibleHeight;
             }
 
-            if(possibleWidth > width){
-                width = possibleWidth;
+            if(possibleWidth > patternWidth){
+                patternWidth = possibleWidth;
             }
             else if(possibleWidth < startPosX){
                 startPosX = possibleWidth;
@@ -203,22 +197,20 @@ public class FileParser {
 
         }
 
-        width-=startPosX;
-        height-=startPosY;
+        patternWidth -= startPosX;
+        possibleHeight-=startPosY;
 
-        boolean[][] imp = new boolean[width+1][height+1];
+        patternArray = new boolean[patternWidth + 1][possibleHeight + 1];
 
         for(int i = 0; i < list.size(); i++){
             patternMatcher = patternParameters.matcher(list.get(i));
 
             if(!patternMatcher.matches()){
-                return null;
+                throw new PatternFormatException();
             }
-            imp[Integer.parseInt(patternMatcher.group(1))-startPosX][Integer.parseInt(patternMatcher.group(2))-startPosY] = true;
+            patternArray[Integer.parseInt(patternMatcher.group(1)) - startPosX][Integer.parseInt(patternMatcher.group(2)) - startPosY] = true;
         }
-
-
-        return imp;
+        return patternArray;
     }
 
     /**
@@ -230,12 +222,12 @@ public class FileParser {
 
         lineList = readLinesFromFile(patternFile);
 
-        while (lineList.get(FIRSTLINE).startsWith("#")){
-            lineList.remove(FIRSTLINE);
+        while (lineList.get(FIRST_LINE).startsWith("#")){
+            lineList.remove(FIRST_LINE);
         }
 
         patternParameters = Pattern.compile("^x = ([0-9]+), y = ([0-9]+), rule = (.+)$");
-        patternMatcher = patternParameters.matcher(lineList.get(FIRSTLINE));
+        patternMatcher = patternParameters.matcher(lineList.get(FIRST_LINE));
 
         if(!patternMatcher.matches()) {
             throw new PatternFormatException();
@@ -246,9 +238,8 @@ public class FileParser {
 
         patternArray = new boolean[patternHeight][patternWidth];
 
-        lineList.remove(FIRSTLINE);
+        lineList.remove(FIRST_LINE);
 
-        char currentCharacter;
         int pattern = 0; //ToBeNamed...
         int x = 0;
         int y = 0;
@@ -321,8 +312,8 @@ public class FileParser {
 
         lineList = Files.readAllLines(patternFile.toPath());
 
-        while(lineList.get(FIRSTLINE).startsWith("!")){
-            lineList.remove(FIRSTLINE);
+        while(lineList.get(FIRST_LINE).startsWith("!")){
+            lineList.remove(FIRST_LINE);
         }
 
         patternHeight = lineList.size();

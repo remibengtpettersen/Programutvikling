@@ -47,3 +47,6 @@ Added file-parser to import game of life patterns.
 
 160314 10:30
 Refactored FileParser.java, added PatternFormatException class.
+
+160314 10:02
+Refactored name for FileParser to PatternParser.
