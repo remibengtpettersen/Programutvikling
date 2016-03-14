@@ -85,14 +85,14 @@
           </file>
           <file leaf-file-name="CanvasView.fxml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/view/CanvasView.fxml">
-              <provider editor-type-id="JavaFX-Scene-Builder">
-                <state />
-              </provider>
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
                   <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
+              </provider>
+              <provider editor-type-id="JavaFX-Scene-Builder">
+                <state />
               </provider>
             </entry>
           </file>
@@ -100,23 +100,18 @@
             <entry file="file://$PROJECT_DIR$/src/controller/MenuController.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#495#496#0" expanded="true" />
-                    <element signature="e#543#544#0" expanded="true" />
-                  </folding>
+                  <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="FileParser.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="FileParser.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/model/FileParser.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="65" column="57" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                  </folding>
+                <state vertical-scroll-proportion="0.5608108">
+                  <caret line="331" column="51" selection-start-line="331" selection-start-column="51" selection-end-line="331" selection-end-column="51" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -125,7 +120,7 @@
             <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+                  <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -133,10 +128,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ToolController.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="ToolController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/controller/ToolController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.30405405">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
                   <folding />
                 </state>
@@ -158,12 +153,7 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
                   <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-                  <folding>
-                    <element signature="e#576#577#0" expanded="false" />
-                    <element signature="e#612#613#0" expanded="false" />
-                    <element signature="e#662#663#0" expanded="false" />
-                    <element signature="e#701#702#0" expanded="false" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -199,22 +189,22 @@
           </file>
           <file leaf-file-name="MenuView.fxml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/view/MenuView.fxml">
-              <provider editor-type-id="JavaFX-Scene-Builder">
-                <state />
-              </provider>
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
                   <caret line="40" column="10" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
                   <folding />
                 </state>
               </provider>
+              <provider editor-type-id="JavaFX-Scene-Builder">
+                <state />
+              </provider>
             </entry>
           </file>
           <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/controller/MasterController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.32094595">
-                  <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+                <state vertical-scroll-proportion="-0.2027027">
+                  <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
                   <folding />
                 </state>
               </provider>
@@ -222,14 +212,14 @@
           </file>
           <file leaf-file-name="ToolView.fxml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/view/ToolView.fxml">
-              <provider editor-type-id="JavaFX-Scene-Builder">
-                <state />
-              </provider>
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
                   <caret line="19" column="62" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
                   <folding />
                 </state>
+              </provider>
+              <provider editor-type-id="JavaFX-Scene-Builder">
+                <state />
               </provider>
             </entry>
           </file>
@@ -285,9 +275,9 @@
         <option value="$PROJECT_DIR$/src/view/MenuView.fxml" />
         <option value="$PROJECT_DIR$/src/controller/MenuController.java" />
         <option value="$PROJECT_DIR$/src/controller/ToolController.java" />
-        <option value="$PROJECT_DIR$/src/model/FileParser.java" />
-        <option value="$PROJECT_DIR$/src/controller/CanvasController.java" />
         <option value="$PROJECT_DIR$/src/controller/MasterController.java" />
+        <option value="$PROJECT_DIR$/src/controller/CanvasController.java" />
+        <option value="$PROJECT_DIR$/src/model/FileParser.java" />
       </list>
     </option>
   </component>
@@ -1148,6 +1138,7 @@
       <workItem from="1457709488756" duration="2073000" />
       <workItem from="1457721517737" duration="2676000" />
       <workItem from="1457940064702" duration="353000" />
+      <workItem from="1457947987551" duration="203000" />
     </task>
     <servers />
   </component>
@@ -1184,7 +1175,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66127000" />
+    <option name="totallyTimeSpent" value="66330000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1128" extended-state="6" />
@@ -1272,14 +1263,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/CanvasView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
@@ -1304,12 +1295,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-          <folding>
-            <element signature="e#576#577#0" expanded="false" />
-            <element signature="e#612#613#0" expanded="false" />
-            <element signature="e#662#663#0" expanded="false" />
-            <element signature="e#701#702#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1562,25 +1548,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/MenuView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="10" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/ToolView.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/ToolView.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="62" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/GameOfLife2D.java">
@@ -1595,34 +1581,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-          <folding>
-            <element signature="e#576#577#0" expanded="false" />
-            <element signature="e#612#613#0" expanded="false" />
-            <element signature="e#662#663#0" expanded="false" />
-            <element signature="e#701#702#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/FileParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="57" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/CanvasView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/GameOfLife.java">
@@ -1630,16 +1601,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1654,17 +1615,14 @@
     <entry file="file://$PROJECT_DIR$/src/controller/MenuController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="e#495#496#0" expanded="true" />
-            <element signature="e#543#544#0" expanded="true" />
-          </folding>
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/ToolController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30405405">
+        <state vertical-scroll-proportion="0.0">
           <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
           <folding />
         </state>
@@ -1672,8 +1630,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/MasterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.32094595">
-          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+        <state vertical-scroll-proportion="-0.2027027">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/FileParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5608108">
+          <caret line="331" column="51" selection-start-line="331" selection-start-column="51" selection-end-line="331" selection-end-column="51" />
           <folding />
         </state>
       </provider>

@@ -32,7 +32,7 @@ public class CanvasController {
     private AnimationTimer animationTimer;
     private long timer;
 
-    private short boardSize = 2500;
+    private short boardSize = 1500;
     private double cellSize = 5;
     private boolean[][] grid;
 
