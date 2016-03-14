@@ -222,7 +222,6 @@ public class PatternParser {
             else if(possibleWidth < startPosX){
                 startPosX = possibleWidth;
             }
-
         }
 
         patternWidth -= startPosX;
