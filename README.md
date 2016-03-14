@@ -50,3 +50,6 @@ Refactored FileParser.java, added PatternFormatException class.
 
 160314 10:02
 Refactored name for FileParser to PatternParser.
+
+160314 11:27
+Added method in PatternParser for importing patterns from the web, and modified the rest of the class to allow this

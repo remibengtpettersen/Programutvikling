@@ -5,8 +5,12 @@ package model;
  */
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,32 +33,56 @@ public class PatternParser {
      */
     static public boolean[][] read(File patternFile) throws IOException {
 
+        lineList = readLinesFromFile(patternFile);
+
         if(patternFile.toString().endsWith(".cells")){
-            return readPlainText(patternFile);
+            return readPlainText();
         }
         else if(patternFile.toString().endsWith(".rle")){
-            return readRLE(patternFile);
+            return readRLE();
         }
         else if(patternFile.toString().endsWith(".lif") || patternFile.toString().endsWith(".life")){
-            return readLife(patternFile);
+            return readLife();
         }
         return null;
     }
+
+    static public boolean[][] read(String pattern) throws IOException {
+        lineList = new ArrayList<String>();
+        URL url = new URL(pattern);
+        Scanner s = new Scanner(url.openStream());
+        while (s.hasNext()){
+            lineList.add(s.nextLine());
+        }
+
+        if(pattern.endsWith(".cells")){
+            return readPlainText();
+        }
+        else if(pattern.endsWith(".rle")){
+            return readRLE();
+        }
+        else if(pattern.endsWith(".lif") || pattern.endsWith(".life")){
+            return readLife();
+        }
+        return null;
+    }
+
+
 
     /**
      * Reads
      * @param patternFile a .lif or .life file
      * @return the boolean array produced from the file
      */
-    private static boolean[][] readLife(File patternFile) throws IOException {
+    private static boolean[][] readLife() throws IOException {
 
-        lineList = Files.readAllLines(patternFile.toPath());
+
 
         if(lineList.get(FIRST_LINE).contains("Life 1.05")){
-            return life05(lineList);
+            return life05();
         }
         else if(lineList.get(FIRST_LINE).contains("Life 1.06")) {
-            return life06(lineList);
+            return life06();
         }
         return null;
     }
@@ -64,7 +92,7 @@ public class PatternParser {
      * @param lineList a list of strings red from a .lif file
      * @return the boolean array produced from the list
      */
-    private static boolean[][] life05(List<String> lineList) {
+    private static boolean[][] life05() {
         patternWidth = 0;
         patternHeight = 0;
         patternParameters = Pattern.compile("#P (.+) (.+)");
@@ -153,14 +181,14 @@ public class PatternParser {
      * @param list a list of strings red from a .lif file
      * @return the boolean array produced from the list
      */
-    private static boolean[][] life06(List<String> list) throws PatternFormatException {
+    private static boolean[][] life06() throws PatternFormatException {
 
-        while(list.get(FIRST_LINE).startsWith("#")){
-            list.remove(FIRST_LINE);
+        while(lineList.get(FIRST_LINE).startsWith("#")){
+            lineList.remove(FIRST_LINE);
         }
         patternParameters = Pattern.compile("(.+) (.+)");
 
-        patternMatcher = patternParameters.matcher(list.get(FIRST_LINE));
+        patternMatcher = patternParameters.matcher(lineList.get(FIRST_LINE));
 
         if(!patternMatcher.matches()){
             throw new PatternFormatException();
@@ -175,8 +203,8 @@ public class PatternParser {
         patternWidth = startPosX;
         possibleHeight = startPosY;
 
-        for(int i =0; i < list.size(); i++){
-            patternMatcher = patternParameters.matcher(list.get(i));
+        for(int i =0; i < lineList.size(); i++){
+            patternMatcher = patternParameters.matcher(lineList.get(i));
 
             if(!patternMatcher.matches()){
                 return null;
@@ -202,8 +230,8 @@ public class PatternParser {
 
         patternArray = new boolean[patternWidth + 1][possibleHeight + 1];
 
-        for(int i = 0; i < list.size(); i++){
-            patternMatcher = patternParameters.matcher(list.get(i));
+        for(int i = 0; i < lineList.size(); i++){
+            patternMatcher = patternParameters.matcher(lineList.get(i));
 
             if(!patternMatcher.matches()){
                 throw new PatternFormatException();
@@ -218,9 +246,7 @@ public class PatternParser {
      * @param patternFile the RLE file
      * @return the boolean array produced from the file
      */
-    private static boolean[][] readRLE(File patternFile) throws IOException {
-
-        lineList = readLinesFromFile(patternFile);
+    private static boolean[][] readRLE() throws IOException {
 
         while (lineList.get(FIRST_LINE).startsWith("#")){
             lineList.remove(FIRST_LINE);
@@ -308,9 +334,7 @@ public class PatternParser {
      * @param patternFile The .cells file
      * @return the boolean array produced from the file
      */
-    private static boolean[][] readPlainText(File patternFile) throws IOException {
-
-        lineList = Files.readAllLines(patternFile.toPath());
+    private static boolean[][] readPlainText() throws IOException {
 
         while(lineList.get(FIRST_LINE).startsWith("!")){
             lineList.remove(FIRST_LINE);
