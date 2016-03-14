@@ -13,53 +13,50 @@ import java.util.regex.Pattern;
 
 public class FileParser {
 
+    private static final byte FIRSTLINE = 0;
+    private static Pattern patternParameters;
+    private static Matcher patternMatcher;
+    private static int patternHeight;
+    private static int patternWidth;
+    private static boolean[][] patternArray;
+    private static List<String> lineList;
+
     /**
      * Reads a Game of Life pattern file and returns an array of the pattern
-     * @param file the file to read frome
+     * @param patternFile the file to read frome
      * @return the boolean array produced from the file
      */
-    static public boolean[][] read(File file){
+    static public boolean[][] read(File patternFile) throws IOException {
 
-        if(file.toString().endsWith(".cells")){
-            return readPlainText(file);
+        if(patternFile.toString().endsWith(".cells")){
+            return readPlainText(patternFile);
         }
-        else if(file.toString().endsWith(".rle")){
-            return readRLE(file);
+        else if(patternFile.toString().endsWith(".rle")){
+            return readRLE(patternFile);
         }
-        else if(file.toString().endsWith(".lif")||file.toString().endsWith(".life")){
-            return readLife(file);
+        else if(patternFile.toString().endsWith(".lif") || patternFile.toString().endsWith(".life")){
+            return readLife(patternFile);
         }
         return null;
     }
 
     /**
      * Reads
-     * @param file a .lif or .life file
+     * @param patternFile a .lif or .life file
      * @return the boolean array produced from the file
      */
-    private static boolean[][] readLife(File file) {
+    private static boolean[][] readLife(File patternFile) throws IOException {
 
+        lineList = Files.readAllLines(patternFile.toPath());
 
-        List<String>list = null;
-        try {
-            list = Files.readAllLines(file.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(lineList.get(FIRSTLINE).contains("Life 1.05")){
+            return life05(lineList);
         }
-
-
-
-        if(list.get(0).contains("Life 1.05")){
-            return life05(list);
+        else if(lineList.get(FIRSTLINE).contains("Life 1.06")) {
+            return life06(lineList);
         }
-        else if(list.get(0).contains("Life 1.06")){
-
-            return life06(list);
-        }
-
         return null;
     }
-
 
     /**
      * reads the string content from a Life 1.05 file
@@ -68,30 +65,26 @@ public class FileParser {
      */
     private static boolean[][] life05(List<String> list) {
 
-        while (!list.get(0).startsWith("#P")){
-            list.remove(0);
+        patternWidth = 0;
+        patternHeight = 0;
+        patternParameters = Pattern.compile("#P (.+) (.+)");
+
+        while (!list.get(FIRSTLINE).startsWith("#P")){
+            list.remove(FIRSTLINE);
         }
-
-        int width = 0;
-        int height = 0;
-
-
-        Pattern p = Pattern.compile("#P (.+) (.+)");
-        Matcher m = p.matcher(list.get(0));
 
         int startPosX = 0;
         int startPosY = 0;
 
-
         for(int i = 0; i < list.size(); i++) {
             if (list.get(i).startsWith("#P")) {
-                m = p.matcher(list.get(i));
-                if (m.matches()) {
-                   if(Integer.parseInt(m.group(1)) < startPosX){
-                       startPosX = Integer.parseInt(m.group(1));
+                patternMatcher = patternParameters.matcher(list.get(i));
+                if (patternMatcher.matches()) {
+                   if(Integer.parseInt(patternMatcher.group(1)) < startPosX){
+                       startPosX = Integer.parseInt(patternMatcher.group(1));
                    }
-                    if(Integer.parseInt(m.group(2)) < startPosY){
-                        startPosY= Integer.parseInt(m.group(2));
+                    if(Integer.parseInt(patternMatcher.group(2)) < startPosY){
+                        startPosY= Integer.parseInt(patternMatcher.group(2));
                     }
                 }
             }
@@ -104,69 +97,58 @@ public class FileParser {
 
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).startsWith("#P")){
-                m = p.matcher(list.get(i));
-                if(m.matches()){
-                    offSetX = Integer.parseInt(m.group(1));
-                    offSetY = Integer.parseInt(m.group(2));
+                patternMatcher = patternParameters.matcher(list.get(i));
+                if(patternMatcher.matches()){
+                    offSetX = Integer.parseInt(patternMatcher.group(1));
+                    offSetY = Integer.parseInt(patternMatcher.group(2));
                 }
 
                 unknownInt = i;
             }
-            if(list.get(i).length() - startPosX + offSetX > width){
-                width = list.get(i).length() - startPosX + offSetX;
+            if(list.get(i).length() - startPosX + offSetX > patternWidth){
+                patternWidth = list.get(i).length() - startPosX + offSetX;
             }
-            if((i-unknownInt) - startPosY + offSetY > height){
-                height = i - unknownInt - startPosY + offSetY;
+            if((i-unknownInt) - startPosY + offSetY > patternHeight){
+                patternHeight = i - unknownInt - startPosY + offSetY;
             }
         }
 
-        System.out.println("Height: "+height);
-        System.out.println("Width: "+width);
+        boolean[][] patternArray = new boolean[patternWidth][patternHeight];
 
-        boolean[][] imp = new boolean[width][height];
-
-        char c;
+        char currentCharacter;
 
         int x = 0;
         int y = 0;
 
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).startsWith("#P")){
-                m = p.matcher(list.get(i));
-                if(m.matches()){
+                patternMatcher = patternParameters.matcher(list.get(i));
+                if(patternMatcher.matches()){
                     System.out.println("Did match");
-                    offSetX = Integer.parseInt(m.group(1));
-                    offSetY = Integer.parseInt(m.group(2));
+                    offSetX = Integer.parseInt(patternMatcher.group(1));
+                    offSetY = Integer.parseInt(patternMatcher.group(2));
                     x = offSetX - startPosX;
                     y = offSetY - startPosY;
                 }
-
-                System.out.println("x: "+x);
-                System.out.println("y: "+y);
-
             }
             else{
                 for(int j = 0; j < list.get(i).length(); j++){
-                    c = list.get(i).charAt(j);
+                    currentCharacter = list.get(i).charAt(j);
 
-                    if(c == '.'){
-                        imp[x][y] = false;
+                    if(currentCharacter == '.'){
+                        patternArray[x][y] = false;
                         x++;
                     }
-                    else if(c == '*'){
-                        imp[x][y] = true;
+                    else if(currentCharacter == '*'){
+                        patternArray[x][y] = true;
                         x++;
                     }
-
                 }
                 y++;
                 x = offSetX - startPosX;
             }
         }
-
-
-
-        return imp;
+        return patternArray;
     }
 
 
@@ -177,20 +159,20 @@ public class FileParser {
      */
     private static boolean[][] life06(List<String> list) {
 
-        while(list.get(0).startsWith("#")){
-            list.remove(0);
+        while(list.get(FIRSTLINE).startsWith("#")){
+            list.remove(FIRSTLINE);
         }
-        Pattern p = Pattern.compile("(.+) (.+)");
-        Matcher m;
+        patternParameters = Pattern.compile("(.+) (.+)");
+        //Matcher m;
 
-        m = p.matcher(list.get(0));
+        patternMatcher = patternParameters.matcher(list.get(FIRSTLINE));
 
-        if(!m.matches()){
+        if(!patternMatcher.matches()){
 
             return null;
         }
-        int startPosX = Integer.parseInt(m.group(1));
-        int startPosY = Integer.parseInt(m.group(2));
+        int startPosX = Integer.parseInt(patternMatcher.group(1));
+        int startPosY = Integer.parseInt(patternMatcher.group(2));
 
 
         int possibleHeight;
@@ -200,13 +182,13 @@ public class FileParser {
         int height = startPosY;
 
         for(int i =0; i < list.size(); i++){
-            m = p.matcher(list.get(i));
+            patternMatcher = patternParameters.matcher(list.get(i));
 
-            if(!m.matches()){
+            if(!patternMatcher.matches()){
                 return null;
             }
-            possibleWidth = Integer.parseInt(m.group(1));
-            possibleHeight = Integer.parseInt(m.group(2));
+            possibleWidth = Integer.parseInt(patternMatcher.group(1));
+            possibleHeight = Integer.parseInt(patternMatcher.group(2));
 
             if(possibleHeight > height){
                 height = possibleHeight;
@@ -227,12 +209,12 @@ public class FileParser {
         boolean[][] imp = new boolean[width+1][height+1];
 
         for(int i = 0; i < list.size(); i++){
-            m = p.matcher(list.get(i));
+            patternMatcher = patternParameters.matcher(list.get(i));
 
-            if(!m.matches()){
+            if(!patternMatcher.matches()){
                 return null;
             }
-            imp[Integer.parseInt(m.group(1))-startPosX][Integer.parseInt(m.group(2))-startPosY] = true;
+            imp[Integer.parseInt(patternMatcher.group(1))-startPosX][Integer.parseInt(patternMatcher.group(2))-startPosY] = true;
         }
 
 
@@ -241,166 +223,130 @@ public class FileParser {
 
     /**
      * Reads a RLE file
-     * @param file the RLE file
+     * @param patternFile the RLE file
      * @return the boolean array produced from the file
      */
-    private static boolean[][] readRLE(File file) {
-        int width;
-        int height;
+    private static boolean[][] readRLE(File patternFile) throws IOException {
 
+        lineList = readLinesFromFile(patternFile);
 
-        List<String>list = null;
-        try {
-            System.out.println(file.toPath().subpath(1, 2));
-            list = Files.readAllLines(file.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        while (list.get(0).startsWith("#")){
-            list.remove(0);
+        while (lineList.get(FIRSTLINE).startsWith("#")){
+            lineList.remove(FIRSTLINE);
         }
 
-        Pattern p = Pattern.compile("^x = ([0-9]+), y = ([0-9]+), rule = (.+)$");
-        Matcher m = p.matcher(list.get(0));
+        patternParameters = Pattern.compile("^x = ([0-9]+), y = ([0-9]+), rule = (.+)$");
+        patternMatcher = patternParameters.matcher(lineList.get(FIRSTLINE));
 
-        if(!m.matches()){
-            return null;
+        if(!patternMatcher.matches()) {
+            throw new PatternFormatException();
         }
 
-        height = Integer.parseInt(m.group(1));
+        patternHeight = Integer.parseInt(patternMatcher.group(1));
+        patternWidth = Integer.parseInt(patternMatcher.group(2));
 
-        width = Integer.parseInt(m.group(2));
-        System.out.println("Height: "+height);
-        System.out.println("width: "+width);
+        patternArray = new boolean[patternHeight][patternWidth];
 
-        boolean[][] imp = new boolean[height][width];
+        lineList.remove(FIRSTLINE);
 
-        list.remove(0);
-        char c;
-        int antall = 0;
+        char currentCharacter;
+        int pattern = 0; //ToBeNamed...
         int x = 0;
         int y = 0;
-        int teller = 0;
 
-        for(int i = 0; i<list.size(); i++){
-            for(int j = 0; j < list.get(i).length(); j++){
+        for(int i = 0; i < lineList.size(); i++){
+            for(int j = 0; j < lineList.get(i).length(); j++){
 
-                c = list.get(i).charAt(j);
-                System.out.println(antall);
+                currentCharacter = lineList.get(i).charAt(j);
 
-                if(Character.isDigit(c)){
-                    antall = antall*10 + (c - '0');
+                if(Character.isDigit(currentCharacter)){
+                    pattern = pattern * 10 + (currentCharacter - '0');
                 }
-                else if(c == 'b'){
-                    if(antall == 0){
-                        imp[x][y] = false;
+                else if(currentCharacter == 'b'){
+                    if(pattern == 0){
+                        patternArray[x][y] = false;
                         x++;
                     }
                     else {
-                        for(int k = 0; k<antall; k++){
-                            imp[x][y] = false;
+                        for(int k = 0; k < pattern; k++){
+                            patternArray[x][y] = false;
                             x++;
                         }
-                        antall = 0;
+                        pattern = 0;
                     }
                 }
-                else if(c == 'o'){
-                    if(antall == 0){
-                        imp[x][y] = true;
+                else if(currentCharacter == 'o'){
+
+                    if(pattern == 0){
+                        patternArray[x][y] = true;
                         x++;
                     }
                     else {
-                        for(int k = 0; k<antall; k++){
-                            imp[x][y] = true;
+                        for(int k = 0; k < pattern; k++){
+                            patternArray[x][y] = true;
                             x++;
                         }
-                        antall = 0;
+                        pattern = 0;
                     }
                 }
-                else if(c == '$'){
+                else if(currentCharacter == '$'){
 
-                    if(antall == 0){
+                    if(pattern == 0){
                         y++;
                     }
                     else{
-                        y+= antall;
+                        y+= pattern;
                     }
-                    antall = 0;
+                    pattern = 0;
 
                     x=0;
                 }
-                else if(c == '!'){
-                    return imp;
+                else if(currentCharacter == '!'){
+                    return patternArray;
                 }
             }
         }
-
-
-
-
-
-      /*  for(int a = 0; a< list.size(); a++){
-       //     System.out.println(list.get(a));
-        }*/
         return null;
+    }
 
+    private static List<String> readLinesFromFile(File patternFile) throws IOException {
+        return Files.readAllLines(patternFile.toPath());
     }
 
     /**
      * Reads a .cells / plain text file
-     * @param file The .cells file
+     * @param patternFile The .cells file
      * @return the boolean array produced from the file
      */
-    private static boolean[][] readPlainText(File file) {
-        int width;
-        int height;
+    private static boolean[][] readPlainText(File patternFile) throws IOException {
 
+        lineList = Files.readAllLines(patternFile.toPath());
 
-        List<String> list = null;
-        try {
-            System.out.println(file.toPath().subpath(1, 2));
-            list = Files.readAllLines(file.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
+        while(lineList.get(FIRSTLINE).startsWith("!")){
+            lineList.remove(FIRSTLINE);
         }
 
+        patternHeight = lineList.size();
+        patternWidth = 0;
 
-
-        while(list.get(0).startsWith("!")){
-            list.remove(0);
-        }
-
-
-        height = list.size();
-        width = 0;
-
-        //Finner den lengste linjen
-
-        for(int x = 0; x < list.size(); x++){
-            if(list.get(x).length() > width){
-                width = list.get(x).length();
+        for(int x = 0; x < lineList.size(); x++){
+            if(lineList.get(x).length() > patternHeight){
+                patternWidth = lineList.get(x).length();
             }
         }
 
-        System.out.println(width+" " + height);
+        patternArray = new boolean[patternWidth][patternHeight];
 
-        boolean[][] imp = new boolean[width][height];
+        for(int y = 0; y < patternHeight; y++){
+            for(int x = 0; x < lineList.get(y).length(); x++){
 
-        for(int y = 0; y<height; y++){
-            for(int x = 0; x<list.get(y).length();x++){
-
-                if(list.get(y).charAt(x) == 'O'){
-                    imp[x][y] = true;
+                if(lineList.get(y).charAt(x) == 'O'){
+                    patternArray[x][y] = true;
                 }
                 else{
-                    imp[x][y] = false;
+                    patternArray[x][y] = false;
                 }
             }
         }
-
-        return imp;
+        return patternArray;
     }
-
-
-
 }

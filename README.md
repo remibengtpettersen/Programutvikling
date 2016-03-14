@@ -44,3 +44,6 @@ Added support for zooming with mouse scroll and a cell counter.
 
 160311 16:34
 Added file-parser to import game of life patterns.
+
+160314 10:30
+Refactored FileParser.java, added PatternFormatException class.
