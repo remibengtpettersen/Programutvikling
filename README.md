@@ -56,3 +56,6 @@ Added method in PatternParser for importing patterns from the web, and modified 
 
 160315 14:15
 Implemented support for reading GUI and game configurations from file. File is stored in ./resources. File name is config.properties. For this to work resources folder need to be set to "Source Root". A folder can be changed to "Source Root" by right clicking and then select "Mark directory as". New class was added to support reading from file. Class name "Configuration". To make this work method "getConfigurationFromFile" and "setConfiguration" must be executed after object is instantiated.
+
+160315 15:24
+Implemented support for starting and stopping game from GUI. Had to make "startAnimationTimer" and "stopAnimationTimer" public on CanvasController to implement this feature. Implemented method that will change image and text on "start and pause" button. Since game is starting with a glider going from left to right, button will start with the pause image and text "Pause".

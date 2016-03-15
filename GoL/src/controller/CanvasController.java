@@ -462,14 +462,14 @@ public class CanvasController {
     /**
      * Starts the animation
      */
-    private void startAnimation() {
+    public void startAnimation() {
         animationTimer.start();
     }
 
     /**
      * Stops the animation
      */
-    private void stopAnimation() {
+    public void stopAnimation() {
         animationTimer.stop();
     }
 
