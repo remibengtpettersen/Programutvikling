@@ -62,3 +62,6 @@ Implemented support for starting and stopping game from GUI. Had to make "startA
 
 160315 17:28
 To be written pauseknappen og sånt :p 
+
+160315 21:06
+Implemented feature that will generate a "config.properties" file if it is missing. File will have default content. 
