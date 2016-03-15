@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 public class MasterController {
 
-    private Configuration configuration;
+    public Configuration configuration;
     private Stage stage;
     private Scene scene;
 

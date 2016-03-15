@@ -1,8 +1,6 @@
 package controller;
 
 import javafx.animation.AnimationTimer;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.Property;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -36,7 +34,7 @@ public class CanvasController {
     private double cellSize = 5;
     private boolean[][] grid;
 
-    private int frameDelay = 0;
+    private int frameDelay = 1000;
     private boolean running = true;
 
     int gridClickX;
@@ -70,13 +68,33 @@ public class CanvasController {
 
         this.masterController = masterController;
 
+        initializeGameParameters();
+
         gol = new GameOfLife2D(boardSize);
         grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
 
+
         initializeListeners();
         initializeAnimation();
         startAnimation();
+    }
+
+    private void initializeGameParameters() {
+
+        try {
+            cellColor = (Color) Color.class.getField(masterController.configuration.getCellColor()).get(null);
+            backgroundColor =(Color) Color.class.getField(masterController.configuration.getBackgroundColor()).get(null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+        cellSize = masterController.configuration.getCellSize();
+        frameDelay = masterController.configuration.getGameSpeed();
+        boardSize = masterController.configuration.getGameSize();
+
     }
 
     /**
@@ -180,7 +198,7 @@ public class CanvasController {
      * @param mouseEvent
      */
     private void mouseClick(MouseEvent mouseEvent) {
-        if(mouseDrag){
+        if (mouseDrag) {
             prevMousePosX = 0;
             prevMousePosY = 0;
             mouseDrag = false;
@@ -189,7 +207,7 @@ public class CanvasController {
 
         mouseButton = mouseEvent.getButton();
         if (mouseButton == MouseButton.PRIMARY) {
-            if(importing){
+            if (importing) {
                 insertImport();
                 importing = false;
                 return;
@@ -200,15 +218,17 @@ public class CanvasController {
             gol.changeCellState(gridClickX, gridClickY);
             renderLife();
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY)
-            if(running){
+            if (running) {
+                masterController.toolController.changeIconToPlay();
                 stopAnimation();
                 running = false;
-            }
-        else{
+            } else {
+                masterController.toolController.changeIconToPause();
                 startAnimation();
                 running = true;
             }
     }
+
 
     /**
      * If left mouse button clicked and mouse dragged, will draw path on canvas.
@@ -231,6 +251,7 @@ public class CanvasController {
 
             if(prevMousePosX != 0 || prevMousePosY != 0){
                 drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY), getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
+
             }
             //gol.setCellAlive(gridClickX, gridClickY);
         }
@@ -249,7 +270,7 @@ public class CanvasController {
         prevMousePosX = currMousePosX;
         prevMousePosY = currMousePosY;
 
-        if(!running)
+        if(frameDelay > 0)
             renderLife();
     }
 
@@ -266,7 +287,7 @@ public class CanvasController {
         boardOffsetY = (int) (cellSize * ratio2 - scrollEvent.getY());
 
         clampView();
-        if(!running)
+        if(frameDelay > 0)
             renderLife();
     }
 
@@ -464,6 +485,7 @@ public class CanvasController {
      */
     public void startAnimation() {
         animationTimer.start();
+        running = true;
     }
 
     /**
@@ -471,6 +493,7 @@ public class CanvasController {
      */
     public void stopAnimation() {
         animationTimer.stop();
+        running = false;
     }
 
     //endregion
@@ -512,6 +535,12 @@ public class CanvasController {
             System.out.println("ISNULL");
         }
     }
+
+    public void setFrameDelay(int frameDelay) {
+        this.frameDelay = frameDelay;
+    }
+
+
 
 
     //endregion

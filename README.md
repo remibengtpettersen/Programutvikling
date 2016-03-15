@@ -59,3 +59,6 @@ Implemented support for reading GUI and game configurations from file. File is s
 
 160315 15:24
 Implemented support for starting and stopping game from GUI. Had to make "startAnimationTimer" and "stopAnimationTimer" public on CanvasController to implement this feature. Implemented method that will change image and text on "start and pause" button. Since game is starting with a glider going from left to right, button will start with the pause image and text "Pause".
+
+160315 17:28
+To be written pauseknappen og sånt :p 

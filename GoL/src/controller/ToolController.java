@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-import java.io.InputStream;
 import java.util.Objects;
 
 /**
@@ -47,6 +46,15 @@ public class ToolController {
 
         imgPause = new Image(getClass().getResourceAsStream(pathImages + pauseImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
         imgPlay = new Image(getClass().getResourceAsStream(pathImages + playImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
+
+        try {
+            cellColorPicker.setValue((Color) Color.class.getField(masterController.configuration.getCellColor()).get(null));
+            backgroundColorPicker.setValue((Color) Color.class.getField(masterController.configuration.getBackgroundColor()).get(null));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -67,6 +75,12 @@ public class ToolController {
         masterController.canvasController.renderLife();
     }
 
+    public void speedSliderDragged(){
+
+        masterController.canvasController.setFrameDelay(-(int)speedSlider.getValue());
+    }
+
+
     public void zoomSliderDragged(){
 
     }
@@ -78,14 +92,22 @@ public class ToolController {
     public void playGame(ActionEvent actionEvent) {
 
         if (Objects.equals(btnPlay.getText(), "Play")) {
-            btnPlay.setText("Pause");
-            btnPlay.setGraphic(new ImageView(imgPause));
+            changeIconToPause();
             masterController.canvasController.startAnimation();
         }
         else {
-            btnPlay.setText("Play");
-            btnPlay.setGraphic(new ImageView(imgPlay));
+            changeIconToPlay();
             masterController.canvasController.stopAnimation();
         }
+    }
+
+    public void changeIconToPlay() {
+        btnPlay.setText("Play");
+        btnPlay.setGraphic(new ImageView(imgPlay));
+    }
+
+    public void changeIconToPause() {
+        btnPlay.setText("Pause");
+        btnPlay.setGraphic(new ImageView(imgPause));
     }
 }

@@ -3,12 +3,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import java.lang.String?>
-<ToolBar  fx:controller="controller.ToolController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml">
-
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<ToolBar fx:controller="controller.ToolController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml">
+    <Button fx:id="btnPlay" text="Pause" onAction="#playGame" prefWidth="85">
+        <graphic>
+            <ImageView fx:id="imgViewBtnPlay" fitWidth="15" fitHeight="15">
+                <Image fx:id="imgBtnPlay" url="/icons/bars.png"></Image>
+            </ImageView>
+        </graphic>
+    </Button>
     <HBox spacing="10">
         <HBox  spacing="5" alignment="CENTER">
             <Label text="Speed"/>
-            <Slider fx:id="speedSlider"/>
+            <Slider fx:id="speedSlider" min="-500" max="0" onMouseDragged="#speedSliderDragged"/>
         </HBox>
         <HBox  spacing="5" alignment="CENTER">
             <Label text="Zoom"/>

@@ -19,13 +19,14 @@ public class Configuration {
     private InputStream inputStream;
     private Properties properties;
 
-    private String windowWidth = "";
-    private String windowHeight = "";
-    private String gameSpeed = "";
-    private String cellSize = "";
-    private String cellColor = "";
-    private String cellType = "";
-    private String canvasColor = "";
+    private String windowWidth;
+    private String windowHeight;
+    private String gameSpeed;
+    private String cellSize;
+    private String gameSize;
+    private String cellColor;
+    private String cellType;
+    private String backgroundColor;
 
     private String propertiesFileName = "./config.properties";
     //endregion
@@ -52,19 +53,21 @@ public class Configuration {
     }
 
     public String getCellColor() {
-        return this.cellColor;
+        return this.cellColor.toUpperCase();
     }
 
-    public String getCellSize() {
-        return this.cellSize;
+    public String getBackgroundColor() {
+        return this.backgroundColor.toUpperCase();
     }
 
-    public String getGameSpeed() {
-        return this.gameSpeed;
+    public double getCellSize() {
+        return Double.parseDouble(this.cellSize);
     }
 
-    public String getCanvasColor() {
-        return this.canvasColor;
+    public short getGameSize() {return Short.parseShort(gameSize);}
+
+    public int getGameSpeed() {
+        return Integer.parseInt(this.gameSpeed);
     }
 
     public void getConfigurationFromFile() throws IOException{
@@ -72,14 +75,14 @@ public class Configuration {
         properties = new Properties();
         inputStream = getClass().getClassLoader().getResourceAsStream(propertiesFileName);
 
-        try {
-            if (inputStream != null) {
+        if (inputStream == null) {
+          // createNewConfigFile();
+        }
+
+            try {
                 properties.load(inputStream);
                 inputStream.close();
-            }
-            else {
-                throw new FileNotFoundException();
-            }
+
         }
         catch (FileNotFoundException exception) {
             LOGGER.log(Level.SEVERE, "property file '" + propertiesFileName + "' not found in the classpath");
@@ -97,7 +100,8 @@ public class Configuration {
         this.gameSpeed = this.properties.getProperty("game.speed");
         this.cellColor = this.properties.getProperty("cell.color");
         this.cellSize = this.properties.getProperty("cell.size");
-        this.canvasColor = this.properties.getProperty("canvas.color");
+        this.backgroundColor = this.properties.getProperty("canvas.background.color");
+        this.gameSize = properties.getProperty("game.size");
     }
     //endregion
 }
