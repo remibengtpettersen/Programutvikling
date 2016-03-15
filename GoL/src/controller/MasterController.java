@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Configuration;
 import model.PatternParser;
 import model.PatternFormatException;
 
@@ -17,11 +18,9 @@ import java.io.IOException;
  */
 public class MasterController {
 
+    private Configuration configuration;
     private Stage stage;
     private Scene scene;
-
-    private short stageWidth = 800;
-    private short stageHeight = 600;
 
     @FXML public CanvasController canvasController;         //these should probably be private and with getters
     @FXML public MenuController menuController;
@@ -29,10 +28,14 @@ public class MasterController {
 
     FileChooser patternChooser = new FileChooser();
 
-    public void initialize(Stage stage, BorderPane root) {
+    public void initialize(Stage stage, BorderPane root) throws IOException {
+
+        configuration = new Configuration();
+        configuration.getConfigurationFromFile();
+        configuration.setConfiguration();
 
         this.stage = stage;
-        scene = new Scene(root, stageWidth, stageHeight);
+        scene = new Scene(root, configuration.getWidth(), configuration.getHeight());
 
         canvasController.initialize(this);
         menuController.initialize(this);

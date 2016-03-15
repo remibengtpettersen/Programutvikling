@@ -53,3 +53,6 @@ Refactored name for FileParser to PatternParser.
 
 160314 11:27
 Added method in PatternParser for importing patterns from the web, and modified the rest of the class to allow this
+
+160315 14:15
+Implemented support for reading GUI and game configurations from file. File is stored in ./resources. File name is config.properties. For this to work resources folder need to be set to "Source Root". A folder can be changed to "Source Root" by right clicking and then select "Mark directory as". New class was added to support reading from file. Class name "Configuration". To make this work method "getConfigurationFromFile" and "setConfiguration" must be executed after object is instantiated.
