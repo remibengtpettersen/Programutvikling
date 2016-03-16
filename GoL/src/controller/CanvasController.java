@@ -96,6 +96,8 @@ public class CanvasController {
         frameDelay = masterController.configuration.getGameSpeed();
         boardSize = masterController.configuration.getGameSize();
 
+        masterController.toolController.setSpeed(frameDelay);
+
     }
 
     /**
@@ -296,6 +298,10 @@ public class CanvasController {
         boardOffsetY = (int) (cellSize * ratio2 - scrollEvent.getY());
 
         clampView();
+
+        masterController.toolController.addSpeedValue(scrollEvent.getDeltaX()/5);
+
+        System.out.println("3: "+ frameDelay);
         if(!running || frameDelay > 0)
             renderLife();
     }
@@ -304,7 +310,7 @@ public class CanvasController {
         double ratio1 = (boardOffsetX + canvas.getWidth()/2) / cellSize;
         double ratio2 = (boardOffsetY + canvas.getHeight()/2) / cellSize;
 
-        System.out.println(newCellSize);
+       // System.out.println(newCellSize);
         cellSize = newCellSize;
         clampCellSize();
         boardOffsetX = (int) (cellSize * ratio1 - canvas.getWidth()/2);
@@ -568,7 +574,13 @@ public class CanvasController {
     }
 
     public void setFrameDelay(int frameDelay) {
-        this.frameDelay = frameDelay;
+        if(frameDelay < 17) // 60 fps
+            this.frameDelay = 0;
+        else
+            this.frameDelay = frameDelay;
+
+        System.out.println("1: "+ frameDelay);
+     //   System.out.println(frameDelay);
     }
 
 

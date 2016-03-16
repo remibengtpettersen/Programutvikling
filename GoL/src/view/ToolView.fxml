@@ -16,7 +16,7 @@
     <HBox spacing="10">
         <HBox  spacing="5" alignment="CENTER">
             <Label text="Speed"/>
-            <Slider fx:id="speedSlider" min="-500" max="0" onMouseDragged="#speedSliderDragged"/>
+            <Slider fx:id="speedSlider" min="-100" max="-25" onMouseDragged="#speedSliderDragged"/>
         </HBox>
         <HBox  spacing="5" alignment="CENTER">
             <Label text="Zoom"/>
