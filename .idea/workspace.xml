@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77e7b0eb-83b0-405b-a95b-a80a4968f2c8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GoL/src/model/rules/HighLifeRule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/MenuController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/MenuController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/model/GameOfLife.java" afterPath="$PROJECT_DIR$/GoL/src/model/GameOfLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/model/GameOfLife2D.java" afterPath="$PROJECT_DIR$/GoL/src/model/GameOfLife2D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/model/GameOfLife3D.java" afterPath="$PROJECT_DIR$/GoL/src/model/GameOfLife3D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java" afterPath="$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/view/MenuView.fxml" afterPath="$PROJECT_DIR$/GoL/src/view/MenuView.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/view/MenuView.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/view/MenuView.fxml" />
     </list>
     <ignored path="Programutvikling.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,7 +76,7 @@
             <entry file="file://$PROJECT_DIR$/README.md">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.81942546">
-                  <caret line="69" column="57" selection-start-line="69" selection-start-column="57" selection-end-line="69" selection-end-column="57" />
+                  <caret line="69" column="56" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
                   <folding />
                 </state>
               </provider>
@@ -1188,7 +1177,7 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.81942546">
-          <caret line="69" column="57" selection-start-line="69" selection-start-column="57" selection-end-line="69" selection-end-column="57" />
+          <caret line="69" column="56" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
           <folding />
         </state>
       </provider>
