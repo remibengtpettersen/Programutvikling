@@ -64,4 +64,7 @@ Implemented support for starting and stopping game from GUI. Had to make "startA
 To be written pauseknappen og sånt :p 
 
 160315 21:06
-Implemented feature that will generate a "config.properties" file if it is missing. File will have default content. 
+Implemented feature that will generate a "config.properties" file if it is missing. File will have default content.
+
+160316 12:31
+Implemented a Rules dropdown menu, a custom rule dialog tpopup, and custom rules. Custom rules are parsed from Bx/Sx notation, and will evolve accordingly. Added the HighLife rule as a class

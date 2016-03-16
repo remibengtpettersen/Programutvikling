@@ -5,7 +5,8 @@
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<MenuBar  fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.control.TextField?>
+<MenuBar fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml">
     <Menu text="GoL">
         <MenuItem text="About" onAction="#onAbout"/>
         <MenuItem text="Preferences"/>
@@ -25,6 +26,12 @@
     <Menu text="View">
         <RadioMenuItem text="Static board"/>
         <RadioMenuItem text="Dynamic board"/>
+    </Menu>
+    <Menu text="Rules">
+        <MenuItem text="Conway" onAction="#setConwayRule"/>
+        <MenuItem text="HighLife" onAction="#setHighLifeRule"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="Custom rule" onAction="#setCustomRule"/>
     </Menu>
     <Menu text="Stats">
         <MenuItem text="Show history"/>

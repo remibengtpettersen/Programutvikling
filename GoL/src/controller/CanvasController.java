@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import model.GameOfLife2D;
+import model.rules.Rule;
 
 /**
  * Created by Andreas on 09.03.2016.
@@ -281,6 +282,8 @@ public class CanvasController {
     private void mouseScroll(ScrollEvent scrollEvent) {
         double ratio1 = (boardOffsetX + scrollEvent.getX()) / cellSize;
         double ratio2 = (boardOffsetY + scrollEvent.getY()) / cellSize;
+
+
         cellSize += cellSize * (scrollEvent.getDeltaY() / 150);
         clampCellSize();
         boardOffsetX = (int) (cellSize * ratio1 - scrollEvent.getX());
@@ -538,6 +541,10 @@ public class CanvasController {
 
     public void setFrameDelay(int frameDelay) {
         this.frameDelay = frameDelay;
+    }
+
+    public void setRule(String ruleText){
+        gol.setRule(ruleText);
     }
 
 

@@ -1,6 +1,9 @@
 package model;
 
 import model.rules.ClassicRule;
+import model.rules.CustomRule;
+import model.rules.HighLifeRule;
+import model.rules.Rule;
 
 /**
  * Created on 12.02.2016.
@@ -16,7 +19,10 @@ public class GameOfLife2D extends GameOfLife{
 
         super(gameSize);
 
-        rule = new ClassicRule(grid, neighbours);
+        //rule = new ClassicRule(grid, neighbours);
+        //rule = new HighLifeRule(grid, neighbours);
+
+        setRule("classic");
     }
 
     //region startup-sequence
@@ -102,6 +108,22 @@ public class GameOfLife2D extends GameOfLife{
     @Override
     public void setGrid(boolean[][] grid) {
         this.grid = grid;
+    }
+
+    @Override
+    public void setRule(String ruleText) {
+
+        switch(ruleText){
+            case "classic":
+                rule = new ClassicRule(grid, neighbours);
+                break;
+            case "highlife":
+                rule = new HighLifeRule(grid, neighbours);
+                break;
+            default:
+                rule = new CustomRule(grid, neighbours, ruleText);
+                System.out.println("Custom");
+        }
     }
 
     /**
