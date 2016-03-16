@@ -65,3 +65,6 @@ To be written pauseknappen og sånt :p
 
 160315 21:06
 Implemented feature that will generate a "config.properties" file if it is missing. File will have default content. 
+
+160316 11:10
+Fixed bug when reading inputstream from file if file is missing. Added support for reading "canvas.grid" is true or false.
