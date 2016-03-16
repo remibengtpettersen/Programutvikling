@@ -90,10 +90,11 @@ public class Configuration {
     }
 
     private void generateConfigurationFileContent() {
-        configurationsString =      "#######################################\n" +
-                                    "# Configuration file for Game of Life #\n" +
-                                    "# ¡Enter text in lower case!          #\n" +
-                                    "#######################################\n" +
+        configurationsString =      "##########################################\n" +
+                                    "# Configuration file for Game of Life    #\n" +
+                                    "# ¡Enter text in lower case!             #\n" +
+                                    "# Separate words with '.' e.g cell.color #\n" +
+                                    "##########################################\n" +
                                     "# Set window size properties\n" +
                                     "window.width = 1000\n" +
                                     "window.height = 800\n" +
