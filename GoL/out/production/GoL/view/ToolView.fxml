@@ -20,7 +20,7 @@
         </HBox>
         <HBox  spacing="5" alignment="CENTER">
             <Label text="Zoom"/>
-            <Slider fx:id="zoomSlider" onMouseDragged="#zoomSliderDragged"/>
+            <Slider fx:id="zoomSlider" min="1" max = "100" onMouseDragged="#zoomSliderDragged"/>
         </HBox>
     </HBox>
 

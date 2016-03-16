@@ -82,7 +82,7 @@ public class ToolController {
 
 
     public void zoomSliderDragged(){
-
+        masterController.canvasController.setCellSize(Math.exp(zoomSlider.getValue()/28));
     }
 
     public void giveCellCount(int cellCount) {
@@ -109,5 +109,13 @@ public class ToolController {
     public void changeIconToPause() {
         btnPlay.setText("Pause");
         btnPlay.setGraphic(new ImageView(imgPause));
+    }
+
+    public void setZoom(double zoom) {
+        zoomSlider.setValue(Math.log(zoom)*28);
+    }
+
+    public void setMinZoom(double minZoom) {
+         zoomSlider.setMin(Math.log(minZoom)*28);
     }
 }
