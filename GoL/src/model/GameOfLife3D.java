@@ -49,6 +49,11 @@ public class GameOfLife3D extends GameOfLife {
     }
 
     @Override
+    public void clearGrid() {
+
+    }
+
+    @Override
     public void setRule(String ruleText) {
 
     }

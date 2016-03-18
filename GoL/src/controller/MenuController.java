@@ -52,7 +52,6 @@ public class MenuController {
         TextInputDialog dialog = new TextInputDialog("B3/S23");
         dialog.setTitle("Custom rule");
         dialog.setHeaderText("Enter custom rule code");
-        //dialog.setHeaderText(null);
         dialog.setContentText("B: Neighbours needed for birth\nS: Neighbours needed for survival\n" +
                 "Example: Conway's rule would be B3/S23");
 
@@ -68,4 +67,26 @@ public class MenuController {
         //Lambda
         //result.ifPresent(ruleCode -> System.out.println("Your choice: " + ruleCode));
     }
+
+    public void setLWDRule(ActionEvent actionEvent) {
+        masterController.canvasController.setRule("B3/S012345678");
+    }
+
+    public void setSeedsRule(ActionEvent actionEvent) {
+        masterController.canvasController.setRule("B2/S");
+    }
+
+    public void setDiamoebaRule(ActionEvent actionEvent) {
+        masterController.canvasController.setRule("B35678/S5678");
+    }
+
+    public void setReplicatorRule(ActionEvent actionEvent) {
+        masterController.canvasController.setRule("B1357/S1357");
+    }
+
+    public void setDNNRule(ActionEvent actionEvent) {
+        masterController.canvasController.setRule("B3678/S34678");
+    }
+
+    public void clearGrid(ActionEvent actionEvent) { masterController.canvasController.clearGrid(); }
 }

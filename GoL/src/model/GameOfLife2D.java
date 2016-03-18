@@ -5,6 +5,8 @@ import model.rules.CustomRule;
 import model.rules.HighLifeRule;
 import model.rules.Rule;
 
+import java.util.Arrays;
+
 /**
  * Created on 12.02.2016.
  * @Author The group through pair programing.
@@ -108,6 +110,15 @@ public class GameOfLife2D extends GameOfLife{
     @Override
     public void setGrid(boolean[][] grid) {
         this.grid = grid;
+    }
+
+    @Override
+    public void clearGrid(){
+
+        for(int i = 0; i < grid.length; i++){
+            Arrays.fill(grid[i], false);
+            Arrays.fill(neighbours[i], (byte)0);
+        }
     }
 
     @Override

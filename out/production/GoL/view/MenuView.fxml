@@ -20,6 +20,7 @@
         <MenuItem text="Cut"/>
         <MenuItem text="Copy"/>
         <MenuItem text="Paste"/>
+        <MenuItem text="Clear board" onAction="#clearGrid"/>
         <SeparatorMenuItem/>
         <MenuItem text="Open editor"/>
     </Menu>
@@ -30,6 +31,12 @@
     <Menu text="Rules">
         <MenuItem text="Conway" onAction="#setConwayRule"/>
         <MenuItem text="HighLife" onAction="#setHighLifeRule"/>
+        <MenuItem text="Life without death" onAction="#setLWDRule"/>
+        <MenuItem text="Seeds" onAction="#setSeedsRule"/>
+        <MenuItem text="Diamoeba" onAction="#setDiamoebaRule"/>
+        <MenuItem text="Replicator" onAction="#setReplicatorRule"/>
+        <MenuItem text="Day and night" onAction="#setDNNRule"/>
+        <!--<MenuItem text="Clear TEMP" onAction="#clear"/>-->
         <SeparatorMenuItem/>
         <MenuItem text="Custom rule" onAction="#setCustomRule"/>
     </Menu>

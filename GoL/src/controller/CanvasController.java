@@ -408,6 +408,10 @@ public class CanvasController {
         importing = false;
     }
 
+    public void clearGrid() {
+        gol.clearGrid();
+    }
+
     /**
      * Draws the cell at the x, y coordinate in the grid
      * @param x The x coordinate in the game of life grid.
