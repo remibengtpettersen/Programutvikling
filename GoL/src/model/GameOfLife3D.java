@@ -10,16 +10,16 @@ public class GameOfLife3D extends GameOfLife {
     private boolean[][][] grid;
     private byte[][][] neighbours;
 
-    public GameOfLife3D(int gameSize) {
+    public GameOfLife3D(int width, int height) {
 
-        super(gameSize);
+        super(width, height);
 
 
         //rule = new ClassicRule(grid, neighbours);
     }
 
     @Override
-    public void createGameBoard(int gameSize) {
+    public void createGameBoard(int width, int height) {
 
     }
 

@@ -12,9 +12,9 @@ public class GameOfLife2D extends GameOfLife{
    private byte[][] neighbours;
 
 
-    public GameOfLife2D(int gameSize) {
+    public GameOfLife2D(int width, int height) {
 
-        super(gameSize);
+        super(width, height);
 
         rule = new ClassicRule(grid, neighbours);
     }
@@ -23,12 +23,11 @@ public class GameOfLife2D extends GameOfLife{
     /**
      * Creates the boolean 2D Array to keep track of dead and alivelive cells, and the 2D byte-
      * array to keep track of the neighbourcount to the corresponding cells in the other array
-     * @param gameSize
      */
     @Override
-    public void createGameBoard(int gameSize) {
-        grid = new boolean[gameSize][gameSize];
-        neighbours = new byte[gameSize][gameSize];
+    public void createGameBoard(int width, int height) {
+        grid = new boolean[width][height];
+        neighbours = new byte[width][height];
 
         grid[3][1] = true;
         grid[3][2] = true;
@@ -129,6 +128,15 @@ public class GameOfLife2D extends GameOfLife{
      */
     public void changeCellState(int x, int y) {
         grid[x][y] = !grid[x][y];
+    }
+
+    public void createNeighboursGrid() {
+        neighbours = new byte[grid.length][grid[0].length];
+    }
+
+    public void updateRuleGrid() {
+        rule.setGrid(grid);
+        rule.setNeighbours(neighbours);
     }
 
     //endregion

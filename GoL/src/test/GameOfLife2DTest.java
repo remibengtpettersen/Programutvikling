@@ -16,7 +16,7 @@ public class GameOfLife2DTest {
 
     @Before
     public void setUp() throws Exception {
-        gol = new GameOfLife2D(5);
+        gol = new GameOfLife2D(5, 5);
         gol.setGrid(new boolean[][]{
                 new boolean[]{false, false, false, false, false},
                 new boolean[]{false, false, false, false, false},

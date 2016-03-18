@@ -63,7 +63,7 @@ public class ToolController {
      */
     public void changeCellColor(ActionEvent actionEvent) {
         masterController.canvasController.setCellColor(cellColorPicker.getValue());    //ugly, but temporary
-        masterController.canvasController.renderLife();
+        masterController.canvasController.renderCanvas();
     }
 
     /**
@@ -72,7 +72,7 @@ public class ToolController {
      */
     public void changeBackgroundColor(ActionEvent actionEvent) {
         masterController.canvasController.setBackgroundColor(backgroundColorPicker.getValue());    //ugly, but temporary
-        masterController.canvasController.renderLife();
+        masterController.canvasController.renderCanvas();
     }
 
     public void speedSliderDragged(){

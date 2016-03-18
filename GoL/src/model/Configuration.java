@@ -29,6 +29,8 @@ public class Configuration {
     private String backgroundColor;
     private String configurationsString;
     private String canvasGrid;
+    private String gameHeight;
+    private String gameWidth;
     //endregion
 
     public Configuration() {
@@ -83,7 +85,9 @@ public class Configuration {
         return Double.parseDouble(this.cellSize);
     }
 
-    public short getGameSize() {return Short.parseShort(gameSize);}
+    public short getGameHeight() {return Short.parseShort(gameHeight);}
+
+    public short getGameWidth() {return Short.parseShort(gameWidth);}
 
     public int getGameSpeed() {
         return Integer.parseInt(this.gameSpeed);
@@ -100,7 +104,8 @@ public class Configuration {
                                     "window.height = 800\n" +
                                     "# Set game properties\n" +
                                     "game.speed = 20\n" +
-                                    "game.size = 1000\n" +
+                                    "game.width = 1000\n" +
+                                    "game.height = 1000\n" +
                                     "# Set cell properties\n" +
                                     "cell.color = green\n" +
                                     "cell.size = 10\n" +
@@ -139,7 +144,8 @@ public class Configuration {
         this.cellColor = this.properties.getProperty("cell.color");
         this.cellSize = this.properties.getProperty("cell.size");
         this.backgroundColor = this.properties.getProperty("canvas.background.color");
-        this.gameSize = properties.getProperty("game.size");
+        this.gameHeight = properties.getProperty("game.height");
+        this.gameWidth = properties.getProperty("game.width");
         this.canvasGrid = properties.getProperty("canvas.grid");
     }
     //endregion

@@ -6,4 +6,8 @@ package model.rules;
 public interface Rule {
 
     void evolve();
+
+    void setGrid(boolean[][] grid);
+
+    void setNeighbours(byte[][] neighbours);
 }

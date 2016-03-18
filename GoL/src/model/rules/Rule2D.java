@@ -6,8 +6,8 @@ package model.rules;
 public abstract class Rule2D implements Rule {
 
     //region data fields
-    protected final boolean[][] grid;
-    protected final byte[][] neighbours;
+    protected boolean[][] grid;
+    protected byte[][] neighbours;
     //endregion
 
     //region constructor
@@ -19,7 +19,9 @@ public abstract class Rule2D implements Rule {
     //endregion
 
     //region public methods
-    public boolean[][] getGrid(){ return grid; };
+    public boolean[][] getGrid(){ return grid; }
+    public void setGrid(boolean[][] grid){this.grid = grid;}
+    public void setNeighbours(byte[][] neighbours){this.neighbours = neighbours;}
     //endregion
 
     //region private methods

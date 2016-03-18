@@ -12,11 +12,11 @@ public abstract class GameOfLife {
     // For statistics
     public int cellCount = 0;
 
-    public GameOfLife(int gameSize){
-        createGameBoard(gameSize);
+    public GameOfLife(int width, int height){
+        createGameBoard(width, height);
     }
 
-    public abstract void createGameBoard(int gameSize);
+    public abstract void createGameBoard(int width, int height);
 
     public abstract void nextGeneration();
     public abstract void aggregateNeighbours();
@@ -29,5 +29,9 @@ public abstract class GameOfLife {
 
     public int getCellCount() {
         return cellCount;
+    }
+
+    public Rule getRule() {
+        return rule;
     }
 }
