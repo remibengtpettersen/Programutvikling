@@ -36,7 +36,6 @@
         <MenuItem text="Diamoeba" onAction="#setDiamoebaRule"/>
         <MenuItem text="Replicator" onAction="#setReplicatorRule"/>
         <MenuItem text="Day and night" onAction="#setDNNRule"/>
-        <!--<MenuItem text="Clear TEMP" onAction="#clear"/>-->
         <SeparatorMenuItem/>
         <MenuItem text="Custom rule" onAction="#setCustomRule"/>
     </Menu>

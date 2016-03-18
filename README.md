@@ -66,8 +66,11 @@ To be written pauseknappen og sånt :p
 160315 21:06
 Implemented feature that will generate a "config.properties" file if it is missing. File will have default content.
 
+160316 11:10
+Fixed bug when reading inputstream from file if file is missing. Added support for reading "canvas.grid" is true or false.
+
 160316 12:31
 Implemented a Rules dropdown menu, a custom rule dialog popup, and custom rules. Custom rules are parsed from Bx/Sx notation, and will evolve accordingly. Added the HighLife rule as a class
 
-160318
+160318 09:30
 Implemented a clearGrid function, available under the Edit dropdown menu. Added some popular, alternative rules (Life Without Death, Seeds, Diamoeba, Replicator, Day and Night) to the rules dropdown menu
