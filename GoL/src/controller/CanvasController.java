@@ -33,6 +33,7 @@ public class CanvasController {
 
     private short boardSize = 1500;
     private double cellSize = 5;
+    private double minCellSize;
     private boolean[][] grid;
 
     private int frameDelay = 1000;
@@ -96,6 +97,8 @@ public class CanvasController {
         frameDelay = masterController.configuration.getGameSpeed();
         boardSize = masterController.configuration.getGameSize();
 
+        masterController.toolController.setSpeed(frameDelay);
+
     }
 
     /**
@@ -109,6 +112,7 @@ public class CanvasController {
 
                 //To control game speed
                 if(now/1000000 - timer > frameDelay) {
+
 
                         gol.nextGeneration();
 
@@ -144,14 +148,16 @@ public class CanvasController {
         canvas.widthProperty().addListener(evt -> {
             clampCellSize();
             clampView();
-            if(!running)
-            renderLife();
+            calculateMinCellSize();
+            if(!running || frameDelay > 0)
+                renderLife();
         });
         canvas.heightProperty().addListener(evt -> {
             clampCellSize();
             clampView();
-            if(!running)
-            renderLife();
+            calculateMinCellSize();
+            if(!running || frameDelay > 0)
+                renderLife();
 
         });
 
@@ -162,7 +168,7 @@ public class CanvasController {
         if(importing){
             currMousePosX = (int) mouseEvent.getX();
             currMousePosY = (int) mouseEvent.getY();
-            if(!running){
+            if(!running || frameDelay > 0){
                 renderLife();
                 renderImport();
             }
@@ -271,7 +277,7 @@ public class CanvasController {
         prevMousePosX = currMousePosX;
         prevMousePosY = currMousePosY;
 
-        if(frameDelay > 0)
+        if(!running || frameDelay > 0)
             renderLife();
     }
 
@@ -285,15 +291,36 @@ public class CanvasController {
 
 
         cellSize += cellSize * (scrollEvent.getDeltaY() / 150);
+
+       // System.out.println(cellSize);
         clampCellSize();
+        masterController.toolController.setZoom(cellSize);
         boardOffsetX = (int) (cellSize * ratio1 - scrollEvent.getX());
         boardOffsetY = (int) (cellSize * ratio2 - scrollEvent.getY());
 
         clampView();
-        if(frameDelay > 0)
+
+        masterController.toolController.addSpeedValue(scrollEvent.getDeltaX()/5);
+
+        System.out.println("3: "+ frameDelay);
+        if(!running || frameDelay > 0)
             renderLife();
     }
 
+    public void setCellSize(double newCellSize) {
+        double ratio1 = (boardOffsetX + canvas.getWidth()/2) / cellSize;
+        double ratio2 = (boardOffsetY + canvas.getHeight()/2) / cellSize;
+
+       // System.out.println(newCellSize);
+        cellSize = newCellSize;
+        clampCellSize();
+        boardOffsetX = (int) (cellSize * ratio1 - canvas.getWidth()/2);
+        boardOffsetY = (int) (cellSize * ratio2 - canvas.getHeight()/2);
+        clampView();
+
+        if(!running || frameDelay > 0)
+            renderLife();
+    }
     /**
      * Keeps the cell size within it´s boundaries.
      */
@@ -301,6 +328,9 @@ public class CanvasController {
         double limit = (canvas.getWidth() > canvas.getHeight()) ? canvas.getWidth() : canvas.getHeight();
         if(cellSize * boardSize < limit){
             cellSize = limit / boardSize;
+        }
+        else if(cellSize > 28){
+            cellSize = 28;
         }
     }
 
@@ -529,6 +559,11 @@ public class CanvasController {
         ghostColor = new Color(red, green, blue, 1);
     }
 
+    private void calculateMinCellSize() {
+         minCellSize = (canvas.getWidth() > canvas.getHeight()) ? canvas.getWidth() / boardSize : canvas.getHeight() / boardSize;
+        masterController.toolController.setMinZoom(minCellSize);
+    }
+
     /**
      * Sets the pattern that is importet from a file
      * @param importPattern the pattern that is imported from a file
@@ -544,7 +579,13 @@ public class CanvasController {
     }
 
     public void setFrameDelay(int frameDelay) {
-        this.frameDelay = frameDelay;
+        if(frameDelay < 17) // 60 fps
+            this.frameDelay = 0;
+        else
+            this.frameDelay = frameDelay;
+
+        System.out.println("1: "+ frameDelay);
+     //   System.out.println(frameDelay);
     }
 
     public void setRule(String ruleText){

@@ -76,13 +76,12 @@ public class ToolController {
     }
 
     public void speedSliderDragged(){
-
-        masterController.canvasController.setFrameDelay(-(int)speedSlider.getValue());
+        masterController.canvasController.setFrameDelay((int)Math.exp(-speedSlider.getValue()/15));
     }
 
 
     public void zoomSliderDragged(){
-
+        masterController.canvasController.setCellSize(Math.exp(zoomSlider.getValue()/28));
     }
 
     public void giveCellCount(int cellCount) {
@@ -109,5 +108,26 @@ public class ToolController {
     public void changeIconToPause() {
         btnPlay.setText("Pause");
         btnPlay.setGraphic(new ImageView(imgPause));
+    }
+
+    public void setZoom(double zoom) {
+        zoomSlider.setValue(Math.log(zoom)*28);
+    }
+
+    public void setSpeed(double zoom) {
+        if(zoom < 0) zoom = 0;
+        speedSlider.setValue(-Math.log(zoom)*15);
+       // System.out.println(speedSlider.getValue() + " " +zoom);
+
+    }
+
+    public void setMinZoom(double minZoom) {
+         zoomSlider.setMin(Math.log(minZoom)*28);
+    }
+
+    public void addSpeedValue(double deltaX) {
+        speedSlider.setValue(speedSlider.getValue()+deltaX);
+        //System.out.println(deltaX);
+        speedSliderDragged();
     }
 }
