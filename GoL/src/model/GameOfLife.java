@@ -26,6 +26,9 @@ public abstract class GameOfLife {
     public abstract boolean[][] getGrid();
 
     public abstract void setGrid(boolean[][] grid);
+    public abstract void clearGrid();
+
+    public abstract void setRule(String ruleText);
 
     public int getCellCount() {
         return cellCount;

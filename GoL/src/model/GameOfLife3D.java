@@ -47,4 +47,14 @@ public class GameOfLife3D extends GameOfLife {
     public void setGrid(boolean[][] grid) {
 
     }
+
+    @Override
+    public void clearGrid() {
+
+    }
+
+    @Override
+    public void setRule(String ruleText) {
+
+    }
 }

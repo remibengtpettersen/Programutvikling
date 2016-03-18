@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import model.GameOfLife2D;
 import model.rules.Rule;
 
+
 import java.util.Optional;
 
 /**
@@ -462,6 +463,10 @@ public class CanvasController {
         importing = false;
     }
 
+    public void clearGrid() {
+        gol.clearGrid();
+    }
+
     /**
      * Draws the cell at the x, y coordinate in the grid
      * @param x The x coordinate in the game of life grid.
@@ -655,6 +660,10 @@ public class CanvasController {
 
 
      //   System.out.println(frameDelay);
+    }
+
+    public void setRule(String ruleText){
+        gol.setRule(ruleText);
     }
 
 

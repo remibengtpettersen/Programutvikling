@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+
 <MenuBar  fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
     <Menu text="GoL">
         <MenuItem text="About" onAction="#onAbout"/>
@@ -18,12 +19,24 @@
         <MenuItem text="Cut"/>
         <MenuItem text="Copy"/>
         <MenuItem text="Paste"/>
+        <MenuItem text="Clear board" onAction="#clearGrid"/>
         <SeparatorMenuItem/>
         <MenuItem text="Open editor"/>
     </Menu>
     <Menu text="View">
         <RadioMenuItem text="Static board"/>
         <RadioMenuItem text="Dynamic board"/>
+    </Menu>
+    <Menu text="Rules">
+        <MenuItem text="Conway" onAction="#setConwayRule"/>
+        <MenuItem text="HighLife" onAction="#setHighLifeRule"/>
+        <MenuItem text="Life without death" onAction="#setLWDRule"/>
+        <MenuItem text="Seeds" onAction="#setSeedsRule"/>
+        <MenuItem text="Diamoeba" onAction="#setDiamoebaRule"/>
+        <MenuItem text="Replicator" onAction="#setReplicatorRule"/>
+        <MenuItem text="Day and night" onAction="#setDNNRule"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="Custom rule" onAction="#setCustomRule"/>
     </Menu>
     <Menu text="Stats">
         <MenuItem text="Show history"/>
