@@ -1,5 +1,7 @@
 package model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.io.*;
 import java.util.Objects;
 import java.util.Properties;
@@ -92,6 +94,8 @@ public class Configuration {
     public int getGameSpeed() {
         return Integer.parseInt(this.gameSpeed);
     }
+
+    public boolean getGridValue() { return Boolean.parseBoolean(canvasGrid); }
 
     private void generateConfigurationFileContent() {
         configurationsString =      "##########################################\n" +

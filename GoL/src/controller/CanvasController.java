@@ -40,6 +40,7 @@ public class CanvasController {
     private short boardWidth;
     private short boardHeight;
     private double cellSize = 5;
+    private double cellSpacing = 0.1; //callSpacing * cellSize pixels
     private double minCellSize;
     private boolean[][] grid;
 
@@ -64,7 +65,7 @@ public class CanvasController {
 
     boolean[][] importPattern;
     boolean importing = false;
-
+    private boolean gridLines;
 
 
     public Canvas getCanvas(){ return canvas; }
@@ -104,6 +105,8 @@ public class CanvasController {
         frameDelay = masterController.configuration.getGameSpeed();
         boardWidth = masterController.configuration.getGameWidth();
         boardHeight = masterController.configuration.getGameHeight();
+        gridLines = masterController.configuration.getGridValue();
+
 
 
         masterController.toolController.setSpeed(frameDelay);
@@ -303,13 +306,16 @@ public class CanvasController {
         boardOffsetY = (int) (cellSize * ratio2 - scrollEvent.getY());
 
         clampView();
-
+        checkIfSholdStillDrawGridd();
         masterController.toolController.addSpeedValue(scrollEvent.getDeltaX()/5);
 
         if(!running || frameDelay > 0)
             renderCanvas();
     }
 
+    private void checkIfSholdStillDrawGridd() {
+        gridLines = cellSize > 5;
+    }
 
 
     public void setCellSize(double newCellSize) {
@@ -401,6 +407,8 @@ public class CanvasController {
         renderLife();
         if(importing)
             renderImport();
+        if(gridLines)
+            renderGridLines();
     }
     /**
      * Renders the current state of the game of life simulation to the canvas.
@@ -417,6 +425,16 @@ public class CanvasController {
                 if(grid[x][y])
                     drawCell(x, y);
             }
+        }
+    }
+
+    public void renderGridLines(){
+        gc.setStroke(ghostColor);
+        for(int i = 0; i < boardWidth; i++){
+            gc.strokeLine(i*cellSize - boardOffsetX - cellSize*cellSpacing/2, 0, i*cellSize - boardOffsetX - cellSize*cellSpacing/2, canvas.getHeight());
+        }
+        for(int i = 0; i < boardHeight; i++){
+            gc.strokeLine(0, i*cellSize - boardOffsetY - cellSize*cellSpacing/2,canvas.getWidth(), i*cellSize - boardOffsetY - cellSize*cellSpacing/2);
         }
     }
 
@@ -473,14 +491,14 @@ public class CanvasController {
      * @param y The y coordinate in the game of life grid.
      */
     private void drawCell(int x, int y) {
-        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize * 0.9, cellSize * 0.9);
+        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize - cellSize * cellSpacing, cellSize - cellSize * cellSpacing);
 
         // TBD ....Check cycle time for different algo.
         //gc.fillRect(x * cellSize - boardOffsetX, y * cellSize - boardOffsetY, cellSize * 0.9, cellSize * 0.9);
     }
 
     private void drawGhost(int x, int y){
-        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize * 0.9, cellSize * 0.9);
+        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize - cellSize * cellSpacing, cellSize - cellSize * cellSpacing);
     }
 
     /**
@@ -572,6 +590,7 @@ public class CanvasController {
         this.backgroundColor = backgroundColor;
         calculateGhostColor();
     }
+
 
     /**
      * Calculates the color just in between the background color and the cell color

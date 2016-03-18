@@ -78,7 +78,7 @@
           <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/model/GameOfLife.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="135">
+                <state relative-caret-position="180">
                   <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
                   <folding>
                     <element signature="e#246#247#0" expanded="true" />
@@ -132,8 +132,8 @@
           <file leaf-file-name="config.properties" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/resources/config.properties">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+                <state relative-caret-position="240">
+                  <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
@@ -191,7 +191,7 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="CustomRule.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="CustomRule.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/model/rules/CustomRule.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="975">
@@ -211,29 +211,31 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="64">
-                  <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+                <state relative-caret-position="801">
+                  <caret line="296" column="71" selection-start-line="296" selection-start-column="71" selection-end-line="296" selection-end-column="71" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#5308#5309#0" expanded="true" />
-                    <element signature="e#5344#5345#0" expanded="true" />
-                    <element signature="e#10784#10785#0" expanded="true" />
-                    <element signature="e#10840#10841#0" expanded="true" />
-                    <element signature="e#10920#10921#0" expanded="true" />
-                    <element signature="e#10979#10980#0" expanded="true" />
-                    <element signature="e#11020#11021#0" expanded="true" />
-                    <element signature="e#11079#11080#0" expanded="true" />
-                    <element signature="e#11340#11341#0" expanded="true" />
-                    <element signature="e#11390#11391#0" expanded="true" />
-                    <element signature="e#11596#11597#0" expanded="true" />
-                    <element signature="e#11646#11647#0" expanded="true" />
-                    <element signature="e#13965#13966#0" expanded="true" />
-                    <element signature="e#13996#13997#0" expanded="true" />
-                    <element signature="e#20029#20030#0" expanded="true" />
-                    <element signature="e#20066#20067#0" expanded="true" />
+                    <element signature="e#5476#5477#0" expanded="true" />
+                    <element signature="e#5512#5513#0" expanded="true" />
+                    <element signature="e#9323#9324#0" expanded="true" />
+                    <element signature="e#9363#9364#0" expanded="true" />
+                    <element signature="e#11077#11078#0" expanded="true" />
+                    <element signature="e#11133#11134#0" expanded="true" />
+                    <element signature="e#11213#11214#0" expanded="true" />
+                    <element signature="e#11272#11273#0" expanded="true" />
+                    <element signature="e#11313#11314#0" expanded="true" />
+                    <element signature="e#11372#11373#0" expanded="true" />
+                    <element signature="e#11633#11634#0" expanded="true" />
+                    <element signature="e#11683#11684#0" expanded="true" />
+                    <element signature="e#11889#11890#0" expanded="true" />
+                    <element signature="e#11939#11940#0" expanded="true" />
+                    <element signature="e#14804#14805#0" expanded="true" />
+                    <element signature="e#14835#14836#0" expanded="true" />
+                    <element signature="e#20945#20946#0" expanded="true" />
+                    <element signature="e#20982#20983#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -242,7 +244,7 @@
           <file leaf-file-name="GameOfLife2DTest.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/test/GameOfLife2DTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
+                <state relative-caret-position="240">
                   <caret line="21" column="65" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
                   <folding />
                 </state>
@@ -275,7 +277,7 @@
           <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/controller/MasterController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="555">
+                <state relative-caret-position="378">
                   <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
                   <folding />
                 </state>
@@ -298,11 +300,11 @@
           <file leaf-file-name="Configuration.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/model/Configuration.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="446">
-                  <caret line="89" column="66" selection-start-line="89" selection-start-column="66" selection-end-line="89" selection-end-column="66" />
+                <state relative-caret-position="363">
+                  <caret line="150" column="64" selection-start-line="150" selection-start-column="64" selection-end-line="150" selection-end-column="64" />
                   <folding>
-                    <element signature="e#2058#2059#0" expanded="true" />
-                    <element signature="e#2115#2116#0" expanded="true" />
+                    <element signature="e#2117#2118#0" expanded="true" />
+                    <element signature="e#2174#2175#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -356,17 +358,17 @@
         <option value="$PROJECT_DIR$/src/controller/MasterController.java" />
         <option value="$PROJECT_DIR$/src/view/ToolView.fxml" />
         <option value="$PROJECT_DIR$/src/controller/ToolController.java" />
-        <option value="$PROJECT_DIR$/src/model/Configuration.java" />
         <option value="$PROJECT_DIR$/src/model/GameOfLife3D.java" />
         <option value="$PROJECT_DIR$/src/test/GameOfLife2DTest.java" />
         <option value="$PROJECT_DIR$/src/model/GameOfLife.java" />
         <option value="$PROJECT_DIR$/src/model/GameOfLife2D.java" />
         <option value="$PROJECT_DIR$/src/model/rules/Rule.java" />
         <option value="$PROJECT_DIR$/src/model/rules/Rule2D.java" />
-        <option value="$PROJECT_DIR$/src/controller/CanvasController.java" />
         <option value="$PROJECT_DIR$/src/view/MenuView.fxml" />
         <option value="$PROJECT_DIR$/src/model/rules/CustomRule.java" />
         <option value="$PROJECT_DIR$/resources/config.properties" />
+        <option value="$PROJECT_DIR$/src/model/Configuration.java" />
+        <option value="$PROJECT_DIR$/src/controller/CanvasController.java" />
       </list>
     </option>
   </component>
@@ -1206,7 +1208,7 @@
       <workItem from="1458112364577" duration="12900000" />
       <workItem from="1458126116437" duration="210000" />
       <workItem from="1458286168297" duration="3000" />
-      <workItem from="1458286338367" duration="7820000" />
+      <workItem from="1458286338367" duration="11509000" />
     </task>
     <servers />
   </component>
@@ -1243,7 +1245,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94165000" />
+    <option name="totallyTimeSpent" value="97854000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1128" extended-state="6" />
@@ -1257,7 +1259,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11753372" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11753372" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1302,7 +1304,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/Configuration.java</url>
-          <line>76</line>
+          <line>78</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
@@ -1346,22 +1348,24 @@
           <caret line="301" column="0" selection-start-line="301" selection-start-column="0" selection-end-line="301" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5308#5309#0" expanded="true" />
-            <element signature="e#5344#5345#0" expanded="true" />
-            <element signature="e#10784#10785#0" expanded="true" />
-            <element signature="e#10840#10841#0" expanded="true" />
-            <element signature="e#10920#10921#0" expanded="true" />
-            <element signature="e#10979#10980#0" expanded="true" />
-            <element signature="e#11020#11021#0" expanded="true" />
-            <element signature="e#11079#11080#0" expanded="true" />
-            <element signature="e#11340#11341#0" expanded="true" />
-            <element signature="e#11390#11391#0" expanded="true" />
-            <element signature="e#11596#11597#0" expanded="true" />
-            <element signature="e#11646#11647#0" expanded="true" />
-            <element signature="e#13965#13966#0" expanded="true" />
-            <element signature="e#13996#13997#0" expanded="true" />
-            <element signature="e#20029#20030#0" expanded="true" />
-            <element signature="e#20066#20067#0" expanded="true" />
+            <element signature="e#5476#5477#0" expanded="true" />
+            <element signature="e#5512#5513#0" expanded="true" />
+            <element signature="e#9323#9324#0" expanded="true" />
+            <element signature="e#9363#9364#0" expanded="true" />
+            <element signature="e#11077#11078#0" expanded="true" />
+            <element signature="e#11133#11134#0" expanded="true" />
+            <element signature="e#11213#11214#0" expanded="true" />
+            <element signature="e#11272#11273#0" expanded="true" />
+            <element signature="e#11313#11314#0" expanded="true" />
+            <element signature="e#11372#11373#0" expanded="true" />
+            <element signature="e#11633#11634#0" expanded="true" />
+            <element signature="e#11683#11684#0" expanded="true" />
+            <element signature="e#11889#11890#0" expanded="true" />
+            <element signature="e#11939#11940#0" expanded="true" />
+            <element signature="e#14804#14805#0" expanded="true" />
+            <element signature="e#14835#14836#0" expanded="true" />
+            <element signature="e#20945#20946#0" expanded="true" />
+            <element signature="e#20982#20983#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1627,42 +1631,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/MasterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/ToolView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/Configuration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="89" column="66" selection-start-line="89" selection-start-column="66" selection-end-line="89" selection-end-column="66" />
-          <folding>
-            <element signature="e#2058#2059#0" expanded="true" />
-            <element signature="e#2115#2116#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1678,19 +1652,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/GameOfLife.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-          <folding>
-            <element signature="e#246#247#0" expanded="true" />
-            <element signature="e#292#293#0" expanded="true" />
-            <element signature="e#778#779#0" expanded="true" />
-            <element signature="e#805#806#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/GameOfLife2D.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="681">
@@ -1702,14 +1663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/GameOfLife2DTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="21" column="65" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/PatternParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1718,81 +1671,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/ToolController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="65" column="41" selection-start-line="65" selection-start-column="41" selection-end-line="65" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5308#5309#0" expanded="true" />
-            <element signature="e#5344#5345#0" expanded="true" />
-            <element signature="e#10784#10785#0" expanded="true" />
-            <element signature="e#10840#10841#0" expanded="true" />
-            <element signature="e#10920#10921#0" expanded="true" />
-            <element signature="e#10979#10980#0" expanded="true" />
-            <element signature="e#11020#11021#0" expanded="true" />
-            <element signature="e#11079#11080#0" expanded="true" />
-            <element signature="e#11340#11341#0" expanded="true" />
-            <element signature="e#11390#11391#0" expanded="true" />
-            <element signature="e#11596#11597#0" expanded="true" />
-            <element signature="e#11646#11647#0" expanded="true" />
-            <element signature="e#13965#13966#0" expanded="true" />
-            <element signature="e#13996#13997#0" expanded="true" />
-            <element signature="e#20029#20030#0" expanded="true" />
-            <element signature="e#20066#20067#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/MenuView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="60" selection-start-line="21" selection-start-column="60" selection-end-line="21" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/rules/ClassicRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/rules/Rule.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="44" selection-start-line="9" selection-start-column="4" selection-end-line="11" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/rules/Rule2D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/rules/CustomRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1824,11 +1706,135 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/ToolController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="65" column="41" selection-start-line="65" selection-start-column="41" selection-end-line="65" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/GameOfLife.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+          <folding>
+            <element signature="e#246#247#0" expanded="true" />
+            <element signature="e#292#293#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#805#806#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/rules/ClassicRule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/rules/CustomRule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="975">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/rules/Rule2D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/GameOfLife2DTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="21" column="65" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/MenuView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="21" column="60" selection-start-line="21" selection-start-column="60" selection-end-line="21" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="240">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Configuration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="150" column="64" selection-start-line="150" selection-start-column="64" selection-end-line="150" selection-end-column="64" />
+          <folding>
+            <element signature="e#2117#2118#0" expanded="true" />
+            <element signature="e#2174#2175#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/ToolView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="59" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/MasterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="801">
+          <caret line="296" column="71" selection-start-line="296" selection-start-column="71" selection-end-line="296" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5476#5477#0" expanded="true" />
+            <element signature="e#5512#5513#0" expanded="true" />
+            <element signature="e#9323#9324#0" expanded="true" />
+            <element signature="e#9363#9364#0" expanded="true" />
+            <element signature="e#11077#11078#0" expanded="true" />
+            <element signature="e#11133#11134#0" expanded="true" />
+            <element signature="e#11213#11214#0" expanded="true" />
+            <element signature="e#11272#11273#0" expanded="true" />
+            <element signature="e#11313#11314#0" expanded="true" />
+            <element signature="e#11372#11373#0" expanded="true" />
+            <element signature="e#11633#11634#0" expanded="true" />
+            <element signature="e#11683#11684#0" expanded="true" />
+            <element signature="e#11889#11890#0" expanded="true" />
+            <element signature="e#11939#11940#0" expanded="true" />
+            <element signature="e#14804#14805#0" expanded="true" />
+            <element signature="e#14835#14836#0" expanded="true" />
+            <element signature="e#20945#20946#0" expanded="true" />
+            <element signature="e#20982#20983#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
