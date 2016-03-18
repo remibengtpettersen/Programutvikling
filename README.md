@@ -64,13 +64,7 @@ Implemented support for starting and stopping game from GUI. Had to make "startA
 To be written pauseknappen og sånt :p 
 
 160315 21:06
-<<<<<<< HEAD
 Implemented feature that will generate a "config.properties" file if it is missing. File will have default content. 
-
-160316 11:10
-Fixed bug when reading inputstream from file if file is missing. Added support for reading "canvas.grid" is true or false.
-=======
-Implemented feature that will generate a "config.properties" file if it is missing. File will have default content.
 
 160316 11:10
 Fixed bug when reading inputstream from file if file is missing. Added support for reading "canvas.grid" is true or false.
@@ -80,4 +74,6 @@ Implemented a Rules dropdown menu, a custom rule dialog popup, and custom rules.
 
 160318 09:30
 Implemented a clearGrid function, available under the Edit dropdown menu. Added some popular, alternative rules (Life Without Death, Seeds, Diamoeba, Replicator, Day and Night) to the rules dropdown menu
->>>>>>> 73a51e6407d5b8a9b46136fb3207d040a6c835ab
+
+160318 13:45
+Moved Patterns out of src. Deleted the unreadable patterns. The FileChooser patternChooser will now have the Patterns folder as initial directory

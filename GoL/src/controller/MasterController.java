@@ -12,6 +12,7 @@ import model.PatternFormatException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.SyncFailedException;
 
 /**
  * Created by remibengtpettersen on 12.02.2016.
@@ -22,11 +23,11 @@ public class MasterController {
     private Stage stage;
     private Scene scene;
 
-    @FXML public CanvasController canvasController;         //these should probably be private and with getters
+    @FXML public CanvasController canvasController;
     @FXML public MenuController menuController;
     @FXML public ToolController toolController;
 
-    FileChooser patternChooser = new FileChooser();
+    private FileChooser patternChooser = new FileChooser();
 
     public void initialize(Stage stage, BorderPane root) throws IOException {
 
@@ -47,6 +48,9 @@ public class MasterController {
 
         patternChooser.setTitle("Choose pattern file");
         patternChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GoL pattern files", "*.rle", "*.lif", "*.life", "*.cells"));
+
+        String patternDir = System.getProperty("user.dir") + "/GoL/Patterns";
+        patternChooser.setInitialDirectory(new File(patternDir));
 
         setEvents();
     }

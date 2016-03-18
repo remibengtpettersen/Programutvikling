@@ -31,8 +31,8 @@ public class CanvasController {
     public Color backgroundColor = Color.WHITE;
     private Color ghostColor;
 
-    GameOfLife2D gol;
-    GraphicsContext gc;
+    private GameOfLife2D gol;
+    private GraphicsContext gc;
 
     private AnimationTimer animationTimer;
     private long timer;
@@ -47,24 +47,24 @@ public class CanvasController {
     private int frameDelay = 1000;
     private boolean running = true;
 
-    int gridClickX;
-    int gridClickY;
+    private int gridClickX;
+    private int gridClickY;
 
     // Is used to calculate the distance the mouse has traveled since last MouseDragEvent.
-    int currMousePosX;
-    int currMousePosY;
-    int prevMousePosX;
-    int prevMousePosY;
+    private int currMousePosX;
+    private int currMousePosY;
+    private int prevMousePosX;
+    private int prevMousePosY;
 
     MouseButton mouseButton;
     private boolean mouseDrag;
     private boolean mouseOnCanvas;
 
-    int boardOffsetX = 50;
-    int boardOffsetY = 50;
+    private int boardOffsetX = 50;
+    private int boardOffsetY = 50;
 
-    boolean[][] importPattern;
-    boolean importing = false;
+    private boolean[][] importPattern;
+    private boolean importing = false;
     private boolean gridLines;
 
 
@@ -107,10 +107,7 @@ public class CanvasController {
         boardHeight = masterController.configuration.getGameHeight();
         gridLines = masterController.configuration.getGridValue();
 
-
-
         masterController.toolController.setSpeed(frameDelay);
-
     }
 
     /**
@@ -168,8 +165,6 @@ public class CanvasController {
                 renderCanvas();
 
         });
-
-
     }
 
     private void mouseTrace(MouseEvent mouseEvent) {
@@ -181,9 +176,6 @@ public class CanvasController {
             }
         }
     }
-
-
-
 
     /**
      * To keep track if mouse is located on the canvas.
@@ -481,8 +473,13 @@ public class CanvasController {
         importing = false;
     }
 
+    /**
+     * Kills all cells on grid
+     */
     public void clearGrid() {
+
         gol.clearGrid();
+        renderCanvas();
     }
 
     /**

@@ -88,6 +88,10 @@ public class ToolController {
         cellCountLabel.setText("Cellcount: "+cellCount);
     }
 
+    public void displayRule(int cellCount) {
+        cellCountLabel.setText("Cellcount: "+cellCount);
+    }
+
     public void playGame(ActionEvent actionEvent) {
 
         if (Objects.equals(btnPlay.getText(), "Play")) {

@@ -15,6 +15,48 @@ public class CustomRule extends Rule2D {
         parseRuleText(ruleText);
     }
 
+    private String translateRule(String oldRuleText){
+
+        String newRuleText = "B";
+
+        oldRuleText = oldRuleText.toUpperCase();
+
+        int bIndex = oldRuleText.indexOf('B');
+        int sIndex = oldRuleText.indexOf('S');
+
+        //System.out.println(bIndex + " " + sIndex);
+
+        for(int i = bIndex; i < oldRuleText.length(); i++){
+
+            if((i + 1) < oldRuleText.length()){
+                if( Character.isDigit(oldRuleText.charAt(i + 1))) {
+
+                    newRuleText += oldRuleText.charAt(i + 1);
+                }
+                else {
+                    break;
+                }
+            }
+        }
+
+        newRuleText += "/S";
+
+        for(int i = sIndex; i < oldRuleText.length(); i++){
+
+            if((i + 1) < oldRuleText.length()){
+                if( Character.isDigit(oldRuleText.charAt(i + 1))) {
+
+                    newRuleText += oldRuleText.charAt(i + 1);
+                }
+                else {
+                    break;
+                }
+            }
+        }
+
+        return newRuleText;
+    }
+
     private void parseRuleText(String ruleText){
 
         shouldBeBorn = new boolean[9];
@@ -25,14 +67,14 @@ public class CustomRule extends Rule2D {
         int bIndex = ruleText.indexOf('B');
         int sIndex = ruleText.indexOf('S');
 
-        //System.out.println(bIndex + " " + sIndex);
-
         for(int i = bIndex; i < ruleText.length(); i++){
 
             if((i + 1) < ruleText.length()){
-                if( Character.isDigit(ruleText.charAt(i + 1))) {
-                    shouldBeBorn[Character.getNumericValue(
-                            ruleText.charAt(i + 1))] = true;
+
+                char nextChar = ruleText.charAt(i+1);
+
+                if( Character.isDigit(nextChar) && (nextChar != '9')) {
+                    shouldBeBorn[Character.getNumericValue(nextChar)] = true;
                 }
                 else {
                     break;
@@ -43,18 +85,19 @@ public class CustomRule extends Rule2D {
         for(int i = sIndex; i < ruleText.length(); i++){
 
             if((i + 1) < ruleText.length()){
-                if( Character.isDigit(ruleText.charAt(i + 1))) {
-                    shouldSurvive[Character.getNumericValue(
-                            ruleText.charAt(i + 1))] = true;
+
+                char nextChar = ruleText.charAt(i+1);
+
+                if( Character.isDigit(nextChar) && (nextChar != '9')) {
+                    shouldSurvive[Character.getNumericValue(nextChar)] = true;
                 }
                 else {
                     break;
                 }
             }
         }
-        System.out.println("Parsed: " + ruleText);
 
-        //B1234/S237
+        System.out.println("Parsed: " + ruleText);
     }
 
     @Override

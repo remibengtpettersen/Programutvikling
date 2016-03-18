@@ -4,6 +4,8 @@ package model;
  * Created by Truls on 18/01/16.
  */
 
+import tools.Utilities;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,6 +50,7 @@ public class PatternParser {
     }
 
     static public boolean[][] read(String pattern) throws IOException {
+
         lineList = new ArrayList<String>();
         URL url = new URL(pattern);
         Scanner s = new Scanner(url.openStream());
@@ -71,12 +74,9 @@ public class PatternParser {
 
     /**
      * Reads
-     * @param patternFile a .lif or .life file
      * @return the boolean array produced from the file
      */
     private static boolean[][] readLife() throws IOException {
-
-
 
         if(lineList.get(FIRST_LINE).contains("Life 1.05")){
             return life05();
@@ -89,10 +89,10 @@ public class PatternParser {
 
     /**
      * reads the string content from a Life 1.05 file
-     * @param lineList a list of strings red from a .lif file
      * @return the boolean array produced from the list
      */
     private static boolean[][] life05() {
+
         patternWidth = 0;
         patternHeight = 0;
         patternParameters = Pattern.compile("#P (.+) (.+)");
@@ -178,7 +178,6 @@ public class PatternParser {
 
     /**
      * reads the string content from a Life 1.06 file
-     * @param list a list of strings red from a .lif file
      * @return the boolean array produced from the list
      */
     private static boolean[][] life06() throws PatternFormatException {
@@ -242,7 +241,6 @@ public class PatternParser {
 
     /**
      * Reads a RLE file
-     * @param patternFile the RLE file
      * @return the boolean array produced from the file
      */
     private static boolean[][] readRLE() throws IOException {
@@ -268,6 +266,8 @@ public class PatternParser {
         int pattern = 0; //ToBeNamed...
         int x = 0;
         int y = 0;
+
+        int cellsAdded = 0;
 
         for(int i = 0; i < lineList.size(); i++){
             for(int j = 0; j < lineList.get(i).length(); j++){
@@ -295,11 +295,13 @@ public class PatternParser {
                     if(pattern == 0){
                         patternArray[x][y] = true;
                         x++;
+                        cellsAdded++;
                     }
                     else {
                         for(int k = 0; k < pattern; k++){
                             patternArray[x][y] = true;
                             x++;
+                            cellsAdded++;
                         }
                         pattern = 0;
                     }
@@ -317,10 +319,12 @@ public class PatternParser {
                     x=0;
                 }
                 else if(currentCharacter == '!'){
+                    System.out.println(cellsAdded);
                     return patternArray;
                 }
             }
         }
+        System.out.println("Couldn't read RLE");
         return null;
     }
 
@@ -330,7 +334,6 @@ public class PatternParser {
 
     /**
      * Reads a .cells / plain text file
-     * @param patternFile The .cells file
      * @return the boolean array produced from the file
      */
     private static boolean[][] readPlainText() throws IOException {

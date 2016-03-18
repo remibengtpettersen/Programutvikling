@@ -4,12 +4,9 @@
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<<<<<<< HEAD
-<MenuBar  fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
-=======
-<?import javafx.scene.control.TextField?>
-<MenuBar fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml">
->>>>>>> 73a51e6407d5b8a9b46136fb3207d040a6c835ab
+
+<MenuBar  fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40"
+          xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
     <Menu text="GoL">
         <MenuItem text="About" onAction="#onAbout"/>
         <MenuItem text="Preferences"/>
@@ -20,10 +17,11 @@
         <MenuItem text="Save"/>
     </Menu>
     <Menu text="Edit">
+        <MenuItem text="Clear board" onAction="#clearGrid"/>
+        <SeparatorMenuItem/>
         <MenuItem text="Cut"/>
         <MenuItem text="Copy"/>
         <MenuItem text="Paste"/>
-        <MenuItem text="Clear board" onAction="#clearGrid"/>
         <SeparatorMenuItem/>
         <MenuItem text="Open editor"/>
     </Menu>
