@@ -167,6 +167,10 @@ public class CanvasController {
         });
     }
 
+    /**
+     * Stores the position of the event
+     * @param mouseEvent Where the mouse is at the current time
+     */
     private void mouseTrace(MouseEvent mouseEvent) {
         if(importing){
             currMousePosX = (int) mouseEvent.getX();
@@ -305,25 +309,16 @@ public class CanvasController {
             renderCanvas();
     }
 
+    /**
+     * Checks if gridlines should be displayed
+     */
     private void checkIfSholdStillDrawGridd() {
         gridLines = cellSize > 5;
     }
 
 
-    public void setCellSize(double newCellSize) {
-        double ratio1 = (boardOffsetX + canvas.getWidth()/2) / cellSize;
-        double ratio2 = (boardOffsetY + canvas.getHeight()/2) / cellSize;
 
-       // System.out.println(newCellSize);
-        cellSize = newCellSize;
-        clampCellSize();
-        boardOffsetX = (int) (cellSize * ratio1 - canvas.getWidth()/2);
-        boardOffsetY = (int) (cellSize * ratio2 - canvas.getHeight()/2);
-        clampView();
-
-        if(!running || frameDelay > 0)
-            renderCanvas();
-    }
+    //region Clamping
     /**
      * Keeps the cell size within it´s boundaries.
      */
@@ -364,6 +359,7 @@ public class CanvasController {
     public int clamp(int val, int min, int max) {
         return Math.max(min, Math.min(max, val));
     }
+    //endregion
 
     // region canvas to grid converter
     private int getGridPosX(double x) {
@@ -395,6 +391,9 @@ public class CanvasController {
     }
     //endregion
 
+    /**
+     * Renders everything on the canvas
+     */
     public void renderCanvas() {
         renderLife();
         if(importing)
@@ -420,6 +419,9 @@ public class CanvasController {
         }
     }
 
+    /**
+     * Draws the grid lines on the canvas
+     */
     public void renderGridLines(){
         gc.setStroke(ghostColor);
         for(int i = 0; i < boardWidth; i++){
@@ -441,7 +443,7 @@ public class CanvasController {
                 if (importPattern[x][y] == true) {
 
                     //drawGhost(x + (int) (currMousePosX / cellSize) - importPattern.length / 2 - boardOffsetX, y + (int) (currMousePosY / cellSize) - importPattern[x].length / 2 - boardOffsetY);
-                    drawGhost(getGridPosX(currMousePosX)-importPattern.length / 2 + x, getGridPosY(currMousePosY) - importPattern[x].length/2 + y);
+                    drawCell(getGridPosX(currMousePosX)-importPattern.length / 2 + x, getGridPosY(currMousePosY) - importPattern[x].length/2 + y);
 
                 }
             }
@@ -492,10 +494,6 @@ public class CanvasController {
 
         // TBD ....Check cycle time for different algo.
         //gc.fillRect(x * cellSize - boardOffsetX, y * cellSize - boardOffsetY, cellSize * 0.9, cellSize * 0.9);
-    }
-
-    private void drawGhost(int x, int y){
-        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize - cellSize * cellSpacing, cellSize - cellSize * cellSpacing);
     }
 
     /**
@@ -554,6 +552,63 @@ public class CanvasController {
 
     }
 
+    /**
+     * Displays a window that tells the user that the current import pattern is bigger than the current GoL universe
+     */
+    private void displayImportTooBigDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Pattern too big");
+        alert.setHeaderText("The pattern you imported seems to bee bigger than the current game of life universe.");
+        alert.setContentText("Do you want to mage the universe bigger?");
+
+        ButtonType yesBtn = new ButtonType("Yes");
+        ButtonType noBtn = new ButtonType("No");
+        ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(yesBtn, noBtn, cancelBtn);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == yesBtn){
+            resizeGridToImport();
+        } else {
+            importing = false;
+        }
+    }
+
+    /**
+     * Resizes the GoL grid to fit the import
+     */
+    private void resizeGridToImport() {
+        resizeGrid((int)(importPattern.length*1.2), (int)(importPattern[0].length*1.2));
+    }
+
+    /**
+     * Resizes the GoL universe to the given width and height
+     * @param width the new width
+     * @param height the nwe height
+     */
+    private void resizeGrid(int width, int height) {
+        int minWidth = (width < grid.length)? width : grid.length;
+        int minHeight = (height < grid[0].length) ? height : grid[0].length;
+
+        boolean [][] temp = new boolean[width][height];
+
+        for(int x = 0; x < minWidth; x++){
+            for(int y = 0; y < minHeight; y++){
+                temp[x][y] = grid[x][y];
+            }
+        }
+
+
+        gol.setGrid(temp);
+        gol.createNeighboursGrid();
+        gol.updateRuleGrid();
+        grid = gol.getGrid();
+        boardWidth = (short)grid.length;
+        boardHeight = (short)grid[0].length;
+
+    }
+
 
     //region Animation-controlls
 
@@ -600,11 +655,32 @@ public class CanvasController {
         ghostColor = new Color(red, green, blue, 1);
     }
 
+    /**
+     * Gives the minimum cellsize to the zoom slider
+     */
     private void calculateMinCellSize() {
          minCellSize = (canvas.getWidth()/boardWidth > canvas.getHeight()/boardHeight) ? canvas.getWidth() / boardHeight : canvas.getHeight() / boardHeight;
         masterController.toolController.setMinZoom(minCellSize);
     }
 
+    /**
+     * Setts the cell size to be the newCellSize
+     * @param newCellSize the new cell size
+     */
+    public void setCellSize(double newCellSize) {
+        double ratio1 = (boardOffsetX + canvas.getWidth()/2) / cellSize;
+        double ratio2 = (boardOffsetY + canvas.getHeight()/2) / cellSize;
+
+        // System.out.println(newCellSize);
+        cellSize = newCellSize;
+        clampCellSize();
+        boardOffsetX = (int) (cellSize * ratio1 - canvas.getWidth()/2);
+        boardOffsetY = (int) (cellSize * ratio2 - canvas.getHeight()/2);
+        clampView();
+
+        if(!running || frameDelay > 0)
+            renderCanvas();
+    }
     /**
      * Sets the pattern that is importet from a file
      * @param importPattern the pattern that is imported from a file
@@ -622,51 +698,6 @@ public class CanvasController {
         }
     }
 
-    private void displayImportTooBigDialog() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Pattern too big");
-        alert.setHeaderText("The pattern you imported seems to bee bigger than the current game of life universe.");
-        alert.setContentText("Do you want to mage the universe bigger?");
-
-        ButtonType yesBtn = new ButtonType("Yes");
-        ButtonType noBtn = new ButtonType("No");
-        ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(yesBtn, noBtn, cancelBtn);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == yesBtn){
-            resizeGridToImport();
-        } else {
-            importing = false;
-        }
-    }
-
-    private void resizeGridToImport() {
-        resizeGrid((int)(importPattern.length*1.2), (int)(importPattern[0].length*1.2));
-    }
-
-    private void resizeGrid(int width, int height) {
-        int minWidth = (width < grid.length)? width : grid.length;
-        int minHeight = (height < grid[0].length) ? height : grid[0].length;
-
-        boolean [][] temp = new boolean[width][height];
-
-        for(int x = 0; x < minWidth; x++){
-            for(int y = 0; y < minHeight; y++){
-                temp[x][y] = grid[x][y];
-            }
-        }
-
-
-        gol.setGrid(temp);
-        gol.createNeighboursGrid();
-        gol.updateRuleGrid();
-        grid = gol.getGrid();
-        boardWidth = (short)grid.length;
-        boardHeight = (short)grid[0].length;
-
-    }
 
     public void setFrameDelay(int frameDelay) {
         if(frameDelay < 17) // 60 fps
