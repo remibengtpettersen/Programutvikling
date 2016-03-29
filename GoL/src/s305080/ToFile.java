@@ -32,8 +32,14 @@ public class ToFile {
             list.add(currentLine.toString());
             currentLine = new StringBuilder();
         }
+
         FileChooser f = new FileChooser();
+
         File file = f.showSaveDialog(stage);
+
+        if(!file.toString().endsWith(".cells")){
+            file = new File(file.toString() + ".cells");
+        }
 
         try {
             Files.write(file.toPath(), list);

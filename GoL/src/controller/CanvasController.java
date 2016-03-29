@@ -36,7 +36,7 @@ public class CanvasController {
     public Color backgroundColor = Color.WHITE;
     private Color ghostColor;
 
-    private GameOfLife2D gol;
+    public GameOfLife2D gol;
     private GraphicsContext gc;
 
     private AnimationTimer animationTimer;
@@ -113,6 +113,8 @@ public class CanvasController {
             e.printStackTrace();
         }
 
+        calculateGhostColor();
+
         cellSize = masterController.configuration.getCellSize();
         frameDelay = masterController.configuration.getGameSpeed();
         boardWidth = masterController.configuration.getGameWidth();
@@ -148,11 +150,8 @@ public class CanvasController {
                 //To control game speed
                 if(now/1000000 - timer > frameDelay) {
 
-                    System.out.println(cellColor.getBlue());
                         gol.nextGeneration();
-                    //System.out.println("X " + currViewMinX + " " + currViewMaxX);
 
-                    //System.out.println("Y " + currViewMinY + " " + currViewMaxY);
                         renderCanvas();
 
                     timer = now/1000000;

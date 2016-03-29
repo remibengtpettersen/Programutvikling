@@ -49,7 +49,7 @@ public class MenuController {
 
     public void setCustomRule(ActionEvent actionEvent) {
 
-        TextInputDialog dialog = new TextInputDialog("B3/S23");
+        TextInputDialog dialog = new TextInputDialog(masterController.canvasController.gol.getRule().toString());
         dialog.setTitle("Custom rule");
         dialog.setHeaderText("Enter custom rule code");
         dialog.setContentText("B: Neighbours needed for birth\nS: Neighbours needed for survival\n" +

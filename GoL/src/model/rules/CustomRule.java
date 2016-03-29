@@ -8,6 +8,7 @@ public class CustomRule extends Rule2D {
 
     private boolean[] shouldBeBorn;    //goes from 0 to 8 neighbours
     private boolean[] shouldSurvive;
+    private String rule;
 
     public CustomRule(boolean[][] grid, byte[][] neighbours, String ruleText) {
         super(grid, neighbours);
@@ -63,6 +64,7 @@ public class CustomRule extends Rule2D {
         shouldSurvive = new boolean[9];
 
         ruleText = ruleText.toUpperCase();
+        rule = ruleText;
 
         int bIndex = ruleText.indexOf('B');
         int sIndex = ruleText.indexOf('S');
@@ -122,6 +124,11 @@ public class CustomRule extends Rule2D {
                 neighbours[x][y] = 0;                    //resets number of neighbours
             }
         }
+    }
+
+    @Override
+    public String toString(){
+        return rule;
     }
 
 
