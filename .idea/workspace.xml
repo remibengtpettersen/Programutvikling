@@ -2,621 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec952695-f310-4db2-941c-ad52ec1dbbd5" name="Default" comment="Changed the Patterns folder. Set Patterns as the initial directory for the pattern FileChooser">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Banks/Banks-I-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Banks/Banks-II-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Banks/Banks-III-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Banks/Banks-IV-constructor.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Banks/Banks-IV-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/Goucher-replicator.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/clocking-on-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/coders-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/construction-arm-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/crossover-unidir-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/decoder-4bit-demo.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/echo-discriminator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/echo-switch-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/extend-coder-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/gates-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/golly-constructor.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/repeater-emitter-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/sensing-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/sheathing-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/sheathing-problems.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/signals-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Codd/tape-reader-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Devore/Devore-body.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Devore/Devore-rep.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Devore/crossover.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Devore/discriminator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Banner.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Bloomerang.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Burst.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Caterpillars.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Delta.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Ebb-and-Flow.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Fireworks.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Lava.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Lines.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/MeteorGuns.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Nova.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Perfect-spiral.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Sawfish.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/SediMental.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Steeplechase.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/Transers.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Generations/What-a-mess.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/Replicator-p237228340.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/broken-lines.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/catacryst.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/gotts-dots.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/hashlife-oddity1.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/hashlife-oddity2.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/hexadecimal.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/jagged.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/jagged2.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/loafer-gun-p8388608-linear.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/logarithmic-width.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/metacatacryst.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/metapixel-galaxy.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/metapixel-p216-gun.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/metapixel-parity64.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/mosquito5.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/nick-gotts-1.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/nick-gotts-2.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/puzzle.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/ruler.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/totalperiodic.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/unlimited-novelty.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/wedge-grow.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/HashLife/wolfram22.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/Boustrophedon-replicator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/Hutton-replicator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/JvN-loop-replicator.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/N-compressed-replicator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/NP-mutation.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/NP-replicator.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/cell-coders-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/codon4-auto-retract.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/codon5-auto-retract.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/construction-arm-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/counter-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/golly-constructor.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/partial-constructor.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/read-arm-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/sphinx-midpoint.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/sphinx-spark.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/JvN/sphinx.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/Byl-Loop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/Chou-Reggia-Loop-1.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/Chou-Reggia-Loop-2.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/Evoloop-finite.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/Evoloop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/Langtons-Loops.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/Perrier-Loop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/Perrier-Parenthesis-Checker.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/SDSR-Loop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Loops/Tempesti-Loop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/BBM.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/CrittersCircle.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/CrittersOscillators.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/DLA.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/HPP.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/HPP_large.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/Sand-Test.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/Sand.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/TMGas.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/TMGas_largeWithHole.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/TripATron.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Margolus/TripATron_BlockAligned.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/Ed-rep.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/HPP-demo-small.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/HPP-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/Langtons-Ant.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/golly-ants.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/life-on-the-edge.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/life-on-the-slope.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Patersons-Worms/worm-1040512.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Patersons-Worms/worm-1042015.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Patersons-Worms/worm-1042020.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Patersons-Worms/worm-1252121.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Patersons-Worms/worm-1525115.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/AlienCounter.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/ComputerArt.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/Extinction.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/FibonacciSpiral.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/Highway2074575.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/LangtonsAnt_LLRR.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/Perfectionist.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/TriangularAnt_period92.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/TriangularLangtonsAnt.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Turmites/WormTrails.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/Langtons-ant.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/NickGardner.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/NylesHeise.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/circuit.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/clocks.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/flip-flop.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/gate-AND.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/gate-NOT.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/gate-OR.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/gate-XOR.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/memory-cell.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/primes.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/WireWorld/unary-multiplier.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Banks/Banks-I-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Banks/Banks-II-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Banks/Banks-III-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Banks/Banks-IV-constructor.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Banks/Banks-IV-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/Goucher-replicator.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/clocking-on-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/coders-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/construction-arm-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/crossover-unidir-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/decoder-4bit-demo.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/echo-discriminator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/echo-switch-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/extend-coder-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/gates-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/golly-constructor.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/repeater-emitter-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/sensing-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/sheathing-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/sheathing-problems.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/signals-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Codd/tape-reader-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Devore/Devore-body.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Devore/Devore-rep.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Devore/crossover.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Devore/discriminator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Banner.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Bloomerang.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Burst.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Caterpillars.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Delta.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Ebb-and-Flow.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Fireworks.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Lava.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Lines.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/MeteorGuns.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Nova.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Perfect-spiral.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Sawfish.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/SediMental.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Steeplechase.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/Transers.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Generations/What-a-mess.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/Replicator-p237228340.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/broken-lines.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/catacryst.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/gotts-dots.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/hashlife-oddity1.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/hashlife-oddity2.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/hexadecimal.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/jagged.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/jagged2.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/loafer-gun-p8388608-linear.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/logarithmic-width.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/metacatacryst.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/metapixel-galaxy.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/metapixel-p216-gun.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/metapixel-parity64.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/mosquito5.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/nick-gotts-1.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/nick-gotts-2.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/puzzle.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/ruler.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/totalperiodic.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/unlimited-novelty.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/wedge-grow.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/HashLife/wolfram22.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/Boustrophedon-replicator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/Hutton-replicator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/JvN-loop-replicator.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/N-compressed-replicator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/NP-mutation.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/NP-replicator.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/cell-coders-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/codon4-auto-retract.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/codon5-auto-retract.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/construction-arm-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/counter-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/golly-constructor.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/partial-constructor.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/read-arm-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/sphinx-midpoint.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/sphinx-spark.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/JvN/sphinx.mc.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/Day-and-Night-gun-and-antigun.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/Morley/breeder2.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/Morley/enterprise-gun.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/Morley/growing-ship.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/alt-wicks.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/coral.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/ice-nine.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/p168-knightship.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/persian-rugs.lif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/replicator.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/spiral-growth.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life-Like/white-whale.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Bounded-Grids/Klein-bottle.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Bounded-Grids/agar-p3.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Bounded-Grids/cross-surface.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Bounded-Grids/herringbone-agar-p14.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Bounded-Grids/lightspeed-bubble.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Bounded-Grids/pulsars-in-tube.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Bounded-Grids/sphere.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Bounded-Grids/torus-with-shift.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Bounded-Grids/torus.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/LWSS-breeder.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/breeder.lif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/c4-diag-switch-engines.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/p100-H-channel-breeder.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/p90-rake-factory.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/pi-blink-breeder1.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/pi-blink-breeder2.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/rake-breeder.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/slide-breeder.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/spacefiller.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/switch-engine-breeder-MR.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Breeders/switch-engine-breeder.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/2c5-spaceship-gun-p416.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/2c5-spaceship-gun-p690.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/7-in-a-row-Cordership-V-gun.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/Cordership-gun-p784.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/golly-ticker.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/gun-p165mwss.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/loafer-gun-p210.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/p59-gun-with-Snark-reflectors.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/p690-PT-Cordership-gun.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/pseudo-p34-gun.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Guns/vacuum-cleaner.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/acorn.lif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/ark1.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/ark2.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/blom.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/iwona.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/justyna.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/lidka-predecessor.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/natural-LWSS.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/rabbits-relation-17423.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/rabbits-relation-17465.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/rabbits.lif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Methuselahs/temp-pulsars-big-s.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/Calcyman-primer.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/Cambrian-Explosion.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/blockstacker.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/diagfuse1.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/die658.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/elbow-ladders.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/fermat-primes.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/four-primers.rle.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/infinity-hotel0.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/infinity-hotel1.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/infinity-hotel2.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/infinity-hotel3.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/lightspeed.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/loggrow-corder.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/sawtooth6b.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/tubstretch-c124b.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/twinprimes.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Miscellaneous/wicks-DRH-2002.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/DRH-oscillators.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/billiard-table.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/extensible-low-period.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/glider-stream-crystal.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/low-period.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/p103079214841.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/p138.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/p59-glider-loop.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/queen-bee-turn.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/traffic-light-hasslers.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Oscillators/unique-high-period.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Puffers/c4-diagonal-puffer.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Puffers/line-puffer-superstable.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Puffers/line-puffer-unstable.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Puffers/p100-H-track-puffer.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Puffers/pi-fuse-puffer.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Puffers/puffer-2c5.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Puffers/puffer-train.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Puffers/zigzag-wickstretcher.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/2c5-engineless-rake-p185.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/2c5-spaceship-rake-p240.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/basic-rakes.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/c2-Cordership-rake.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/c3-forward-rake-p333.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/c4-sideways-rake.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/c5-adjustable-rake.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/forward-LWSS-rake-p90.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/p270-frothing-puffer-rake.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Rakes/spider-rake.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/Herschel-conduit-stamp-collection.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/Turing-Machine-3-state.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/Unit-Life-Cell-512x512.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/Unit-Life-Deep-Cell.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/advancer.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/constructor-memory-loop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/constructor-memory-tape.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/heisenblinker-30.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/heisenburp-30.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/heisenburp-46-natural.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/heisenburp-46.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/lightspeed-telegraph.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/p30-racetrack.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/p46racetrack.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/reflectors.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/reflectors2.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/signal-turn.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/stargate.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Signal-Circuitry/traffic-lights-extruder.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/2c5-orthogonal.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/Corder-lineship.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/Cordership-LWSS-freeze-tag.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/Cordership-boat-burner.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/adjustable-Corder-lineship.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/c3-orthogonal.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/c4-diagonal.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/c4-orthogonal.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/corderships.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/diagonal.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/orthogonal.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/short-thin-race.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/smallest-low-period.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Spaceships/spaceship-types.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Still-Lifes/1998-eater-stamp-collection.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Still-Lifes/eaters-misc.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Still-Lifes/eaters.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Still-Lifes/random.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Still-Lifes/ss-eaters.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Still-Lifes/stripey.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/109-still-lifes.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/29-still-lifes.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/blockish-and-blockic-seeds.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/life-integer-constructions.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/make-harbor.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/make-lightbulb.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/make-osc-p3.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/make-osc-p4.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/make-osc-p5-plus.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/make-p11.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/make-p18.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/make-p33.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/oscillator-syntheses.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/slow-salvo-eater-recipes.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Life/Syntheses/two-glider-collisions.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/Byl-Loop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/Chou-Reggia-Loop-1.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/Chou-Reggia-Loop-2.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/Evoloop-finite.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/Evoloop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/Langtons-Loops.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/Perrier-Loop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/Perrier-Parenthesis-Checker.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/SDSR-Loop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Loops/Tempesti-Loop.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/BBM.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/CrittersCircle.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/CrittersOscillators.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/DLA.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/HPP.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/HPP_large.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/Sand-Test.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/Sand.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/TMGas.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/TMGas_largeWithHole.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/TripATron.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Margolus/TripATron_BlockAligned.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Other-Rules/Ed-rep.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Other-Rules/HPP-demo-small.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Other-Rules/HPP-demo.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Other-Rules/Langtons-Ant.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Other-Rules/golly-ants.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Other-Rules/life-on-the-edge.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Other-Rules/life-on-the-slope.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Patersons-Worms/worm-1040512.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Patersons-Worms/worm-1042015.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Patersons-Worms/worm-1042020.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Patersons-Worms/worm-1252121.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Patersons-Worms/worm-1525115.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/AlienCounter.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/ComputerArt.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/Extinction.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/FibonacciSpiral.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/Highway2074575.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/LangtonsAnt_LLRR.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/Perfectionist.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/TriangularAnt_period92.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/TriangularLangtonsAnt.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/Turmites/WormTrails.rle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/Langtons-ant.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/NickGardner.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/NylesHeise.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/circuit.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/clocks.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/flip-flop.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/gate-AND.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/gate-NOT.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/gate-OR.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/gate-XOR.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/memory-cell.mcl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/primes.mc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/unary-multiplier.mcl" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/Day-and-Night-gun-and-antigun.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/Day-and-Night-gun-and-antigun.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/Morley/breeder2.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/Morley/breeder2.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/Morley/enterprise-gun.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/Morley/enterprise-gun.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/Morley/growing-ship.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/Morley/growing-ship.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/alt-wicks.py" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/alt-wicks.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/coral.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/coral.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/ice-nine.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/ice-nine.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/p168-knightship.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/p168-knightship.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/persian-rugs.lif" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/persian-rugs.lif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/replicator.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/replicator.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/spiral-growth.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/spiral-growth.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life-Like/white-whale.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life-Like/white-whale.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Bounded-Grids/Klein-bottle.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Bounded-Grids/Klein-bottle.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Bounded-Grids/agar-p3.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Bounded-Grids/agar-p3.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Bounded-Grids/cross-surface.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Bounded-Grids/cross-surface.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Bounded-Grids/herringbone-agar-p14.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Bounded-Grids/herringbone-agar-p14.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Bounded-Grids/lightspeed-bubble.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Bounded-Grids/lightspeed-bubble.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Bounded-Grids/pulsars-in-tube.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Bounded-Grids/pulsars-in-tube.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Bounded-Grids/sphere.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Bounded-Grids/sphere.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Bounded-Grids/torus-with-shift.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Bounded-Grids/torus-with-shift.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Bounded-Grids/torus.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Bounded-Grids/torus.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/LWSS-breeder.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/LWSS-breeder.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/breeder.lif" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/breeder.lif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/c4-diag-switch-engines.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/c4-diag-switch-engines.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/p100-H-channel-breeder.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/p100-H-channel-breeder.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/p90-rake-factory.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/p90-rake-factory.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/pi-blink-breeder1.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/pi-blink-breeder1.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/pi-blink-breeder2.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/pi-blink-breeder2.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/rake-breeder.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/rake-breeder.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/slide-breeder.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/slide-breeder.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/spacefiller.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/spacefiller.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/switch-engine-breeder-MR.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/switch-engine-breeder-MR.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Breeders/switch-engine-breeder.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Breeders/switch-engine-breeder.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/2c5-spaceship-gun-p416.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/2c5-spaceship-gun-p416.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/2c5-spaceship-gun-p690.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/2c5-spaceship-gun-p690.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/7-in-a-row-Cordership-V-gun.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/7-in-a-row-Cordership-V-gun.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/Cordership-gun-p784.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/Cordership-gun-p784.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/golly-ticker.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/golly-ticker.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/gun-p165mwss.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/gun-p165mwss.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/loafer-gun-p210.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/loafer-gun-p210.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/p59-gun-with-Snark-reflectors.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/p59-gun-with-Snark-reflectors.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/p690-PT-Cordership-gun.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/p690-PT-Cordership-gun.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/pseudo-p34-gun.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/pseudo-p34-gun.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Guns/vacuum-cleaner.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Guns/vacuum-cleaner.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/acorn.lif" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/acorn.lif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/ark1.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/ark1.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/ark2.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/ark2.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/blom.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/blom.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/iwona.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/iwona.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/justyna.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/justyna.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/lidka-predecessor.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/lidka-predecessor.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/natural-LWSS.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/natural-LWSS.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/rabbits-relation-17423.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/rabbits-relation-17423.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/rabbits-relation-17465.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/rabbits-relation-17465.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/rabbits.lif" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/rabbits.lif" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Methuselahs/temp-pulsars-big-s.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Methuselahs/temp-pulsars-big-s.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/Calcyman-primer.zip" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/Calcyman-primer.zip" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/Cambrian-Explosion.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/Cambrian-Explosion.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/blockstacker.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/blockstacker.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/diagfuse1.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/diagfuse1.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/die658.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/die658.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/elbow-ladders.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/elbow-ladders.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/fermat-primes.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/fermat-primes.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/four-primers.rle.gz" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/four-primers.rle.gz" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/infinity-hotel0.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/infinity-hotel0.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/infinity-hotel1.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/infinity-hotel1.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/infinity-hotel2.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/infinity-hotel2.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/infinity-hotel3.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/infinity-hotel3.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/lightspeed.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/lightspeed.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/loggrow-corder.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/loggrow-corder.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/sawtooth6b.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/sawtooth6b.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/tubstretch-c124b.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/tubstretch-c124b.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/twinprimes.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/twinprimes.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Miscellaneous/wicks-DRH-2002.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Miscellaneous/wicks-DRH-2002.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/DRH-oscillators.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/DRH-oscillators.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/billiard-table.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/billiard-table.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/extensible-low-period.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/extensible-low-period.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/glider-stream-crystal.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/glider-stream-crystal.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/low-period.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/low-period.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/p103079214841.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/p103079214841.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/p138.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/p138.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/p59-glider-loop.py" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/p59-glider-loop.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/queen-bee-turn.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/queen-bee-turn.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/traffic-light-hasslers.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/traffic-light-hasslers.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Oscillators/unique-high-period.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Oscillators/unique-high-period.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Puffers/c4-diagonal-puffer.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Puffers/c4-diagonal-puffer.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Puffers/line-puffer-superstable.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Puffers/line-puffer-superstable.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Puffers/line-puffer-unstable.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Puffers/line-puffer-unstable.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Puffers/p100-H-track-puffer.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Puffers/p100-H-track-puffer.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Puffers/pi-fuse-puffer.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Puffers/pi-fuse-puffer.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Puffers/puffer-2c5.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Puffers/puffer-2c5.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Puffers/puffer-train.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Puffers/puffer-train.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Puffers/zigzag-wickstretcher.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Puffers/zigzag-wickstretcher.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/2c5-engineless-rake-p185.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/2c5-engineless-rake-p185.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/2c5-spaceship-rake-p240.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/2c5-spaceship-rake-p240.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/basic-rakes.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/basic-rakes.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/c2-Cordership-rake.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/c2-Cordership-rake.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/c3-forward-rake-p333.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/c3-forward-rake-p333.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/c4-sideways-rake.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/c4-sideways-rake.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/c5-adjustable-rake.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/c5-adjustable-rake.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/forward-LWSS-rake-p90.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/forward-LWSS-rake-p90.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/p270-frothing-puffer-rake.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/p270-frothing-puffer-rake.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Rakes/spider-rake.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Rakes/spider-rake.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/Herschel-conduit-stamp-collection.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/Herschel-conduit-stamp-collection.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/Turing-Machine-3-state.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/Turing-Machine-3-state.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/Unit-Life-Cell-512x512.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/Unit-Life-Cell-512x512.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/Unit-Life-Deep-Cell.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/Unit-Life-Deep-Cell.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/advancer.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/advancer.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/constructor-memory-loop.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/constructor-memory-loop.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/constructor-memory-tape.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/constructor-memory-tape.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/heisenblinker-30.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/heisenblinker-30.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/heisenburp-30.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/heisenburp-30.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/heisenburp-46-natural.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/heisenburp-46-natural.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/heisenburp-46.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/heisenburp-46.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/lightspeed-telegraph.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/lightspeed-telegraph.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/p30-racetrack.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/p30-racetrack.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/p46racetrack.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/p46racetrack.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/reflectors.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/reflectors.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/reflectors2.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/reflectors2.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/signal-turn.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/signal-turn.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/stargate.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/stargate.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Signal-Circuitry/traffic-lights-extruder.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Signal-Circuitry/traffic-lights-extruder.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/2c5-orthogonal.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/2c5-orthogonal.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/Corder-lineship.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/Corder-lineship.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/Cordership-LWSS-freeze-tag.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/Cordership-LWSS-freeze-tag.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/Cordership-boat-burner.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/Cordership-boat-burner.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/adjustable-Corder-lineship.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/adjustable-Corder-lineship.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/c3-orthogonal.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/c3-orthogonal.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/c4-diagonal.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/c4-diagonal.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/c4-orthogonal.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/c4-orthogonal.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/corderships.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/corderships.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/diagonal.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/diagonal.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/orthogonal.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/orthogonal.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/short-thin-race.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/short-thin-race.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/smallest-low-period.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/smallest-low-period.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Spaceships/spaceship-types.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Spaceships/spaceship-types.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Still-Lifes/1998-eater-stamp-collection.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Still-Lifes/1998-eater-stamp-collection.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Still-Lifes/eaters-misc.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Still-Lifes/eaters-misc.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Still-Lifes/eaters.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Still-Lifes/eaters.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Still-Lifes/random.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Still-Lifes/random.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Still-Lifes/ss-eaters.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Still-Lifes/ss-eaters.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Still-Lifes/stripey.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Still-Lifes/stripey.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/109-still-lifes.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/109-still-lifes.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/29-still-lifes.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/29-still-lifes.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/blockish-and-blockic-seeds.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/blockish-and-blockic-seeds.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/life-integer-constructions.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/life-integer-constructions.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/make-harbor.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/make-harbor.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/make-lightbulb.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/make-lightbulb.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/make-osc-p3.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/make-osc-p3.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/make-osc-p4.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/make-osc-p4.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/make-osc-p5-plus.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/make-osc-p5-plus.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/make-p11.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/make-p11.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/make-p18.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/make-p18.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/make-p33.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/make-p33.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/oscillator-syntheses.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/oscillator-syntheses.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/slow-salvo-eater-recipes.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/slow-salvo-eater-recipes.rle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GoL/src/Patterns/Life/Syntheses/two-glider-collisions.rle" afterPath="$PROJECT_DIR$/GoL/Patterns/Life/Syntheses/two-glider-collisions.rle" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GoL/src/tools/GIFLib.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/.idea/workspace.xml" afterPath="$PROJECT_DIR$/GoL/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/MasterController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/ToolController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/ToolController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/css/stylesheet.css" afterPath="$PROJECT_DIR$/GoL/src/css/stylesheet.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/model/PatternParser.java" afterPath="$PROJECT_DIR$/GoL/src/model/PatternParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java" afterPath="$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/view/CanvasView.fxml" afterPath="$PROJECT_DIR$/GoL/src/view/CanvasView.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/view/MenuView.fxml" afterPath="$PROJECT_DIR$/GoL/src/view/MenuView.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/view/ToolView.fxml" afterPath="$PROJECT_DIR$/GoL/src/view/ToolView.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/config.properties" afterPath="$PROJECT_DIR$/out/production/GoL/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/view/MenuView.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/view/MenuView.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/css/stylesheet.css" afterPath="$PROJECT_DIR$/out/production/GoL/css/stylesheet.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/view/CanvasView.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/view/CanvasView.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/view/ToolView.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/view/ToolView.fxml" />
     </list>
     <ignored path="Programutvikling.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -633,14 +31,14 @@
     <favorites_list name="Programutvikling" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="MainView.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GoL/src/view/MainView.fxml">
           <provider editor-type-id="JavaFX-Scene-Builder">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -653,7 +51,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
+            <state vertical-scroll-proportion="0.0">
               <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
               <folding />
             </state>
@@ -663,7 +61,7 @@
       <file leaf-file-name="PatternParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GoL/src/model/PatternParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="659">
+            <state vertical-scroll-proportion="0.0">
               <caret line="106" column="8" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
               <folding />
             </state>
@@ -673,7 +71,7 @@
       <file leaf-file-name="CustomRule.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
+            <state vertical-scroll-proportion="0.0">
               <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
               <folding>
                 <element signature="method#translateRule#0;class#CustomRule#0" expanded="false" />
@@ -682,10 +80,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
+            <state vertical-scroll-proportion="0.0">
               <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding />
             </state>
@@ -695,48 +93,46 @@
       <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="29" column="43" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
-              <folding />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="792" column="45" selection-start-line="792" selection-start-column="45" selection-end-line="792" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.91493386">
+                <caret line="81" column="32" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Utilities.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GoL/src/tools/Utilities.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="713">
-              <caret line="78" column="100" selection-start-line="78" selection-start-column="100" selection-end-line="78" selection-end-column="100" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/controller/MenuController.java">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ToolController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/controller/ToolController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="61" column="14" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="p168-knightship.rle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/p168-knightship.rle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" column="32" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -755,25 +151,30 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/GoL/src/model/PatternParser.java" />
         <option value="$PROJECT_DIR$/GoL/src/view/MenuView.fxml" />
         <option value="$PROJECT_DIR$/GoL/src/view/CanvasView.fxml" />
         <option value="$PROJECT_DIR$/GoL/src/css/stylesheet.css" />
         <option value="$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java" />
         <option value="$PROJECT_DIR$/GoL/src/controller/ToolController.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
         <option value="$PROJECT_DIR$/GoL/src/view/ToolView.fxml" />
         <option value="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="69" />
-    <option name="y" value="-9" />
-    <option name="width" value="1860" />
-    <option name="height" value="1092" />
+    <option name="x" value="48" />
+    <option name="y" value="50" />
+    <option name="width" value="1849" />
+    <option name="height" value="1029" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -800,7 +201,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -832,24 +233,6 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Programutvikling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -865,141 +248,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Programutvikling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Programutvikling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Programutvikling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="icons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Programutvikling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Programutvikling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Programutvikling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Patterns" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Life-Like" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Programutvikling" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Patterns" />
+              <option name="myItemId" value="tools" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -1035,21 +296,31 @@
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -1059,15 +330,27 @@
       <option name="METHOD_NAME" value="" />
       <option name="CLASS_NAME" value="" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -1270,18 +553,19 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ec952695-f310-4db2-941c-ad52ec1dbbd5" name="Default" comment="" />
       <created>1458300462307</created>
       <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
       <updated>1458300462307</updated>
+      <workItem from="1459253850310" duration="680000" />
     </task>
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="680000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1293,33 +577,34 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="69" y="-9" width="1860" height="1092" extended-state="0" />
+    <frame x="48" y="50" width="1849" height="1029" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24193548" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24972005" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32821077" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24149287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24958494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -1338,291 +623,197 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Loops/Evoloop-finite.rle">
+    <entry file="file://$PROJECT_DIR$/GoL/src/view/MainView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Loops/Perrier-Parenthesis-Checker.rle">
+    <entry file="file://$PROJECT_DIR$/GoL/src/view/ToolView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-792">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/model/PatternParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="106" column="8" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <folding>
+            <element signature="method#translateRule#0;class#CustomRule#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Margolus/BBM.rle">
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-242">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="43" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Margolus/DLA.rle">
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/ToolController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-198">
-          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="14" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Margolus/TMGas_largeWithHole.rle">
+    <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/p168-knightship.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/golly-ants.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/Ed-rep.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/HPP-demo-small.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/Langtons-Ant.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/life-on-the-edge.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Other-Rules/life-on-the-slope.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Patersons-Worms/worm-1040512.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Patersons-Worms/worm-1042015.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Patersons-Worms/worm-1042020.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Patersons-Worms/worm-1252121.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/Turmites/AlienCounter.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-179">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/WireWorld/circuit.mcl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-25">
-          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/WireWorld/clocks.mcl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/WireWorld/gate-AND.mcl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/WireWorld/gate-NOT.mcl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/Patterns/WireWorld/gate-OR.mcl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="32" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/Morley/breeder2.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
+        <state vertical-scroll-proportion="0.0">
           <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/alt-wicks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/coral.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/Day-and-Night-gun-and-antigun.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/ice-nine.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/spiral-growth.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/white-whale.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/Morley/enterprise-gun.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/Morley/growing-ship.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life/Rakes/2c5-engineless-rake-p185.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life/Rakes/c3-forward-rake-p333.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life/Rakes/c5-adjustable-rake.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life/Rakes/spider-rake.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life/Rakes/p270-frothing-puffer-rake.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
+        <state vertical-scroll-proportion="0.0">
           <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/tools/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1631,7 +822,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
+        <state vertical-scroll-proportion="0.0">
           <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
           <folding />
         </state>
@@ -1639,9 +830,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/css/stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
+        <state vertical-scroll-proportion="0.0">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1650,7 +840,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
+        <state vertical-scroll-proportion="0.0">
           <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
           <folding />
         </state>
@@ -1658,17 +848,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/replicator.rle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/persian-rugs.lif">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1677,55 +865,15 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/p168-knightship.rle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="32" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/MenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="713">
-          <caret line="78" column="100" selection-start-line="78" selection-start-column="100" selection-end-line="78" selection-end-column="100" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/ToolController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="61" column="14" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="29" column="43" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/model/PatternParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
+        <state vertical-scroll-proportion="0.0">
           <caret line="106" column="8" selection-start-line="106" selection-start-column="8" selection-end-line="106" selection-end-column="8" />
           <folding />
         </state>
@@ -1733,7 +881,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
+        <state vertical-scroll-proportion="0.0">
           <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
           <folding>
             <element signature="method#translateRule#0;class#CustomRule#0" expanded="false" />
@@ -1746,7 +894,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
+        <state vertical-scroll-proportion="0.0">
           <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
           <folding />
         </state>
@@ -1754,9 +902,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
+        <state vertical-scroll-proportion="0.0">
           <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/Patterns/Life-Like/p168-knightship.rle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.016987542">
+          <caret line="1" column="32" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/ToolController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.016987542">
+          <caret line="61" column="14" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.016987542">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="792" column="45" selection-start-line="792" selection-start-column="45" selection-end-line="792" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/tools/Utilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="78" column="100" selection-start-line="78" selection-start-column="100" selection-end-line="78" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.91493386">
+            <caret line="81" column="32" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

@@ -76,4 +76,7 @@ Implemented a Rules dropdown menu, a custom rule dialog popup, and custom rules.
 Implemented a clearGrid function, available under the Edit dropdown menu. Added some popular, alternative rules (Life Without Death, Seeds, Diamoeba, Replicator, Day and Night) to the rules dropdown menu
 
 160318 13:45
-Moved Patterns out of src. Deleted the unreadable patterns. The FileChooser patternChooser will now have the Patterns folder as initial directory
+Moved Patterns out of src. Deleted the unreadable patterns. The FileChooser patternChooser will now have the Patterns folder as initial directory.
+
+160329 14:28
+Added GIFLib.jar to GoL project.

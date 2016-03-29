@@ -1,2 +1,3 @@
 <?import javafx.scene.canvas.Canvas?>
-<Canvas fx:controller="controller.CanvasController" fx:id="canvas" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml" width="800" height="500"/>
+<Canvas fx:controller="controller.CanvasController" fx:id="canvas"
+        xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml" width="1000" height="1000"/>
