@@ -40,18 +40,15 @@ public class Configuration {
     }
 
     private void initialize() {
-        convertFileToInputStream();
-
         if (!file.exists()) {
             createFile();
             generateConfigurationFileContent();
             writeConfigurationToFile();
             setInputStream();
         }
-    }
-
-    private void convertFileToInputStream() {
-        inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
+        else {
+            setInputStream();
+        }
     }
 
     private void setInputStream() {

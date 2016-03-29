@@ -80,3 +80,6 @@ Moved Patterns out of src. Deleted the unreadable patterns. The FileChooser patt
 
 160329 14:28
 Added GIFLib.jar to GoL project.
+
+160329 14:54
+Changes so that resource folder does not need to be set as a source folder. Removed method for reading inputsteam from source folder.
