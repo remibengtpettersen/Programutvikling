@@ -20,8 +20,8 @@ import java.io.SyncFailedException;
 public class MasterController {
 
     public Configuration configuration;
-    private Stage stage;
-    private Scene scene;
+    public Stage stage;
+    public Scene scene;
 
     @FXML public CanvasController canvasController;
     @FXML public MenuController menuController;
@@ -49,8 +49,8 @@ public class MasterController {
         patternChooser.setTitle("Choose pattern file");
         patternChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GoL pattern files", "*.rle", "*.lif", "*.life", "*.cells"));
 
-        String patternDir = System.getProperty("user.dir") + "/GoL/Patterns";
-        patternChooser.setInitialDirectory(new File(patternDir));
+        String patternDir = "../../Patterns";
+       // patternChooser.setInitialDirectory(new File(patternDir)); virket ikke for meg
 
         setEvents();
     }

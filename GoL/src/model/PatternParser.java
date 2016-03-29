@@ -7,7 +7,6 @@ package model;
 import tools.Utilities;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -350,7 +349,7 @@ public class PatternParser {
                 patternWidth = lineList.get(x).length();
             }
         }
-
+        System.out.println(patternHeight +" "+ patternWidth);
         patternArray = new boolean[patternWidth][patternHeight];
 
         for(int y = 0; y < patternHeight; y++){
