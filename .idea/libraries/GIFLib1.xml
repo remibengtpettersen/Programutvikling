@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="GIFLib">
+  <library name="GIFLib1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/GoL/out/production/GoL/tools/GIFLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/GoL/library/GIFLib.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
