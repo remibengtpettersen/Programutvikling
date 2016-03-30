@@ -5,6 +5,9 @@ package model.rules;
  */
 public interface Rule {
 
+    /**
+     * evolves the grid one generation
+     */
     void evolve();
 
     void setGrid(boolean[][] grid);

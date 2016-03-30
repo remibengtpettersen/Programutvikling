@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 /**
  * Created on 12.02.2016.
- * @Author The group through pair programing.
+ * @author The group through pair programing.
  */
 public class GameOfLife2D extends GameOfLife{
 
@@ -86,7 +86,7 @@ public class GameOfLife2D extends GameOfLife{
     //region Getters
     /**
      * Getter for neighbour-2D-array
-     * @return
+     * @return the neighbour-2D-array
      */
     @Override
     public byte[][] getNeighbours() {
@@ -95,7 +95,7 @@ public class GameOfLife2D extends GameOfLife{
 
     /**
      * Getter for the cell-2D-array
-     * @return
+     * @return the cell-2D-array
      */
     @Override
     public boolean[][] getGrid() {

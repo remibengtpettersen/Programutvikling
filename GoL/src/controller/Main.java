@@ -11,6 +11,11 @@ import java.io.IOException;
 
 public class Main extends Application {
 
+    /**
+     * Loads the manView fxml document and starts the application
+     * @param stage the primary stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception{
 
@@ -32,6 +37,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * launches the application
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

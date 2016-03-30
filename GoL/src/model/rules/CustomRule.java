@@ -8,31 +8,43 @@ public class CustomRule extends Rule2D {
 
     private boolean[] shouldBeBorn;    //goes from 0 to 8 neighbours
     private boolean[] shouldSurvive;
-    private String rule;
+    private String ruleText;
 
+    /**
+     * Constructor for the custom ruleText
+     * @param grid the grid to be evolved
+     * @param neighbours the neighbours grid used in evolve()
+     * @param ruleText the text that containes the ruleText
+     */
     public CustomRule(boolean[][] grid, byte[][] neighbours, String ruleText) {
         super(grid, neighbours);
 
-        parseRuleText(ruleText);
+        this.ruleText = format(ruleText);
+        parseRuleText();
     }
 
-    private String translateRule(String oldRuleText){
+    /**
+     * Formats the ruleText to be in the right order, with B in front of S and separated with a "/".
+     * @param ruleText the text to be formatted
+     * @return The formatted string
+     */
+    private String format(String ruleText){
 
         String newRuleText = "B";
 
-        oldRuleText = oldRuleText.toUpperCase();
+        ruleText = ruleText.toUpperCase();
 
-        int bIndex = oldRuleText.indexOf('B');
-        int sIndex = oldRuleText.indexOf('S');
+        int bIndex = ruleText.indexOf('B');
+        int sIndex = ruleText.indexOf('S');
 
         //System.out.println(bIndex + " " + sIndex);
 
-        for(int i = bIndex; i < oldRuleText.length(); i++){
+        for(int i = bIndex; i < ruleText.length(); i++){
 
-            if((i + 1) < oldRuleText.length()){
-                if( Character.isDigit(oldRuleText.charAt(i + 1))) {
+            if((i + 1) < ruleText.length()){
+                if( Character.isDigit(ruleText.charAt(i + 1))) {
 
-                    newRuleText += oldRuleText.charAt(i + 1);
+                    newRuleText += ruleText.charAt(i + 1);
                 }
                 else {
                     break;
@@ -42,12 +54,12 @@ public class CustomRule extends Rule2D {
 
         newRuleText += "/S";
 
-        for(int i = sIndex; i < oldRuleText.length(); i++){
+        for(int i = sIndex; i < ruleText.length(); i++){
 
-            if((i + 1) < oldRuleText.length()){
-                if( Character.isDigit(oldRuleText.charAt(i + 1))) {
+            if((i + 1) < ruleText.length()){
+                if( Character.isDigit(ruleText.charAt(i + 1))) {
 
-                    newRuleText += oldRuleText.charAt(i + 1);
+                    newRuleText += ruleText.charAt(i + 1);
                 }
                 else {
                     break;
@@ -58,13 +70,13 @@ public class CustomRule extends Rule2D {
         return newRuleText;
     }
 
-    private void parseRuleText(String ruleText){
+    /**
+     * converts the rule text into the arrays used in evolve
+     */
+    private void parseRuleText(){
 
         shouldBeBorn = new boolean[9];
         shouldSurvive = new boolean[9];
-
-        ruleText = ruleText.toUpperCase();
-        rule = ruleText;
 
         int bIndex = ruleText.indexOf('B');
         int sIndex = ruleText.indexOf('S');
@@ -102,6 +114,7 @@ public class CustomRule extends Rule2D {
         System.out.println("Parsed: " + ruleText);
     }
 
+
     @Override
     public void evolve() {
         // Double for loop to iterate through the grid.
@@ -126,9 +139,10 @@ public class CustomRule extends Rule2D {
         }
     }
 
+
     @Override
     public String toString(){
-        return rule;
+        return ruleText;
     }
 
 

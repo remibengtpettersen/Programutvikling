@@ -24,6 +24,17 @@ import java.util.Optional;
 
 /**
  * The controller that handles everything that happens on the canvas.
+ *
+ * mouse controll
+ * zoom controll
+ * grid positoning
+ * Draw gameboard on canvas
+ * animation
+ * keyboard handeling
+ * animation speed
+ * save to gif
+ *
+ *
  */
 public class CanvasController {
 

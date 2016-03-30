@@ -40,4 +40,9 @@ public class ClassicRule extends Rule2D {
         }
 
     }
+
+    @Override
+    public String toString(){
+        return "B3/S23";
+    }
 }

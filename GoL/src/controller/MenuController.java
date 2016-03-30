@@ -16,8 +16,8 @@ import java.io.File;
 import java.util.Optional;
 
 /**
- * Created by Andreas on 09.03.2016.
- */
+ * Controller for the menu bars on top of the stage
+ * */
 public class MenuController {
 
     private MasterController masterController;
@@ -26,12 +26,18 @@ public class MenuController {
     @FXML
     private MenuItem openBtn;
 
+    /**
+     * Stores the reference to the masterController
+     * @param masterController reference to the masterController
+     */
     public void initialize(MasterController masterController) {
         this.masterController = masterController;
 
     }
 
-
+    /**
+     * Opens the fileChooser so the user can choose a pattern to import
+     */
     public void openFileChooser(){
         masterController.choosePattern();
     }
@@ -47,6 +53,10 @@ public class MenuController {
         masterController.canvasController.setRule("highlife");
     }
 
+    /**
+     * opens a dialog so the user can choose a custom rule
+     * @param actionEvent
+     */
     public void setCustomRule(ActionEvent actionEvent) {
 
         TextInputDialog dialog = new TextInputDialog(masterController.canvasController.gol.getRule().toString());

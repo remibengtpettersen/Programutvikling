@@ -12,7 +12,6 @@ import model.PatternFormatException;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.SyncFailedException;
 
 /**
  * Created by remibengtpettersen on 12.02.2016.
@@ -29,6 +28,12 @@ public class MasterController {
 
     private FileChooser patternChooser = new FileChooser();
 
+    /**
+     *
+     * @param stage the primary stage
+     * @param root the borderpane with the mainView
+     * @throws IOException
+     */
     public void initialize(Stage stage, BorderPane root) throws IOException {
 
         configuration = new Configuration();
@@ -52,16 +57,22 @@ public class MasterController {
         String patternDir = "../../Patterns";
        // patternChooser.setInitialDirectory(new File(patternDir)); virket ikke for meg
 
-        setEvents();
+        bindCanvas();
     }
 
-    private void setEvents(){
+    /**
+     * Binds the canvas size to the scene size
+     */
+    private void bindCanvas(){
         canvasController.getCanvas().widthProperty().bind(
                 scene.widthProperty());
         canvasController.getCanvas().heightProperty().bind(
                 scene.heightProperty().subtract(70));
     }
 
+    /**
+     * opens the filechooser so the user can choose a pattern file to import
+     */
     public void choosePattern(){
         File file = patternChooser.showOpenDialog(stage);
         if(file != null) {

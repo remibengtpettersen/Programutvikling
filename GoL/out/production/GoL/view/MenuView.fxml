@@ -5,7 +5,8 @@
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 
-<MenuBar  fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
+<MenuBar  fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40"
+          xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
     <Menu text="GoL">
         <MenuItem text="About" onAction="#onAbout"/>
         <MenuItem text="Preferences"/>
@@ -16,10 +17,11 @@
         <MenuItem text="Save"/>
     </Menu>
     <Menu text="Edit">
+        <MenuItem text="Clear board" onAction="#clearGrid"/>
+        <SeparatorMenuItem/>
         <MenuItem text="Cut"/>
         <MenuItem text="Copy"/>
         <MenuItem text="Paste"/>
-        <MenuItem text="Clear board" onAction="#clearGrid"/>
         <SeparatorMenuItem/>
         <MenuItem text="Open editor"/>
     </Menu>
