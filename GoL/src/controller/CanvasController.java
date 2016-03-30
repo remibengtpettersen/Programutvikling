@@ -76,6 +76,7 @@ public class CanvasController {
     private boolean[][] importPattern;
     private boolean importing = false;
     private boolean gridLines;
+    private boolean userWantsGridLines;
 
 
 
@@ -99,6 +100,7 @@ public class CanvasController {
         updateView();
         initializeListeners();
         initializeAnimation();
+        checkIfSholdStillDrawGrid();
         startAnimation();
     }
 
@@ -119,7 +121,7 @@ public class CanvasController {
         frameDelay = masterController.configuration.getGameSpeed();
         boardWidth = masterController.configuration.getGameWidth();
         boardHeight = masterController.configuration.getGameHeight();
-        gridLines = masterController.configuration.getGridValue();
+        userWantsGridLines = masterController.configuration.getGridValue();
         masterController.toolController.setSpeed(frameDelay);
 
 
@@ -455,7 +457,8 @@ public class CanvasController {
         if(importing)
             renderImport();
         if(gridLines)
-            renderGridLines();
+            if(userWantsGridLines)
+                renderGridLines();
     }
     /**
      * Renders the current state of the game of life simulation to the canvas.

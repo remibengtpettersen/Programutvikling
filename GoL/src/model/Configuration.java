@@ -18,7 +18,7 @@ public class Configuration {
     private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 
     private InputStream inputStream;
-    private String propertiesFileName = "./GoL/resources/config.properties";
+    private String propertiesFileName = "../GoL/resources/config.properties";
     private Properties properties = new Properties();
     private File file = new File(propertiesFileName);
     private String windowWidth;
@@ -53,7 +53,7 @@ public class Configuration {
 
     private void setInputStream() {
         try {
-            inputStream = new FileInputStream("./GoL/resources/config.properties");
+            inputStream = new FileInputStream(propertiesFileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -108,7 +108,7 @@ public class Configuration {
                                     "game.width = 1000\n" +
                                     "game.height = 1000\n" +
                                     "# Set cell properties\n" +
-                                    "cell.color = green\n" +
+                                    "cell.color = black\n" +
                                     "cell.size = 10\n" +
                                     "# Set canvas properties\n" +
                                     "canvas.background.color = white\n" +
