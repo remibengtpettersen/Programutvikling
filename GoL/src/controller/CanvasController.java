@@ -18,7 +18,6 @@ import model.GameOfLife2D;
 import s305080.ToFile;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -43,8 +42,8 @@ public class CanvasController {
     @FXML
     private Canvas canvas;
 
-    private Color cellColor = Color.BLACK;        //these should be private, etc etc
-    public Color backgroundColor = Color.WHITE;
+    private Color cellColor;        //these should be private, etc etc
+    public Color backgroundColor;
     private Color ghostColor;
 
     public GameOfLife2D gol;
@@ -57,14 +56,10 @@ public class CanvasController {
     private short boardHeight;
     private double cellSize = 5;
     private double cellSpacing = 0.1; //callSpacing * cellSize pixels
-    private double minCellSize;
     private boolean[][] grid;
 
     private int frameDelay = 1000;
     private boolean running = true;
-
-    private int gridClickX;
-    private int gridClickY;
 
     // Is used to calculate the distance the mouse has traveled since last MouseDragEvent.
     private int currMousePosX;
@@ -72,7 +67,6 @@ public class CanvasController {
     private int prevMousePosX;
     private int prevMousePosY;
 
-    MouseButton mouseButton;
     private boolean mouseDrag;
     private boolean mouseOnCanvas;
 
@@ -135,7 +129,7 @@ public class CanvasController {
         frameDelay = masterController.configuration.getGameSpeed();
         boardWidth = masterController.configuration.getGameWidth();
         boardHeight = masterController.configuration.getGameHeight();
-        userWantsGridLines = masterController.configuration.getGridValue();
+        userWantsGridLines = masterController.configuration.isGridLinesOn();
         masterController.toolController.setSpeed(frameDelay);
 
 
@@ -289,7 +283,7 @@ public class CanvasController {
             return;
         }
 
-        mouseButton = mouseEvent.getButton();
+        MouseButton mouseButton = mouseEvent.getButton();
         if (mouseButton == MouseButton.PRIMARY) {
             if (importing) {
                 insertImport();
@@ -297,8 +291,8 @@ public class CanvasController {
                 return;
             }
 
-            gridClickX = getGridPosX(mouseEvent.getX());
-            gridClickY = getGridPosY(mouseEvent.getY());
+            int gridClickX = getGridPosX(mouseEvent.getX());
+            int gridClickY = getGridPosY(mouseEvent.getY());
             gol.changeCellState(gridClickX, gridClickY);
             renderCanvas();
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY)
@@ -739,7 +733,7 @@ public class CanvasController {
      * Gives the minimum cellsize to the zoom slider
      */
     private void calculateMinCellSize() {
-         minCellSize = (canvas.getWidth()/boardWidth > canvas.getHeight()/boardHeight) ? canvas.getWidth() / boardHeight : canvas.getHeight() / boardHeight;
+        double minCellSize = (canvas.getWidth() / boardWidth > canvas.getHeight() / boardHeight) ? canvas.getWidth() / boardHeight : canvas.getHeight() / boardHeight;
         masterController.toolController.setMinZoom(minCellSize);
     }
 

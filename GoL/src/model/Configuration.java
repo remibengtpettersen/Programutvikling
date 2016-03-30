@@ -39,6 +39,9 @@ public class Configuration {
         initialize();
     }
 
+    /**
+     * Creates a file if it is not there
+     */
     private void initialize() {
         if (!file.exists()) {
             createFile();
@@ -51,6 +54,9 @@ public class Configuration {
         }
     }
 
+    /**
+     * creates the inputStream from the config file
+     */
     private void setInputStream() {
         try {
             inputStream = new FileInputStream(propertiesFileName);
@@ -60,10 +66,19 @@ public class Configuration {
     }
 
     //region getters
+
+    /**
+     * Gets the width value from the config file
+     * @return the with value from the config file
+     */
     public int getWidth() {
         return Integer.parseInt(this.windowWidth);
     }
 
+    /**
+     * gets the height value from the config file
+     * @return the height value from the config file
+     */
     public int getHeight() {
         return Integer.parseInt(this.windowHeight);
     }
@@ -72,28 +87,60 @@ public class Configuration {
         return this.cellType;
     }
 
+    /**
+     * gets the cell color from the config file
+     * @return the cell color from the config file
+     */
     public String getCellColor() {
         return this.cellColor.toUpperCase();
     }
 
+    /**
+     * gets the background color from the config file
+     * @return the background color from the config file
+     */
     public String getBackgroundColor() {
         return this.backgroundColor.toUpperCase();
     }
 
+    /**
+     * gets the cell size from the config file
+     * @return the cell size from the config file
+     */
     public double getCellSize() {
         return Double.parseDouble(this.cellSize);
     }
 
+    /**
+     * gets the game height from the config file
+     * @return the game height from the config file
+     */
     public short getGameHeight() {return Short.parseShort(gameHeight);}
 
+    /**
+     * gets the game width from the config file
+     * @return game width from the config file
+     */
     public short getGameWidth() {return Short.parseShort(gameWidth);}
 
+    /**
+     * gets the game speed from the config file
+     * @return the game speed from the config file
+     */
     public int getGameSpeed() {
         return Integer.parseInt(this.gameSpeed);
     }
 
-    public boolean getGridValue() { return Boolean.parseBoolean(canvasGrid); }
+    /**
+     * Returns true if the grid lines should be displayed
+     * @return true if the grid lines should be displayed
+     */
+    public boolean isGridLinesOn() { return Boolean.parseBoolean(canvasGrid); }
 
+
+    /**
+     * Generates content for a new config file in the string configurationsString
+     */
     private void generateConfigurationFileContent() {
         configurationsString =      "##########################################\n" +
                                     "# Configuration file for Game of Life    #\n" +
@@ -115,6 +162,9 @@ public class Configuration {
                                     "canvas.grid = false\n";
     }
 
+    /**
+     * Creates a new config file
+     */
     private void createFile() {
         try {
             file.createNewFile();
@@ -123,6 +173,9 @@ public class Configuration {
         }
     }
 
+    /**
+     * loads the input stream into the properties field
+     */
     public void getConfigurationFromFile() {
         try {
             properties.load(inputStream);
@@ -138,6 +191,10 @@ public class Configuration {
     //endregion
 
     //region setters
+
+    /**
+     * sets the properties from "properties" to the local variables
+     */
     public void setConfiguration() {
         this.windowWidth = this.properties.getProperty("window.width");
         this.windowHeight = this.properties.getProperty("window.height");
@@ -151,6 +208,9 @@ public class Configuration {
     }
     //endregion
 
+    /**
+     * Writes the new config content to the file
+     */
     private void writeConfigurationToFile() {
         try
         {
@@ -164,14 +224,4 @@ public class Configuration {
         }
     }
 
-    public boolean isCanvasGrid() {
-        canvasGrid.toLowerCase();
-
-        if (Objects.equals(canvasGrid, "true")) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
 }

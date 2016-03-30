@@ -19,7 +19,7 @@ public class GameOfLife2D extends GameOfLife{
 
     public GameOfLife2D(int width, int height) {
 
-        super(width, height);
+        createGameBoard(width, height);
 
         //rule = new ClassicRule(grid, neighbours);
         //rule = new HighLifeRule(grid, neighbours);
@@ -32,8 +32,8 @@ public class GameOfLife2D extends GameOfLife{
      * Creates the boolean 2D Array to keep track of dead and alivelive cells, and the 2D byte-
      * array to keep track of the neighbourcount to the corresponding cells in the other array
      */
-    @Override
-    public void createGameBoard(int width, int height) {
+
+    private void createGameBoard(int width, int height) {
         grid = new boolean[width][height];
         neighbours = new byte[width][height];
 
@@ -48,17 +48,6 @@ public class GameOfLife2D extends GameOfLife{
     //endregion
 
     //region NextGeneration
-    /**
-     * Evolves the game board one generation ahead.
-     */
-    @Override
-    public void nextGeneration(){
-        aggregateNeighbours();
-
-        rule.evolve();
-
-    }
-
     /**
      * For each alive cell, it increments the adjacent cells neighbour count.
      */
@@ -88,7 +77,7 @@ public class GameOfLife2D extends GameOfLife{
      * Getter for neighbour-2D-array
      * @return the neighbour-2D-array
      */
-    @Override
+
     public byte[][] getNeighbours() {
         return neighbours;
     }
@@ -97,7 +86,7 @@ public class GameOfLife2D extends GameOfLife{
      * Getter for the cell-2D-array
      * @return the cell-2D-array
      */
-    @Override
+
     public boolean[][] getGrid() {
         return grid;
     }
@@ -106,7 +95,7 @@ public class GameOfLife2D extends GameOfLife{
     //endregion
 
     //region Setters
-    @Override
+
     public void setGrid(boolean[][] grid) {
         this.grid = grid;
     }

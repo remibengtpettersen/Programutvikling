@@ -9,31 +9,44 @@ public abstract class GameOfLife {
 
     protected Rule rule;
 
-    // For statistics
     public int cellCount = 0;
 
-    public GameOfLife(int width, int height){
-        createGameBoard(width, height);
-    }
+    /**
+     * Evolves the grid one generation
+     */
+    public void nextGeneration(){
+        aggregateNeighbours();
+        rule.evolve();
+    };
 
-    public abstract void createGameBoard(int width, int height);
-
-    public abstract void nextGeneration();
+    /**
+     * Counts the neighbours for each cell
+     */
     public abstract void aggregateNeighbours();
 
-
-    public abstract byte[][] getNeighbours();
-    public abstract boolean[][] getGrid();
-
-    public abstract void setGrid(boolean[][] grid);
+    /**
+     * Should be used to clear the grid of live cells
+     */
     public abstract void clearGrid();
 
+    /**
+     * Should be used to set a spesific rule
+     * @param ruleText the rule
+     */
     public abstract void setRule(String ruleText);
 
+    /**
+     * Returns the cell count
+     * @return the cell count
+     */
     public int getCellCount() {
         return cellCount;
     }
 
+    /**
+     * Returns the Rule
+     * @return the rule
+     */
     public Rule getRule() {
         return rule;
     }
