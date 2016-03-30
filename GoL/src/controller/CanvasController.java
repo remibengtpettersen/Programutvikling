@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Created by Andreas on 09.03.2016.
+ * The controller that handles everything that happens on the canvas.
  */
 public class CanvasController {
 
@@ -104,6 +104,9 @@ public class CanvasController {
         startAnimation();
     }
 
+    /**
+     * Gets the game parameters from the config file
+     */
     private void initializeGameParameters() {
 
         try {
@@ -127,6 +130,9 @@ public class CanvasController {
 
     }
 
+    /**
+     * Updates the fields that contains the grid minimum and maximum x and y values displayed on the canvas
+     */
     private void updateView() {
         currViewMinX = (int) (boardOffsetX / cellSize);
         currViewMaxX = (int) ((boardOffsetX + canvas.getWidth()) / cellSize) + 1;
@@ -197,6 +203,10 @@ public class CanvasController {
         });
     }
 
+    /**
+     *
+     * @param keyEvent
+     */
     private void keyPressed(KeyEvent keyEvent) {
         String code = keyEvent.getCode().toString();
 
@@ -760,6 +770,7 @@ public class CanvasController {
     }
 
 
+
     public void setFrameDelay(int frameDelay) {
         if(frameDelay < 17) // 60 fps
             this.frameDelay = 0;
@@ -828,6 +839,10 @@ public class CanvasController {
 
     //endregion
 
+    /**
+     * We copied getBoundingBox from the assignment
+     * @return
+     */
     private int[] getBoundingBox() {
         int[] boundingBox = new int[4]; // minrow maxrow mincolumn maxcolumn boundingBox[0] = board.length;
         boundingBox[0] = grid.length;
