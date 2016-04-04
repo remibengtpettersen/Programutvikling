@@ -83,3 +83,6 @@ Added GIFLib.jar to GoL project.
 
 160329 14:54
 Changes so that resource folder does not need to be set as a source folder. Removed method for reading inputsteam from source folder.
+
+160404 09:09
+Refactored the rule classes, especially CustomRule. All 2D-rules now have a ruleText which will be returned by toString().

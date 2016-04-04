@@ -1,77 +1,74 @@
 package model.rules;
 
 /**
+ * A custom rule based on an input string
  * Created on 12.02.2016.
- * @Author The group through pair programing.
+ * @author The group through pair programming.
  */
 public class CustomRule extends Rule2D {
 
-    private boolean[] shouldBeBorn;    //goes from 0 to 8 neighbours
+    private boolean[] shouldBeBorn;
     private boolean[] shouldSurvive;
-    private String ruleText;
 
     /**
-     * Constructor for the custom ruleText
-     * @param grid the grid to be evolved
-     * @param neighbours the neighbours grid used in evolve()
-     * @param ruleText the text that containes the ruleText
+     * Constructor for the custom rule
+     * @param grid reference to the cell grid to be evolved
+     * @param neighbours reference to the neighbours grid used during evolution
+     * @param rawRuleText the input rule text
      */
-    public CustomRule(boolean[][] grid, byte[][] neighbours, String ruleText) {
+    public CustomRule(boolean[][] grid, byte[][] neighbours, String rawRuleText) {
+
         super(grid, neighbours);
 
-        this.ruleText = format(ruleText);
+        ruleText = formatRuleText(rawRuleText);
         parseRuleText();
     }
 
     /**
-     * Formats the ruleText to be in the right order, with B in front of S and separated with a "/".
-     * @param ruleText the text to be formatted
-     * @return The formatted string
+     * Formats the rule text to be in the right order, with the B-section in front, followed by a "/", then the S-section
+     * @param rawRuleText rule text to be formatted
+     * @return formatted rule text
      */
-    private String format(String ruleText){
+    private String formatRuleText(String rawRuleText){
+
+        rawRuleText = rawRuleText.toUpperCase();
+
+        int bIndex = rawRuleText.indexOf('B');
+        int sIndex = rawRuleText.indexOf('S');
 
         String newRuleText = "B";
-
-        ruleText = ruleText.toUpperCase();
-
-        int bIndex = ruleText.indexOf('B');
-        int sIndex = ruleText.indexOf('S');
-
-        //System.out.println(bIndex + " " + sIndex);
-
-        for(int i = bIndex; i < ruleText.length(); i++){
-
-            if((i + 1) < ruleText.length()){
-                if( Character.isDigit(ruleText.charAt(i + 1))) {
-
-                    newRuleText += ruleText.charAt(i + 1);
-                }
-                else {
-                    break;
-                }
-            }
-        }
-
+        newRuleText += getFollowingDigits(rawRuleText, bIndex);
         newRuleText += "/S";
-
-        for(int i = sIndex; i < ruleText.length(); i++){
-
-            if((i + 1) < ruleText.length()){
-                if( Character.isDigit(ruleText.charAt(i + 1))) {
-
-                    newRuleText += ruleText.charAt(i + 1);
-                }
-                else {
-                    break;
-                }
-            }
-        }
+        newRuleText += getFollowingDigits(rawRuleText, sIndex);
 
         return newRuleText;
     }
 
     /**
-     * converts the rule text into the arrays used in evolve
+     * Returns a substring of superRuleText entirely out of digits from 0 to 8, starting one character after index
+     * @param superRuleText the original rule text
+     * @param index the index for the character in front of the substring to be returned
+     * @return a substring of digits 0 to 8
+     */
+    private String getFollowingDigits(String superRuleText, int index){
+
+        String subRuleText = "";
+
+        for(int i = ++index; i < superRuleText.length(); i++){
+
+            char currentChar = superRuleText.charAt(i);
+
+            if(Character.isDigit(currentChar) && currentChar != '9')
+                subRuleText += currentChar;
+            else
+                break;
+        }
+
+        return subRuleText;
+    }
+
+    /**
+     * Parses the rule text, converts it into the shouldBeBorn and shouldSurvive arrays to be used in evolve
      */
     private void parseRuleText(){
 
@@ -81,69 +78,51 @@ public class CustomRule extends Rule2D {
         int bIndex = ruleText.indexOf('B');
         int sIndex = ruleText.indexOf('S');
 
-        for(int i = bIndex; i < ruleText.length(); i++){
+        String bFollowing = getFollowingDigits(ruleText, bIndex);
+        String sFollowing = getFollowingDigits(ruleText, sIndex);
 
-            if((i + 1) < ruleText.length()){
+        for(int i = 0; i < bFollowing.length(); i++){
 
-                char nextChar = ruleText.charAt(i+1);
+            char currentChar = bFollowing.charAt(i);
+            int currentInt = Character.getNumericValue(currentChar);
 
-                if( Character.isDigit(nextChar) && (nextChar != '9')) {
-                    shouldBeBorn[Character.getNumericValue(nextChar)] = true;
-                }
-                else {
-                    break;
-                }
-            }
+            shouldBeBorn[currentInt] = true;
         }
 
-        for(int i = sIndex; i < ruleText.length(); i++){
+        for(int i = 0; i < sFollowing.length(); i++){
 
-            if((i + 1) < ruleText.length()){
+            char currentChar = sFollowing.charAt(i);
+            int currentInt = Character.getNumericValue(currentChar);
 
-                char nextChar = ruleText.charAt(i+1);
-
-                if( Character.isDigit(nextChar) && (nextChar != '9')) {
-                    shouldSurvive[Character.getNumericValue(nextChar)] = true;
-                }
-                else {
-                    break;
-                }
-            }
+            shouldSurvive[currentInt] = true;
         }
 
         System.out.println("Parsed: " + ruleText);
     }
 
-
+    /**
+     * Evolves the grid one generation. The evolution rules are based on the
+     * shouldBeBorn and shouldSurvive arrays which again are based on the rule text
+     */
     @Override
     public void evolve() {
-        // Double for loop to iterate through the grid.
+
         for(int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
 
                 byte neighbourCount = neighbours[x][y];
 
                 if(grid[x][y]){                         // If cell is alive
-
                     if(!shouldSurvive[neighbourCount])  // If the cell isn't supposed to survive,
                         grid[x][y] = false;             // the cell would die
                 }
                 else {                                  // If cell is dead
-
                     if(shouldBeBorn[neighbourCount])    // If the cell is supposed to be born,
                         grid[x][y] = true;              // the cell should be born
                 }
 
-                neighbours[x][y] = 0;                    //resets number of neighbours
+                neighbours[x][y] = 0;                   //resets number of neighbours
             }
         }
     }
-
-
-    @Override
-    public String toString(){
-        return ruleText;
-    }
-
-
 }
