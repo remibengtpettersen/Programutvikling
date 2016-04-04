@@ -44,6 +44,7 @@ public class ToolController {
      * @param masterController the reference to the masterController
      */
     public void initialize(MasterController masterController) {
+
         this.masterController = masterController;
         cellColorPicker.setValue(Color.BLACK);
 
@@ -65,6 +66,7 @@ public class ToolController {
      * @param actionEvent
      */
     public void changeCellColor(ActionEvent actionEvent) {
+
         masterController.canvasController.setCellColor(cellColorPicker.getValue());    //ugly, but temporary
         masterController.canvasController.renderCanvas();
     }
@@ -74,6 +76,7 @@ public class ToolController {
      * @param actionEvent
      */
     public void changeBackgroundColor(ActionEvent actionEvent) {
+
         masterController.canvasController.setBackgroundColor(backgroundColorPicker.getValue());    //ugly, but temporary
         masterController.canvasController.renderCanvas();
     }
@@ -82,6 +85,7 @@ public class ToolController {
      * Changes the speed of the simulation when the speedSlider is dragged
      */
     public void speedSliderDragged(){
+
         masterController.canvasController.setFrameDelay((int)Math.exp(-speedSlider.getValue()/15));
     }
 
@@ -89,6 +93,7 @@ public class ToolController {
      * Changes the cellSize in the simulation when the zoomSlider is dragged
      */
     public void zoomSliderDragged(){
+
         masterController.canvasController.setCellSize(Math.exp(zoomSlider.getValue()/28));
     }
 
@@ -97,10 +102,12 @@ public class ToolController {
      * @param cellCount the numbers of live cells in the grid
      */
     public void giveCellCount(int cellCount) {
+
         cellCountLabel.setText("Cellcount: "+cellCount);
     }
 
     public void displayRule(int cellCount) {
+
         cellCountLabel.setText("Cellcount: "+cellCount);
     }
 
@@ -124,6 +131,7 @@ public class ToolController {
      * changes the btnPlay image to a play button image
      */
     public void changeIconToPlay() {
+
         btnPlay.setText("Play");
         btnPlay.setGraphic(new ImageView(imgPlay));
     }
@@ -132,6 +140,7 @@ public class ToolController {
      * changes the btnPlay image to a pause button image
      */
     public void changeIconToPause() {
+
         btnPlay.setText("Pause");
         btnPlay.setGraphic(new ImageView(imgPause));
     }
@@ -141,23 +150,23 @@ public class ToolController {
      * @param zoom the zoom value to match
      */
     public void setZoom(double zoom) {
-        zoomSlider.setValue(Math.log(zoom)*28);
+
+        zoomSlider.setValue(Math.log(zoom) * 28);
     }
 
     public void setSpeed(double speed) {
-        if(speed < 0) speed = 0;
-        speedSlider.setValue(-Math.log(speed)*15);
-       // System.out.println(speedSlider.getValue() + " " +speed);
 
+        if(speed < 0) speed = 0;
+        speedSlider.setValue(-Math.log(speed) * 15);
     }
 
     public void setMinZoom(double minZoom) {
-         zoomSlider.setMin(Math.log(minZoom)*28);
+         zoomSlider.setMin(Math.log(minZoom) * 28);
     }
 
     public void addSpeedValue(double deltaX) {
+
         speedSlider.setValue(speedSlider.getValue()+deltaX);
-        //System.out.println(deltaX);
         speedSliderDragged();
     }
 }

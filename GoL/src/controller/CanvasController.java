@@ -43,7 +43,7 @@ public class CanvasController {
     private Canvas canvas;
 
     private Color cellColor;        //these should be private, etc etc
-    public Color backgroundColor;
+    private Color backgroundColor;
     private Color ghostColor;
 
     public GameOfLife2D gol;
@@ -83,9 +83,6 @@ public class CanvasController {
     private boolean gridLines;
     private boolean userWantsGridLines;
 
-
-
-
     public Canvas getCanvas(){ return canvas; }
 
     /**
@@ -95,7 +92,6 @@ public class CanvasController {
     public void initialize(MasterController masterController) {
 
         this.masterController = masterController;
-
         initializeGameParameters();
 
         gol = new GameOfLife2D(boardWidth, boardHeight);
@@ -105,7 +101,7 @@ public class CanvasController {
         updateView();
         initializeListeners();
         initializeAnimation();
-        checkIfSholdStillDrawGrid();
+        checkIfShouldStillDrawGrid();
         startAnimation();
     }
 
@@ -131,14 +127,13 @@ public class CanvasController {
         boardHeight = masterController.configuration.getGameHeight();
         userWantsGridLines = masterController.configuration.isGridLinesOn();
         masterController.toolController.setSpeed(frameDelay);
-
-
     }
 
     /**
      * Updates the fields that contains the grid minimum and maximum x and y values displayed on the canvas
      */
     private void updateView() {
+
         currViewMinX = (int) (boardOffsetX / cellSize);
         currViewMaxX = (int) ((boardOffsetX + canvas.getWidth()) / cellSize) + 1;
         if(currViewMaxX > grid.length)
@@ -148,13 +143,13 @@ public class CanvasController {
         currViewMaxY = (int) ((boardOffsetY + canvas.getHeight()) / cellSize) + 1;
         if(currViewMaxY > grid[0].length)
             currViewMaxY--;
-
     }
 
     /**
      * Initializes the animation. The "timer" and "frameDelay" are used for having dynamic frame rate.
      */
     private void initializeAnimation() {
+
         animationTimer = new AnimationTimer() {
 
             @Override
@@ -163,9 +158,8 @@ public class CanvasController {
                 //To control game speed
                 if(now/1000000 - timer > frameDelay) {
 
-                        gol.nextGeneration();
-
-                        renderCanvas();
+                    gol.nextGeneration();
+                    renderCanvas();
 
                     timer = now/1000000;
                     masterController.toolController.giveCellCount(gol.getCellCount());
@@ -178,6 +172,7 @@ public class CanvasController {
      * Sets up all the listeners needed for the simulation of Game of Life
      */
     private void initializeListeners() {
+
         canvas.setOnMouseClicked(this::mouseClick);
         canvas.setOnMouseDragged(this::mouseDrag);
         canvas.setOnMouseMoved(this::mouseTrace);
@@ -185,11 +180,7 @@ public class CanvasController {
         canvas.setOnMouseExited(this::mouseCanvasExit);
         canvas.setOnMouseEntered(this::mouseCanvasEnter);
 
-        //backgroundColorPicker.setOnAction(this::changeBackgroundColor);
-        //cellColorPicker.setOnAction(this::changeCellColor);
-
         masterController.scene.setOnKeyPressed(this::keyPressed);
-        //master.theScene.setOnKeyPressed(this::keyPressed);
 
         canvas.widthProperty().addListener(evt -> {
             clampCellSize();
@@ -198,13 +189,13 @@ public class CanvasController {
             if(!running || frameDelay > 0)
                 renderCanvas();
         });
+
         canvas.heightProperty().addListener(evt -> {
             clampCellSize();
             clampView();
             calculateMinCellSize();
             if(!running || frameDelay > 0)
                 renderCanvas();
-
         });
     }
 
@@ -213,6 +204,7 @@ public class CanvasController {
      * @param keyEvent
      */
     private void keyPressed(KeyEvent keyEvent) {
+
         String code = keyEvent.getCode().toString();
 
         if(code.equals("S")){
@@ -230,16 +222,14 @@ public class CanvasController {
             System.out.println(getBoundingBox()[0] + " " + getBoundingBox()[1] + " " + getBoundingBox()[2] + " " +getBoundingBox()[3] + " ");
             startAnimation();
         }
-
     }
-
-
 
     /**
      * Stores the position of the event
      * @param mouseEvent Where the mouse is at the current time
      */
     private void mouseTrace(MouseEvent mouseEvent) {
+
         if(importing){
             currMousePosX = (int) mouseEvent.getX();
             currMousePosY = (int) mouseEvent.getY();
@@ -263,6 +253,7 @@ public class CanvasController {
      * @param mouseDragEvent
      */
     private void mouseCanvasExit(MouseEvent mouseDragEvent) {
+
         mouseOnCanvas = false;
         prevMousePosX = 0;
         prevMousePosY = 0;
@@ -276,6 +267,7 @@ public class CanvasController {
      * @param mouseEvent
      */
     private void mouseClick(MouseEvent mouseEvent) {
+
         if (mouseDrag) {
             prevMousePosX = 0;
             prevMousePosY = 0;
@@ -284,6 +276,7 @@ public class CanvasController {
         }
 
         MouseButton mouseButton = mouseEvent.getButton();
+
         if (mouseButton == MouseButton.PRIMARY) {
             if (importing) {
                 insertImport();
@@ -294,7 +287,9 @@ public class CanvasController {
             int gridClickX = getGridPosX(mouseEvent.getX());
             int gridClickY = getGridPosY(mouseEvent.getY());
             gol.changeCellState(gridClickX, gridClickY);
+
             renderCanvas();
+
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY)
             if (running) {
                 masterController.toolController.changeIconToPlay();
@@ -306,7 +301,6 @@ public class CanvasController {
                 running = true;
             }
     }
-
 
     /**
      * If left mouse button clicked and mouse dragged, will draw path on canvas.
@@ -326,22 +320,17 @@ public class CanvasController {
         currMousePosY = (int)mouseEvent.getY();
 
         if(b == MouseButton.PRIMARY) {
-
             if(prevMousePosX != 0 || prevMousePosY != 0){
                 drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY), getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
             }
             else
                 gol.setCellAlive(getGridPosX(currMousePosX), getGridPosY(currMousePosY));
-            //gol.setCellAlive(gridClickX, gridClickY);
         }
         else if(mouseEvent.getButton() == MouseButton.SECONDARY){
-
-
             if(prevMousePosX != 0 || prevMousePosY != 0){
                 boardOffsetX += prevMousePosX - currMousePosX;
                 boardOffsetY += prevMousePosY - currMousePosY;
             }
-
 
             clampView();
         }
@@ -360,20 +349,22 @@ public class CanvasController {
      * @param scrollEvent
      */
     private void mouseScroll(ScrollEvent scrollEvent) {
+
         double ratio1 = (boardOffsetX + scrollEvent.getX()) / cellSize;
         double ratio2 = (boardOffsetY + scrollEvent.getY()) / cellSize;
 
-
         cellSize += cellSize * (scrollEvent.getDeltaY() / 150);
 
-       // System.out.println(cellSize);
         clampCellSize();
+
         masterController.toolController.setZoom(cellSize);
+
         boardOffsetX = (int) (cellSize * ratio1 - scrollEvent.getX());
         boardOffsetY = (int) (cellSize * ratio2 - scrollEvent.getY());
 
         clampView();
-        checkIfSholdStillDrawGrid();
+        checkIfShouldStillDrawGrid();
+
         masterController.toolController.addSpeedValue(scrollEvent.getDeltaX()/5);
 
         updateView();
@@ -383,9 +374,9 @@ public class CanvasController {
     }
 
     /**
-     * Checks if gridlines should be displayed
+     * Checks if grid lines should be displayed
      */
-    private void checkIfSholdStillDrawGrid() {
+    private void checkIfShouldStillDrawGrid() {
         gridLines = cellSize > 5;
     }
 
@@ -396,11 +387,6 @@ public class CanvasController {
      * Keeps the cell size within it´s boundaries.
      */
     private void clampCellSize() {
-        /*
-        double limit = (canvas.getWidth() > canvas.getHeight()) ? canvas.getWidth() : canvas.getHeight();
-        if(cellSize * boardSize < limit){
-            cellSize = limit / boardSize;
-        }*/
 
         if(cellSize*boardWidth < canvas.getWidth()){
             cellSize = canvas.getWidth()/boardWidth;
@@ -429,7 +415,7 @@ public class CanvasController {
      * @param max maximum value
      * @return val in range of min and max
      */
-    public int clamp(int val, int min, int max) {
+    private int clamp(int val, int min, int max) {
         return Math.max(min, Math.min(max, val));
     }
     //endregion
@@ -468,18 +454,22 @@ public class CanvasController {
      * Renders everything on the canvas
      */
     public void renderCanvas() {
+
         renderLife();
+
         if(importing)
             renderImport();
         if(gridLines)
             if(userWantsGridLines)
-                renderGridLines();
+            renderGridLines();
     }
+
     /**
      * Renders the current state of the game of life simulation to the canvas.
      * Sets background color and cell color.
      */
-    public void renderLife() {
+    private void renderLife() {
+
         gc.setFill(backgroundColor);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
@@ -496,8 +486,10 @@ public class CanvasController {
     /**
      * Draws the grid lines on the canvas
      */
-    public void renderGridLines(){
+    private void renderGridLines(){
+
         gc.setStroke(ghostColor);
+
         for(int i = currViewMinX; i < currViewMaxX; i++){
             gc.strokeLine(i*cellSize - boardOffsetX - cellSize*cellSpacing/2, 0, i*cellSize - boardOffsetX - cellSize*cellSpacing/2, canvas.getHeight());
         }
@@ -509,16 +501,14 @@ public class CanvasController {
     /**
      * Renders the imported pattern on the canvas around the mouse position
      */
-    public void renderImport() {
+    private void renderImport() {
 
         gc.setFill(ghostColor);
+
         for (int x = 0; x < importPattern.length; x++) {
             for (int y = 0; y < importPattern[x].length; y++) {
                 if (importPattern[x][y] == true) {
-
-                    //drawGhost(x + (int) (currMousePosX / cellSize) - importPattern.length / 2 - boardOffsetX, y + (int) (currMousePosY / cellSize) - importPattern[x].length / 2 - boardOffsetY);
                     drawCell(getGridPosX(currMousePosX)-importPattern.length / 2 + x, getGridPosY(currMousePosY) - importPattern[x].length/2 + y);
-
                 }
             }
         }
@@ -532,8 +522,6 @@ public class CanvasController {
         for (int x = 0; x < importPattern.length; x++) {
             for (int y = 0; y < importPattern[x].length; y++) {
                 if (importPattern[x][y] == true) {
-
-                    //drawGhost(x + (int) (currMousePosX / cellSize) - importPattern.length / 2 - boardOffsetX, y + (int) (currMousePosY / cellSize) - importPattern[x].length / 2 - boardOffsetY);
                     int posX = getGridPosX(currMousePosX)-importPattern.length / 2 + x;
 
                     if(posX >= 0 && posX < boardWidth) {
@@ -542,7 +530,6 @@ public class CanvasController {
                         if(posY >= 0 && posY < boardHeight)
                             gol.setCellAlive(posX, posY);
                     }
-
                 }
             }
         }
@@ -565,9 +552,6 @@ public class CanvasController {
      */
     private void drawCell(int x, int y) {
         gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize - cellSize * cellSpacing, cellSize - cellSize * cellSpacing);
-
-        // TBD ....Check cycle time for different algo.
-        //gc.fillRect(x * cellSize - boardOffsetX, y * cellSize - boardOffsetY, cellSize * 0.9, cellSize * 0.9);
     }
 
     /**
@@ -577,45 +561,9 @@ public class CanvasController {
      * @param x2 The first coordinate of the end cell
      * @param y2 The second coordinate of the end cell
      */
-    public void drawLine(int x, int y, int x2, int y2) {
+    private void drawLine(int x, int y, int x2, int y2) {
 
-
-        //region Bresenham Algorithm
-        /*
-        int w = x2 - x;
-        int h = y2 - y;
-        int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
-        if (w < 0) dx1 = -1;
-        else if (w > 0) dx1 = 1;
-        if (h < 0) dy1 = -1;
-        else if (h > 0) dy1 = 1;
-        if (w < 0) dx2 = -1;
-        else if (w > 0) dx2 = 1;
-        int longest = Math.abs(w);
-        int shortest = Math.abs(h);
-        if (!(longest > shortest)) {
-            longest = Math.abs(h);
-            shortest = Math.abs(w);
-            if (h < 0) dy2 = -1;
-            else if (h > 0) dy2 = 1;
-            dx2 = 0;
-        }
-        int numerator = longest >> 1;
-        for (int i = 0; i <= longest; i++) {
-                setAlive(x, y);
-                numerator += shortest;
-            if (!(numerator < longest)) {
-                numerator -= longest;
-                x += dx1;
-                y += dy1;
-            } else {
-                x += dx2;
-                y += dy2;
-            }
-        }*/
-        //endregion
-
-        int width = x2 -x;
+        int width = x2 - x;
         int height = y2 - y;
 
         int lineLength = Math.abs((Math.abs(width) < Math.abs(height))? height : width);
@@ -623,14 +571,15 @@ public class CanvasController {
         for(int i = 0; i < lineLength; i++){
             gol.setCellAlive(x + i * width / lineLength, y + i * height / lineLength);
         }
-
     }
 
     /**
      * Displays a window that tells the user that the current import pattern is bigger than the current GoL universe
      */
     private void displayImportTooBigDialog() {
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
         alert.setTitle("Pattern too big");
         alert.setHeaderText("The pattern you imported seems to bee bigger than the current game of life universe.");
         alert.setContentText("Do you want to mage the universe bigger?");
@@ -642,6 +591,7 @@ public class CanvasController {
         alert.getButtonTypes().setAll(yesBtn, noBtn, cancelBtn);
 
         Optional<ButtonType> result = alert.showAndWait();
+
         if (result.get() == yesBtn){
             resizeGridToImport();
         } else {
@@ -650,10 +600,11 @@ public class CanvasController {
     }
 
     /**
-     * Resizes the GoL grid to fit the import
+     * Resize the GoL grid to fit the import
      */
     private void resizeGridToImport() {
-        resizeGrid((int)(importPattern.length*1.2), (int)(importPattern[0].length*1.2));
+
+        resizeGrid((int)(importPattern.length * 1.2), (int)(importPattern[0].length * 1.2));
     }
 
     /**
@@ -662,6 +613,7 @@ public class CanvasController {
      * @param height the nwe height
      */
     private void resizeGrid(int width, int height) {
+
         int minWidth = (width < grid.length)? width : grid.length;
         int minHeight = (height < grid[0].length) ? height : grid[0].length;
 
@@ -673,55 +625,53 @@ public class CanvasController {
             }
         }
 
-
         gol.setGrid(temp);
         gol.createNeighboursGrid();
         gol.updateRuleGrid();
         grid = gol.getGrid();
         boardWidth = (short)grid.length;
         boardHeight = (short)grid[0].length;
-
     }
 
-
-    //region Animation-controlls
+    //region Animation control
 
     /**
-     * Starts the animation
+     * Start animation
      */
     public void startAnimation() {
+
         animationTimer.start();
         running = true;
     }
 
     /**
-     * Stops the animation
+     * Stop animation
      */
     public void stopAnimation() {
+
         animationTimer.stop();
         running = false;
     }
-
     //endregion
 
     //region Setters
-
-
     public void setCellColor(Color cellColor) {
+
         this.cellColor = cellColor;
         calculateGhostColor();
     }
 
     public void setBackgroundColor(Color backgroundColor) {
+
         this.backgroundColor = backgroundColor;
         calculateGhostColor();
     }
-
 
     /**
      * Calculates the color just in between the background color and the cell color
      */
     private void calculateGhostColor() {
+
         double blue = (cellColor.getBlue() + backgroundColor.getBlue()) / 2;
         double red = (cellColor.getRed() + backgroundColor.getRed()) / 2;
         double green = (cellColor.getGreen() + backgroundColor.getGreen()) / 2;
@@ -730,9 +680,10 @@ public class CanvasController {
     }
 
     /**
-     * Gives the minimum cellsize to the zoom slider
+     * Gives the minimum cell size to the zoom slider
      */
     private void calculateMinCellSize() {
+
         double minCellSize = (canvas.getWidth() / boardWidth > canvas.getHeight() / boardHeight) ? canvas.getWidth() / boardHeight : canvas.getHeight() / boardHeight;
         masterController.toolController.setMinZoom(minCellSize);
     }
@@ -742,14 +693,16 @@ public class CanvasController {
      * @param newCellSize the new cell size
      */
     public void setCellSize(double newCellSize) {
-        double ratio1 = (boardOffsetX + canvas.getWidth()/2) / cellSize;
-        double ratio2 = (boardOffsetY + canvas.getHeight()/2) / cellSize;
 
-        // System.out.println(newCellSize);
+        double ratio1 = (boardOffsetX + canvas.getWidth() / 2) / cellSize;
+        double ratio2 = (boardOffsetY + canvas.getHeight() / 2) / cellSize;
+
         cellSize = newCellSize;
         clampCellSize();
-        boardOffsetX = (int) (cellSize * ratio1 - canvas.getWidth()/2);
-        boardOffsetY = (int) (cellSize * ratio2 - canvas.getHeight()/2);
+
+        boardOffsetX = (int) (cellSize * ratio1 - canvas.getWidth() / 2);
+        boardOffsetY = (int) (cellSize * ratio2 - canvas.getHeight() / 2);
+
         clampView();
 
         updateView();
@@ -762,7 +715,9 @@ public class CanvasController {
      * @param importPattern the pattern that is imported from a file
      */
     public void setImportPattern(boolean[][] importPattern) {
+
         this.importPattern = importPattern;
+
         if(importPattern != null) {
             importing = true;
             if(importPattern.length > boardWidth || importPattern[0].length > boardHeight){
@@ -774,32 +729,27 @@ public class CanvasController {
         }
     }
 
-
-
     public void setFrameDelay(int frameDelay) {
+
         if(frameDelay < 17) // 60 fps
             this.frameDelay = 0;
         else
             this.frameDelay = frameDelay;
-
-
-     //   System.out.println(frameDelay);
     }
 
     public void setRule(String ruleText){
+
         gol.setRule(ruleText);
     }
 
-
-
-
     //endregion
 
-    // region s305080 tillegsoppgaver
+    // region s305080 extra task
     private void saveToGif() throws IOException {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose save directory");
+
         String path = fileChooser.showSaveDialog(masterController.stage).toString() + ".gif";
 
         int width = (int) canvas.getWidth();
@@ -808,39 +758,43 @@ public class CanvasController {
         int milliSeconds = frameDelay;
 
         boolean[][] gridCopy = new boolean[grid.length][grid[0].length];
+
         for(int i = 0; i < grid.length; i++){
             gridCopy[i] = grid[i].clone();
         }
-        GIFWriter gwriter = new GIFWriter(width, height, path, milliSeconds);
+
+        GIFWriter gifWriter = new GIFWriter(width, height, path, milliSeconds);
 
         int gifWidth = currViewMaxX - currViewMinX;
         int gifHeight = currViewMaxY - currViewMinY;
 
         for(int i = 0; i < 10; i++){
-            gwriter.fillRect(0, width - 1, 0, height - 1, new java.awt.Color((int)(255*backgroundColor.getRed()), (int)(255*backgroundColor.getGreen()), (int)(255*backgroundColor.getBlue())));
+            gifWriter.fillRect(0, width - 1, 0, height - 1, new java.awt.Color((int)(255 * backgroundColor.getRed()), (int)(255 * backgroundColor.getGreen()), (int)(255 * backgroundColor.getBlue())));
             for(int x = 0; x < gifWidth-1; x++){
                 for(int y = 0; y < gifHeight-1; y++){
                     if(grid[x + currViewMinX][y + currViewMinY]){
-                        gwriter.fillRect(x*width/gifWidth,(x+1)*width/gifWidth,y*height/gifHeight,(y+1)*height/gifHeight, new java.awt.Color((int)(255*cellColor.getRed()), (int)(255*cellColor.getGreen()), (int)(255*cellColor.getBlue())));
+                        gifWriter.fillRect(x * width / gifWidth, (x + 1) * width / gifWidth, y * height/ gifHeight, (y + 1) * height / gifHeight, new java.awt.Color((int)(255 * cellColor.getRed()), (int)(255 * cellColor.getGreen()), (int)(255 * cellColor.getBlue())));
                     }
                 }
             }
+
             gol.nextGeneration();
-
-            gwriter.insertAndProceed();
-
+            gifWriter.insertAndProceed();
         }
-        gwriter.close();
+
+        gifWriter.close();
+
         for(int i = 0; i < grid.length; i++){
             grid[i] = gridCopy[i];
         }
+
         System.out.println("Done");
     }
 
     void saveToFile(){
+
         ToFile.writeToFile(grid, getBoundingBox(), masterController.stage);
     }
-
 
     //endregion
 
@@ -849,7 +803,9 @@ public class CanvasController {
      * @return
      */
     private int[] getBoundingBox() {
+
         int[] boundingBox = new int[4]; // minrow maxrow mincolumn maxcolumn boundingBox[0] = board.length;
+
         boundingBox[0] = grid.length;
         boundingBox[1] = 0;
         boundingBox[2] = grid[0].length;

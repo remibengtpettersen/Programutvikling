@@ -22,7 +22,6 @@ public class MenuController {
 
     private MasterController masterController;
 
-
     @FXML
     private MenuItem openBtn;
 
@@ -31,25 +30,29 @@ public class MenuController {
      * @param masterController reference to the masterController
      */
     public void initialize(MasterController masterController) {
-        this.masterController = masterController;
 
+        this.masterController = masterController;
     }
 
     /**
      * Opens the fileChooser so the user can choose a pattern to import
      */
     public void openFileChooser(){
+
         masterController.choosePattern();
     }
     public void onAbout(ActionEvent actionEvent) {
+
         System.out.println("About clicked");
     }
 
     public void setConwayRule(ActionEvent actionEvent) {
+
         masterController.canvasController.setRule("classic");
     }
 
     public void setHighLifeRule(ActionEvent actionEvent) {
+
         masterController.canvasController.setRule("highlife");
     }
 
@@ -60,6 +63,7 @@ public class MenuController {
     public void setCustomRule(ActionEvent actionEvent) {
 
         TextInputDialog dialog = new TextInputDialog(masterController.canvasController.gol.getRule().toString());
+
         dialog.setTitle("Custom rule");
         dialog.setHeaderText("Enter custom rule code");
         dialog.setContentText("B: Neighbours needed for birth\nS: Neighbours needed for survival\n" +
@@ -73,9 +77,6 @@ public class MenuController {
 
             masterController.canvasController.setRule(result.get());
         }
-
-        //Lambda
-        //result.ifPresent(ruleCode -> System.out.println("Your choice: " + ruleCode));
     }
 
     public void setLWDRule(ActionEvent actionEvent) {

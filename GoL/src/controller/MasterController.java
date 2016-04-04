@@ -31,7 +31,7 @@ public class MasterController {
     /**
      *
      * @param stage the primary stage
-     * @param root the borderpane with the mainView
+     * @param root the border pane with the mainView
      * @throws IOException
      */
     public void initialize(Stage stage, BorderPane root) throws IOException {
@@ -55,7 +55,6 @@ public class MasterController {
         patternChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GoL pattern files", "*.rle", "*.lif", "*.life", "*.cells"));
 
         String patternDir = "../../Patterns";
-       // patternChooser.setInitialDirectory(new File(patternDir)); virket ikke for meg
 
         bindCanvas();
     }
@@ -64,18 +63,19 @@ public class MasterController {
      * Binds the canvas size to the scene size
      */
     private void bindCanvas(){
-        canvasController.getCanvas().widthProperty().bind(
-                scene.widthProperty());
-        canvasController.getCanvas().heightProperty().bind(
-                scene.heightProperty().subtract(70));
+
+        canvasController.getCanvas().widthProperty().bind(scene.widthProperty());
+        canvasController.getCanvas().heightProperty().bind(scene.heightProperty().subtract(70));
     }
 
     /**
-     * opens the filechooser so the user can choose a pattern file to import
+     * opens the file chooser so the user can choose a pattern file to import
      */
     public void choosePattern(){
+
         File file = patternChooser.showOpenDialog(stage);
         if(file != null) {
+
             try {
                 canvasController.setImportPattern(PatternParser.read(file));
             }

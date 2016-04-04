@@ -18,7 +18,7 @@ public class Configuration {
     private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 
     private InputStream inputStream;
-    private String propertiesFileName = "../GoL/resources/config.properties";
+    private String propertiesFileName = "./GoL/resources/config.properties";
     private Properties properties = new Properties();
     private File file = new File(propertiesFileName);
     private String windowWidth;
