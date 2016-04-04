@@ -1,17 +1,26 @@
 package model.rules;
 
 /**
+ * A rule similar to the classic Conway rule, but will also allow cells to be born if they have 6 neighbours. Rulestring: B36/S23
  * Created by Andreas on 16.03.2016.
  */
 public class HighLifeRule extends Rule2D {
 
+    /**
+     * Constructor for the High Life rule
+     * @param grid reference to the cell grid to be evolved
+     * @param neighbours reference to the neighbours grid used during evolution
+     */
     public HighLifeRule(boolean[][] grid, byte[][] neighbours) {
+
         super(grid, neighbours);
+
+        ruleText = "B36/S23";
     }
 
     @Override
     public void evolve() {
-        // Double for loop to iterate through the grid.
+
         for(int x = 0; x < grid.length; x++){
             for(int y = 0; y < grid[x].length; y++){
 
@@ -20,14 +29,12 @@ public class HighLifeRule extends Rule2D {
                     grid[x][y] = true;
 
                 // if a cell is dead and has 6 neighbours, it will become alive. This is highLife's only difference
-                else if ((neighbours[x][y] == 6) && grid[x][y] == false)
+                else if ((neighbours[x][y] == 6) && !grid[x][y])
                     grid[x][y] = true;
 
-                    // If a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
+                    // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
                 else if (neighbours[x][y] != 2)
                     grid[x][y] = false;
-
-
 
                 neighbours[x][y] = 0;
             }
