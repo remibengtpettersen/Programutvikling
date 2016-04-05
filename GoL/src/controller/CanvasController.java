@@ -534,6 +534,9 @@ public class CanvasController {
             }
         }
         importing = false;
+
+        if(!running || frameDelay > 0)
+            renderCanvas();
     }
 
     /**
