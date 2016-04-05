@@ -89,3 +89,6 @@ Refactored the rule classes, especially CustomRule. All 2D-rules now have a rule
 
 160404 09:24
 Refactored and updated formatting for all classes in controller package.
+
+160405 12:47
+Created test classes for Custom rule, HighLife rule, Configuration, PatternParser and GameOfLife2D. 
