@@ -5,6 +5,7 @@ import model.rules.CustomRule;
 import model.rules.Rule2D;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import tools.Utilities;
 
@@ -40,12 +41,6 @@ public class CustomRuleTest {
 
         // Constructs classicRule
         rule = new CustomRule(grid, neighbours, "b3/s23");
-    }
-
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 
     /**

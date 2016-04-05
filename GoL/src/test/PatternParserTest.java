@@ -1,10 +1,7 @@
 package test;
 
 import model.PatternParser;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import tools.Utilities;
 
 import java.io.File;
@@ -17,27 +14,27 @@ import static org.junit.Assert.*;
  */
 public class PatternParserTest {
 
-    private boolean [][] plainText;
-    private boolean [][] rle;
-    private boolean [][] life05;
-    private boolean [][] life06;
+    private static boolean [][] plainText;
+    private static boolean [][] rle;
+    private static boolean [][] life05;
+    private static boolean [][] life06;
 
-    private boolean [][] life06URL;
+    private static boolean [][] life06URL;
 
-    private String gliderUrl = "http://www.conwaylife.com/patterns/glider_106.lif";
+    private static String gliderUrl = "http://www.conwaylife.com/patterns/glider_106.lif";
 
-    private boolean [][] threeEnginecordershiprake05Pattern;
-    private boolean [][] threeEnginecordershiprake06Pattern;
+    private static boolean [][] threeEnginecordershiprake05Pattern;
+    private static boolean [][] threeEnginecordershiprake06Pattern;
 
-    private boolean [][] glider;
+    private static boolean [][] glider;
 
 
     /**
      * Sets up the blueprint for the glider in an array. Then loads the RLE, PlainText, Life 1.05 and Life 1.06 from files.
      * @throws IOException Incompatible file format or missing file.
      */
-    @Before
-    public void setUp() throws IOException {
+    @BeforeClass
+    public static void setUp() throws IOException {
 
         // This the blueprint of a glider
         glider = new boolean[][]{

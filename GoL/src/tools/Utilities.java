@@ -16,4 +16,14 @@ public class Utilities {
             System.out.println();
         }
     }
+
+    public static void print2DArray(byte[][] grid){
+        for(int y = 0; y < grid[0].length; y++){
+            for(int x = 0; x < grid.length; x++){
+                System.out.print(grid[x][y]);
+
+            }
+            System.out.println();
+        }
+    }
 }

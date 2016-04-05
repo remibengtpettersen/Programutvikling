@@ -4,6 +4,7 @@ import model.rules.ClassicRule;
 import model.rules.Rule2D;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import tools.Utilities;
 

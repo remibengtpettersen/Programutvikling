@@ -36,13 +36,6 @@ public class GameOfLife2D extends GameOfLife{
     private void createGameBoard(int width, int height) {
         grid = new boolean[width][height];
         neighbours = new byte[width][height];
-
-        grid[3][1] = true;
-        grid[3][2] = true;
-        grid[3][3] = true;
-        grid[2][3] = true;
-        grid[1][2] = true;
-
     }
 
     //endregion

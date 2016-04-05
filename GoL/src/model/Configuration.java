@@ -18,9 +18,9 @@ public class Configuration {
     private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 
     private InputStream inputStream;
-    private String propertiesFileName = "./GoL/resources/config.properties";
+    private String propertiesFileName;
     private Properties properties = new Properties();
-    private File file = new File(propertiesFileName);
+    private File file;
     private String windowWidth;
     private String windowHeight;
     private String gameSpeed;
@@ -35,14 +35,20 @@ public class Configuration {
     private String gameWidth;
     //endregion
 
-    public Configuration() {
+    public Configuration(String propertiesFileName) {
+        this.propertiesFileName = propertiesFileName;
         initialize();
+        getConfigurationFromFile();
+        setConfiguration();
     }
 
     /**
      * Creates a file if it is not there
      */
     private void initialize() {
+
+        file = new File(propertiesFileName);
+
         if (!file.exists()) {
             createFile();
             generateConfigurationFileContent();
