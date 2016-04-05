@@ -10,14 +10,16 @@ import tools.Utilities;
 import static org.junit.Assert.*;
 
 /**
- * Created by remibengtpettersen on 12.02.2016.
  */
 public class ClassicRuleTest {
 
     private Rule2D rule;
 
+    /**
+     * Creates a grid to be evolved and a neighbour grid that is pre populated with neighbours count. The neighbour aggregator is tested elsewhere.
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
 
         // Creates a mock grid to be tested
         boolean[][] grid = new boolean[][]{
@@ -39,13 +41,11 @@ public class ClassicRuleTest {
         rule = new ClassicRule(grid, neighbours);
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-    }
-    
+    /**
+     * Runs the evolve method once and checks if the array has evolved correctly
+     */
     @Test
-    public void testEvolve() throws Exception {
+    public void testEvolve(){
 
         rule.evolve();
 
