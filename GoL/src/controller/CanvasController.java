@@ -628,9 +628,7 @@ public class CanvasController {
         boolean[][] temp = new boolean[width][height];
 
         for (int x = 0; x < minWidth; x++) {
-            for (int y = 0; y < minHeight; y++) {
-                temp[x][y] = grid[x][y];
-            }
+            System.arraycopy(grid[x], 0, temp[x], 0, minHeight);
         }
 
         gol.setGrid(temp);

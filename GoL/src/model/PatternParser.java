@@ -48,7 +48,7 @@ public class PatternParser {
         return null;
     }
 
-    static public boolean[][] read(String pattern) throws IOException {
+    static public boolean[][] readUrl(String pattern) throws IOException {
 
         lineList = new ArrayList<String>();
         URL url = new URL(pattern);
@@ -349,7 +349,6 @@ public class PatternParser {
                 patternWidth = lineList.get(x).length();
             }
         }
-        System.out.println(patternHeight +" "+ patternWidth);
         patternArray = new boolean[patternWidth][patternHeight];
 
         for(int y = 0; y < patternHeight; y++){
