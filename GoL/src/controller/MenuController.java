@@ -11,6 +11,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import model.rules.ClassicRule;
+import s305080.TheStrip;
 
 import java.io.File;
 import java.util.Optional;
@@ -100,4 +101,8 @@ public class MenuController {
     }
 
     public void clearGrid(ActionEvent actionEvent) { masterController.canvasController.clearGrid(); }
+
+    public void showTheStrip(){
+        masterController.canvasController.showTheStrip();
+    }
 }

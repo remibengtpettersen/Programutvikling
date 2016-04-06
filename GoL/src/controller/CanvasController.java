@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import lieng.GIFWriter;
 import model.GameOfLife2D;
+import s305080.TheStrip;
 import s305080.ToFile;
 
 
@@ -94,11 +95,14 @@ public class CanvasController {
         grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
 
+        clampCellSize();
+        clampView();
         updateView();
         initializeListeners();
         initializeAnimation();
         checkIfShouldStillDrawGrid();
         startAnimation();
+
     }
 
     /**
@@ -169,7 +173,7 @@ public class CanvasController {
      */
     private void initializeListeners() {
 
-        canvas.setOnMouseClicked(this::mouseClick);
+        canvas.setOnMouseReleased(this::mouseClick);
         canvas.setOnMouseDragged(this::mouseDrag);
         canvas.setOnMouseMoved(this::mouseTrace);
         canvas.setOnScroll(this::mouseScroll);
@@ -601,7 +605,10 @@ public class CanvasController {
 
         if (result.get() == yesBtn) {
             resizeGridToImport();
-        } else {
+        }else if(result.get() == noBtn){
+
+        }
+        else {
             importing = false;
         }
     }
@@ -800,8 +807,11 @@ public class CanvasController {
     }
 
     void saveToFile() {
-
         ToFile.writeToFile(grid, getBoundingBox(), masterController.stage);
+    }
+
+    void showTheStrip() {
+        new TheStrip().display(grid, masterController);
     }
 
     //endregion
