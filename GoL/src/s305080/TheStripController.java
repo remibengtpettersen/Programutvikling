@@ -1,5 +1,6 @@
 package s305080;
 
+import controller.MasterController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,14 +12,21 @@ import model.GameOfLife2D;
  * Created by Truls on 06/04/16.
  */
 public class TheStripController {
+
     private boolean[][] grid;
     double cellSize;
+
+    int minX;
+    int maxX;
+    int minY;
+    int maxY;
 
     @FXML
     Canvas canvas;
     GraphicsContext gc;
 
     private GameOfLife2D gol;
+    private MasterController master;
 
     public TheStripController(){
     //    gc = canvas.getGraphicsContext2D();
@@ -26,19 +34,26 @@ public class TheStripController {
     }
 
     public void updateStrip(){
+
+        minX = master.canvasController.getMinX();
+        maxX = master.canvasController.getCurrViewMaxX();
+        minY = master.canvasController.getCurrViewMinY();
+        maxY = master.canvasController.getCurrViewMaxY();
+
         gol.setGrid(copy(grid));
         gol.updateRuleGrid();
         gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
-        cellSize = canvas.getHeight()/grid[0].length;
-        for(int i = 0; i < canvas.getWidth(); i += canvas.getWidth()/20){
-            for(int x = 0; x < grid.length; x++){
-                for(int y = 0; y < grid[x].length; y++){
+        cellSize = canvas.getHeight()/(maxY - minY);
+        for(int i = 0; i < canvas.getWidth(); i += (maxX - minX) * cellSize){
+            for(int x = minX; x < maxX; x++){
+                for(int y = minY; y < maxY; y++){
                     if(gol.getGrid()[x][y]){
-                        gc.fillRect(i + cellSize * x, cellSize * y, cellSize, cellSize);
+                        gc.fillRect(i + cellSize * x - minX * cellSize, cellSize * y - minY * cellSize, cellSize * 0.9, cellSize * 0.9);
                     }
                 }
             }
             gol.nextGeneration();
+            gc.strokeLine(i,0,i,canvas.getHeight());
         }
     }
 
@@ -63,5 +78,9 @@ public class TheStripController {
             updateStrip();
         });
 
+    }
+
+    public void setMaster(MasterController master) {
+        this.master = master;
     }
 }

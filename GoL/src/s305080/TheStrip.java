@@ -16,6 +16,7 @@ public class TheStrip {
 
     Parent root;
     TheStripController theStripController;
+
     public void display(boolean[][] grid, MasterController masterController){
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("../s305080/TheStrip.fxml"));
@@ -24,6 +25,7 @@ public class TheStrip {
 
             theStripController = loader.getController();
             theStripController.setGrid(grid);
+            theStripController.setMaster(masterController);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,7 +36,7 @@ public class TheStrip {
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
         stage.show();
-
+        stage.setMaxHeight(440);
         bindCanvasToStage(stage);
 
         stage.setX(masterController.stage.getX()+masterController.stage.getWidth());

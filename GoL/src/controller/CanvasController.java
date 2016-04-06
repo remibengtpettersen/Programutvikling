@@ -849,4 +849,20 @@ public class CanvasController {
         }
         return boundingBox;
     }
+
+    public int getMinX() {
+        return currViewMinX;
+    }
+
+    public int getCurrViewMaxX() {
+        return currViewMaxX;
+    }
+
+    public int getCurrViewMinY() {
+        return currViewMinY;
+    }
+
+    public int getCurrViewMaxY() {
+        return currViewMaxY;
+    }
 }
