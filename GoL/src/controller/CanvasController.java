@@ -158,7 +158,9 @@ public class CanvasController {
                     renderCanvas();
 
                     timer = now / 1000000;
+
                     masterController.toolController.giveCellCount(gol.getCellCount());
+                    masterController.updateStatWindow(gol);
                 }
             }
         };

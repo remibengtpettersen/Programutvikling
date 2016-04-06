@@ -2,17 +2,9 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import model.rules.ClassicRule;
 
-import java.io.File;
 import java.util.Optional;
 
 /**
@@ -100,4 +92,9 @@ public class MenuController {
     }
 
     public void clearGrid(ActionEvent actionEvent) { masterController.canvasController.clearGrid(); }
+
+    public void openStatWindow(ActionEvent actionEvent) {
+
+        masterController.openStatWindow();
+    }
 }

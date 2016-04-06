@@ -9,7 +9,8 @@ public abstract class GameOfLife {
 
     protected Rule rule;
 
-    public int cellCount = 0;
+    protected int cellCount = 0;
+    protected int iterationCount = 0;
 
     /**
      * Evolves the grid one generation
@@ -17,6 +18,7 @@ public abstract class GameOfLife {
     public void nextGeneration(){
         aggregateNeighbours();
         rule.evolve();
+        iterationCount++;
     };
 
     /**
@@ -27,7 +29,9 @@ public abstract class GameOfLife {
     /**
      * Should be used to clear the grid of live cells
      */
-    public abstract void clearGrid();
+    public void clearGrid(){
+        iterationCount = 0;
+    };
 
     /**
      * Should be used to set a spesific rule
@@ -42,6 +46,11 @@ public abstract class GameOfLife {
     public int getCellCount() {
         return cellCount;
     }
+
+    /**
+     * @return the number of generations iterated since last clear
+     */
+    public int getIterationCount() { return iterationCount; }
 
     /**
      * Returns the Rule

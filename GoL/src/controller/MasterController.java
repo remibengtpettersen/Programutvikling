@@ -1,14 +1,15 @@
 package controller;
 
 import javafx.fxml.FXML;
-
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Configuration;
-import model.PatternParser;
+import model.GameOfLife;
 import model.PatternFormatException;
+import model.PatternParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class MasterController {
     @FXML public CanvasController canvasController;
     @FXML public MenuController menuController;
     @FXML public ToolController toolController;
+    @FXML public StatController statController;
 
     private FileChooser patternChooser = new FileChooser();
 
@@ -84,6 +86,34 @@ public class MasterController {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void openStatWindow() {
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("../view/StatView.fxml"));
+
+        try {
+            Stage statStage = new Stage();
+            stage.setTitle("Statistics");
+            statStage.setScene(loader.load());
+            statController = loader.getController();
+            statController.updateStatistics(canvasController.gol);
+            statStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load FXML documents");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("");
+        }
+    }
+
+    public void updateStatWindow(GameOfLife gol) {
+
+        if(statController != null && gol != null)
+            statController.updateStatistics(gol);
     }
 }
 

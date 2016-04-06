@@ -92,3 +92,6 @@ Refactored and updated formatting for all classes in controller package.
 
 160405 12:47
 Created test classes for Custom rule, HighLife rule, Configuration, PatternParser and GameOfLife2D. 
+
+160406 22:38
+Implemented simple statistics. The "Show history" button in "Stats", will now open a Linechart which shows population count and population growth

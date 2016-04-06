@@ -3,7 +3,6 @@ package model;
 import model.rules.ClassicRule;
 import model.rules.CustomRule;
 import model.rules.HighLifeRule;
-import model.rules.Rule;
 
 import java.util.Arrays;
 
@@ -95,6 +94,8 @@ public class GameOfLife2D extends GameOfLife{
 
     @Override
     public void clearGrid(){
+
+        super.clearGrid();
 
         for(int i = 0; i < grid.length; i++){
             Arrays.fill(grid[i], false);
