@@ -258,6 +258,7 @@ public class PatternParser {
         patternHeight = Integer.parseInt(patternMatcher.group(1));
         patternWidth = Integer.parseInt(patternMatcher.group(2));
 
+
         patternArray = new boolean[patternHeight][patternWidth];
 
         lineList.remove(FIRST_LINE);

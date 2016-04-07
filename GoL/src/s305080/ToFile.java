@@ -12,18 +12,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Created by Truls on 29/03/16.
  */
 public class ToFile {
 
-    static List <String> list;
+    private static List <String> list;
     private static int[] boundingBox;
     private static boolean[][] grid;
 
     public static void writeToFile(boolean[][] grid, int[] boundingBox, Stage stage){
 
+        if(boundingBox[0] > boundingBox[1]){
+            System.out.println("YOU SHALL NOT SAVE");
+            return; //throw exception
+        }
         ToFile.grid = grid;
         ToFile.boundingBox = boundingBox;
 
@@ -41,27 +46,74 @@ public class ToFile {
         if(file == null){
             return; //throw exception
         }
-//      writeRLE(file);
-        writePlainText(file);
+      writeRLE(file);
+//    writePlainText(file);
     }
 
     private static void writeRLE(File file) {
 
         StringBuilder currentLine = new StringBuilder();
 
-        currentLine.append("# x = "+grid.length+" y = "+grid[0].length+ "rule = s32/b3");
+        currentLine.append("x = "+(boundingBox[1]-boundingBox[0]+1)+", y = "+(boundingBox[3]-boundingBox[2]+1)+ ", rule = s32/b3");
 
         list.add(currentLine.toString());
 
+        currentLine = new StringBuilder();
         int counter = 0;
-        int lastBit;
-
+        boolean lastBit = false;
+        boolean firstInLine = true;
         for (int y = boundingBox[2]; y <= boundingBox[3]; y++) {
 
             for (int x = boundingBox[0]; x <= boundingBox[1]; x++) {
 
+             if(firstInLine){
+                    counter++;
+                    firstInLine = false;
+                }
+                else if(lastBit == grid[x][y]){
+                    counter ++;
+                    if (currentLine.length() > 40){
+                        list.add(currentLine.toString());
+                        currentLine = new StringBuilder();
+                    }
+                }
+                else{
+                    if (lastBit){
+                        currentLine.append((counter == 1) ? "" : counter).append("o");
+                    }
+                    else {
+                        currentLine.append((counter == 1) ? "" : counter).append("b");
+                    }
+                    counter = 1;
+                }
+                lastBit = grid[x][y];
+
             }
+
+            firstInLine = true;
+            if (lastBit){
+                currentLine.append((counter == 1) ? "" : counter).append("o");
+            }
+
+
+            currentLine.append("$");
+
+            counter = 0;
         }
+
+        currentLine.append("!");
+        list.add(currentLine.toString());
+
+        if(!file.toString().endsWith(".rle")){
+            file = new File(file.toString() + ".rle");
+        }
+
+        try {
+            Files.write(file.toPath(), list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static void writePlainText(File file) {
