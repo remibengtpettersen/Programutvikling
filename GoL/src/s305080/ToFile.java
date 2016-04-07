@@ -59,9 +59,7 @@ public class ToFile {
         for (int y = boundingBox[2]; y <= boundingBox[3]; y++) {
 
             for (int x = boundingBox[0]; x <= boundingBox[1]; x++) {
-                if(lastBit == grid[x][y]){
 
-                }
             }
         }
     }
