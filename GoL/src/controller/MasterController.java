@@ -71,7 +71,9 @@ public class MasterController {
      */
     public void choosePattern(){
 
+        canvasController.busy = true;
         File file = patternChooser.showOpenDialog(stage);
+        canvasController.busy = false;
         if(file != null) {
 
             try {

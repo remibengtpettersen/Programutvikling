@@ -55,6 +55,7 @@ public class CanvasController {
 
     private int frameDelay;
     private boolean running = true;
+    public boolean busy = false;
 
     // Is used to calculate the distance the mouse has traveled since last MouseDragEvent.
     private int currMousePosX;
@@ -158,11 +159,13 @@ public class CanvasController {
                 //To control game speed
                 if (now / 1000000 - timer > frameDelay) {
 
-                    gol.nextGeneration();
-                    renderCanvas();
+                    if(!busy) {
+                        gol.nextGeneration();
+                        renderCanvas();
 
-                    timer = now / 1000000;
-                    masterController.toolController.giveCellCount(gol.getCellCount());
+                        timer = now / 1000000;
+                        masterController.toolController.giveCellCount(gol.getCellCount());
+                    }
                 }
             }
         };
@@ -216,10 +219,10 @@ public class CanvasController {
             startAnimation();
         }
         if (code.equals("D")) {
-            stopAnimation();
+
             saveToFile();
             System.out.println(getBoundingBox()[0] + " " + getBoundingBox()[1] + " " + getBoundingBox()[2] + " " + getBoundingBox()[3] + " ");
-            startAnimation();
+
         }
     }
 
@@ -807,7 +810,9 @@ public class CanvasController {
     }
 
     void saveToFile() {
+        busy = true;
         ToFile.writeToFile(grid, getBoundingBox(), masterController.stage);
+        busy = false;
     }
 
     void showTheStrip() {
