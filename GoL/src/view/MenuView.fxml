@@ -14,7 +14,7 @@
     </Menu>
     <Menu text="File">
         <MenuItem fx:id="openBtn" text="Open" onAction="#openFileChooser"/>
-        <MenuItem text="Save"/>
+        <MenuItem text="Save - s305080" onAction="#saveFile"/>
     </Menu>
     <Menu text="Edit">
         <MenuItem text="Clear board" onAction="#clearGrid"/>

@@ -42,6 +42,10 @@ public class MenuController {
 
         masterController.choosePattern();
     }
+
+    public void saveFile(){
+        masterController.canvasController.saveToFile();
+    }
     public void onAbout(ActionEvent actionEvent) {
 
         System.out.println("About clicked");
