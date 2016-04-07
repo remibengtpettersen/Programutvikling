@@ -27,6 +27,6 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#save" text="Save" />
+      <Button fx:id="saveBtn" mnemonicParsing="false" text="Save" />
    </children>
 </VBox>

@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="14cae250-bc11-4f35-bee7-4c6ab9e65f4d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/resources/config.properties" afterPath="$PROJECT_DIR$/GoL/resources/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/MasterController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/.idea/workspace.xml" afterPath="$PROJECT_DIR$/GoL/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml" afterPath="$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/TheStrip.fxml" afterPath="$PROJECT_DIR$/GoL/src/s305080/TheStrip.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/TheStrip.java" afterPath="$PROJECT_DIR$/GoL/src/s305080/TheStrip.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" afterPath="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/s305080/TheStrip.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/s305080/TheStrip.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/ToFile.java" afterPath="$PROJECT_DIR$/GoL/src/s305080/ToFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/s305080/MetaData.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/s305080/MetaData.fxml" />
     </list>
     <ignored path="Programutvikling.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,7 +39,7 @@
           <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="242">
+                <state relative-caret-position="1200">
                   <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -69,8 +65,8 @@
           <file leaf-file-name="ToFile.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/GoL/src/s305080/ToFile.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="439">
-                  <caret line="70" column="33" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
+                <state relative-caret-position="326">
+                  <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -92,8 +88,8 @@
           <file leaf-file-name="MetaData.fxml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="390">
-                  <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+                <state relative-caret-position="435">
+                  <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
                   <folding />
                 </state>
               </provider>
@@ -105,7 +101,7 @@
           <file leaf-file-name="PatternParser.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/model/PatternParser.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="4699">
+                <state relative-caret-position="4935">
                   <caret line="338" column="0" selection-start-line="338" selection-start-column="0" selection-end-line="338" selection-end-column="0" />
                   <folding />
                 </state>
@@ -141,7 +137,7 @@
           <file leaf-file-name="TheStrip.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStrip.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="604">
+                <state relative-caret-position="765">
                   <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -153,7 +149,7 @@
           <file leaf-file-name="TheStripController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStripController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="574">
+                <state relative-caret-position="1320">
                   <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -179,7 +175,7 @@
           <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-71">
+                <state relative-caret-position="244">
                   <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
                   <folding />
                 </state>
@@ -225,8 +221,6 @@
         <option value="$PROJECT_DIR$/GoL/src/test/GameOfLife2DTest.java" />
         <option value="$PROJECT_DIR$/GoL/src/view/MenuView.fxml" />
         <option value="$PROJECT_DIR$/GoL/src/controller/MenuController.java" />
-        <option value="$PROJECT_DIR$/GoL/src/s305080/ToFile.java" />
-        <option value="$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml" />
         <option value="$PROJECT_DIR$/GoL/src/model/PatternParser.java" />
         <option value="$PROJECT_DIR$/GoL/src/s305080/TheStrip.java" />
         <option value="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" />
@@ -234,6 +228,8 @@
         <option value="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
         <option value="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
         <option value="$PROJECT_DIR$/GoL/resources/config.properties" />
+        <option value="$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml" />
+        <option value="$PROJECT_DIR$/GoL/src/s305080/ToFile.java" />
       </list>
     </option>
   </component>
@@ -273,6 +269,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -417,7 +414,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1019,6 +1015,8 @@
       <workItem from="1459967564742" duration="2534000" />
       <workItem from="1460009396135" duration="1258000" />
       <workItem from="1460011049403" duration="2125000" />
+      <workItem from="1460013307516" duration="855000" />
+      <workItem from="1460014624724" duration="87000" />
     </task>
     <servers />
   </component>
@@ -1055,36 +1053,36 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33064000" />
+    <option name="totallyTimeSpent" value="34006000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="186" y="23" width="1627" height="1121" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944608" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28377065" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1280757" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12744479" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39941692" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39941692" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944608" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28279883" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295302" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944608" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1104,15 +1102,16 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39941692" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33026585" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944608" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31292516" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28279883" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295302" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19865772" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12744479" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944608" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -1435,31 +1434,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/view/MenuView.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="73" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStripController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
+        <state relative-caret-position="1320">
           <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1469,7 +1446,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStrip.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="604">
+        <state relative-caret-position="765">
           <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1501,7 +1478,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/model/PatternParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4699">
+        <state relative-caret-position="4935">
           <caret line="338" column="0" selection-start-line="338" selection-start-column="0" selection-end-line="338" selection-end-column="0" />
           <folding />
         </state>
@@ -1509,7 +1486,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
+        <state relative-caret-position="1200">
           <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1531,7 +1508,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-71">
+        <state relative-caret-position="244">
           <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
           <folding />
         </state>
@@ -1545,10 +1522,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/view/MenuView.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="73" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/s305080/ToFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="70" column="33" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
+        <state relative-caret-position="326">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
           <folding />
         </state>
       </provider>

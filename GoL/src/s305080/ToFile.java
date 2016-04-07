@@ -19,10 +19,13 @@ import java.util.List;
 public class ToFile {
 
     static List <String> list;
+    private static int[] boundingBox;
+    private static boolean[][] grid;
 
     public static void writeToFile(boolean[][] grid, int[] boundingBox, Stage stage){
 
-
+        ToFile.grid = grid;
+        ToFile.boundingBox = boundingBox;
 
         list = new ArrayList<String>();
 
@@ -31,6 +34,39 @@ public class ToFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        FileChooser f = new FileChooser();
+
+        File file = f.showSaveDialog(stage);
+        if(file == null){
+            return; //throw exception
+        }
+//      writeRLE(file);
+        writePlainText(file);
+    }
+
+    private static void writeRLE(File file) {
+
+        StringBuilder currentLine = new StringBuilder();
+
+        currentLine.append("# x = "+grid.length+" y = "+grid[0].length+ "rule = s32/b3");
+
+        list.add(currentLine.toString());
+
+        int counter = 0;
+        int lastBit;
+
+        for (int y = boundingBox[2]; y <= boundingBox[3]; y++) {
+
+            for (int x = boundingBox[0]; x <= boundingBox[1]; x++) {
+                if(lastBit == grid[x][y]){
+
+                }
+            }
+        }
+    }
+
+    private static void writePlainText(File file) {
 
         StringBuilder currentLine = new StringBuilder();
 
@@ -48,12 +84,7 @@ public class ToFile {
             currentLine = new StringBuilder();
         }
 
-        FileChooser f = new FileChooser();
 
-        File file = f.showSaveDialog(stage);
-        if(file == null){
-            return; //throw exception
-        }
         if(!file.toString().endsWith(".cells")){
             file = new File(file.toString() + ".cells");
         }

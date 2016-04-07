@@ -23,9 +23,10 @@
       <ChoiceBox>
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Plain text"/>
+               <String fx:value="Plain text" />
             </FXCollections>
          </items>
       </ChoiceBox>
+      <Button fx:id="saveBtn" mnemonicParsing="false" text="Save" />
    </children>
 </VBox>
