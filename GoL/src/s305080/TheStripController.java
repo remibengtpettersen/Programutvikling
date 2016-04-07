@@ -4,8 +4,6 @@ import controller.MasterController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import model.GameOfLife2D;
 
 /**
@@ -35,14 +33,16 @@ public class TheStripController {
 
     public void updateStrip(){
 
-        minX = master.canvasController.getMinX();
+        minX = master.canvasController.getCurrViewMinX();
         maxX = master.canvasController.getCurrViewMaxX();
         minY = master.canvasController.getCurrViewMinY();
         maxY = master.canvasController.getCurrViewMaxY();
 
         gol.setGrid(copy(grid));
         gol.updateRuleGrid();
-        gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
+
+        clearCanvasAndSetColors();
+
         cellSize = canvas.getHeight()/(maxY - minY);
         for(int i = 0; i < canvas.getWidth(); i += (maxX - minX) * cellSize){
             for(int x = minX; x < maxX; x++){
@@ -55,6 +55,13 @@ public class TheStripController {
             gol.nextGeneration();
             gc.strokeLine(i,0,i,canvas.getHeight());
         }
+    }
+
+    private void clearCanvasAndSetColors() {
+        gc.setFill(master.canvasController.getBackgroundColor());
+        gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
+        gc.setFill(master.canvasController.getCellColor());
+        gc.setStroke(gc.getFill());
     }
 
     private boolean[][] copy(boolean[][] array) {
@@ -74,7 +81,7 @@ public class TheStripController {
         gol.setGrid(grid);
         gol.updateRuleGrid();
         cellSize = 150 / grid.length;
-        canvas.widthProperty().addListener(e -> {
+        canvas.heightProperty().addListener(e -> {
             updateStrip();
         });
 

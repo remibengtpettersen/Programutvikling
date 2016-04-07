@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="14cae250-bc11-4f35-bee7-4c6ab9e65f4d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/resources/config.properties" afterPath="$PROJECT_DIR$/GoL/resources/config.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/MasterController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/ToFile.java" afterPath="$PROJECT_DIR$/GoL/src/s305080/ToFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml" afterPath="$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/TheStrip.fxml" afterPath="$PROJECT_DIR$/GoL/src/s305080/TheStrip.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/TheStrip.java" afterPath="$PROJECT_DIR$/GoL/src/s305080/TheStrip.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" afterPath="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/s305080/TheStrip.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/s305080/TheStrip.fxml" />
     </list>
     <ignored path="Programutvikling.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,36 +37,40 @@
     <favorites_list name="Programutvikling" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.9">
+    <splitter split-orientation="horizontal" split-proportion="0.58394647">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="647">
-                  <caret line="224" column="0" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
+                <state relative-caret-position="242">
+                  <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
                   <folding>
                     <element signature="imports" expanded="true" />
+                    <element signature="e#25550#25551#0" expanded="true" />
+                    <element signature="e#25582#25583#0" expanded="true" />
+                    <element signature="e#25621#25622#0" expanded="true" />
+                    <element signature="e#25659#25660#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ToFile.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/GoL/src/s305080/ToFile.java">
+          <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/GoL/resources/config.properties">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="776">
-                  <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+                <state relative-caret-position="255">
+                  <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ToolController.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/GoL/src/controller/ToolController.java">
+          <file leaf-file-name="ToFile.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/GoL/src/s305080/ToFile.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+                <state relative-caret-position="439">
+                  <caret line="70" column="33" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
                   <folding />
                 </state>
               </provider>
@@ -69,34 +78,34 @@
           </file>
           <file leaf-file-name="MenuView.fxml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/view/MenuView.fxml">
-              <provider editor-type-id="JavaFX-Scene-Builder">
-                <state />
-              </provider>
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="465">
                   <caret line="31" column="73" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="73" />
                   <folding />
                 </state>
               </provider>
+              <provider editor-type-id="JavaFX-Scene-Builder">
+                <state />
+              </provider>
             </entry>
           </file>
           <file leaf-file-name="MetaData.fxml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml">
-              <provider editor-type-id="JavaFX-Scene-Builder">
-                <state />
-              </provider>
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="575">
-                  <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+                <state relative-caret-position="390">
+                  <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
                   <folding />
                 </state>
+              </provider>
+              <provider editor-type-id="JavaFX-Scene-Builder">
+                <state />
               </provider>
             </entry>
           </file>
           <file leaf-file-name="PatternParser.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/model/PatternParser.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="439">
+                <state relative-caret-position="4699">
                   <caret line="338" column="0" selection-start-line="338" selection-start-column="0" selection-end-line="338" selection-end-column="0" />
                   <folding />
                 </state>
@@ -105,35 +114,35 @@
           </file>
           <file leaf-file-name="MainView.fxml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/view/MainView.fxml">
-              <provider editor-type-id="JavaFX-Scene-Builder">
-                <state />
-              </provider>
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="150">
                   <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
                   <folding />
                 </state>
               </provider>
+              <provider editor-type-id="JavaFX-Scene-Builder">
+                <state />
+              </provider>
             </entry>
           </file>
           <file leaf-file-name="TheStrip.fxml" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStrip.fxml">
-              <provider editor-type-id="JavaFX-Scene-Builder">
-                <state />
-              </provider>
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+                <state relative-caret-position="135">
+                  <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
                   <folding />
                 </state>
+              </provider>
+              <provider editor-type-id="JavaFX-Scene-Builder">
+                <state />
               </provider>
             </entry>
           </file>
           <file leaf-file-name="TheStrip.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStrip.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="37" column="21" selection-start-line="20" selection-start-column="7" selection-end-line="37" selection-end-column="21" />
+                <state relative-caret-position="604">
+                  <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -144,12 +153,10 @@
           <file leaf-file-name="TheStripController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStripController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="660">
-                  <caret line="50" column="134" selection-start-line="50" selection-start-column="134" selection-end-line="50" selection-end-column="134" />
+                <state relative-caret-position="574">
+                  <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#2293#2294#0" expanded="true" />
-                    <element signature="e#2329#2330#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -172,8 +179,8 @@
           <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="614">
-                  <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+                <state relative-caret-position="-71">
+                  <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
@@ -218,15 +225,15 @@
         <option value="$PROJECT_DIR$/GoL/src/test/GameOfLife2DTest.java" />
         <option value="$PROJECT_DIR$/GoL/src/view/MenuView.fxml" />
         <option value="$PROJECT_DIR$/GoL/src/controller/MenuController.java" />
-        <option value="$PROJECT_DIR$/GoL/resources/config.properties" />
-        <option value="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" />
-        <option value="$PROJECT_DIR$/GoL/src/s305080/TheStrip.java" />
-        <option value="$PROJECT_DIR$/GoL/src/s305080/TheStrip.fxml" />
-        <option value="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
         <option value="$PROJECT_DIR$/GoL/src/s305080/ToFile.java" />
         <option value="$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml" />
         <option value="$PROJECT_DIR$/GoL/src/model/PatternParser.java" />
+        <option value="$PROJECT_DIR$/GoL/src/s305080/TheStrip.java" />
+        <option value="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" />
+        <option value="$PROJECT_DIR$/GoL/src/s305080/TheStrip.fxml" />
+        <option value="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
         <option value="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
+        <option value="$PROJECT_DIR$/GoL/resources/config.properties" />
       </list>
     </option>
   </component>
@@ -236,7 +243,7 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="137" />
+    <option name="x" value="186" />
     <option name="y" value="23" />
     <option name="width" value="1627" />
     <option name="height" value="1121" />
@@ -266,7 +273,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -410,6 +416,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -1011,6 +1018,7 @@
       <workItem from="1459949493660" duration="6665000" />
       <workItem from="1459967564742" duration="2534000" />
       <workItem from="1460009396135" duration="1258000" />
+      <workItem from="1460011049403" duration="2125000" />
     </task>
     <servers />
   </component>
@@ -1047,11 +1055,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30939000" />
+    <option name="totallyTimeSpent" value="33064000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="137" y="23" width="1627" height="1121" extended-state="0" />
-    <editor active="false" />
+    <frame x="186" y="23" width="1627" height="1121" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1061,11 +1069,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28377065" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28377065" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.056782335" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1280757" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1216,6 +1224,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#25550#25551#0" expanded="true" />
+            <element signature="e#25582#25583#0" expanded="true" />
+            <element signature="e#25621#25622#0" expanded="true" />
+            <element signature="e#25659#25660#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1248,6 +1260,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#25550#25551#0" expanded="true" />
+            <element signature="e#25582#25583#0" expanded="true" />
+            <element signature="e#25621#25622#0" expanded="true" />
+            <element signature="e#25659#25660#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1383,14 +1399,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/view/ToolView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/javafx-src.zip!/javafx/event/EventHandler.java">
@@ -1411,22 +1427,96 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/resources/config.properties">
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/ToolController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        <state relative-caret-position="210">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/view/MenuView.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="73" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStripController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="50" column="134" selection-start-line="50" selection-start-column="134" selection-end-line="50" selection-end-column="134" />
+        <state relative-caret-position="574">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2293#2294#0" expanded="true" />
-            <element signature="e#2329#2330#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStrip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStrip.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/view/MainView.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/model/PatternParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4699">
+          <caret line="338" column="0" selection-start-line="338" selection-start-column="0" selection-end-line="338" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#25550#25551#0" expanded="true" />
+            <element signature="e#25582#25583#0" expanded="true" />
+            <element signature="e#25621#25622#0" expanded="true" />
+            <element signature="e#25659#25660#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1439,99 +1529,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/ToolController.java">
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+        <state relative-caret-position="-71">
+          <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStrip.java">
+    <entry file="file://$PROJECT_DIR$/GoL/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="37" column="21" selection-start-line="20" selection-start-column="7" selection-end-line="37" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/s305080/ToFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="776">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/view/MenuView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="73" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStrip.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/view/MainView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="614">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/MetaData.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/model/PatternParser.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
-          <caret line="338" column="0" selection-start-line="338" selection-start-column="0" selection-end-line="338" selection-end-column="0" />
+          <caret line="70" column="33" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="224" column="0" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

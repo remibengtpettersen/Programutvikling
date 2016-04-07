@@ -41,12 +41,13 @@ public class TheStrip {
 
         stage.setX(masterController.stage.getX()+masterController.stage.getWidth());
         stage.setY(masterController.stage.getY());
-      //  masterController.canvasController.getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
+
+        masterController.stage.setOnCloseRequest(event -> stage.close());
+
         masterController.canvasController.getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
     }
 
     private void bindCanvasToStage(Stage stage) {
         theStripController.canvas.heightProperty().bind(stage.heightProperty().subtract(40));
-        theStripController.canvas.widthProperty().bind(theStripController.canvas.heightProperty().multiply(20));
     }
 }

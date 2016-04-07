@@ -78,6 +78,7 @@ public class CanvasController {
     private boolean importing = false;
     private boolean gridLines;
     private boolean userWantsGridLines;
+    private double maxCellSize = 50;
 
     public Canvas getCanvas() {
         return canvas;
@@ -399,8 +400,8 @@ public class CanvasController {
         }
         if (cellSize * boardHeight < canvas.getHeight()) {
             cellSize = canvas.getHeight() / boardHeight;
-        } else if (cellSize > 28) {
-            cellSize = 28;
+        } else if (cellSize > maxCellSize) {
+            cellSize = maxCellSize;
         }
     }
 
@@ -855,7 +856,8 @@ public class CanvasController {
         return boundingBox;
     }
 
-    public int getMinX() {
+    //region getters
+    public int getCurrViewMinX() {
         return currViewMinX;
     }
 
@@ -870,4 +872,12 @@ public class CanvasController {
     public int getCurrViewMaxY() {
         return currViewMaxY;
     }
+
+    public Color getCellColor(){
+        return cellColor;
+    }
+    public Color getBackgroundColor(){
+        return backgroundColor;
+    }
+    //endregion
 }
