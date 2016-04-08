@@ -36,7 +36,7 @@ public class TheStrip {
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
         stage.show();
-        stage.setMaxHeight(440);
+
         bindCanvasToStage(stage);
 
         stage.setX(masterController.stage.getX()+masterController.stage.getWidth());
@@ -45,6 +45,7 @@ public class TheStrip {
         masterController.stage.setOnCloseRequest(event -> stage.close());
 
         masterController.canvasController.getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
+        stage.setOnCloseRequest(event -> masterController.canvasController.getCanvas().setOnMouseClicked(null));
     }
 
     private void bindCanvasToStage(Stage stage) {

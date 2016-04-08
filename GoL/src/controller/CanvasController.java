@@ -295,6 +295,7 @@ public class CanvasController {
             int gridClickY = getGridPosY(mouseEvent.getY());
             gol.changeCellState(gridClickX, gridClickY);
 
+            if (!running || frameDelay > 0)
             renderCanvas();
 
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY)
