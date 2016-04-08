@@ -43,13 +43,13 @@ public class MasterController {
         this.stage = stage;
         scene = new Scene(root, configuration.getWidth(), configuration.getHeight());
 
-        canvasController.initialize(this);
-        menuController.initialize(this);
-        toolController.initialize(this);
-
         stage.setTitle("Game of life - GoL");
         stage.setScene(scene);
         stage.show();
+
+        canvasController.initialize(this);
+        menuController.initialize(this);
+        toolController.initialize(this);
 
         patternChooser.setTitle("Choose pattern file");
         patternChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GoL pattern files", "*.rle", "*.lif", "*.life", "*.cells"));
@@ -73,7 +73,9 @@ public class MasterController {
      */
     public void choosePattern(){
 
+        canvasController.busy = true;
         File file = patternChooser.showOpenDialog(stage);
+        canvasController.busy = false;
         if(file != null) {
 
             try {

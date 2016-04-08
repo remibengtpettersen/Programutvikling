@@ -4,6 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import model.rules.ClassicRule;
+import s305080.TheStrip;
 
 import java.util.Optional;
 
@@ -32,6 +38,10 @@ public class MenuController {
     public void openFileChooser(){
 
         masterController.choosePattern();
+    }
+
+    public void saveFile(){
+        masterController.canvasController.saveToFile();
     }
     public void onAbout(ActionEvent actionEvent) {
 
@@ -96,5 +106,9 @@ public class MenuController {
     public void openStatWindow(ActionEvent actionEvent) {
 
         masterController.openStatWindow();
+    }
+
+    public void showTheStrip(){
+        masterController.canvasController.showTheStrip();
     }
 }

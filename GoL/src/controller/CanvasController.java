@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import lieng.GIFWriter;
 import model.GameOfLife2D;
+import s305080.TheStrip;
 import s305080.ToFile;
 
 
@@ -54,6 +55,7 @@ public class CanvasController {
 
     private int frameDelay;
     private boolean running = true;
+    public boolean busy = false;
 
     // Is used to calculate the distance the mouse has traveled since last MouseDragEvent.
     private int currMousePosX;
@@ -76,6 +78,7 @@ public class CanvasController {
     private boolean importing = false;
     private boolean gridLines;
     private boolean userWantsGridLines;
+    private double maxCellSize = 50;
 
     public Canvas getCanvas() {
         return canvas;
@@ -94,11 +97,14 @@ public class CanvasController {
         grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
 
+        clampCellSize();
+        clampView();
         updateView();
         initializeListeners();
         initializeAnimation();
         checkIfShouldStillDrawGrid();
         startAnimation();
+
     }
 
     /**
@@ -154,13 +160,13 @@ public class CanvasController {
                 //To control game speed
                 if (now / 1000000 - timer > frameDelay) {
 
-                    gol.nextGeneration();
-                    renderCanvas();
+                    if(!busy) {
+                        gol.nextGeneration();
+                        renderCanvas();
 
-                    timer = now / 1000000;
-
-                    masterController.toolController.giveCellCount(gol.getCellCount());
-                    masterController.updateStatWindow(gol);
+                        timer = now / 1000000;
+                        masterController.toolController.giveCellCount(gol.getCellCount());
+                    }
                 }
             }
         };
@@ -171,7 +177,7 @@ public class CanvasController {
      */
     private void initializeListeners() {
 
-        canvas.setOnMouseClicked(this::mouseClick);
+        canvas.setOnMouseReleased(this::mouseClick);
         canvas.setOnMouseDragged(this::mouseDrag);
         canvas.setOnMouseMoved(this::mouseTrace);
         canvas.setOnScroll(this::mouseScroll);
@@ -214,10 +220,10 @@ public class CanvasController {
             startAnimation();
         }
         if (code.equals("D")) {
-            stopAnimation();
+
             saveToFile();
             System.out.println(getBoundingBox()[0] + " " + getBoundingBox()[1] + " " + getBoundingBox()[2] + " " + getBoundingBox()[3] + " ");
-            startAnimation();
+
         }
     }
 
@@ -394,8 +400,8 @@ public class CanvasController {
         }
         if (cellSize * boardHeight < canvas.getHeight()) {
             cellSize = canvas.getHeight() / boardHeight;
-        } else if (cellSize > 28) {
-            cellSize = 28;
+        } else if (cellSize > maxCellSize) {
+            cellSize = maxCellSize;
         }
     }
 
@@ -603,7 +609,10 @@ public class CanvasController {
 
         if (result.get() == yesBtn) {
             resizeGridToImport();
-        } else {
+        }else if(result.get() == noBtn){
+
+        }
+        else {
             importing = false;
         }
     }
@@ -802,8 +811,13 @@ public class CanvasController {
     }
 
     void saveToFile() {
-
+        busy = true;
         ToFile.writeToFile(grid, getBoundingBox(), masterController.stage);
+        busy = false;
+    }
+
+    void showTheStrip() {
+        new TheStrip().display(grid, masterController);
     }
 
     //endregion
@@ -841,4 +855,29 @@ public class CanvasController {
         }
         return boundingBox;
     }
+
+    //region getters
+    public int getCurrViewMinX() {
+        return currViewMinX;
+    }
+
+    public int getCurrViewMaxX() {
+        return currViewMaxX;
+    }
+
+    public int getCurrViewMinY() {
+        return currViewMinY;
+    }
+
+    public int getCurrViewMaxY() {
+        return currViewMaxY;
+    }
+
+    public Color getCellColor(){
+        return cellColor;
+    }
+    public Color getBackgroundColor(){
+        return backgroundColor;
+    }
+    //endregion
 }
