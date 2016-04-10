@@ -98,19 +98,23 @@ public class MasterController {
                 getClass().getResource("../s305061/StatView.fxml"));
 
         try {
-            Stage statStage = new Stage();
-            statStage.setTitle("Statistics");
-            statStage.setScene(loader.load());
+            BorderPane root = loader.load();
             statController = loader.getController();
+
+            Stage statStage = new Stage();
+            statStage.setScene(new Scene(root));
+
             statController.updateStats(canvasController.gol);
+            statStage.setTitle("Statistics");
+
             statStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Failed to load FXML documents");
+            System.out.println("Failed to load the statistics (s305061) FXML document, IO exception");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("");
+            System.out.println("Failed to load the statistics (s305061) FXML document, unknown exception");
         }
     }
 

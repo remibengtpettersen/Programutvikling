@@ -12,16 +12,12 @@ import java.util.Arrays;
  */
 public class GameOfLife2D extends GameOfLife{
 
-   private boolean[][] grid;
-   private byte[][] neighbours;
-
+    private boolean[][] grid;
+    private byte[][] neighbours;
 
     public GameOfLife2D(int width, int height) {
 
         createGameBoard(width, height);
-
-        //rule = new ClassicRule(grid, neighbours);
-        //rule = new HighLifeRule(grid, neighbours);
 
         setRule("classic");
     }
@@ -69,7 +65,6 @@ public class GameOfLife2D extends GameOfLife{
      * Getter for neighbour-2D-array
      * @return the neighbour-2D-array
      */
-
     public byte[][] getNeighbours() {
         return neighbours;
     }
@@ -78,12 +73,29 @@ public class GameOfLife2D extends GameOfLife{
      * Getter for the cell-2D-array
      * @return the cell-2D-array
      */
-
     public boolean[][] getGrid() {
         return grid;
     }
 
-   
+    //region s305061
+    @Override
+    public GameOfLife2D clone(){
+
+        int width = this.grid[0].length;
+        int height = this.grid.length;
+
+        GameOfLife2D clonedGol = new GameOfLife2D(width, height);
+
+        clonedGol.setRule(this.rule.toString());
+
+        for(int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++) {
+                clonedGol.grid[x][y] = this.grid[x][y];
+                clonedGol.neighbours[x][y] = this.neighbours[x][y];
+            }
+
+        return clonedGol;
+    }
     //endregion
 
     //region Setters

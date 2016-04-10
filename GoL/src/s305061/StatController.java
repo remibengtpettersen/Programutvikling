@@ -17,17 +17,24 @@ public class StatController {
     @FXML
     private LineChart<Double, Double> graph;
 
+    //@FXML private CheckMenuItem showLive;
+    //@FXML private CheckMenuItem showGrowth;
+
     ObservableList<XYChart.Series<Double, Double>> lineChartData;
     LineChart.Series<Double, Double> livingSeries;
     LineChart.Series<Double, Double> growthSeries;
 
-    //private int iteration = 0;
+    private int currentIteration = 0;
     private int lastCellCount = 0;
-    private ArrayList<Double> representations = new ArrayList<>(100);
 
-    private final double ALPHA = 0.5;
-    private final double BETA = 3.0;
-    private final double GAMMA = 0.25;
+    private int minIteration = 0;
+    private int maxIteration = 100;
+
+    private final float ALPHA = 0.5f;
+    private final float BETA = 3.0f;
+    private final float GAMMA = 0.25f;
+
+    private GameOfLife2D clonedGol;
 
     @FXML
     protected void initialize() {
@@ -35,12 +42,13 @@ public class StatController {
         lineChartData = FXCollections.observableArrayList();
 
         livingSeries = new LineChart.Series<>();
-        livingSeries.setName("Antall levende celler");
+        livingSeries.setName("Live cells");
         lineChartData.add(livingSeries);
 
         growthSeries = new LineChart.Series<>();
-        growthSeries.setName("Endring i levende celler");
+        growthSeries.setName("Cell growth");
         lineChartData.add(growthSeries);
+
 
         graph.setCreateSymbols(false);
         graph.setAnimated(false);
@@ -48,66 +56,46 @@ public class StatController {
         graph.setData(lineChartData);
     }
 
-    public void updateStats(GameOfLife gol){
-
-        int cellCount = gol.getCellCount();
-        int iteration = gol.getIterationCount();
-
-        int growth = 0;
-
-        if(iteration > 0)
-            growth = cellCount - lastCellCount;
-
-        int geometricFactor = calculateGeometricFactor(gol);
-        double currentRepresentation = calculateRepresentation(cellCount, growth, geometricFactor);
-
-        representations.add(currentRepresentation);
-
-        System.out.println(currentRepresentation);
-
-        livingSeries.getData().add(new XYChart.Data<>((double)iteration, (double)cellCount));
-        growthSeries.getData().add(new XYChart.Data<>((double)iteration, (double)growth));
-
-        lastCellCount = cellCount;
-        //iteration++;
-    }
-
     public void clearStats(){
 
         livingSeries.getData().clear();
         growthSeries.getData().clear();
-        lastCellCount = 0;
-        representations.clear();
+        currentIteration = 0;//game.getIterationCount();
     }
 
-    private double calulateSimilarityMeasure(int currentRepresentation){
+    public void updateStats(GameOfLife game){
 
-        for (int i = 0; i < representations.size()-1; i++) {    //size() - 1 because the last element is the currentRepresentation
-            //if()
+        int cellCount = game.getCellCount();
+        int growth = 0;
+        if(currentIteration > 0)
+            growth = cellCount - lastCellCount;
+
+        //if(showLive.isSelected())
+        livingSeries.getData().add(new XYChart.Data<>((double) currentIteration, (double)cellCount));
+
+        //if(showGrowth.isSelected())
+        growthSeries.getData().add(new XYChart.Data<>((double) currentIteration, (double)growth));
+
+        //float geometricPosition = 0;
+
+        lastCellCount = cellCount;
+        currentIteration++;
+    }
+
+    private ArrayList<StatDataElement> getStatistics(GameOfLife gol, int iterations){
+
+
+        return null;
+    }
+
+
+    /*public void test(ActionEvent actionEvent) {
+        if(!showLive.isSelected()) {
+            livingSeries.getData().clear();
         }
 
-        return 0;
-    }
-
-    private double calculateRepresentation(int cellCount, int growth, int geometricFactor){
-
-        return ALPHA*cellCount + BETA*growth + GAMMA*geometricFactor;
-    }
-
-    private int calculateGeometricFactor(GameOfLife gol){
-
-        boolean[][] grid = ((GameOfLife2D)gol).getGrid();
-
-        int coordinateSum = 0;
-
-        for(int x = 0; x < grid.length; x++)
-            for(int y = 0; y < grid[0].length; y++){
-
-                if(grid[x][y])
-                    coordinateSum += x+y;
-            }
-
-        return coordinateSum;
-    }
-
+        if(!showGrowth.isSelected()) {
+            growthSeries.getData().clear();
+        }
+    }*/
 }
