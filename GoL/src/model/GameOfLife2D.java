@@ -154,10 +154,5 @@ public class GameOfLife2D extends GameOfLife{
         rule.setGrid(grid);
         rule.setNeighbours(neighbours);
     }
-
     //endregion
-
-
-
-
 }

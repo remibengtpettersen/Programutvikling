@@ -164,8 +164,12 @@ public class CanvasController {
                         gol.nextGeneration();
                         renderCanvas();
 
+                        //s305061
+                        masterController.updateGameInfo(gol);
+                        //masterController.toolController.giveCellCount(gol.getCellCount());
+                        //masterController.updateStatWindow(gol);
+
                         timer = now / 1000000;
-                        masterController.toolController.giveCellCount(gol.getCellCount());
                     }
                 }
             }
@@ -555,6 +559,7 @@ public class CanvasController {
     public void clearGrid() {
 
         gol.clearGrid();
+
         renderCanvas();
     }
 
@@ -760,7 +765,6 @@ public class CanvasController {
 
         gol.setRule(ruleText);
     }
-
     //endregion
 
     // region s305080 extra task

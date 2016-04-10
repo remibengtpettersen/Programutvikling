@@ -101,7 +101,7 @@ public class MenuController {
         masterController.canvasController.setRule("B3678/S34678");
     }
 
-    public void clearGrid(ActionEvent actionEvent) { masterController.canvasController.clearGrid(); }
+    public void clearGrid(ActionEvent actionEvent) { masterController.clearGrid(); }
 
     public void openStatWindow(ActionEvent actionEvent) {
 

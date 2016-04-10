@@ -6,10 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Configuration;
-import model.GameOfLife;
-import model.PatternFormatException;
-import model.PatternParser;
+import model.*;
+import s305061.StatController;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,7 +67,7 @@ public class MasterController {
     }
 
     /**
-     * opens the file chooser so the user can choose a pattern file to import
+     * Opens the file chooser so the user can choose a pattern file to import
      */
     public void choosePattern(){
 
@@ -90,17 +88,21 @@ public class MasterController {
         }
     }
 
+    //region s305061
+    /**
+     * Opens the statistics window
+     */
     public void openStatWindow() {
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("../view/StatView.fxml"));
+                getClass().getResource("../s305061/StatView.fxml"));
 
         try {
             Stage statStage = new Stage();
-            stage.setTitle("Statistics");
+            statStage.setTitle("Statistics");
             statStage.setScene(loader.load());
             statController = loader.getController();
-            statController.updateStatistics(canvasController.gol);
+            statController.updateStats(canvasController.gol);
             statStage.show();
 
         } catch (IOException e) {
@@ -112,10 +114,19 @@ public class MasterController {
         }
     }
 
-    public void updateStatWindow(GameOfLife gol) {
+    public void updateGameInfo(GameOfLife2D gol) {
 
-        if(statController != null && gol != null)
-            statController.updateStatistics(gol);
+        toolController.giveCellCount(gol.getCellCount());
+
+        if(statController != null)
+            statController.updateStats(gol);
     }
+
+    public void clearGrid() {
+
+        canvasController.clearGrid();
+        statController.clearStats();
+    }
+    //endregion
 }
 
