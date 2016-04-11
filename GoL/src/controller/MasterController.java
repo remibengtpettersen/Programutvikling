@@ -104,7 +104,8 @@ public class MasterController {
             Stage statStage = new Stage();
             statStage.setScene(new Scene(root));
 
-            statController.updateStats(canvasController.gol);
+            //statController.updateStats(canvasController.gol);
+            statController.setGol(canvasController.gol);
             statStage.setTitle("Statistics");
 
             statStage.show();
@@ -122,8 +123,8 @@ public class MasterController {
 
         toolController.giveCellCount(gol.getCellCount());
 
-        if(statController != null)
-            statController.updateStats(gol);
+        //if(statController != null)
+            //statController.updateStats(gol);
     }
 
     public void clearGrid() {

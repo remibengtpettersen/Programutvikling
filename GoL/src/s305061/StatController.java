@@ -2,6 +2,7 @@ package s305061;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -24,8 +25,8 @@ public class StatController {
     LineChart.Series<Double, Double> livingSeries;
     LineChart.Series<Double, Double> growthSeries;
 
-    private int currentIteration = 0;
-    private int lastCellCount = 0;
+   // private int currentIteration = 0;
+    //private int lastCellCount = 0;
 
     private int minIteration = 0;
     private int maxIteration = 100;
@@ -34,7 +35,9 @@ public class StatController {
     private final float BETA = 3.0f;
     private final float GAMMA = 0.25f;
 
+    private GameOfLife2D gol;
     private GameOfLife2D clonedGol;
+    //private ArrayList<StatDataElement> dataElements = new ArrayList<>(100);
 
     @FXML
     protected void initialize() {
@@ -49,21 +52,26 @@ public class StatController {
         growthSeries.setName("Cell growth");
         lineChartData.add(growthSeries);
 
-
         graph.setCreateSymbols(false);
         graph.setAnimated(false);
 
         graph.setData(lineChartData);
+
+        System.out.println("fadfdsfdf");
     }
 
     public void clearStats(){
 
         livingSeries.getData().clear();
         growthSeries.getData().clear();
-        currentIteration = 0;//game.getIterationCount();
+        //currentIteration = 0;//game.getIterationCount();
     }
 
-    public void updateStats(GameOfLife game){
+    public void setGol(GameOfLife gol){
+        this.gol = (GameOfLife2D)gol;
+    }
+
+    /*public void updateStats(GameOfLife game){
 
         int cellCount = game.getCellCount();
         int growth = 0;
@@ -80,14 +88,64 @@ public class StatController {
 
         lastCellCount = cellCount;
         currentIteration++;
+    }*/
+
+    private ArrayList<StatDataElement> getStatistics(int iterations){
+        return getStatistics(gol, iterations);
     }
 
     private ArrayList<StatDataElement> getStatistics(GameOfLife gol, int iterations){
 
+        //dataElements.clear();
+        ArrayList<StatDataElement> dataElements = new ArrayList<>(100);
 
-        return null;
+        clonedGol = ((GameOfLife2D)gol).clone();
+        //clonedGol.aggregateNeighbours();            // calculates the cell count, but is fucked 
+
+        int previousLiving = 0;
+
+        for(int iteration = 0; iteration < iterations; iteration++){
+
+            int currentLiving = clonedGol.getCellCount();
+            System.out.println(currentLiving);
+            int growth = 0;
+
+            if(iteration > 0)
+                growth = currentLiving - previousLiving;
+
+            StatDataElement newDataElement = new StatDataElement(iteration, currentLiving, growth);
+
+            dataElements.add(newDataElement);
+
+            clonedGol.nextGeneration();
+
+            previousLiving = currentLiving;
+        }
+
+
+        return dataElements;
     }
 
+    private void displayStatistics(ArrayList<StatDataElement> dataElements){
+
+        clearStats();
+
+       /* for(StatDataElement dataElement : dataElements){
+
+            livingSeries.getData().add(new XYChart.Data<>((double)dataElement.getIteration(), (double)dataElement.getLiving()));
+            growthSeries.getData().add(new XYChart.Data<>((double)dataElement.getIteration(), (double)dataElement.getGrowth()));
+        }*/
+
+        for(int i = 0; i < dataElements.size(); i++){
+
+            livingSeries.getData().add(new XYChart.Data<>((double)i, (double)dataElements.get(i).getLiving()));
+            growthSeries.getData().add(new XYChart.Data<>((double)i, (double)dataElements.get(i).getGrowth()));
+        }
+    }
+
+    public void test(ActionEvent actionEvent) {
+        displayStatistics(getStatistics(10));
+    }
 
     /*public void test(ActionEvent actionEvent) {
         if(!showLive.isSelected()) {

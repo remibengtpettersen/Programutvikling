@@ -1,6 +1,6 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <BorderPane fx:controller="s305061.StatController" xmlns:fx="http://javafx.com/fxml">
     <center>
@@ -10,6 +10,6 @@
         </LineChart>
     </center>
     <bottom>
-        <RadioButton text="Current generation" />
+        <Button text="Test" onAction="#test"/>
     </bottom>
 </BorderPane>

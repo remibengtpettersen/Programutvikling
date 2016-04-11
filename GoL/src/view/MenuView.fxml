@@ -43,8 +43,7 @@
         <MenuItem text="Custom rule" onAction="#setCustomRule"/>
     </Menu>
     <Menu text="Stats">
-        <MenuItem text="Show history" onAction="#openStatWindow"/>
-        <MenuItem text="Show evolution"/>
+        <MenuItem text="Show statistics - s305061" onAction="#openStatWindow"/>
     </Menu>
     <Menu text="Music">
         <CheckMenuItem text="Enable"/>
