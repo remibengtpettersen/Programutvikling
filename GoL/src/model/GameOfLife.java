@@ -43,7 +43,11 @@ public class GameOfLife {
      */
     public void nextGeneration(){
         aggregateNeighbours();
-        rule.evolve();
+        try {
+            rule.evolve();
+        } catch (EvolveException e) {
+            e.printStackTrace();
+        }
     };
 
     /**

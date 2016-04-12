@@ -1,5 +1,7 @@
 package model.rules;
 
+import model.EvolveException;
+
 /**
  * A base class for two-dimensional rules
  * Created on 29.02.2016.
@@ -55,7 +57,7 @@ public abstract class Rule {
     /**
      * Evolves the board one generation, based on the number of neighbours per cell.
      */
-    public abstract void evolve();
+    public abstract void evolve() throws EvolveException;
 
     /**
      * @return The rule text of the rule

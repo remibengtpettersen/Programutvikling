@@ -98,3 +98,6 @@ Added RuleParser, and moved formatRuleText from CustomRule to this class as a st
 
 160412 13:48
 Removed Rule interface and GameOfLife and GameOfLife3D classes. Renamed Rule2D to Rule, and GameOfLife2D to GameOfLife.
+
+160412 17:10
+Added more unit test for Ruls. Refactored Rules and FileParser.Added Exceptions class for Evolve exceptions.

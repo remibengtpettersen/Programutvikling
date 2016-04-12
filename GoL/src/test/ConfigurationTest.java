@@ -23,7 +23,7 @@ public class ConfigurationTest {
     @BeforeClass
     public static void setUp(){
 
-        configFile = "src/test/Test Config File/config.properties";
+        configFile = "./resources/config.properties";
 
         config = new Configuration(configFile);
     }

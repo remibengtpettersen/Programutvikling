@@ -1,5 +1,6 @@
 package test;
 
+import model.EvolveException;
 import model.rules.CustomRule;
 import model.rules.Rule;
 import org.junit.Before;
@@ -44,7 +45,7 @@ public class CustomRuleTest {
      * Runs the evolve method once and checks if the array has evolved correctly
      */
     @Test
-    public void testEvolve(){
+    public void testEvolve() throws EvolveException {
 
         rule.evolve();
 

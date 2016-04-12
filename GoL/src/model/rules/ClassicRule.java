@@ -1,5 +1,7 @@
 package model.rules;
 
+import model.EvolveException;
+
 /**
  * The original Game of Life rule made by John Conway in 1970. Rulestring: B3/S23
  * Created on 12.02.2016.
@@ -21,13 +23,17 @@ public class ClassicRule extends Rule {
 
 
     @Override
-    public void evolve() {
+    public void evolve() throws EvolveException {
 
         for(int x = 0; x < grid.length; x++){
             for(int y = 0; y < grid[x].length; y++){
 
+                if (neighbours[x][y] < 0 || neighbours[x][y] > 8) {
+                    throw new EvolveException();
+                }
+
                 // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
-                if(neighbours[x][y] == 3)
+                else if (neighbours[x][y] == 3)
                     grid[x][y] = true;
 
                 // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.

@@ -184,6 +184,28 @@ public class PatternParserTest {
         PatternParser.read(new File("noFile.rle"));
     }
 
+    @Test
+    public void testIfTwoDifferentRulesPresentThenPatternFormatException() throws IOException {
+        String error = "#N";
+        String rleFormat =
+                "#Life 1.05\n" +
+                        "#D Name: My homemade Ship\n" +
+                        "#R 32/2\n" +
+                        error +"\n" +
+                        "#P\n"+
+                        ".***\n" +
+                        ".*\n" +
+                        "****…*";
+
+        List lineList = new ArrayList<>();
+        lineList.add(rleFormat);
+        File file = new File("test.life");
+        Files.write(file.toPath(), lineList);
+
+        expectedException.expect(PatternFormatException.class);
+        PatternParser.read(file);
+        Files.delete(file.toPath());
+    }
 
     /**
      * Reads a threeEnginecordershiprake in Life 1.05 and Life 1.06 an compares them to each other.

@@ -38,12 +38,7 @@ public class Life05Parser extends PatternParser {
         return patternArray;
     }
 
-    private static void extractRules() throws PatternFormatException {
-        if(lastImportedRule != null) {
-            throw new PatternFormatException();
-        }
-        lastImportedRule = fileContentList.get(FIRST_LINE).replaceAll("[^1-9/1-9]", "");
-    }
+
 
     private static void extractRulesFromMetaData() throws PatternFormatException {
         while (!fileContentList.get(FIRST_LINE).startsWith("#P")){
@@ -59,6 +54,13 @@ public class Life05Parser extends PatternParser {
 
             fileContentList.remove(FIRST_LINE);
         }
+    }
+
+    private static void extractRules() throws PatternFormatException {
+        if(lastImportedRule != null) {
+            throw new PatternFormatException();
+        }
+        lastImportedRule = fileContentList.get(FIRST_LINE).replaceAll("[^1-9/1-9]", "");
     }
 
     private static void findUpperLeftCellCoordinates() {
@@ -105,7 +107,7 @@ public class Life05Parser extends PatternParser {
         }
     }
 
-    private static void buildPatternArray() {
+    private static void buildPatternArray() throws PatternFormatException {
         int x = 0;
         int y = 0;
         patternArray = new boolean[patternWidth][patternHeight];
