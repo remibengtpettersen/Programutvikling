@@ -1,13 +1,11 @@
 package test;
 
-import model.PatternParser;
+import model.Parser.PatternParser;
 import org.junit.*;
 import tools.Utilities;
 
 import java.io.File;
 import java.io.IOException;
-
-import static org.junit.Assert.*;
 
 /**
  * This is the test class for the PatterParser that will test if the different GoL patterns are imported correctly.

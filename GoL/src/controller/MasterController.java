@@ -7,7 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Configuration;
-import model.PatternParser;
+import model.Parser.PatternParser;
 import model.PatternFormatException;
 
 import java.io.File;
