@@ -1,11 +1,20 @@
 package test;
 
 import model.Parser.PatternParser;
+import model.PatternFormatException;
 import org.junit.*;
+import org.junit.rules.ExpectedException;
 import tools.Utilities;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This is the test class for the PatterParser that will test if the different GoL patterns are imported correctly.
@@ -25,6 +34,8 @@ public class PatternParserTest {
     private static boolean [][] threeEnginecordershiprake06Pattern;
 
     private static boolean [][] glider;
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
 
     /**
@@ -106,6 +117,72 @@ public class PatternParserTest {
         Assert.assertArrayEquals(glider, life06URL);
     }
 
+    @Test
+    public void testIfXLifeRuleIsPresentThenReadRuleFromMetaDataRLE() throws IOException {
+        String expected = "32/2";
+        String rleFormat =
+                "#r "+expected+"\n" +
+                "x = 3, y = 3\n" +
+                "bo$2bo$3o$!\n";
+
+        List lineList = new ArrayList<>();
+        lineList.add(rleFormat);
+        File file = new File("test.rle");
+        Files.write(file.toPath(), lineList);
+
+        PatternParser.read(file);
+        Assert.assertEquals(expected, PatternParser.getLastImportedRule());
+
+
+        Files.delete(file.toPath());
+    }
+
+    @Test
+    public void testIfRuleIsPresentThenReadRuleFromMetaDataRLE() throws IOException {
+        String expected = "s32/b2";
+        String rleFormat =
+                "x = 3, y = 3, rule = "+expected+"\n" +
+                "bo$2bo$3o$!\n";
+
+        List lineList = new ArrayList<>();
+        lineList.add(rleFormat);
+        File file = new File("test.rle");
+        Files.write(file.toPath(), lineList);
+
+        PatternParser.read(file);
+        Assert.assertEquals(expected, PatternParser.getLastImportedRule());
+
+        Files.delete(file.toPath());
+    }
+
+    @Test
+    public void testIfRuleIsPresentThenReadRuleFromMetaData() throws IOException {
+        String expected = "32/2";
+        String rleFormat =
+                "#Life 1.05\n" +
+                "#D Name: My homemade Ship\n" +
+                "#R "+expected+"\n" +
+                "#P\n"+
+                "….***\n" +
+                ".*\n" +
+                "****…*";
+
+        List lineList = new ArrayList<>();
+        lineList.add(rleFormat);
+        File file = new File("test.life");
+        Files.write(file.toPath(), lineList);
+
+        PatternParser.read(file);
+        Assert.assertEquals(expected, PatternParser.getLastImportedRule());
+
+        Files.delete(file.toPath());
+    }
+
+    @Test
+    public void testIfFileContainsNoPattern() throws IOException {
+        expectedException.expect(NoSuchFileException.class);
+        PatternParser.read(new File("noFile.rle"));
+    }
 
 
     /**

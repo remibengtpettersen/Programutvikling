@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
  * Created by Truls on 12/04/16.
  */
 class RleParser extends PatternParser {
+    private static Pattern patternParametersXLife;
+
     /**
      * Reads a RLE file
      * @return the boolean array produced from the file
@@ -19,11 +21,22 @@ class RleParser extends PatternParser {
         extractMetaData();
         extractGridProperties();
 
+
         patternArray = new boolean[patternHeight][patternWidth];
 
         if (buildPatternArray()) return patternArray;
 
         throw new PatternFormatException();
+    }
+
+    /**
+     * Extracts rules from metadata tag #r
+     */
+    private static void extractXlifeRuleFormat() {
+        for(String currentLine : metaData)
+            if (currentLine.startsWith("#r"))
+                lastImportedRule = currentLine.replaceAll("[^1-9/1-9]", "");
+
     }
 
     /**
@@ -33,9 +46,9 @@ class RleParser extends PatternParser {
 
         metaData = new ArrayList<>();
 
-        while (fileContent.get(FIRST_LINE).startsWith("#")){
-            metaData.add(fileContent.get(FIRST_LINE));
-            fileContent.remove(FIRST_LINE);
+        while (fileContentList.get(FIRST_LINE).startsWith("#")){
+            metaData.add(fileContentList.get(FIRST_LINE));
+            fileContentList.remove(FIRST_LINE);
         }
     }
 
@@ -44,17 +57,28 @@ class RleParser extends PatternParser {
      * @throws PatternFormatException Is thrown if rle format is violated.
      */
     private static void extractGridProperties() throws PatternFormatException {
-        patternParameters = Pattern.compile("^x = ([0-9]+), y = ([0-9]+), rule = (.+)$");
-        patternMatcher = patternParameters.matcher(fileContent.get(FIRST_LINE));
+        patternParameters = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+),[ ]*rule[ ]*=[ ]*(.+)$");
+        patternParametersXLife = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+)$");
 
-        if(!patternMatcher.matches()) {
-            throw new PatternFormatException();
+        patternMatcher = patternParametersXLife.matcher(fileContentList.get(FIRST_LINE));
+
+        if(patternMatcher.matches()) {
+            extractXlifeRuleFormat();
+        }
+        else{
+
+            patternMatcher = patternParameters.matcher(fileContentList.get(FIRST_LINE));
+            if(!patternMatcher.matches())
+                throw new PatternFormatException();
+
+            lastImportedRule = patternMatcher.group(3);
         }
 
         patternHeight = Integer.parseInt(patternMatcher.group(1));
         patternWidth = Integer.parseInt(patternMatcher.group(2));
-        lastImportedRule = patternMatcher.group(3);
-        fileContent.remove(FIRST_LINE);
+
+
+        fileContentList.remove(FIRST_LINE);
     }
 
     /**
@@ -68,7 +92,7 @@ class RleParser extends PatternParser {
 
         int cellsAdded = 0;
 
-        for (String currentLine : fileContent) {
+        for (String currentLine : fileContentList) {
             for (int currentCharIndex = 0; currentCharIndex < currentLine.length(); currentCharIndex++) {
 
                 currentCharacter = currentLine.charAt(currentCharIndex);

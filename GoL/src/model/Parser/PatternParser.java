@@ -4,9 +4,12 @@ package model.Parser;
  * Created by Truls on 18/01/16.
  */
 
+import model.PatternFormatException;
+
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +25,7 @@ public class PatternParser {
     static int patternHeight;
     static int patternWidth;
     static boolean[][] patternArray;
-    static List<String> fileContent;
+    static List<String> fileContentList;
     static List<String> metaData;
     static char currentCharacter;
     static String lastImportedRule;
@@ -34,7 +37,9 @@ public class PatternParser {
      */
     static public boolean[][] read(File patternFile) throws IOException {
 
-        fileContent = readLinesFromFile(patternFile);
+        lastImportedRule = null;
+
+        fileContentList = readLinesFromFile(patternFile);
 
         if(patternFile.toString().endsWith(".cells")){
             return PlainTextParser.parsePlainText();
@@ -50,11 +55,13 @@ public class PatternParser {
 
     static public boolean[][] readUrl(String pattern) throws IOException {
 
-        fileContent = new ArrayList<String>();
+        lastImportedRule = null;
+
+        fileContentList = new ArrayList<String>();
         URL url = new URL(pattern);
         Scanner s = new Scanner(url.openStream());
         while (s.hasNext()){
-            fileContent.add(s.nextLine());
+            fileContentList.add(s.nextLine());
         }
 
         if(pattern.endsWith(".cells")){
@@ -75,10 +82,10 @@ public class PatternParser {
      */
     private static boolean[][] checkLifeFormat() throws IOException {
 
-        if(fileContent.get(FIRST_LINE).contains("Life 1.05")){
+        if(fileContentList.get(FIRST_LINE).contains("Life 1.05")){
             return Life05Parser.parseLife05();
         }
-        else if(fileContent.get(FIRST_LINE).contains("Life 1.06")) {
+        else if(fileContentList.get(FIRST_LINE).contains("Life 1.06")) {
             return Life06Parser.parseLife06();
         }
         return null;
@@ -91,6 +98,7 @@ public class PatternParser {
     public static String getLastImportedRule(){
         return lastImportedRule;
     }
+
 
 
 }

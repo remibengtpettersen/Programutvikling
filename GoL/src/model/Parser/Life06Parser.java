@@ -14,12 +14,12 @@ public class Life06Parser extends PatternParser {
      */
     static boolean[][] parseLife06() throws PatternFormatException {
 
-        while(fileContent.get(FIRST_LINE).startsWith("#")){
-            fileContent.remove(FIRST_LINE);
+        while(fileContentList.get(FIRST_LINE).startsWith("#")){
+            fileContentList.remove(FIRST_LINE);
         }
         patternParameters = Pattern.compile("(.+) (.+)");
 
-        patternMatcher = patternParameters.matcher(fileContent.get(FIRST_LINE));
+        patternMatcher = patternParameters.matcher(fileContentList.get(FIRST_LINE));
 
         if(!patternMatcher.matches()){
             throw new PatternFormatException();
@@ -34,8 +34,8 @@ public class Life06Parser extends PatternParser {
         patternWidth = startPosX;
         possibleHeight = startPosY;
 
-        for(int i = 0; i < fileContent.size(); i++){
-            patternMatcher = patternParameters.matcher(fileContent.get(i));
+        for(int i = 0; i < fileContentList.size(); i++){
+            patternMatcher = patternParameters.matcher(fileContentList.get(i));
 
             if(!patternMatcher.matches()){
                 return null;
@@ -60,8 +60,8 @@ public class Life06Parser extends PatternParser {
 
         patternArray = new boolean[patternWidth + 1][possibleHeight + 1];
 
-        for(int i = 0; i < fileContent.size(); i++){
-            patternMatcher = patternParameters.matcher(fileContent.get(i));
+        for(int i = 0; i < fileContentList.size(); i++){
+            patternMatcher = patternParameters.matcher(fileContentList.get(i));
 
             if(!patternMatcher.matches()){
                 throw new PatternFormatException();
