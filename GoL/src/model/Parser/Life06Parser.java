@@ -12,14 +12,14 @@ public class Life06Parser extends PatternParser {
      * reads the string content from a Life 1.06 file
      * @return the boolean array produced from the list
      */
-    static boolean[][] life06() throws PatternFormatException {
+    static boolean[][] parseLife06() throws PatternFormatException {
 
-        while(lineList.get(FIRST_LINE).startsWith("#")){
-            lineList.remove(FIRST_LINE);
+        while(fileContentList.get(FIRST_LINE).startsWith("#")){
+            fileContentList.remove(FIRST_LINE);
         }
         patternParameters = Pattern.compile("(.+) (.+)");
 
-        patternMatcher = patternParameters.matcher(lineList.get(FIRST_LINE));
+        patternMatcher = patternParameters.matcher(fileContentList.get(FIRST_LINE));
 
         if(!patternMatcher.matches()){
             throw new PatternFormatException();
@@ -34,8 +34,8 @@ public class Life06Parser extends PatternParser {
         patternWidth = startPosX;
         possibleHeight = startPosY;
 
-        for(int i =0; i < lineList.size(); i++){
-            patternMatcher = patternParameters.matcher(lineList.get(i));
+        for(int i = 0; i < fileContentList.size(); i++){
+            patternMatcher = patternParameters.matcher(fileContentList.get(i));
 
             if(!patternMatcher.matches()){
                 return null;
@@ -60,14 +60,15 @@ public class Life06Parser extends PatternParser {
 
         patternArray = new boolean[patternWidth + 1][possibleHeight + 1];
 
-        for(int i = 0; i < lineList.size(); i++){
-            patternMatcher = patternParameters.matcher(lineList.get(i));
+        for(int i = 0; i < fileContentList.size(); i++){
+            patternMatcher = patternParameters.matcher(fileContentList.get(i));
 
             if(!patternMatcher.matches()){
                 throw new PatternFormatException();
             }
             patternArray[Integer.parseInt(patternMatcher.group(1)) - startPosX][Integer.parseInt(patternMatcher.group(2)) - startPosY] = true;
         }
+        lastImportedRule = null;
         return patternArray;
     }
 }
