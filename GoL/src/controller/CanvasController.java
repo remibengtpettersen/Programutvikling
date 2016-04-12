@@ -14,7 +14,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import lieng.GIFWriter;
-import model.GameOfLife2D;
+import model.GameOfLife;
 import s305080.TheStrip;
 import s305080.ToFile;
 
@@ -35,7 +35,7 @@ import java.util.Optional;
  */
 public class CanvasController {
 
-    public GameOfLife2D gol;
+    public GameOfLife gol;
     private MasterController masterController;
     @FXML
     private Canvas canvas;
@@ -85,7 +85,7 @@ public class CanvasController {
     }
 
     /**
-     * Sets master controller, creates an instance of the GameOfLife2D object and prepares the grid and gets the Graphics Content of the canvas.
+     * Sets master controller, creates an instance of the GameOfLife object and prepares the grid and gets the Graphics Content of the canvas.
      * Also it sets up listeners and prepare the animation. Final it launches the animation.
      */
     public void initialize(MasterController masterController) {
@@ -93,7 +93,7 @@ public class CanvasController {
         this.masterController = masterController;
         initializeGameParameters();
 
-        gol = new GameOfLife2D(boardWidth, boardHeight);
+        gol = new GameOfLife(boardWidth, boardHeight);
         grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
 

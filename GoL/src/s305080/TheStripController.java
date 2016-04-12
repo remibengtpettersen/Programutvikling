@@ -4,7 +4,7 @@ import controller.MasterController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import model.GameOfLife2D;
+import model.GameOfLife;
 
 /**
  * Created by Truls on 06/04/16.
@@ -23,7 +23,7 @@ public class TheStripController {
     Canvas canvas;
     GraphicsContext gc;
 
-    private GameOfLife2D gol;
+    private GameOfLife gol;
     private MasterController master;
 
     public TheStripController(){
@@ -77,7 +77,7 @@ public class TheStripController {
     public void setGrid(boolean[][] grid) {
         gc = canvas.getGraphicsContext2D();
         this.grid = grid;
-        gol = new GameOfLife2D(grid.length, grid[0].length);
+        gol = new GameOfLife(grid.length, grid[0].length);
         gol.setGrid(grid);
         gol.updateRuleGrid();
         cellSize = 150 / grid.length;

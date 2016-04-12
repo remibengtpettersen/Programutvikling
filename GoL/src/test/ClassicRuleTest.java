@@ -1,10 +1,8 @@
 package test;
 
 import model.rules.ClassicRule;
-import model.rules.Rule2D;
-import org.junit.After;
+import model.rules.Rule;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import tools.Utilities;
 
@@ -14,7 +12,7 @@ import static org.junit.Assert.*;
  */
 public class ClassicRuleTest {
 
-    private Rule2D rule;
+    private Rule rule;
 
     /**
      * Creates a grid to be evolved and a neighbour grid that is pre populated with neighbours count. The neighbour aggregator is tested elsewhere.

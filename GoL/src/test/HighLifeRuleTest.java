@@ -1,8 +1,7 @@
 package test;
 
-import model.rules.ClassicRule;
 import model.rules.HighLifeRule;
-import model.rules.Rule2D;
+import model.rules.Rule;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +13,7 @@ import static org.junit.Assert.*;
  */
 public class HighLifeRuleTest {
 
-    private Rule2D rule;
+    private Rule rule;
 
     /**
      * Creates a grid to be evolved and a neighbour grid that is pre populated with neighbours count. The neighbour aggregator is tested elsewhere.

@@ -92,3 +92,9 @@ Refactored and updated formatting for all classes in controller package.
 
 160405 12:47
 Created test classes for Custom rule, HighLife rule, Configuration, PatternParser and GameOfLife2D. 
+
+160412 12:14
+Added RuleParser, and moved formatRuleText from CustomRule to this class as a static function. Refactored the rule parsing algorithm, now uses regex.
+
+160412 13:48
+Removed Rule interface and GameOfLife and GameOfLife3D classes. Renamed Rule2D to Rule, and GameOfLife2D to GameOfLife.

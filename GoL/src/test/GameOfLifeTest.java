@@ -1,19 +1,16 @@
 package test;
 
-import model.GameOfLife2D;
+import model.GameOfLife;
 import org.junit.*;
-import tools.Utilities;
-
-import javax.rmi.CORBA.Util;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by Andreas on 29.02.2016.
  */
-public class GameOfLife2DTest {
+public class GameOfLifeTest {
 
-    static GameOfLife2D gol;
+    static GameOfLife gol;
     static boolean [][] grid;
 
     @BeforeClass
@@ -25,7 +22,7 @@ public class GameOfLife2DTest {
                 new boolean[]{false, false, false, false, false},
                 new boolean[]{false, false, false, false, false}};
 
-        gol = new GameOfLife2D(5, 5);
+        gol = new GameOfLife(5, 5);
     }
 
     @After

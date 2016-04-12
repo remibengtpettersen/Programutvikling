@@ -5,7 +5,7 @@ package model.rules;
  * Created on 12.02.2016.
  * This class provides the default rules for game of life as defined by Conway.
  */
-public class ClassicRule extends Rule2D {
+public class ClassicRule extends Rule {
 
     /**
      * Constructor for the custom rule

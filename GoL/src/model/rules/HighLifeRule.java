@@ -4,7 +4,7 @@ package model.rules;
  * A rule similar to the classic Conway rule, but will also allow cells to be born if they have 6 neighbours. Rulestring: B36/S23
  * Created by Andreas on 16.03.2016.
  */
-public class HighLifeRule extends Rule2D {
+public class HighLifeRule extends Rule {
 
     /**
      * Constructor for the High Life rule
