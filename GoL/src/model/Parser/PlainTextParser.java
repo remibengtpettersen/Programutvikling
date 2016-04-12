@@ -10,26 +10,26 @@ public class PlainTextParser extends PatternParser {
      * Reads a .cells / plain text file
      * @return the boolean array produced from the file
      */
-    static boolean[][] readPlainText() throws IOException {
+    static boolean[][] parsePlainText() throws IOException {
 
-        while(lineList.get(FIRST_LINE).startsWith("!")){
-            lineList.remove(FIRST_LINE);
+        while(fileContent.get(FIRST_LINE).startsWith("!")){
+            fileContent.remove(FIRST_LINE);
         }
 
-        patternHeight = lineList.size();
+        patternHeight = fileContent.size();
         patternWidth = 0;
 
-        for(int x = 0; x < lineList.size(); x++){
-            if(lineList.get(x).length() > patternWidth){
-                patternWidth = lineList.get(x).length();
+        for(int x = 0; x < fileContent.size(); x++){
+            if(fileContent.get(x).length() > patternWidth){
+                patternWidth = fileContent.get(x).length();
             }
         }
         patternArray = new boolean[patternWidth][patternHeight];
 
         for(int y = 0; y < patternHeight; y++){
-            for(int x = 0; x < lineList.get(y).length(); x++){
+            for(int x = 0; x < fileContent.get(y).length(); x++){
 
-                if(lineList.get(y).charAt(x) == 'O'){
+                if(fileContent.get(y).charAt(x) == 'O'){
                     patternArray[x][y] = true;
                 }
                 else{
@@ -37,6 +37,7 @@ public class PlainTextParser extends PatternParser {
                 }
             }
         }
+        lastImportedRule = null;
         return patternArray;
     }
 }

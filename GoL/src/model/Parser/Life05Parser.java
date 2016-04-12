@@ -10,22 +10,22 @@ public class Life05Parser extends PatternParser {
      * reads the string content from a Life 1.05 file
      * @return the boolean array produced from the list
      */
-    static boolean[][] life05() {
+    static boolean[][] parseLife05() {
 
         patternWidth = 0;
         patternHeight = 0;
         patternParameters = Pattern.compile("#P (.+) (.+)");
 
-        while (!lineList.get(FIRST_LINE).startsWith("#P")){
-            lineList.remove(FIRST_LINE);
+        while (!fileContent.get(FIRST_LINE).startsWith("#P")){
+            fileContent.remove(FIRST_LINE);
         }
 
         int startPosX = 0;
         int startPosY = 0;
 
-        for(int i = 0; i < lineList.size(); i++) {
-            if (lineList.get(i).startsWith("#P")) {
-                patternMatcher = patternParameters.matcher(lineList.get(i));
+        for(int i = 0; i < fileContent.size(); i++) {
+            if (fileContent.get(i).startsWith("#P")) {
+                patternMatcher = patternParameters.matcher(fileContent.get(i));
                 if (patternMatcher.matches()) {
                     if(Integer.parseInt(patternMatcher.group(1)) < startPosX){
                         startPosX = Integer.parseInt(patternMatcher.group(1));
@@ -42,9 +42,9 @@ public class Life05Parser extends PatternParser {
 
         int unknownInt = 0;
 
-        for(int i = 0; i < lineList.size(); i++){
-            if(lineList.get(i).startsWith("#P")){
-                patternMatcher = patternParameters.matcher(lineList.get(i));
+        for(int i = 0; i < fileContent.size(); i++){
+            if(fileContent.get(i).startsWith("#P")){
+                patternMatcher = patternParameters.matcher(fileContent.get(i));
                 if(patternMatcher.matches()){
                     offSetX = Integer.parseInt(patternMatcher.group(1));
                     offSetY = Integer.parseInt(patternMatcher.group(2));
@@ -52,8 +52,8 @@ public class Life05Parser extends PatternParser {
 
                 unknownInt = i;
             }
-            if(lineList.get(i).length() - startPosX + offSetX > patternWidth){
-                patternWidth = lineList.get(i).length() - startPosX + offSetX;
+            if(fileContent.get(i).length() - startPosX + offSetX > patternWidth){
+                patternWidth = fileContent.get(i).length() - startPosX + offSetX;
             }
             if((i-unknownInt) - startPosY + offSetY > patternHeight){
                 patternHeight = i - unknownInt - startPosY + offSetY;
@@ -65,9 +65,9 @@ public class Life05Parser extends PatternParser {
         int x = 0;
         int y = 0;
 
-        for(int i = 0; i < lineList.size(); i++){
-            if(lineList.get(i).startsWith("#P")){
-                patternMatcher = patternParameters.matcher(lineList.get(i));
+        for(int i = 0; i < fileContent.size(); i++){
+            if(fileContent.get(i).startsWith("#P")){
+                patternMatcher = patternParameters.matcher(fileContent.get(i));
                 if(patternMatcher.matches()){
                     offSetX = Integer.parseInt(patternMatcher.group(1));
                     offSetY = Integer.parseInt(patternMatcher.group(2));
@@ -76,8 +76,8 @@ public class Life05Parser extends PatternParser {
                 }
             }
             else{
-                for(int j = 0; j < lineList.get(i).length(); j++){
-                    currentCharacter = lineList.get(i).charAt(j);
+                for(int j = 0; j < fileContent.get(i).length(); j++){
+                    currentCharacter = fileContent.get(i).charAt(j);
 
                     if(currentCharacter == '.'){
                         patternArray[x][y] = false;
@@ -92,6 +92,7 @@ public class Life05Parser extends PatternParser {
                 x = offSetX - startPosX;
             }
         }
+        lastImportedRule = null;
         return patternArray;
     }
 }

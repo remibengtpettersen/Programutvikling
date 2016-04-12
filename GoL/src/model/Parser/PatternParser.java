@@ -4,9 +4,6 @@ package model.Parser;
  * Created by Truls on 18/01/16.
  */
 
-import model.PatternFormatException;
-import tools.Utilities;
-
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -25,8 +22,10 @@ public class PatternParser {
     static int patternHeight;
     static int patternWidth;
     static boolean[][] patternArray;
-    static List<String> lineList;
+    static List<String> fileContent;
+    static List<String> metaData;
     static char currentCharacter;
+    static String lastImportedRule;
 
     /**
      * Reads a Game of Life pattern file and returns an array of the pattern
@@ -35,37 +34,37 @@ public class PatternParser {
      */
     static public boolean[][] read(File patternFile) throws IOException {
 
-        lineList = readLinesFromFile(patternFile);
+        fileContent = readLinesFromFile(patternFile);
 
         if(patternFile.toString().endsWith(".cells")){
-            return PlainTextParser.readPlainText();
+            return PlainTextParser.parsePlainText();
         }
         else if(patternFile.toString().endsWith(".rle")){
-            return RleParser.readRLE();
+            return RleParser.parseRle();
         }
         else if(patternFile.toString().endsWith(".lif") || patternFile.toString().endsWith(".life")){
-            return readLife();
+            return checkLifeFormat();
         }
         return null;
     }
 
     static public boolean[][] readUrl(String pattern) throws IOException {
 
-        lineList = new ArrayList<String>();
+        fileContent = new ArrayList<String>();
         URL url = new URL(pattern);
         Scanner s = new Scanner(url.openStream());
         while (s.hasNext()){
-            lineList.add(s.nextLine());
+            fileContent.add(s.nextLine());
         }
 
         if(pattern.endsWith(".cells")){
-            return PlainTextParser.readPlainText();
+            return PlainTextParser.parsePlainText();
         }
         else if(pattern.endsWith(".rle")){
-            return RleParser.readRLE();
+            return RleParser.parseRle();
         }
         else if(pattern.endsWith(".lif") || pattern.endsWith(".life")){
-            return readLife();
+            return checkLifeFormat();
         }
         return null;
     }
@@ -74,19 +73,23 @@ public class PatternParser {
      * Reads
      * @return the boolean array produced from the file
      */
-    private static boolean[][] readLife() throws IOException {
+    private static boolean[][] checkLifeFormat() throws IOException {
 
-        if(lineList.get(FIRST_LINE).contains("Life 1.05")){
-            return Life05Parser.life05();
+        if(fileContent.get(FIRST_LINE).contains("Life 1.05")){
+            return Life05Parser.parseLife05();
         }
-        else if(lineList.get(FIRST_LINE).contains("Life 1.06")) {
-            return Life06Parser.life06();
+        else if(fileContent.get(FIRST_LINE).contains("Life 1.06")) {
+            return Life06Parser.parseLife06();
         }
         return null;
     }
 
     private static List<String> readLinesFromFile(File patternFile) throws IOException {
         return Files.readAllLines(patternFile.toPath());
+    }
+
+    public static String getLastImportedRule(){
+        return lastImportedRule;
     }
 
 
