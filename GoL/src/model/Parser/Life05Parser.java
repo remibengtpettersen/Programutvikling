@@ -48,7 +48,7 @@ public class Life05Parser extends PatternParser {
 
             else if(fileContentList.get(FIRST_LINE).startsWith("#N")) {
                 if (lastImportedRule != null)
-                    throw new PatternFormatException();
+                    throw new PatternFormatException("This created an exception object...");
                 lastImportedRule = "23/3"; // Conway's default rule
             }
 
@@ -58,7 +58,7 @@ public class Life05Parser extends PatternParser {
 
     private static void extractRules() throws PatternFormatException {
         if(lastImportedRule != null) {
-            throw new PatternFormatException();
+            throw new PatternFormatException("This created an exception object...");
         }
         lastImportedRule = fileContentList.get(FIRST_LINE).replaceAll("[^1-9/1-9]", "");
     }

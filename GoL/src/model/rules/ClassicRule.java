@@ -29,7 +29,7 @@ public class ClassicRule extends Rule {
             for(int y = 0; y < grid[x].length; y++){
 
                 if (neighbours[x][y] < 0 || neighbours[x][y] > 8) {
-                    throw new EvolveException();
+                    throw new EvolveException("This creates an exception object.");
                 }
 
                 // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead

@@ -101,3 +101,6 @@ Removed Rule interface and GameOfLife and GameOfLife3D classes. Renamed Rule2D t
 
 160412 17:10
 Added more unit test for Ruls. Refactored Rules and FileParser.Added Exceptions class for Evolve exceptions.
+
+160413 08:26
+Added constructor that takes a string argument for PatternFormatException and EvolveException.

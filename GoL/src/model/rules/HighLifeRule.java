@@ -27,7 +27,7 @@ public class HighLifeRule extends Rule {
             for(int y = 0; y < grid[x].length; y++){
 
                 if (neighbours[x][y] < 0 || neighbours[x][y] > 8)
-                    throw new EvolveException();
+                    throw new EvolveException("This create an exception object...");
 
                 // if a cell has 3 neighbours it wil become alive independent if it is alive or dead
                 else if(neighbours[x][y] == 3)

@@ -26,7 +26,7 @@ class RleParser extends PatternParser {
 
         if (buildPatternArray()) return patternArray;
 
-        throw new PatternFormatException();
+        throw new PatternFormatException("This created an exception object...");
     }
 
     /**
@@ -69,7 +69,7 @@ class RleParser extends PatternParser {
 
             patternMatcher = patternParameters.matcher(fileContentList.get(FIRST_LINE));
             if(!patternMatcher.matches())
-                throw new PatternFormatException();
+                throw new PatternFormatException("This created an exception object...");
 
             lastImportedRule = patternMatcher.group(3);
         }
