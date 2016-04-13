@@ -66,9 +66,11 @@ class RleParser extends PatternParser {
             extractXlifeRuleFormat();
         }
         else{
-
             patternMatcher = patternParameters.matcher(fileContentList.get(FIRST_LINE));
             if(!patternMatcher.matches())
+                throw new PatternFormatException();
+
+            if (lastImportedRule != null)
                 throw new PatternFormatException();
 
             lastImportedRule = patternMatcher.group(3);

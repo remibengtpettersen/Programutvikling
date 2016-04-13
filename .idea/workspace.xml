@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="aab5717d-d8e2-4d55-a44f-13dfcfeaad92" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/model/Parser/RleParser.java" afterPath="$PROJECT_DIR$/GoL/src/model/Parser/RleParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/test/PatternParserTest.java" afterPath="$PROJECT_DIR$/GoL/src/test/PatternParserTest.java" />
     </list>
     <ignored path="Programutvikling.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,18 +46,28 @@
       <file leaf-file-name="Life05Parser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GoL/src/model/Parser/Life05Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1980">
+            <state relative-caret-position="595">
               <caret line="134" column="16" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClassicRuleTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClassicRuleTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GoL/src/test/ClassicRuleTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="953">
+            <state relative-caret-position="1815">
               <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7110">
+              <caret line="105" column="58" selection-start-line="105" selection-start-column="58" selection-end-line="105" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -73,18 +86,28 @@
       <file leaf-file-name="PatternParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GoL/src/model/Parser/PatternParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="59" column="24" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
+            <state relative-caret-position="312">
+              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PatternParserTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PatternParserTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GoL/src/test/PatternParserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="893">
-              <caret line="187" column="46" selection-start-line="187" selection-start-column="46" selection-end-line="187" selection-end-column="46" />
+            <state relative-caret-position="323">
+              <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RleParser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GoL/src/model/Parser/RleParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="65" column="37" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -120,26 +143,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PatternFormatException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/model/PatternFormatException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EvolveException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/model/EvolveException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="46" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -164,12 +167,10 @@
         <option value="$PROJECT_DIR$/GoL/src/controller/Main.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/GoL/src/s305080/TheStrip.java" />
-        <option value="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
         <option value="$PROJECT_DIR$/GoL/resources/config.properties" />
         <option value="$PROJECT_DIR$/GoL/src/model/Parser/PlainTextParser.java" />
         <option value="$PROJECT_DIR$/GoL/src/model/Parser/Life06Parser.java" />
         <option value="$PROJECT_DIR$/GoL/src/model/Parser/PatternParser.java" />
-        <option value="$PROJECT_DIR$/GoL/src/model/Parser/RleParser.java" />
         <option value="$PROJECT_DIR$/GoL/src/test/ConfigurationTest.java" />
         <option value="$PROJECT_DIR$/GoL/src/test/RuleParserTest.java" />
         <option value="$PROJECT_DIR$/GoL/src/model/EvolveException.java" />
@@ -180,7 +181,9 @@
         <option value="$PROJECT_DIR$/GoL/src/model/rules/ClassicRule.java" />
         <option value="$PROJECT_DIR$/GoL/src/test/ClassicRuleTest.java" />
         <option value="$PROJECT_DIR$/GoL/src/model/Parser/Life05Parser.java" />
+        <option value="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
         <option value="$PROJECT_DIR$/GoL/src/test/PatternParserTest.java" />
+        <option value="$PROJECT_DIR$/GoL/src/model/Parser/RleParser.java" />
       </list>
     </option>
   </component>
@@ -190,9 +193,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="51" />
+    <option name="x" value="187" />
     <option name="y" value="23" />
-    <option name="width" value="1822" />
+    <option name="width" value="1411" />
     <option name="height" value="1101" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -220,16 +223,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -244,6 +237,17 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -308,13 +312,52 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Programutvikling" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Parser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Programutvikling" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -334,7 +377,27 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration default="false" name="PatternParserTest.testIfErrorInPatternThenPatternFormatException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="controller.Main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="GoL" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="PatternParserTest.testIfTwoDifferentRulesPresentRleThenPatternFormatException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="test.*" />
@@ -346,7 +409,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="test" />
       <option name="MAIN_CLASS_NAME" value="test.PatternParserTest" />
-      <option name="METHOD_NAME" value="testIfErrorInPatternThenPatternFormatException" />
+      <option name="METHOD_NAME" value="testIfTwoDifferentRulesPresentRleThenPatternFormatException" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -360,7 +423,28 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="PatternParserTest.testIfTwoDifferentRulesPresentThenPatternFormatException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="All in GoL" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="GoL" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="PatternParserTest.testIfRuleIsPresentThenReadRuleFromMetaDataRLE" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="test.*" />
@@ -372,7 +456,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="test" />
       <option name="MAIN_CLASS_NAME" value="test.PatternParserTest" />
-      <option name="METHOD_NAME" value="testIfTwoDifferentRulesPresentThenPatternFormatException" />
+      <option name="METHOD_NAME" value="testIfRuleIsPresentThenReadRuleFromMetaDataRLE" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -405,47 +489,6 @@
       </option>
       <envs />
       <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="All in GoL (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="GoL" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="controller.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="GoL" />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -863,19 +906,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.PatternParserTest.testIfErrorInPatternThenPatternFormatException" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.PatternParserTest.testIfTwoDifferentRulesPresentThenPatternFormatException" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.All in GoL (1)" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.All in GoL (2)" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.PatternParserTest.testIfTwoDifferentRulesPresentRleThenPatternFormatException" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.All in GoL" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.PatternParserTest.testIfRuleIsPresentThenReadRuleFromMetaDataRLE" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.All in GoL (1)" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.All in GoL (2)" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.All in GoL (1)" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.PatternParserTest.testIfTwoDifferentRulesPresentThenPatternFormatException" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.PatternParserTest.testIfErrorInPatternThenPatternFormatException" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.All in GoL (1)" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.PatternParserTest.testIfTwoDifferentRulesPresentRleThenPatternFormatException" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.PatternParserTest.testIfRuleIsPresentThenReadRuleFromMetaDataRLE" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.All in GoL" />
       </list>
     </recent_temporary>
   </component>
@@ -899,72 +942,73 @@
       <workItem from="1460464366952" duration="8984000" />
       <workItem from="1460475710136" duration="25000" />
       <workItem from="1460526957912" duration="69000" />
+      <workItem from="1460527917571" duration="1598000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_GoL_(1) - 2016.04.12 at 17h 05m 13s.xml">
+    <history-entry file="All_in_GoL - 2016.04.13 at 08h 25m 54s.xml">
+      <configuration name="All in GoL" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_GoL_(1) - 2016.04.13 at 08h 38m 06s.xml">
       <configuration name="All in GoL (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_GoL_(2) - 2016.04.12 at 17h 07m 33s.xml">
-      <configuration name="All in GoL (2)" configurationId="JUnit" />
+    <history-entry file="PatternParserTest_testIfRuleIsPresentThenReadRuleFromMetaDataRLE - 2016.04.13 at 08h 26m 48s.xml">
+      <configuration name="PatternParserTest.testIfRuleIsPresentThenReadRuleFromMetaDataRLE" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PatternParserTest_testIfErrorInPatternThenPatternFormatException - 2016.04.12 at 16h 50m 08s.xml">
-      <configuration name="PatternParserTest.testIfErrorInPatternThenPatternFormatException" configurationId="JUnit" />
+    <history-entry file="PatternParserTest_testIfRuleIsPresentThenReadRuleFromMetaDataRLE - 2016.04.13 at 08h 27m 11s.xml">
+      <configuration name="PatternParserTest.testIfRuleIsPresentThenReadRuleFromMetaDataRLE" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PatternParserTest_testIfErrorInPatternThenPatternFormatException - 2016.04.12 at 16h 54m 59s.xml">
-      <configuration name="PatternParserTest.testIfErrorInPatternThenPatternFormatException" configurationId="JUnit" />
+    <history-entry file="PatternParserTest_testIfTwoDifferentRulesPresentRleThenPatternFormatException - 2016.04.13 at 08h 22m 50s.xml">
+      <configuration name="PatternParserTest.testIfTwoDifferentRulesPresentRleThenPatternFormatException" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PatternParserTest_testIfErrorInPatternThenPatternFormatException - 2016.04.12 at 16h 56m 45s.xml">
-      <configuration name="PatternParserTest.testIfErrorInPatternThenPatternFormatException" configurationId="JUnit" />
+    <history-entry file="PatternParserTest_testIfTwoDifferentRulesPresentRleThenPatternFormatException - 2016.04.13 at 08h 25m 30s.xml">
+      <configuration name="PatternParserTest.testIfTwoDifferentRulesPresentRleThenPatternFormatException" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PatternParserTest_testIfErrorInPatternThenPatternFormatException - 2016.04.12 at 16h 57m 51s.xml">
-      <configuration name="PatternParserTest.testIfErrorInPatternThenPatternFormatException" configurationId="JUnit" />
+    <history-entry file="PatternParserTest_testIfTwoDifferentRulesPresentRleThenPatternFormatException - 2016.04.13 at 08h 27m 20s.xml">
+      <configuration name="PatternParserTest.testIfTwoDifferentRulesPresentRleThenPatternFormatException" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PatternParserTest_testIfErrorInPatternThenPatternFormatException - 2016.04.12 at 16h 58m 59s.xml">
-      <configuration name="PatternParserTest.testIfErrorInPatternThenPatternFormatException" configurationId="JUnit" />
+    <history-entry file="PatternParserTest_testIfTwoDifferentRulesPresentRleThenPatternFormatException - 2016.04.13 at 08h 29m 03s.xml">
+      <configuration name="PatternParserTest.testIfTwoDifferentRulesPresentRleThenPatternFormatException" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PatternParserTest_testIfErrorInPatternThenPatternFormatException - 2016.04.12 at 17h 03m 33s.xml">
-      <configuration name="PatternParserTest.testIfErrorInPatternThenPatternFormatException" configurationId="JUnit" />
+    <history-entry file="PatternParserTest_testIfTwoDifferentRulesPresentRleThenPatternFormatException - 2016.04.13 at 08h 30m 37s.xml">
+      <configuration name="PatternParserTest.testIfTwoDifferentRulesPresentRleThenPatternFormatException" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PatternParserTest_testIfErrorInPatternThenPatternFormatException - 2016.04.12 at 17h 04m 11s.xml">
-      <configuration name="PatternParserTest.testIfErrorInPatternThenPatternFormatException" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PatternParserTest_testIfTwoDifferentRulesPresentThenPatternFormatException - 2016.04.12 at 17h 04m 57s.xml">
-      <configuration name="PatternParserTest.testIfTwoDifferentRulesPresentThenPatternFormatException" configurationId="JUnit" />
+    <history-entry file="PatternParserTest_testIfTwoDifferentRulesPresentRleThenPatternFormatException - 2016.04.13 at 08h 33m 50s.xml">
+      <configuration name="PatternParserTest.testIfTwoDifferentRulesPresentRleThenPatternFormatException" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11630000" />
+    <option name="totallyTimeSpent" value="13228000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="51" y="23" width="1822" height="1101" extended-state="0" />
+    <frame x="187" y="23" width="1411" height="1101" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35282457" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24887641" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24835646" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977527" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39940536" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39979655" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35282457" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21910113" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -982,7 +1026,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/GoL/src/test/PatternParserTest.java</url>
+          <line>223</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1189,20 +1241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/model/Parser/RleParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="118" column="28" selection-start-line="118" selection-start-column="28" selection-end-line="118" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="297" column="43" selection-start-line="297" selection-start-column="43" selection-end-line="297" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/test/ConfigurationTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1317,42 +1355,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/model/Parser/Life05Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="134" column="16" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/model/GameOfLife.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1710">
           <caret line="129" column="66" selection-start-line="129" selection-start-column="66" selection-end-line="129" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/model/Parser/PatternParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="59" column="24" selection-start-line="59" selection-start-column="24" selection-end-line="59" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/test/ClassicRuleTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="953">
-          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1365,10 +1371,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7110">
+          <caret line="105" column="58" selection-start-line="105" selection-start-column="58" selection-end-line="105" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/model/Parser/Life05Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="134" column="16" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/test/PatternParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="187" column="46" selection-start-line="187" selection-start-column="46" selection-end-line="187" selection-end-column="46" />
+        <state relative-caret-position="323">
+          <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/model/Parser/PatternParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/model/Parser/RleParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="65" column="37" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/test/ClassicRuleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1815">
+          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
           <folding />
         </state>
       </provider>

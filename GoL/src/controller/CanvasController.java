@@ -103,6 +103,7 @@ public class CanvasController {
         initializeListeners();
         initializeAnimation();
         checkIfShouldStillDrawGrid();
+        masterController.toolController.setZoom(cellSize);
         startAnimation();
 
     }
