@@ -104,3 +104,6 @@ Added more unit test for Ruls. Refactored Rules and FileParser.Added Exceptions 
 
 160413 08:26
 Added constructor that takes a string argument for PatternFormatException and EvolveException.
+
+160413 11:04
+Added more unit test to GameOfLifeTest class. Coverage is now 80%.

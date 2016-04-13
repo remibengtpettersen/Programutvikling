@@ -55,14 +55,12 @@ public class GameOfLife {
      */
     public void aggregateNeighbours() {
         cellCount=0;
-        for(int x = 1; x < grid.length -1; x++){
-            for(int y = 1; y < grid[x].length -1; y++){
-
+        for(int x = 1; x < grid.length - 1; x++){
+            for(int y = 1; y < grid[x].length - 1; y++){
                 if(grid[x][y]){
                     cellCount++;
-                    for(int a = x-1; a <= x+1; a++){
-                        for(int b = y - 1; b <= y+1; b++){
-
+                    for(int a = x - 1; a <= x + 1; a++){
+                        for(int b = y - 1; b <= y + 1; b++){
                             if( a != x || b != y){
                                 neighbours[a][b]++;
                             }
@@ -119,6 +117,8 @@ public class GameOfLife {
      */
     public void setRule(String ruleText) {
 
+        ruleText = ruleText.toLowerCase();
+
         switch(ruleText){
             case "classic":
                 rule = new ClassicRule(grid, neighbours);
@@ -139,15 +139,6 @@ public class GameOfLife {
      */
     public void setCellAlive(int x, int y){
         grid[x][y] = true;
-    }
-
-    /**
-     * Will set cell state to false regardless of current state.
-     * @param x the x coordinate in the grid.
-     * @param y the y coordinate in the grid.
-     */
-    public void setCellDead(int x, int y){
-        grid[x][y] = false;
     }
 
     /**
