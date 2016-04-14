@@ -107,3 +107,6 @@ Added constructor that takes a string argument for PatternFormatException and Ev
 
 160413 11:04
 Added more unit test to GameOfLifeTest class. Coverage is now 80%.
+
+160414 09:57
+Added RuleFormatException. Several classes refactored and documented with JavaDoc.

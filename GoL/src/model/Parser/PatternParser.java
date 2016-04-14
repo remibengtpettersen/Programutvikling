@@ -32,8 +32,9 @@ public class PatternParser {
 
     /**
      * Reads a Game of Life pattern file and returns an array of the pattern
-     * @param patternFile the file to read frome
+     * @param patternFile the file to read from
      * @return the boolean array produced from the file
+     * @throws IOException
      */
     static public boolean[][] read(File patternFile) throws IOException {
 
@@ -53,6 +54,12 @@ public class PatternParser {
         return null;
     }
 
+    /**
+     * Reads a Game of Life pattern file from the web and returns an array of the pattern
+     * @param pattern The web file to read from
+     * @return The boolean array produced from the file
+     * @throws IOException
+     */
     static public boolean[][] readUrl(String pattern) throws IOException {
 
         lastImportedRule = null;
@@ -77,8 +84,10 @@ public class PatternParser {
     }
 
     /**
-     * Reads
-     * @return the boolean array produced from the file
+     * Checks if a file with .lif or .life file types, is either Life 1.05 or Life 1.06,
+     * then parses the file with the appropriate parser
+     * @return The boolean array produced from the file
+     * @throws IOException
      */
     private static boolean[][] checkLifeFormat() throws IOException {
 
@@ -91,10 +100,20 @@ public class PatternParser {
         return null;
     }
 
+    /**
+     * Reads all lines from a file
+     * @param patternFile A text file
+     * @return A list of strings, with each string containing a line from a file
+     * @throws IOException Is thrown if patternFile is unreadable
+     */
     private static List<String> readLinesFromFile(File patternFile) throws IOException {
         return Files.readAllLines(patternFile.toPath());
     }
 
+    /**
+     * Gets the last imported rule
+     * @return The last imported rule
+     */
     public static String getLastImportedRule(){
         return lastImportedRule;
     }

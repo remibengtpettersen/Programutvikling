@@ -18,8 +18,8 @@ public abstract class Rule {
     //region constructor
     /**
      * Default constructor
-     * @param grid the grid to be evolved
-     * @param neighbours the neighbours grid used during evolution
+     * @param grid The grid to be evolved
+     * @param neighbours The neighbour grid used during evolution
      */
     public Rule(boolean[][] grid, byte[][] neighbours){
 
@@ -31,13 +31,13 @@ public abstract class Rule {
     //region setters
     /**
      * Sets the reference to the grid to be evolved
-     * @param grid Reference to grid
+     * @param grid Cell grid
      */
     public void setGrid(boolean[][] grid){this.grid = grid;}
 
     /**
-     * Sets the reference to the neighbourhood grid to be used during evolution
-     * @param neighbours Reference to neighbourhood grid
+     * Sets the reference to the neighbour grid to be used during evolution
+     * @param neighbours Neighbour grid
      */
     public void setNeighbours(byte[][] neighbours){this.neighbours = neighbours;}
     //endregion
@@ -45,11 +45,13 @@ public abstract class Rule {
     //region getters
     /**
      * Gets the reference to the grid to be evolved
+     * @return Cell grid
      */
     public boolean[][] getGrid(){ return grid; }
 
     /**
-     * Gets the reference to the neighbourhood grid to be used during evolution
+     * Gets the reference to the neighbour grid to be used during evolution
+     * @return Neighbour grid
      */
     public byte[][] getNeighbours(){ return neighbours; }
     //endregion
@@ -60,7 +62,8 @@ public abstract class Rule {
     public abstract void evolve() throws EvolveException;
 
     /**
-     * @return The rule text of the rule
+     * Returns the rule text of the rule
+     * @return Rule text
      */
     @Override
     public String toString(){
@@ -68,8 +71,8 @@ public abstract class Rule {
     }
 
     /**
-     * Checks if this rule is equivalent to a rule text
-     * @param otherRuleText
+     * Returns true if this rule's rule text is equivalent to another rule text
+     * @param otherRuleText the other rule text
      * @return true if this rule's ruleText is equal to otherRuleText
      */
     public boolean isEqual(String otherRuleText){

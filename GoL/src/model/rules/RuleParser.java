@@ -13,7 +13,7 @@ public class RuleParser {
      * @param rawRuleText rule text to be formatted
      * @return formatted rule text
      */
-    public static String formatRuleText(String rawRuleText){
+    public static String formatRuleText(String rawRuleText) throws RuleFormatException {
 
         rawRuleText = rawRuleText.toUpperCase();
         String newRuleText = "";
@@ -29,22 +29,20 @@ public class RuleParser {
 
                 birthDigits = ruleMatcher.group(1);
                 survivalDigits = ruleMatcher.group(2);
-
             } else {
-                System.out.println("Rule didn't match");
+                throw new RuleFormatException(rawRuleText);
             }
-
         } else if (rawRuleText.contains("/")){
 
             String[] parameters = rawRuleText.split("/");
 
-            if(parameters.length == 2){
-
-                birthDigits = parameters[1];
+            if(parameters.length > 0)
                 survivalDigits = parameters[0];
-            } else {
-                System.out.println("Rule had more slashes or some shit?");
-            }
+
+            if(parameters.length > 1)
+                birthDigits = parameters[1];
+        } else {
+            throw new RuleFormatException(rawRuleText);
         }
 
         newRuleText = "B" + simplifyDigits(birthDigits) + "/S" + simplifyDigits(survivalDigits);

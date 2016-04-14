@@ -16,9 +16,14 @@ public class GameOfLife {
     private boolean[][] grid;
     private byte[][] neighbours;
 
-    public Rule rule;
-    public int cellCount = 0;
+    private Rule rule;
+    private int cellCount = 0;
 
+    /**
+     * GameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
+     * @param width
+     * @param height
+     */
     public GameOfLife(int width, int height) {
 
         createGameBoard(width, height);
@@ -27,14 +32,13 @@ public class GameOfLife {
 
     //region startup-sequence
     /**
-     * Creates the boolean 2D Array to keep track of dead and alivelive cells, and the 2D byte-
-     * array to keep track of the neighbourcount to the corresponding cells in the other array
+     * Creates the boolean 2D Array to keep track of dead and live cells, and the 2D byte-
+     * array to keep track of the neighbour count to the corresponding cells in the other array
      */
     private void createGameBoard(int width, int height) {
         grid = new boolean[width][height];
         neighbours = new byte[width][height];
     }
-
     //endregion
 
     //region NextGeneration
@@ -43,6 +47,7 @@ public class GameOfLife {
      */
     public void nextGeneration(){
         aggregateNeighbours();
+
         try {
             rule.evolve();
         } catch (EvolveException e) {
@@ -52,6 +57,7 @@ public class GameOfLife {
 
     /**
      * For each alive cell, it increments the adjacent cells neighbour count.
+     * Also calculates the live cell count
      */
     public void aggregateNeighbours() {
         cellCount=0;
@@ -74,7 +80,7 @@ public class GameOfLife {
     //region Getters
     /**
      * Getter for neighbour-2D-array
-     * @return the neighbour-2D-array
+     * @return The neighbour-2D-array
      */
     public byte[][] getNeighbours() {
         return neighbours;
@@ -82,23 +88,23 @@ public class GameOfLife {
 
     /**
      * Getter for the cell-2D-array
-     * @return the cell-2D-array
+     * @return The cell-2D-array
      */
     public boolean[][] getGrid() {
         return grid;
     }
 
     /**
-     * Returns the cell count
-     * @return the cell count
+     * Returns the number of live cells in grid
+     * @return The live cell count
      */
     public int getCellCount() {
         return cellCount;
     }
 
     /**
-     * Returns the Rule
-     * @return the rule
+     * Returns the rule used for evolution
+     * @return The rule
      */
     public Rule getRule() {
         return rule;
@@ -106,14 +112,15 @@ public class GameOfLife {
     //endregion
 
     //region Setters
-
-    public void setGrid(boolean[][] grid) {
-        this.grid = grid;
-    }
+    /**
+     * Sets the cell grid to be used
+     * @param grid Cell grid
+     */
+    public void setGrid(boolean[][] grid) { this.grid = grid; }
 
     /**
-     * Should be used to set a spesific rule
-     * @param ruleText the rule
+     * Sets a specific rule to be used.
+     * @param ruleText The rule text
      */
     public void setRule(String ruleText) {
 
@@ -133,7 +140,7 @@ public class GameOfLife {
     }
 
     /**
-     * Will set cell state to true regardless of current state.
+     * Sets cell state to true regardless of current state.
      * @param x the x coordinate in the grid.
      * @param y the y coordinate in the grid.
      */
@@ -150,12 +157,17 @@ public class GameOfLife {
         grid[x][y] = !grid[x][y];
     }
 
+    /**
+     * Creates a new neighbour grid if a cell grid is already set.
+     * The neighbour grid will get the same dimensions as the cell grid
+     * If a cell grid is not yet set, use createGameBoard() instead.
+     */
     public void createNeighboursGrid() {
         neighbours = new byte[grid.length][grid[0].length];
     }
 
     /**
-     * Should be used to clear the grid of live cells
+     * Clears the grid of live cells
      */
     public void clearGrid(){
 
@@ -165,6 +177,9 @@ public class GameOfLife {
         }
     }
 
+    /**
+     * Updates the rule's references to this class' cell grid and neighbour grid
+     */
     public void updateRuleGrid() {
         rule.setGrid(grid);
         rule.setNeighbours(neighbours);

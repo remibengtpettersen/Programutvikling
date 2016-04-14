@@ -41,6 +41,7 @@ public class Life05Parser extends PatternParser {
 
 
     private static void extractRulesFromMetaData() throws PatternFormatException {
+
         while (!fileContentList.get(FIRST_LINE).startsWith("#P")){
             if(fileContentList.get(FIRST_LINE).startsWith("#R")){
                 extractRules();
@@ -48,7 +49,7 @@ public class Life05Parser extends PatternParser {
 
             else if(fileContentList.get(FIRST_LINE).startsWith("#N")) {
                 if (lastImportedRule != null)
-                    throw new PatternFormatException("This created an exception object...");
+                    throw new PatternFormatException("Couldn't extract rules from meta data");
                 lastImportedRule = "23/3"; // Conway's default rule
             }
 
@@ -57,13 +58,15 @@ public class Life05Parser extends PatternParser {
     }
 
     private static void extractRules() throws PatternFormatException {
+
         if(lastImportedRule != null) {
-            throw new PatternFormatException("This created an exception object...");
+            throw new PatternFormatException("Couldn't extract rules");
         }
         lastImportedRule = fileContentList.get(FIRST_LINE).replaceAll("[^1-9/1-9]", "");
     }
 
     private static void findUpperLeftCellCoordinates() {
+
         for (String currentLine : fileContentList) {
 
             if (currentLine.startsWith("#P")) {
@@ -84,6 +87,7 @@ public class Life05Parser extends PatternParser {
     }
 
     private static void getGridProperties() {
+
         for(int i = 0; i < fileContentList.size(); i++){
 
             if(fileContentList.get(i).startsWith("#P")){
@@ -108,6 +112,7 @@ public class Life05Parser extends PatternParser {
     }
 
     private static void buildPatternArray() throws PatternFormatException {
+
         int x = 0;
         int y = 0;
         patternArray = new boolean[patternWidth][patternHeight];

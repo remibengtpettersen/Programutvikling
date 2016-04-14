@@ -1,5 +1,7 @@
 package model.rules;
 
+import model.EvolveException;
+
 /**
  * A custom rule based on an input string
  * Created on 12.02.2016.
@@ -11,7 +13,7 @@ public class CustomRule extends Rule {
     private boolean[] shouldSurvive;
 
     /**
-     * Constructor for the custom rule
+     * CustomRule constructor.
      * @param grid reference to the cell grid to be evolved
      * @param neighbours reference to the neighbours grid used during evolution
      * @param rawRuleText the input rule text
@@ -20,14 +22,20 @@ public class CustomRule extends Rule {
 
         super(grid, neighbours);
 
-        ruleText = RuleParser.formatRuleText(rawRuleText);
+        try {
+            ruleText = RuleParser.formatRuleText(rawRuleText);
+        } catch (RuleFormatException e){
+            ruleText = "B3/S23";
+            System.out.println(e.getMessage());
+        }
+
         parseRuleText();
     }
 
     /**
      * Parses the rule text, converts it into the shouldBeBorn and shouldSurvive arrays to be used in evolve
      */
-    private void parseRuleText(){   //move this to RuleParser?
+    private void parseRuleText(){
 
         shouldBeBorn = new boolean[9];
         shouldSurvive = new boolean[9];
@@ -67,12 +75,15 @@ public class CustomRule extends Rule {
      * shouldBeBorn and shouldSurvive arrays which again are based on the rule text
      */
     @Override
-    public void evolve() {
+    public void evolve() throws EvolveException {
 
         for(int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
 
                 byte neighbourCount = neighbours[x][y];
+
+                if (neighbourCount < 0 || neighbourCount > 8)
+                    throw new EvolveException("Tried setting " + neighbourCount + " neighbours");
 
                 if(grid[x][y]){                         // If cell is alive
                     if(!shouldSurvive[neighbourCount])  // If the cell isn't supposed to survive,

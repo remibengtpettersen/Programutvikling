@@ -21,22 +21,22 @@ class RleParser extends PatternParser {
         extractMetaData();
         extractGridProperties();
 
-
         patternArray = new boolean[patternHeight][patternWidth];
 
-        if (buildPatternArray()) return patternArray;
-
-        throw new PatternFormatException("This created an exception object...");
+        if (buildPatternArray())
+            return patternArray;
+        else
+            throw new PatternFormatException("Couldn't parse RLE file");
     }
 
     /**
      * Extracts rules from metadata tag #r
      */
     private static void extractXlifeRuleFormat() {
+
         for(String currentLine : metaData)
             if (currentLine.startsWith("#r"))
                 lastImportedRule = currentLine.replaceAll("[^1-9/1-9]", "");
-
     }
 
     /**
@@ -57,6 +57,7 @@ class RleParser extends PatternParser {
      * @throws PatternFormatException Is thrown if rle format is violated.
      */
     private static void extractGridProperties() throws PatternFormatException {
+
         patternParameters = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+),[ ]*rule[ ]*=[ ]*(.+)$");
         patternParametersXLife = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+)$");
 
@@ -66,17 +67,15 @@ class RleParser extends PatternParser {
             extractXlifeRuleFormat();
         }
         else{
-
             patternMatcher = patternParameters.matcher(fileContentList.get(FIRST_LINE));
             if(!patternMatcher.matches())
-                throw new PatternFormatException("This created an exception object...");
+                throw new PatternFormatException("Couldn't extract grid properties from RLE file");
 
             lastImportedRule = patternMatcher.group(3);
         }
 
         patternHeight = Integer.parseInt(patternMatcher.group(1));
         patternWidth = Integer.parseInt(patternMatcher.group(2));
-
 
         fileContentList.remove(FIRST_LINE);
     }
@@ -86,6 +85,7 @@ class RleParser extends PatternParser {
      * @return True if build is successful, false if not.
      */
     private static boolean buildPatternArray() {
+
         int tagOccurrence = 0;
         int x = 0;
         int y = 0;
@@ -142,7 +142,4 @@ class RleParser extends PatternParser {
         }
         return false;
     }
-
-
-
 }

@@ -35,6 +35,10 @@ public class Configuration {
     private String gameWidth;
     //endregion
 
+    /**
+     * Configuration constructor.
+     * @param propertiesFileName
+     */
     public Configuration(String propertiesFileName) {
         this.propertiesFileName = propertiesFileName;
         initialize();

@@ -22,7 +22,7 @@ public class Life06Parser extends PatternParser {
         patternMatcher = patternParameters.matcher(fileContentList.get(FIRST_LINE));
 
         if(!patternMatcher.matches()){
-            throw new PatternFormatException("This created an exception object");
+            throw new PatternFormatException("Couldn't parse Life 1.06 file");
         }
 
         int startPosX = Integer.parseInt(patternMatcher.group(1));
@@ -64,7 +64,7 @@ public class Life06Parser extends PatternParser {
             patternMatcher = patternParameters.matcher(fileContentList.get(i));
 
             if(!patternMatcher.matches()){
-                throw new PatternFormatException("This created an exception object");
+                throw new PatternFormatException("Couldn't parse Life 1.06 file");
             }
             patternArray[Integer.parseInt(patternMatcher.group(1)) - startPosX][Integer.parseInt(patternMatcher.group(2)) - startPosY] = true;
         }
