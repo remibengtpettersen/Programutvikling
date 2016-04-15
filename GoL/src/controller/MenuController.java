@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -25,6 +26,8 @@ public class MenuController {
 
     @FXML
     private MenuItem openBtn;
+    @FXML
+    RadioMenuItem theStripS305080;
 
     /**
      * Stores the reference to the masterController
@@ -107,6 +110,21 @@ public class MenuController {
     public void clearGrid(ActionEvent actionEvent) { masterController.canvasController.clearGrid(); }
 
     public void showTheStrip(){
-        masterController.canvasController.showTheStrip();
+
+        if(!theStripS305080.isSelected())
+            masterController.closeTheStrip();
+        else
+            masterController.showTheStrip();
     }
+
+    //region s305080
+
+    /**
+     * Changes the selected status of the radioMenuItem
+     * @param theStripIsShowing True if it should be selected, false if not
+     */
+    public void setTheStripIsShowing(boolean theStripIsShowing) {
+        theStripS305080.setSelected(theStripIsShowing);
+    }
+    //endregion
 }

@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import model.Configuration;
 import model.Parser.PatternParser;
 import model.PatternFormatException;
+import s305080.TheStrip;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +27,9 @@ public class MasterController {
     @FXML public MenuController menuController;
     @FXML public ToolController toolController;
 
+    //region s305080
+    TheStrip theStrip;
+    //endregion
     private FileChooser patternChooser = new FileChooser();
 
     /**
@@ -87,5 +91,24 @@ public class MasterController {
             }
         }
     }
+
+    //region s305080
+
+    /**
+     * Displays theStrip
+     */
+    void showTheStrip() {
+        theStrip = new TheStrip();
+        theStrip.display(canvasController.gol.getGrid(), this);
+    }
+
+    /**
+     * Closes the Strip
+     */
+    void closeTheStrip(){
+        theStrip.close();
+        theStrip = null;
+    }
+    //endregion
 }
 

@@ -71,6 +71,9 @@ class RleParser extends PatternParser {
             if(!patternMatcher.matches())
                 throw new PatternFormatException("Couldn't extract grid properties from RLE file");
 
+            if (lastImportedRule != null)
+                throw new PatternFormatException("Multiple rules present");
+
             lastImportedRule = patternMatcher.group(3);
         }
 
