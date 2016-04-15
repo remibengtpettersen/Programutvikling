@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Langtons-ant">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/production/GoL/Patterns/WireWorld/Langtons-ant.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -189,6 +189,7 @@ public class CanvasController {
             clampCellSize();
             clampView();
             calculateMinCellSize();
+            updateView();
             if (!running || frameDelay > 0)
                 renderCanvas();
         });
@@ -197,6 +198,7 @@ public class CanvasController {
             clampCellSize();
             clampView();
             calculateMinCellSize();
+            updateView();
             if (!running || frameDelay > 0)
                 renderCanvas();
         });
@@ -787,7 +789,7 @@ public class CanvasController {
         int gifWidth = currViewMaxX - currViewMinX;
         int gifHeight = currViewMaxY - currViewMinY;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             gifWriter.fillRect(0, width - 1, 0, height - 1, new java.awt.Color((int) (255 * backgroundColor.getRed()), (int) (255 * backgroundColor.getGreen()), (int) (255 * backgroundColor.getBlue())));
             for (int x = 0; x < gifWidth - 1; x++) {
                 for (int y = 0; y < gifHeight - 1; y++) {
@@ -798,6 +800,26 @@ public class CanvasController {
             }
 
             gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+            gol.nextGeneration();
+
             gifWriter.insertAndProceed();
         }
 
