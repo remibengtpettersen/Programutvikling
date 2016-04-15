@@ -19,20 +19,34 @@ import java.util.TreeMap;
  */
 public class ToFile {
 
-    private static List <String> list;
-    private static int[] boundingBox;
-    private static boolean[][] grid;
+    private  List <String> list;
+    private  int[] boundingBox;
+    private  boolean[][] grid;
+    FileChooser f;
+    private Stage stage;
+    private String ruleText;
+    LagringsFormat format;
 
-    public static void writeToFile(boolean[][] grid, int[] boundingBox, Stage stage){
+    public void setFormat(LagringsFormat format) {
+        this.format = format;
+    }
+
+    public enum LagringsFormat {
+        RLE, PlainText
+    }
+
+    public void writeToFile(boolean[][] grid, int[] boundingBox, Stage stage){
 
         if(boundingBox[0] > boundingBox[1]){
             System.out.println("YOU SHALL NOT SAVE");
             return; //throw exception
         }
-        ToFile.grid = grid;
-        ToFile.boundingBox = boundingBox;
+        this.grid = grid;
+        this.boundingBox = boundingBox;
 
         list = new ArrayList<String>();
+
+        f = new FileChooser();
 
         try {
             collectMetaData();
@@ -40,21 +54,21 @@ public class ToFile {
             e.printStackTrace();
         }
 
-        FileChooser f = new FileChooser();
-
         File file = f.showSaveDialog(stage);
         if(file == null){
             return; //throw exception
         }
-      writeRLE(file);
-//    writePlainText(file);
+
+        writeRLE(file);
+        writePlainText(file);
+
     }
 
-    private static void writeRLE(File file) {
+    private  void writeRLE(File file) {
 
         StringBuilder currentLine = new StringBuilder();
 
-        currentLine.append("x = "+(boundingBox[1]-boundingBox[0]+1)+", y = "+(boundingBox[3]-boundingBox[2]+1)+ ", rule = s32/b3");
+        currentLine.append("x = "+(boundingBox[1]-boundingBox[0]+1)+", y = "+(boundingBox[3]-boundingBox[2]+1) + ((ruleText == null)?"":", rule = " + ruleText));
 
         list.add(currentLine.toString());
 
@@ -116,7 +130,7 @@ public class ToFile {
 
     }
 
-    private static void writePlainText(File file) {
+    private void writePlainText(File file) {
 
         StringBuilder currentLine = new StringBuilder();
 
@@ -146,18 +160,31 @@ public class ToFile {
         }
     }
 
-    private static void collectMetaData() throws IOException {
+    private void collectMetaData() throws IOException {
         Parent root;
         FXMLLoader loader = new FXMLLoader(ToFile.class.getResource("../s305080/MetaData.fxml"));
             root = loader.load();
-
-
-
+        MetaDataController mController = loader.getController();
+        mController.setList(list);
         Scene scene = new Scene(root);
-        Stage stage = new Stage();
+        stage = new Stage();
+
+        mController.setComunicationLink(this);
 
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
         stage.showAndWait();
+    }
+
+    public void closeStage() {
+        stage.close();
+    }
+
+    public void setInitialFileName(String initialFileName) {
+        f.setInitialFileName(initialFileName);
+    }
+
+    public void setRuleText(String ruleText) {
+        this.ruleText = ruleText;
     }
 }

@@ -16,8 +16,11 @@ public class TheStrip {
 
     Parent root;
     TheStripController theStripController;
+    Stage stage;
+    MasterController masterController;
 
     public void display(boolean[][] grid, MasterController masterController){
+        this.masterController = masterController;
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("../s305080/TheStrip.fxml"));
         try {
@@ -31,7 +34,7 @@ public class TheStrip {
         }
 
         Scene scene = new Scene(root);
-        Stage stage = new Stage();
+        stage = new Stage();
 
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
@@ -45,10 +48,18 @@ public class TheStrip {
         masterController.stage.setOnCloseRequest(event -> stage.close());
 
         masterController.canvasController.getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
-        stage.setOnCloseRequest(event -> masterController.canvasController.getCanvas().setOnMouseClicked(null));
+        stage.setOnCloseRequest(event -> {
+            masterController.canvasController.getCanvas().setOnMouseClicked(null);
+            masterController.menuController.setTheStripIsShowing(false);
+        });
     }
 
     private void bindCanvasToStage(Stage stage) {
         theStripController.canvas.heightProperty().bind(stage.heightProperty().subtract(40));
+    }
+
+    public void close() {
+        masterController.canvasController.getCanvas().setOnMouseClicked(null);
+        stage.close();
     }
 }

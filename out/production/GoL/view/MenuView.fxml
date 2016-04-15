@@ -29,7 +29,7 @@
         <RadioMenuItem text="Static board"/>
         <RadioMenuItem text="Dynamic board"/>
         <SeparatorMenuItem/>
-        <RadioMenuItem text="The strip - s305080" onAction="#showTheStrip"/>
+        <RadioMenuItem fx:id="theStripS305080" text="The strip - s305080" onAction="#showTheStrip"/>
     </Menu>
     <Menu text="Rules">
         <MenuItem text="Conway" onAction="#setConwayRule"/>

@@ -116,9 +116,7 @@ public class CanvasController {
         try {
             cellColor = (Color) Color.class.getField(masterController.configuration.getCellColor()).get(null);
             backgroundColor = (Color) Color.class.getField(masterController.configuration.getBackgroundColor()).get(null);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+        } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
 
@@ -212,13 +210,13 @@ public class CanvasController {
         String code = keyEvent.getCode().toString();
 
         if (code.equals("S")) {
-            stopAnimation();
+            busy = true;
             try {
                 saveToGif();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            startAnimation();
+            busy = false;
         }
         if (code.equals("D")) {
 
@@ -814,13 +812,11 @@ public class CanvasController {
 
     void saveToFile() {
         busy = true;
-        ToFile.writeToFile(grid, getBoundingBox(), masterController.stage);
+        new ToFile().writeToFile(grid, getBoundingBox(), masterController.stage);
         busy = false;
     }
 
-    void showTheStrip() {
-        new TheStrip().display(grid, masterController);
-    }
+
 
     //endregion
 
