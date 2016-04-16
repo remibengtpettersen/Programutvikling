@@ -87,6 +87,7 @@ public class GameOfLife2D extends GameOfLife{
         GameOfLife2D clonedGol = new GameOfLife2D(width, height);
 
         clonedGol.setRule(this.rule.toString());
+        clonedGol.cellCount = this.cellCount;
 
         for(int x = 0; x < width; x++)
             for (int y = 0; y < height; y++) {

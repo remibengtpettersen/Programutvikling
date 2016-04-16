@@ -9,8 +9,6 @@ import javafx.scene.chart.XYChart;
 import model.GameOfLife;
 import model.GameOfLife2D;
 
-import java.util.ArrayList;
-
 /**
  * Created by And on 06.04.2016.
  */
@@ -24,6 +22,7 @@ public class StatController {
     ObservableList<XYChart.Series<Double, Double>> lineChartData;
     LineChart.Series<Double, Double> livingSeries;
     LineChart.Series<Double, Double> growthSeries;
+    LineChart.Series<Double, Double> similaritySeries;
 
    // private int currentIteration = 0;
     //private int lastCellCount = 0;
@@ -39,6 +38,10 @@ public class StatController {
     private GameOfLife2D clonedGol;
     //private ArrayList<StatDataElement> dataElements = new ArrayList<>(100);
 
+    public void setGol(GameOfLife gol){
+        this.gol = (GameOfLife2D)gol;
+    }
+
     @FXML
     protected void initialize() {
 
@@ -52,25 +55,102 @@ public class StatController {
         growthSeries.setName("Cell growth");
         lineChartData.add(growthSeries);
 
+        similaritySeries = new LineChart.Series<>();
+        similaritySeries.setName("Similarity measure");
+        lineChartData.add(similaritySeries);
+
         graph.setCreateSymbols(false);
         graph.setAnimated(false);
 
         graph.setData(lineChartData);
-
-        System.out.println("fadfdsfdf");
     }
 
     public void clearStats(){
 
         livingSeries.getData().clear();
         growthSeries.getData().clear();
+        similaritySeries.getData().clear();
         //currentIteration = 0;//game.getIterationCount();
     }
 
-    public void setGol(GameOfLife gol){
-        this.gol = (GameOfLife2D)gol;
+    public int[][] getStatistics(GameOfLife game, int iterations){
+
+        int[][] stats = new int[3][iterations];
+        float[] representations = new float[iterations];
+
+        clonedGol = ((GameOfLife2D)gol).clone();
+
+        int previousLiving = 0;
+
+        for(int iteration = 0; iteration < iterations; iteration++){
+
+            int currentLiving = clonedGol.getCellCount();
+            int growth = 0;
+
+            if(iteration > 0)
+                growth = currentLiving - previousLiving;
+
+            stats[0][iteration] = currentLiving;
+            stats[1][iteration] = growth;
+            //stats[2][iteration] = (int)(Math.random()*100);
+
+            representations[iteration] = ALPHA*currentLiving + BETA*growth + GAMMA*getGeometricFactor(game);
+
+            clonedGol.nextGeneration();
+            previousLiving = currentLiving;
+        }
+
+        stats[2] = new int[iterations];
+
+        return stats;
     }
 
+    private float getGeometricFactor(GameOfLife game) {
+
+        //boolean[][] grid = game.getGrid;
+
+        return 0;
+    }
+
+    private void displayStatistics(int[][] stats){
+
+        for(int iteration = 0; iteration < stats[0].length; iteration++){
+
+            livingSeries.getData().add(new XYChart.Data<>(
+                    (double)iteration, (double)stats[0][iteration]));
+
+            growthSeries.getData().add(new XYChart.Data<>(
+                    (double)iteration, (double)stats[1][iteration]));
+
+            similaritySeries.getData().add(new XYChart.Data<>(
+                    (double)iteration, (double)stats[2][iteration]));
+        }
+
+        //clearStats();
+
+       /* for(StatDataElement dataElement : dataElements){
+
+            livingSeries.getData().add(new XYChart.Data<>((double)dataElement.getIteration(), (double)dataElement.getLiving()));
+            growthSeries.getData().add(new XYChart.Data<>((double)dataElement.getIteration(), (double)dataElement.getGrowth()));
+        }*/
+
+        /*for(int i = 0; i < dataElements.size(); i++){
+
+            livingSeries.getData().add(new XYChart.Data<>((double)i, (double)dataElements.get(i).getLiving()));
+            growthSeries.getData().add(new XYChart.Data<>((double)i, (double)dataElements.get(i).getGrowth()));
+        }*/
+    }
+
+
+
+    public void test(ActionEvent actionEvent) {
+
+        clearStats();
+
+        displayStatistics(getStatistics(gol, 100));
+    }
+
+    //region old stuff
     /*public void updateStats(GameOfLife game){
 
         int cellCount = game.getCellCount();
@@ -90,17 +170,17 @@ public class StatController {
         currentIteration++;
     }*/
 
-    private ArrayList<StatDataElement> getStatistics(int iterations){
-        return getStatistics(gol, iterations);
-    }
+    //private ArrayList<StatDataElement> getStatistics(int iterations){
+        //return getStatistics(gol, iterations);
+    //}
 
-    private ArrayList<StatDataElement> getStatistics(GameOfLife gol, int iterations){
+    /*private ArrayList<StatDataElement> getStatistics(GameOfLife gol, int iterations){
 
         //dataElements.clear();
         ArrayList<StatDataElement> dataElements = new ArrayList<>(100);
 
         clonedGol = ((GameOfLife2D)gol).clone();
-        //clonedGol.aggregateNeighbours();            // calculates the cell count, but is fucked 
+        //clonedGol.aggregateNeighbours();            // calculates the cell count, but is fucked
 
         int previousLiving = 0;
 
@@ -124,30 +204,9 @@ public class StatController {
 
 
         return dataElements;
-    }
+    }*/
 
-    private void displayStatistics(ArrayList<StatDataElement> dataElements){
-
-        clearStats();
-
-       /* for(StatDataElement dataElement : dataElements){
-
-            livingSeries.getData().add(new XYChart.Data<>((double)dataElement.getIteration(), (double)dataElement.getLiving()));
-            growthSeries.getData().add(new XYChart.Data<>((double)dataElement.getIteration(), (double)dataElement.getGrowth()));
-        }*/
-
-        for(int i = 0; i < dataElements.size(); i++){
-
-            livingSeries.getData().add(new XYChart.Data<>((double)i, (double)dataElements.get(i).getLiving()));
-            growthSeries.getData().add(new XYChart.Data<>((double)i, (double)dataElements.get(i).getGrowth()));
-        }
-    }
-
-    public void test(ActionEvent actionEvent) {
-        displayStatistics(getStatistics(10));
-    }
-
-    /*public void test(ActionEvent actionEvent) {
+        /*public void test(ActionEvent actionEvent) {
         if(!showLive.isSelected()) {
             livingSeries.getData().clear();
         }
@@ -156,4 +215,9 @@ public class StatController {
             growthSeries.getData().clear();
         }
     }*/
+    //endregion
+
+
+
+
 }
