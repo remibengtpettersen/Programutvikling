@@ -35,8 +35,6 @@ public class StatController {
     private final float GAMMA = 0.25f;
 
     private GameOfLife2D gol;
-    private GameOfLife2D clonedGol;
-    //private ArrayList<StatDataElement> dataElements = new ArrayList<>(100);
 
     public void setGol(GameOfLife gol){
         this.gol = (GameOfLife2D)gol;
@@ -70,15 +68,14 @@ public class StatController {
         livingSeries.getData().clear();
         growthSeries.getData().clear();
         similaritySeries.getData().clear();
-        //currentIteration = 0;//game.getIterationCount();
     }
 
-    public int[][] getStatistics(GameOfLife game, int iterations){
+    public int[][] getStatistics(int iterations){
 
         int[][] stats = new int[3][iterations];
-        float[] representations = new float[iterations];
+        double[] representations = new double[iterations];
 
-        clonedGol = ((GameOfLife2D)gol).clone();
+        GameOfLife2D clonedGol = gol.clone();
 
         int previousLiving = 0;
 
@@ -92,27 +89,61 @@ public class StatController {
 
             stats[0][iteration] = currentLiving;
             stats[1][iteration] = growth;
-            //stats[2][iteration] = (int)(Math.random()*100);
 
-            representations[iteration] = ALPHA*currentLiving + BETA*growth + GAMMA*getGeometricFactor(game);
+            representations[iteration] = ALPHA*currentLiving + BETA*growth + GAMMA*getGeometricFactor(clonedGol);
 
             clonedGol.nextGeneration();
             previousLiving = currentLiving;
         }
 
-        stats[2] = new int[iterations];
+        for(int repA = 0; repA < iterations; repA++) {
+
+            int maxP = 0;
+
+            for(int repB = 0; repB < iterations; repB++) {
+
+                if(repA == repB)
+                    continue;
+
+                int p = compareRepresentations(representations[repA], representations[repB]);
+
+                if (p > maxP){
+                    maxP = p;
+                }
+            }
+
+            stats[2][repA] = maxP;
+        }
 
         return stats;
     }
 
-    private float getGeometricFactor(GameOfLife game) {
+    private int compareRepresentations(double repA, double repB) {
 
-        //boolean[][] grid = game.getGrid;
+        double min = Math.min(repA, repB);
+        double max = Math.max(repA, repB);
 
-        return 0;
+        int percent =(int)(100*min/max);
+
+        return percent;
+    }
+
+    private float getGeometricFactor(GameOfLife2D game) {
+
+        boolean[][] grid = game.getGrid();
+        float geoFactor = 0;
+
+        for(int x = 0; x < grid[0].length; x++)
+            for (int y = 0; y < grid.length; y++)
+                if(grid[x][y])
+                    geoFactor += x + y;
+
+        return geoFactor;
     }
 
     private void displayStatistics(int[][] stats){
+
+        clearStats();
 
         for(int iteration = 0; iteration < stats[0].length; iteration++){
 
@@ -125,29 +156,11 @@ public class StatController {
             similaritySeries.getData().add(new XYChart.Data<>(
                     (double)iteration, (double)stats[2][iteration]));
         }
-
-        //clearStats();
-
-       /* for(StatDataElement dataElement : dataElements){
-
-            livingSeries.getData().add(new XYChart.Data<>((double)dataElement.getIteration(), (double)dataElement.getLiving()));
-            growthSeries.getData().add(new XYChart.Data<>((double)dataElement.getIteration(), (double)dataElement.getGrowth()));
-        }*/
-
-        /*for(int i = 0; i < dataElements.size(); i++){
-
-            livingSeries.getData().add(new XYChart.Data<>((double)i, (double)dataElements.get(i).getLiving()));
-            growthSeries.getData().add(new XYChart.Data<>((double)i, (double)dataElements.get(i).getGrowth()));
-        }*/
     }
-
-
-
+    
     public void test(ActionEvent actionEvent) {
 
-        clearStats();
-
-        displayStatistics(getStatistics(gol, 100));
+        displayStatistics(getStatistics(1000));
     }
 
     //region old stuff
