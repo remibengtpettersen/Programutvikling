@@ -6,29 +6,25 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.TextField;
 import model.GameOfLife;
 import model.GameOfLife2D;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by And on 06.04.2016.
  */
 public class StatController {
-    @FXML
-    private LineChart<Double, Double> graph;
 
-    //@FXML private CheckMenuItem showLive;
-    //@FXML private CheckMenuItem showGrowth;
+    @FXML private LineChart<Double, Double> graph;
+    @FXML private TextField textField;
 
     ObservableList<XYChart.Series<Double, Double>> lineChartData;
     LineChart.Series<Double, Double> livingSeries;
     LineChart.Series<Double, Double> growthSeries;
     LineChart.Series<Double, Double> similaritySeries;
-
-   // private int currentIteration = 0;
-    //private int lastCellCount = 0;
-
-    private int minIteration = 0;
-    private int maxIteration = 100;
 
     private final float ALPHA = 0.5f;
     private final float BETA = 3.0f;
@@ -141,9 +137,11 @@ public class StatController {
         return geoFactor;
     }
 
-    private void displayStatistics(int[][] stats){
+    private void displayStatistics(int iterations){
 
         clearStats();
+
+        int[][] stats = getStatistics(iterations);
 
         for(int iteration = 0; iteration < stats[0].length; iteration++){
 
@@ -157,80 +155,21 @@ public class StatController {
                     (double)iteration, (double)stats[2][iteration]));
         }
     }
-    
-    public void test(ActionEvent actionEvent) {
 
-        displayStatistics(getStatistics(1000));
+    @FXML
+    public void onButtonClicked(ActionEvent actionEvent) {
+
+        String string = textField.getText();
+
+        Pattern p = Pattern.compile("\\d+");//"\\d+");
+        Matcher m = p.matcher(string);
+
+        if(m.matches()) {
+            int iterations = Integer.parseInt(m.group());
+            displayStatistics(iterations);
+        }
+        else {
+            textField.setText("Could not parse number");
+        }
     }
-
-    //region old stuff
-    /*public void updateStats(GameOfLife game){
-
-        int cellCount = game.getCellCount();
-        int growth = 0;
-        if(currentIteration > 0)
-            growth = cellCount - lastCellCount;
-
-        //if(showLive.isSelected())
-        livingSeries.getData().add(new XYChart.Data<>((double) currentIteration, (double)cellCount));
-
-        //if(showGrowth.isSelected())
-        growthSeries.getData().add(new XYChart.Data<>((double) currentIteration, (double)growth));
-
-        //float geometricPosition = 0;
-
-        lastCellCount = cellCount;
-        currentIteration++;
-    }*/
-
-    //private ArrayList<StatDataElement> getStatistics(int iterations){
-        //return getStatistics(gol, iterations);
-    //}
-
-    /*private ArrayList<StatDataElement> getStatistics(GameOfLife gol, int iterations){
-
-        //dataElements.clear();
-        ArrayList<StatDataElement> dataElements = new ArrayList<>(100);
-
-        clonedGol = ((GameOfLife2D)gol).clone();
-        //clonedGol.aggregateNeighbours();            // calculates the cell count, but is fucked
-
-        int previousLiving = 0;
-
-        for(int iteration = 0; iteration < iterations; iteration++){
-
-            int currentLiving = clonedGol.getCellCount();
-            System.out.println(currentLiving);
-            int growth = 0;
-
-            if(iteration > 0)
-                growth = currentLiving - previousLiving;
-
-            StatDataElement newDataElement = new StatDataElement(iteration, currentLiving, growth);
-
-            dataElements.add(newDataElement);
-
-            clonedGol.nextGeneration();
-
-            previousLiving = currentLiving;
-        }
-
-
-        return dataElements;
-    }*/
-
-        /*public void test(ActionEvent actionEvent) {
-        if(!showLive.isSelected()) {
-            livingSeries.getData().clear();
-        }
-
-        if(!showGrowth.isSelected()) {
-            growthSeries.getData().clear();
-        }
-    }*/
-    //endregion
-
-
-
-
 }

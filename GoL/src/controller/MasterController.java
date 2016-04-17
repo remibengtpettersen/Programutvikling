@@ -130,7 +130,9 @@ public class MasterController {
     public void clearGrid() {
 
         canvasController.clearGrid();
-        statController.clearStats();
+
+        if(statController != null)
+            statController.clearStats();
     }
     //endregion
 }
