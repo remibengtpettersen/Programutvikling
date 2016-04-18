@@ -116,3 +116,6 @@ Extracted cell object from canvas controller, created test class and refined zoo
 
 160418 11:56
 Added Editor for task 6, extended tasks for s305073.
+
+160418 18:19
+Implemented onAction launchEditor for editor for extra task -Pattern Editor-. Also included stage for for S305073.
