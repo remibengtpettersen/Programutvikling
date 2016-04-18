@@ -2,9 +2,23 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
+
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import model.rules.ClassicRule;
+import s305073.controller.EditorController;
+
+import java.io.File;
+import java.io.IOException;
 
 import java.util.Optional;
 
@@ -116,6 +130,34 @@ public class MenuController {
      */
     public void setTheStripIsShowing(boolean theStripIsShowing) {
         theStripS305080.setSelected(theStripIsShowing);
+    }
+
+    public void launchEditor(ActionEvent actionEvent) {
+        Stage editor = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../s305073/view/EditorView.fxml"));
+        editor.initModality(Modality.WINDOW_MODAL);
+        editor.initOwner(masterController.stage);
+
+        BorderPane root = null;
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(root, 1200, 1000);
+        editor.setScene(scene);
+
+        EditorController editorController = loader.getController();
+        editorController.getDeepCopyGol(masterController.getCanvasController().gol);
+        editorController.initialize(editor);
+
+        masterController.getCanvasController().stopAnimation();
+        masterController.getToolController().changeIconToPlay();
+
+        editor.setTitle("Pattern Editor");
+        editor.showAndWait();
     }
     //endregion
 }
