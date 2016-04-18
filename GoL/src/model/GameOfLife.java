@@ -100,7 +100,7 @@ public class GameOfLife {
 
         //tools.Utilities.print2DArray(clonedGol.getGrid());
 
-        clonedGol.rule = new CustomRule(clonedGol.grid, clonedGol.neighbours, this.rule.toString());
+        clonedGol.setRule(this.rule.toString());
 
         return clonedGol;
     }

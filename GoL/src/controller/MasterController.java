@@ -52,7 +52,8 @@ public class MasterController {
         patternChooser.setTitle("Choose pattern file");
         patternChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GoL pattern files", "*.rle", "*.lif", "*.life", "*.cells"));
 
-        String patternDir = "../../Patterns";
+        String patternDir = "./GoL/Patterns";
+        patternChooser.setInitialDirectory(new File(patternDir));
 
         bindCanvas();
     }

@@ -64,13 +64,13 @@ public class ToGif {
 
         //writer.insertAndProceed();
 
-        tools.Utilities.print2DArray(game.getGrid());
+        //tools.Utilities.print2DArray(game.getGrid());
         game.nextGeneration();
 
         game.getGrid()[0][0] = false;
         game.getGrid()[7][7] = true;
 
-        tools.Utilities.print2DArray(game.getGrid());
+        //tools.Utilities.print2DArray(game.getGrid());
 
         writer.createNextImage();
 
@@ -113,7 +113,7 @@ public class ToGif {
             //<nextGeneration call to game>
             game.nextGeneration();
 
-            System.out.println(counter);
+            //System.out.println(counter);
             //<recursive call to writeGoLSequenceToGIF>
             writeGoLSequenceToGIF(writer, game, ++counter);
         }
