@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.GameOfLife;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,7 +36,8 @@ public class ToFile {
         RLE, PlainText
     }
 
-    public void writeToFile(boolean[][] grid, int[] boundingBox, Stage stage){
+    public void writeToFile(GameOfLife gol, Stage stage){
+        int [] boundingBox = gol.getBoundingBox();
 
         if(boundingBox[0] > boundingBox[1]){
             System.out.println("YOU SHALL NOT SAVE");
@@ -53,6 +55,9 @@ public class ToFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if(format == null)
+            return;
 
         File file = f.showSaveDialog(stage);
         if(file == null){

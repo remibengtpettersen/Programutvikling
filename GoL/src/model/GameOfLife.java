@@ -109,6 +109,40 @@ public class GameOfLife {
     public Rule getRule() {
         return rule;
     }
+
+    /**
+     * We copied getBoundingBox from the assignment
+     *
+     * @return
+     */
+    public int[] getBoundingBox() {
+
+        int[] boundingBox = new int[4]; // minrow maxrow mincolumn maxcolumn boundingBox[0] = board.length;
+
+        boundingBox[0] = grid.length;
+        boundingBox[1] = 0;
+        boundingBox[2] = grid[0].length;
+        boundingBox[3] = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (!grid[i][j]) continue;
+                if (i < boundingBox[0]) {
+                    boundingBox[0] = i;
+                }
+                if (i > boundingBox[1]) {
+                    boundingBox[1] = i;
+                }
+                if (j < boundingBox[2]) {
+                    boundingBox[2] = j;
+                }
+                if (j > boundingBox[3]) {
+                    boundingBox[3] = j;
+                }
+            }
+        }
+        return boundingBox;
+    }
     //endregion
 
     //region Setters

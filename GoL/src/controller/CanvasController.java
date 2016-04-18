@@ -162,7 +162,7 @@ public class CanvasController {
 
                     if(!busy) {
                         gol.nextGeneration();
-                       
+
                         renderCanvas();
 
                         timer = now / 1000000;
@@ -225,7 +225,7 @@ public class CanvasController {
         if (code.equals("D")) {
 
             saveToFile();
-            System.out.println(getBoundingBox()[0] + " " + getBoundingBox()[1] + " " + getBoundingBox()[2] + " " + getBoundingBox()[3] + " ");
+            System.out.println(gol.getBoundingBox()[0] + " " + gol.getBoundingBox()[1] + " " + gol.getBoundingBox()[2] + " " + gol.getBoundingBox()[3] + " ");
 
         }
     }
@@ -334,9 +334,11 @@ public class CanvasController {
         if (b == MouseButton.PRIMARY) {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
                 drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY), getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
-            } else
+            } else {
                 gol.setCellAlive(getGridPosX(currMousePosX), getGridPosY(currMousePosY));
-        } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                drawCell(getGridPosX(currMousePosX), getGridPosY(currMousePosY));
+            }
+            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
                 boardOffsetX += prevMousePosX - currMousePosX;
                 boardOffsetY += prevMousePosY - currMousePosY;
@@ -839,7 +841,7 @@ public class CanvasController {
 
     void saveToFile() {
         busy = true;
-        new ToFile().writeToFile(grid, getBoundingBox(), masterController.stage);
+        new ToFile().writeToFile(gol, masterController.stage);
         busy = false;
     }
 
@@ -847,39 +849,7 @@ public class CanvasController {
 
     //endregion
 
-    /**
-     * We copied getBoundingBox from the assignment
-     *
-     * @return
-     */
-    private int[] getBoundingBox() {
 
-        int[] boundingBox = new int[4]; // minrow maxrow mincolumn maxcolumn boundingBox[0] = board.length;
-
-        boundingBox[0] = grid.length;
-        boundingBox[1] = 0;
-        boundingBox[2] = grid[0].length;
-        boundingBox[3] = 0;
-
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                if (!grid[i][j]) continue;
-                if (i < boundingBox[0]) {
-                    boundingBox[0] = i;
-                }
-                if (i > boundingBox[1]) {
-                    boundingBox[1] = i;
-                }
-                if (j < boundingBox[2]) {
-                    boundingBox[2] = j;
-                }
-                if (j > boundingBox[3]) {
-                    boundingBox[3] = j;
-                }
-            }
-        }
-        return boundingBox;
-    }
 
     //region getters
     public int getCurrViewMinX() {
