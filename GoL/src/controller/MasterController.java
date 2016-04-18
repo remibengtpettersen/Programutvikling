@@ -3,14 +3,13 @@ package controller;
 import javafx.fxml.FXML;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Configuration;
 import model.Parser.PatternParser;
 import model.PatternFormatException;
-import s305080.TheStrip;
+import s305080.TheStrip.TheStrip;
 
 import java.io.File;
 import java.io.IOException;

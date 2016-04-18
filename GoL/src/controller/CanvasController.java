@@ -16,7 +16,7 @@ import javafx.stage.FileChooser;
 import lieng.GIFWriter;
 import model.Cell;
 import model.GameOfLife;
-import s305080.ToFile;
+import s305080.PatternSaver.ToFile;
 
 
 import java.io.IOException;

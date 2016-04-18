@@ -1,20 +1,18 @@
-package s305080;
+package s305080.PatternSaver;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.GameOfLife;
+import tools.MessageBox;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 /**
  * Created by Truls on 29/03/16.
@@ -41,6 +39,7 @@ public class ToFile {
         int [] boundingBox = gol.getBoundingBox();
 
         if(boundingBox[0] > boundingBox[1]){
+            MessageBox.alert("No pattern to save");
             System.out.println("YOU SHALL NOT SAVE");
             return; //throw exception
         }
@@ -172,7 +171,7 @@ public class ToFile {
 
     private void collectMetaData() throws IOException {
         Parent root;
-        FXMLLoader loader = new FXMLLoader(ToFile.class.getResource("../s305080/MetaData.fxml"));
+        FXMLLoader loader = new FXMLLoader(ToFile.class.getResource("MetaData.fxml"));
             root = loader.load();
         MetaDataController mController = loader.getController();
         mController.setList(list);

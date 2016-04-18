@@ -1,4 +1,4 @@
-package s305080;
+package s305080.TheStrip;
 
 import controller.MasterController;
 import javafx.fxml.FXML;
@@ -21,7 +21,7 @@ public class TheStripController {
     int maxY;
 
     @FXML
-    Canvas canvas;
+    public Canvas canvas;
     GraphicsContext gc;
 
     private GameOfLife gol;

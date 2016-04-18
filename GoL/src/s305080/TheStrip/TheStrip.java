@@ -1,10 +1,9 @@
-package s305080;
+package s305080.TheStrip;
 
 import controller.MasterController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;

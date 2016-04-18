@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.collections.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="200.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s305080.MetaDataController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="200.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s305080.PatternSaver.MetaDataController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="200.0" text="Meta data" textAlignment="CENTER">
          <font>
@@ -17,7 +17,7 @@
          </font>
       </Label>
       <TextField fx:id="name" alignment="CENTER" maxWidth="150.0" prefHeight="30.0" prefWidth="50.0" promptText="Name" />
-      <TextField fx:id="author" alignment="CENTER" maxWidth="150.0" prefHeight="30.0" prefWidth="150.0" promptText="lukk vindu for å save" />
+      <TextField fx:id="author" alignment="CENTER" maxWidth="150.0" prefHeight="30.0" prefWidth="150.0" promptText="Author" />
       <TextField fx:id="description" alignment="CENTER" maxWidth="150.0" promptText="Description" />
       <TextField fx:id="rules" alignment="CENTER" maxWidth="150.0" promptText="Rules" />
       <ComboBox fx:id="format" promptText="Choose format">
