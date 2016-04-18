@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 import javafx.stage.Stage;
+import model.Cell;
 import model.GameOfLife;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class EditorController {
 
     private GraphicsContext gc;
     private GameOfLife game;
+    private Cell cell;
     private Color canvasEditorColor = Color.ALICEBLUE;
     private Color canvasStripColor = Color.WHITE;
     private double canvasWidthToHeightRatio;
@@ -51,7 +53,7 @@ public class EditorController {
     public void initialize(Stage editor){
         setGraphicsContextToEditor();
 
-        game.getCell().setSize(10);
+        cell.setSize(10);
 
         initializeScrollPane();
         initializeCanvasSizeListener();
@@ -84,7 +86,7 @@ public class EditorController {
     }
 
     private void clearPosition(int i, int j) {
-        gc.clearRect(i, j, game.getCell().getSize(), game.getCell().getSize());
+        gc.clearRect(i, j, cell.getSize(), cell.getSize());
     }
 
     private void calculateCanvasToStripRatio() {
@@ -155,11 +157,7 @@ public class EditorController {
     }
 
     public void getDeepCopyGol(GameOfLife gameOfLife) {
-        try {
-            this.game = (GameOfLife) gameOfLife.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        this.game = gameOfLife.clone();
     }
 
     public void setGridLines() {
@@ -167,8 +165,8 @@ public class EditorController {
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(0.5);
 
-        for (int i = 0; i < canvasEditor.getWidth(); i += game.getCell().getSize()) {
-            for (int j = 0; j < canvasEditor.getHeight(); j +=game.getCell().getSize()) {
+        for (int i = 0; i < canvasEditor.getWidth(); i += cell.getSize()) {
+            for (int j = 0; j < canvasEditor.getHeight(); j += cell.getSize()) {
                 gc.strokeLine(i, 0, i, canvasEditor.getHeight());
                 gc.strokeLine(0, i, canvasEditor.getWidth(), i);
             }
@@ -178,19 +176,19 @@ public class EditorController {
     private void fillCellPosition(int x_coordinate, int y_coordinate, Color color) {
         gc.setFill(color);
 
-        gc.fillRect(x_coordinate * game.getCell().getSize(),
-                y_coordinate * game.getCell().getSize(),
-                game.getCell().getSize() * game.getCell().getSpacing(),
-                game.getCell().getSize() * game.getCell().getSpacing());
+        gc.fillRect(x_coordinate * cell.getSize(),
+                y_coordinate * cell.getSize(),
+                cell.getSize() * cell.getSpacing(),
+                cell.getSize() * cell.getSpacing());
     }
 
     private void fillStripPosition(int x_coordinate, int y_coordinate, Color color) {
         gc.setFill(color);
 
-        gc.fillRect(x_coordinate * game.getCell().getSize(),
-                y_coordinate * game.getCell().getSize(),
-                game.getCell().getSize() * game.getCell().getSpacing(),
-                game.getCell().getSize() * game.getCell().getSpacing());
+        gc.fillRect(x_coordinate * cell.getSize(),
+                y_coordinate * cell.getSize(),
+                cell.getSize() * cell.getSpacing(),
+                cell.getSize() * cell.getSpacing());
     }
 
     private double stripHeight() {
@@ -202,8 +200,8 @@ public class EditorController {
     }
 
     public void mouseClicked(MouseEvent event) {
-        int gridLocation_x = (int)event.getX() / (int) game.getCell().getSize();
-        int gridLocation_y = (int)event.getY() / (int) game.getCell().getSize();
+        int gridLocation_x = (int)event.getX() / (int) cell.getSize();
+        int gridLocation_y = (int)event.getY() / (int) cell.getSize();
 
         game.getGrid()[gridLocation_x][gridLocation_y] = true;
 
@@ -212,8 +210,8 @@ public class EditorController {
     }
 
     public void mouseDragged(MouseEvent event) {
-        int gridLocation_x = (int)event.getX() / (int) game.getCell().getSize();
-        int gridLocation_y = (int)event.getY() / (int) game.getCell().getSize();
+        int gridLocation_x = (int)event.getX() / (int) cell.getSize();
+        int gridLocation_y = (int)event.getY() / (int) cell.getSize();
 
         setGraphicsContextToEditor();
         fillCellPosition(gridLocation_x, gridLocation_y, Color.BLACK);
@@ -265,8 +263,8 @@ public class EditorController {
         gc.setStroke(gridLineColor);
         gc.setLineWidth(gridLineSize);
 
-        for (int i = 0; i < canvasEditor.getWidth(); i += game.getCell().getSize()) {
-            for (int j = 0; j < canvasEditor.getHeight(); j +=game.getCell().getSize()) {
+        for (int i = 0; i < canvasEditor.getWidth(); i += cell.getSize()) {
+            for (int j = 0; j < canvasEditor.getHeight(); j += cell.getSize()) {
                 gc.strokeLine(i, 0, i, canvasEditor.getHeight());
                 gc.strokeLine(0, i, canvasEditor.getWidth(), i);
             }
