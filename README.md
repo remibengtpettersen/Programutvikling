@@ -113,3 +113,6 @@ Added RuleFormatException. Several classes refactored and documented with JavaDo
 
 160418 11:34 
 Extracted cell object from canvas controller, created test class and refined zoom function.
+
+160418 11:56
+Added Editor for task 6, extended tasks for s305073.
