@@ -162,9 +162,7 @@ public class CanvasController {
 
                     if(!busy) {
                         gol.nextGeneration();
-                        gol.nextGeneration();
-                        gol.nextGeneration();
-                        gol.nextGeneration();
+                       
                         renderCanvas();
 
                         timer = now / 1000000;
