@@ -128,6 +128,7 @@ public class CanvasController {
         boardHeight = masterController.configuration.getGameHeight();
         userWantsGridLines = masterController.configuration.isGridLinesOn();
         masterController.toolController.setSpeed(frameDelay);
+
     }
 
     /**
@@ -160,6 +161,9 @@ public class CanvasController {
                 if (now / 1000000 - timer > frameDelay) {
 
                     if(!busy) {
+                        gol.nextGeneration();
+                        gol.nextGeneration();
+                        gol.nextGeneration();
                         gol.nextGeneration();
                         renderCanvas();
 
@@ -341,15 +345,17 @@ public class CanvasController {
             }
 
             clampView();
+
+            updateView();
+
+            if (!running || frameDelay > 0)
+                renderCanvas();
         }
 
         prevMousePosX = currMousePosX;
         prevMousePosY = currMousePosY;
 
-        updateView();
 
-        if (!running || frameDelay > 0)
-            renderCanvas();
     }
 
     /**
@@ -584,9 +590,10 @@ public class CanvasController {
         int height = y2 - y;
 
         int lineLength = Math.abs((Math.abs(width) < Math.abs(height)) ? height : width);
-
+        int x1, y1;
         for (int i = 0; i < lineLength; i++) {
-            gol.setCellAlive(x + i * width / lineLength, y + i * height / lineLength);
+            gol.setCellAlive(x1 = (x + i * width / lineLength), y1 = (y + i * height / lineLength));
+            drawCell(x1, y1);
         }
     }
 

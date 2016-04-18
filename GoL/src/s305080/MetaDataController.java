@@ -20,6 +20,9 @@ public class MetaDataController {
 
     private ToFile toFile;
 
+    public MetaDataController(){
+
+    }
 
     public void insertMetaData(){
         if (format.getValue() == null){

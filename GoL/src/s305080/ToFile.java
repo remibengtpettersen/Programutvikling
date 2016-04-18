@@ -59,8 +59,12 @@ public class ToFile {
             return; //throw exception
         }
 
-        writeRLE(file);
-        writePlainText(file);
+        if(format == LagringsFormat.RLE)
+            writeRLE(file);
+
+        if(format == LagringsFormat.PlainText)
+            writePlainText(file);
+
 
     }
 
