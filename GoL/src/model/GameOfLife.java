@@ -53,7 +53,7 @@ public class GameOfLife {
         } catch (EvolveException e) {
             e.printStackTrace();
         }
-    };
+    }
 
     /**
      * For each alive cell, it increments the adjacent cells neighbour count.
@@ -75,6 +75,34 @@ public class GameOfLife {
                 }
             }
         }
+
+        System.out.println("Aggregated neighbours. " + cellCount + " live cells");
+    }
+
+    @Override
+    public GameOfLife clone(){
+
+        int width = this.grid.length;
+        int height = this.grid[0].length;
+
+        GameOfLife clonedGol = new GameOfLife(width, height);
+
+        //clonedGol.aggregateNeighbours();
+        //clonedGol.rule = this.rule;
+        //clonedGol.rule = new CustomRule(clonedGol.grid, clonedGol.neighbours, this.rule.toString());
+        //clonedGol.cellCount = this.cellCount;
+
+        for(int x = 0; x < width; x++)
+            for(int y = 0; y < height; y++){
+                clonedGol.grid[x][y] = this.grid[x][y];
+                clonedGol.neighbours[x][y] = this.neighbours[x][y];
+            }
+
+        //tools.Utilities.print2DArray(clonedGol.getGrid());
+
+        clonedGol.rule = new CustomRule(clonedGol.grid, clonedGol.neighbours, this.rule.toString());
+
+        return clonedGol;
     }
 
     //region Getters
