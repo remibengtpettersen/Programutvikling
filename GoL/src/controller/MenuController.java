@@ -47,7 +47,7 @@ public class MenuController {
     }
 
     public void saveFile(){
-        masterController.canvasController.saveToFile();
+        masterController.getCanvasController().saveToFile();
     }
     public void onAbout(ActionEvent actionEvent) {
 
@@ -56,12 +56,12 @@ public class MenuController {
 
     public void setConwayRule(ActionEvent actionEvent) {
 
-        masterController.canvasController.setRule("classic");
+        masterController.getCanvasController().setRule("classic");
     }
 
     public void setHighLifeRule(ActionEvent actionEvent) {
 
-        masterController.canvasController.setRule("highlife");
+        masterController.getCanvasController().setRule("highlife");
     }
 
     /**
@@ -70,7 +70,7 @@ public class MenuController {
      */
     public void setCustomRule(ActionEvent actionEvent) {
 
-        TextInputDialog dialog = new TextInputDialog(masterController.canvasController.gol.getRule().toString());
+        TextInputDialog dialog = new TextInputDialog(masterController.getCanvasController().gol.getRule().toString());
 
         dialog.setTitle("Custom rule");
         dialog.setHeaderText("Enter custom rule code");
@@ -83,31 +83,31 @@ public class MenuController {
         if (result.isPresent()){
             System.out.println("Custom rule set: " + result.get());
 
-            masterController.canvasController.setRule(result.get());
+            masterController.getCanvasController().setRule(result.get());
         }
     }
 
     public void setLWDRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B3/S012345678");
+        masterController.getCanvasController().setRule("B3/S012345678");
     }
 
     public void setSeedsRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B2/S");
+        masterController.getCanvasController().setRule("B2/S");
     }
 
     public void setDiamoebaRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B35678/S5678");
+        masterController.getCanvasController().setRule("B35678/S5678");
     }
 
     public void setReplicatorRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B1357/S1357");
+        masterController.getCanvasController().setRule("B1357/S1357");
     }
 
     public void setDNNRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B3678/S34678");
+        masterController.getCanvasController().setRule("B3678/S34678");
     }
 
-    public void clearGrid(ActionEvent actionEvent) { masterController.canvasController.clearGrid(); }
+    public void clearGrid(ActionEvent actionEvent) { masterController.getCanvasController().clearGrid(); }
 
     public void showTheStrip(){
 

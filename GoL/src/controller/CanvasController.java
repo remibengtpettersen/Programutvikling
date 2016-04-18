@@ -14,8 +14,8 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import lieng.GIFWriter;
+import model.Cell;
 import model.GameOfLife;
-import s305080.TheStrip;
 import s305080.ToFile;
 
 
@@ -39,18 +39,15 @@ public class CanvasController {
     private MasterController masterController;
     @FXML
     private Canvas canvas;
-    private Color cellColor;        //these should be private, etc etc
-    private Color backgroundColor;
-    private Color ghostColor;
     private GraphicsContext gc;
 
     private AnimationTimer animationTimer;
     private long timer;
 
+    public Cell cell;
+
     private short boardWidth;
     private short boardHeight;
-    private double cellSize;
-    private double cellSpacing = 0.1; //callSpacing * cellSize pixels
     private boolean[][] grid;
 
     private int frameDelay;
@@ -78,7 +75,6 @@ public class CanvasController {
     private boolean importing = false;
     private boolean gridLines;
     private boolean userWantsGridLines;
-    private double maxCellSize = 50;
 
     public Canvas getCanvas() {
         return canvas;
@@ -103,7 +99,7 @@ public class CanvasController {
         initializeListeners();
         initializeAnimation();
         checkIfShouldStillDrawGrid();
-        masterController.toolController.setZoom(cellSize);
+        masterController.getToolController().setZoom(cell.getSize());
         startAnimation();
 
     }
@@ -113,21 +109,13 @@ public class CanvasController {
      */
     private void initializeGameParameters() {
 
-        try {
-            cellColor = (Color) Color.class.getField(masterController.configuration.getCellColor()).get(null);
-            backgroundColor = (Color) Color.class.getField(masterController.configuration.getBackgroundColor()).get(null);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
+        cell = new Cell(masterController.getConfig());
 
-        calculateGhostColor();
-
-        cellSize = masterController.configuration.getCellSize();
         frameDelay = masterController.configuration.getGameSpeed();
         boardWidth = masterController.configuration.getGameWidth();
         boardHeight = masterController.configuration.getGameHeight();
         userWantsGridLines = masterController.configuration.isGridLinesOn();
-        masterController.toolController.setSpeed(frameDelay);
+        masterController.getToolController().setSpeed(frameDelay);
 
     }
 
@@ -136,13 +124,13 @@ public class CanvasController {
      */
     private void updateView() {
 
-        currViewMinX = (int) (boardOffsetX / cellSize);
-        currViewMaxX = (int) ((boardOffsetX + canvas.getWidth()) / cellSize) + 1;
+        currViewMinX = (int) (boardOffsetX / cell.getSize());
+        currViewMaxX = (int) ((boardOffsetX + canvas.getWidth()) / cell.getSize()) + 1;
         if (currViewMaxX > grid.length)
             currViewMaxX--;
 
-        currViewMinY = (int) (boardOffsetY / cellSize);
-        currViewMaxY = (int) ((boardOffsetY + canvas.getHeight()) / cellSize) + 1;
+        currViewMinY = (int)(boardOffsetY / cell.getSize());
+        currViewMaxY = (int) ((boardOffsetY + canvas.getHeight()) / cell.getSize()) + 1;
         if (currViewMaxY > grid[0].length)
             currViewMaxY--;
     }
@@ -166,7 +154,7 @@ public class CanvasController {
                         renderCanvas();
 
                         timer = now / 1000000;
-                        masterController.toolController.giveCellCount(gol.getCellCount());
+                        masterController.getToolController().giveCellCount(gol.getCellCount());
                     }
                 }
             }
@@ -187,23 +175,17 @@ public class CanvasController {
 
         masterController.scene.setOnKeyPressed(this::keyPressed);
 
-        canvas.widthProperty().addListener(evt -> {
-            clampCellSize();
-            clampView();
-            calculateMinCellSize();
-            updateView();
-            if (!running || frameDelay > 0)
-                renderCanvas();
-        });
+        canvas.widthProperty().addListener(evt -> fitContentToWindow());
+        canvas.heightProperty().addListener(evt -> fitContentToWindow());
+    }
 
-        canvas.heightProperty().addListener(evt -> {
-            clampCellSize();
-            clampView();
-            calculateMinCellSize();
-            updateView();
-            if (!running || frameDelay > 0)
-                renderCanvas();
-        });
+    private void fitContentToWindow() {
+        clampCellSize();
+        clampView();
+        calculateMinCellSize();
+        updateView();
+        if (!running || frameDelay > 0)
+            renderCanvas();
     }
 
     /**
@@ -303,11 +285,11 @@ public class CanvasController {
 
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY)
             if (running) {
-                masterController.toolController.changeIconToPlay();
+                masterController.getToolController().changeIconToPlay();
                 stopAnimation();
                 running = false;
             } else {
-                masterController.toolController.changeIconToPause();
+                masterController.getToolController().changeIconToPause();
                 startAnimation();
                 running = true;
             }
@@ -365,22 +347,22 @@ public class CanvasController {
      */
     private void mouseScroll(ScrollEvent scrollEvent) {
 
-        double ratio1 = (boardOffsetX + scrollEvent.getX()) / cellSize;
-        double ratio2 = (boardOffsetY + scrollEvent.getY()) / cellSize;
+        double ratio1 = (boardOffsetX + scrollEvent.getX()) / cell.getSize();
+        double ratio2 = (boardOffsetY + scrollEvent.getY()) /  cell.getSize();
 
-        cellSize += cellSize * (scrollEvent.getDeltaY() / 150);
+         cell.setSize(cell.getSize() * ( 1 + (scrollEvent.getDeltaY() / 150)));
 
         clampCellSize();
 
-        masterController.toolController.setZoom(cellSize);
+        masterController.getToolController().setZoom( cell.getSize());
 
-        boardOffsetX = (int) (cellSize * ratio1 - scrollEvent.getX());
-        boardOffsetY = (int) (cellSize * ratio2 - scrollEvent.getY());
+        boardOffsetX = (int) ( cell.getSize() * ratio1 - scrollEvent.getX());
+        boardOffsetY = (int) ( cell.getSize() * ratio2 - scrollEvent.getY());
 
         clampView();
         checkIfShouldStillDrawGrid();
 
-        masterController.toolController.addSpeedValue(scrollEvent.getDeltaX() / 5);
+        masterController.getToolController().addSpeedValue(scrollEvent.getDeltaX() / 5);
 
         updateView();
 
@@ -392,7 +374,7 @@ public class CanvasController {
      * Checks if grid lines should be displayed
      */
     private void checkIfShouldStillDrawGrid() {
-        gridLines = cellSize > 5;
+        gridLines = cell.getSize() > 5;
     }
 
 
@@ -403,13 +385,14 @@ public class CanvasController {
      */
     private void clampCellSize() {
 
-        if (cellSize * boardWidth < canvas.getWidth()) {
-            cellSize = canvas.getWidth() / boardWidth;
+        if (cell.getSize() * boardWidth < canvas.getWidth()) {
+            cell.setSize(canvas.getWidth() / boardWidth);
         }
-        if (cellSize * boardHeight < canvas.getHeight()) {
-            cellSize = canvas.getHeight() / boardHeight;
-        } else if (cellSize > maxCellSize) {
-            cellSize = maxCellSize;
+
+        if (cell.getSize() * boardHeight < canvas.getHeight()) {
+            cell.setSize(canvas.getHeight() / boardHeight);
+        } else if (cell.getSize() > Cell.MAX_SIZE) {
+            cell.setSize(Cell.MAX_SIZE);
         }
     }
 
@@ -418,8 +401,8 @@ public class CanvasController {
      */
     private void clampView() {
 
-        boardOffsetX = clamp(boardOffsetX, 0, (int) (cellSize * boardWidth - canvas.getWidth()));
-        boardOffsetY = clamp(boardOffsetY, 0, (int) (cellSize * boardHeight - canvas.getHeight()));
+        boardOffsetX = clamp(boardOffsetX, 0, (int) (cell.getSize() * boardWidth - canvas.getWidth()));
+        boardOffsetY = clamp(boardOffsetY, 0, (int) (cell.getSize() * boardHeight - canvas.getHeight()));
     }
 
     /**
@@ -437,11 +420,11 @@ public class CanvasController {
 
     // region canvas to grid converter
     private int getGridPosX(double x) {
-        return (int) ((x + boardOffsetX) / cellSize);
+        return (int) ((x + boardOffsetX) / cell.getSize());
     }
 
     private int getGridPosY(double y) {
-        return (int) ((y + boardOffsetY) / cellSize);
+        return (int) ((y + boardOffsetY) / cell.getSize());
     }
     // endregion
 
@@ -454,7 +437,7 @@ public class CanvasController {
      * @return a x coordinate on the canvas.
      */
     private double getCanvasPosX(int x) {
-        return x * cellSize - boardOffsetX;
+        return x * cell.getSize() - boardOffsetX;
     }
 
     /**
@@ -464,7 +447,7 @@ public class CanvasController {
      * @return a y coordinate on the canvas.
      */
     private double getCanvasPosY(int y) {
-        return y * cellSize - boardOffsetY;
+        return y * cell.getSize() - boardOffsetY;
     }
     //endregion
 
@@ -488,10 +471,10 @@ public class CanvasController {
      */
     private void renderLife() {
 
-        gc.setFill(backgroundColor);
+        gc.setFill(cell.getDeadColor());
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        gc.setFill(cellColor);
+        gc.setFill(cell.getColor());
         for (int x = currViewMinX; x < currViewMaxX; x++) {
             for (int y = currViewMinY; y < currViewMaxY; y++) {
 
@@ -506,13 +489,13 @@ public class CanvasController {
      */
     private void renderGridLines() {
 
-        gc.setStroke(ghostColor);
+        gc.setStroke(cell.getGhostColor());
 
         for (int i = currViewMinX; i < currViewMaxX; i++) {
-            gc.strokeLine(i * cellSize - boardOffsetX - cellSize * cellSpacing / 2, 0, i * cellSize - boardOffsetX - cellSize * cellSpacing / 2, canvas.getHeight());
+            gc.strokeLine(i * cell.getSize() - boardOffsetX - cell.getSize() * cell.getSpacing() / 2, 0, i * cell.getSize() - boardOffsetX - cell.getSize() * cell.getSpacing() / 2, canvas.getHeight());
         }
         for (int i = currViewMinY; i < currViewMaxY; i++) {
-            gc.strokeLine(0, i * cellSize - boardOffsetY - cellSize * cellSpacing / 2, canvas.getWidth(), i * cellSize - boardOffsetY - cellSize * cellSpacing / 2);
+            gc.strokeLine(0, i * cell.getSize() - boardOffsetY - cell.getSize() * cell.getSpacing() / 2, canvas.getWidth(), i * cell.getSize() - boardOffsetY - cell.getSize() * cell.getSpacing() / 2);
         }
     }
 
@@ -521,11 +504,11 @@ public class CanvasController {
      */
     private void renderImport() {
 
-        gc.setFill(ghostColor);
+        gc.setFill(cell.getGhostColor());
 
         for (int x = 0; x < importPattern.length; x++) {
             for (int y = 0; y < importPattern[x].length; y++) {
-                if (importPattern[x][y] == true) {
+                if (importPattern[x][y]) {
                     drawCell(getGridPosX(currMousePosX) - importPattern.length / 2 + x, getGridPosY(currMousePosY) - importPattern[x].length / 2 + y);
                 }
             }
@@ -539,7 +522,7 @@ public class CanvasController {
 
         for (int x = 0; x < importPattern.length; x++) {
             for (int y = 0; y < importPattern[x].length; y++) {
-                if (importPattern[x][y] == true) {
+                if (importPattern[x][y]) {
                     int posX = getGridPosX(currMousePosX) - importPattern.length / 2 + x;
 
                     if (posX >= 0 && posX < boardWidth) {
@@ -573,7 +556,7 @@ public class CanvasController {
      * @param y The y coordinate in the game of life grid.
      */
     private void drawCell(int x, int y) {
-        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cellSize - cellSize * cellSpacing, cellSize - cellSize * cellSpacing);
+        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cell.getSize() - cell.getSize() * cell.getSpacing(), cell.getSize() - cell.getSize() * cell.getSpacing());
     }
 
     /**
@@ -681,37 +664,20 @@ public class CanvasController {
     //endregion
 
     //region Setters
-    public void setCellColor(Color cellColor) {
 
-        this.cellColor = cellColor;
-        calculateGhostColor();
-    }
 
     public void setBackgroundColor(Color backgroundColor) {
-
-        this.backgroundColor = backgroundColor;
-        calculateGhostColor();
+        cell.setDeadColor(backgroundColor);
     }
 
-    /**
-     * Calculates the color just in between the background color and the cell color
-     */
-    private void calculateGhostColor() {
 
-        double blue = (cellColor.getBlue() + backgroundColor.getBlue()) / 2;
-        double red = (cellColor.getRed() + backgroundColor.getRed()) / 2;
-        double green = (cellColor.getGreen() + backgroundColor.getGreen()) / 2;
-
-        ghostColor = new Color(red, green, blue, 1);
-    }
 
     /**
      * Gives the minimum cell size to the zoom slider
      */
     private void calculateMinCellSize() {
-
         double minCellSize = (canvas.getWidth() / boardWidth > canvas.getHeight() / boardHeight) ? canvas.getWidth() / boardHeight : canvas.getHeight() / boardHeight;
-        masterController.toolController.setMinZoom(minCellSize);
+        masterController.getToolController().setMinZoom(minCellSize);
     }
 
     /**
@@ -721,14 +687,14 @@ public class CanvasController {
      */
     public void setCellSize(double newCellSize) {
 
-        double ratio1 = (boardOffsetX + canvas.getWidth() / 2) / cellSize;
-        double ratio2 = (boardOffsetY + canvas.getHeight() / 2) / cellSize;
+        double ratio1 = (boardOffsetX + canvas.getWidth() / 2) / cell.getSize();
+        double ratio2 = (boardOffsetY + canvas.getHeight() / 2) / cell.getSize();
 
-        cellSize = newCellSize;
+        cell.setSize(newCellSize);
         clampCellSize();
 
-        boardOffsetX = (int) (cellSize * ratio1 - canvas.getWidth() / 2);
-        boardOffsetY = (int) (cellSize * ratio2 - canvas.getHeight() / 2);
+        boardOffsetX = (int) (cell.getSize() * ratio1 - canvas.getWidth() / 2);
+        boardOffsetY = (int) (cell.getSize() * ratio2 - canvas.getHeight() / 2);
 
         clampView();
 
@@ -797,11 +763,17 @@ public class CanvasController {
         int gifHeight = currViewMaxY - currViewMinY;
 
         for (int i = 0; i < 100; i++) {
-            gifWriter.fillRect(0, width - 1, 0, height - 1, new java.awt.Color((int) (255 * backgroundColor.getRed()), (int) (255 * backgroundColor.getGreen()), (int) (255 * backgroundColor.getBlue())));
+            gifWriter.fillRect(0, width - 1, 0, height - 1, new java.awt.Color((int) (255 * cell.getDeadColor().getRed()), (int) (255 * cell.getDeadColor().getGreen()), (int) (255 * cell.getDeadColor().getBlue())));
             for (int x = 0; x < gifWidth - 1; x++) {
                 for (int y = 0; y < gifHeight - 1; y++) {
                     if (grid[x + currViewMinX][y + currViewMinY]) {
-                        gifWriter.fillRect(x * width / gifWidth, (x + 1) * width / gifWidth, y * height / gifHeight, (y + 1) * height / gifHeight, new java.awt.Color((int) (255 * cellColor.getRed()), (int) (255 * cellColor.getGreen()), (int) (255 * cellColor.getBlue())));
+                        gifWriter.fillRect(
+                                x * width / gifWidth, (x + 1) * width / gifWidth,
+                                y * height / gifHeight, (y + 1) * height / gifHeight,
+                                new java.awt.Color(
+                                        (int) (255 * cell.getColor().getRed()),
+                                        (int) (255 * cell.getColor().getGreen()),
+                                        (int) (255 * cell.getColor().getBlue())));
                     }
                 }
             }
@@ -868,11 +840,8 @@ public class CanvasController {
         return currViewMaxY;
     }
 
-    public Color getCellColor(){
-        return cellColor;
-    }
-    public Color getBackgroundColor(){
-        return backgroundColor;
+    public Cell getCell() {
+        return cell;
     }
     //endregion
 }

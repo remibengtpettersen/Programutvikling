@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.GameOfLife;
 
@@ -43,7 +44,7 @@ public class ToFile {
             System.out.println("YOU SHALL NOT SAVE");
             return; //throw exception
         }
-        this.grid = grid;
+        this.grid = gol.getGrid();
         this.boundingBox = boundingBox;
 
         list = new ArrayList<String>();
@@ -183,6 +184,7 @@ public class ToFile {
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
         stage.showAndWait();
+
     }
 
     public void closeStage() {

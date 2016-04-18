@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 /**
  * Created on 12.02.2016.
+ *
  * @author The group through pair programing.
  */
 public class GameOfLife {
@@ -21,6 +22,7 @@ public class GameOfLife {
 
     /**
      * GameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
+     *
      * @param width
      * @param height
      */
@@ -31,6 +33,7 @@ public class GameOfLife {
     }
 
     //region startup-sequence
+
     /**
      * Creates the boolean 2D Array to keep track of dead and live cells, and the 2D byte-
      * array to keep track of the neighbour count to the corresponding cells in the other array
@@ -42,10 +45,11 @@ public class GameOfLife {
     //endregion
 
     //region NextGeneration
+
     /**
      * Evolves the grid one generation
      */
-    public void nextGeneration(){
+    public void nextGeneration() {
         aggregateNeighbours();
 
         try {
@@ -53,21 +57,23 @@ public class GameOfLife {
         } catch (EvolveException e) {
             e.printStackTrace();
         }
-    };
+    }
+
+    ;
 
     /**
      * For each alive cell, it increments the adjacent cells neighbour count.
      * Also calculates the live cell count
      */
     public void aggregateNeighbours() {
-        cellCount=0;
-        for(int x = 1; x < grid.length - 1; x++){
-            for(int y = 1; y < grid[x].length - 1; y++){
-                if(grid[x][y]){
+        cellCount = 0;
+        for (int x = 1; x < grid.length - 1; x++) {
+            for (int y = 1; y < grid[x].length - 1; y++) {
+                if (grid[x][y]) {
                     cellCount++;
-                    for(int a = x - 1; a <= x + 1; a++){
-                        for(int b = y - 1; b <= y + 1; b++){
-                            if( a != x || b != y){
+                    for (int a = x - 1; a <= x + 1; a++) {
+                        for (int b = y - 1; b <= y + 1; b++) {
+                            if (a != x || b != y) {
                                 neighbours[a][b]++;
                             }
                         }
@@ -77,9 +83,43 @@ public class GameOfLife {
         }
     }
 
+
+    /**
+     * Clones the GameOfLife object
+     * @return the cloned GameOfLife object
+     */
+    @Override
+    public GameOfLife clone() {
+
+        GameOfLife gameOfLife = new GameOfLife(getGrid().length, getGrid()[0].length);
+        gameOfLife.deepCopyOnSet(grid);
+        gameOfLife.setRule(getRule().toString());
+        gameOfLife.setCellCount(cellCount);
+
+        //gameOfLife.setCell(getCell());
+
+        return gameOfLife;
+    }
+
+    /**
+     * Deep copies the grid and sets it.
+     * @param grid the grid to be deep copied and set.
+     */
+    public void deepCopyOnSet(boolean[][] grid) {
+
+        boolean[][] copiedBoard = new boolean[grid.length][grid.length];
+
+        for(int i = 0; i < grid.length; i++){
+            copiedBoard[i] = grid[i].clone();
+        }
+        this.grid = copiedBoard;
+    }
+
     //region Getters
+
     /**
      * Getter for neighbour-2D-array
+     *
      * @return The neighbour-2D-array
      */
     public byte[][] getNeighbours() {
@@ -88,6 +128,7 @@ public class GameOfLife {
 
     /**
      * Getter for the cell-2D-array
+     *
      * @return The cell-2D-array
      */
     public boolean[][] getGrid() {
@@ -96,6 +137,7 @@ public class GameOfLife {
 
     /**
      * Returns the number of live cells in grid
+     *
      * @return The live cell count
      */
     public int getCellCount() {
@@ -104,6 +146,7 @@ public class GameOfLife {
 
     /**
      * Returns the rule used for evolution
+     *
      * @return The rule
      */
     public Rule getRule() {
@@ -143,24 +186,58 @@ public class GameOfLife {
         }
         return boundingBox;
     }
+
+    public boolean[][] getPatternFromGrid() {
+        int[] pattern = getBoundingBox();
+
+        int startPoint_x = pattern[0];
+        int endPoint_x = pattern[1] + 1;
+        int startPoint_y = pattern[2];
+        int endPoint_y = pattern[3] + 1;
+
+        int length_x = endPoint_x - startPoint_x;
+        int length_y = endPoint_y - startPoint_y;
+
+        boolean[][] gridExtracted = new boolean[length_x][length_y];
+
+        int k = 0, t = 0;
+
+        for (int i = startPoint_x; i < startPoint_x + length_x; i++) {
+            for (int j = startPoint_y; j < startPoint_y + length_y; j++) {
+                if (getGrid()[i][j]) {
+                    gridExtracted[k][t] = getGrid()[i][j];
+                }
+                t++;
+            }
+            k++;
+            t = 0;
+        }
+
+        return gridExtracted;
+    }
     //endregion
 
     //region Setters
+
     /**
      * Sets the cell grid to be used
+     *
      * @param grid Cell grid
      */
-    public void setGrid(boolean[][] grid) { this.grid = grid; }
+    public void setGrid(boolean[][] grid) {
+        this.grid = grid;
+    }
 
     /**
      * Sets a specific rule to be used.
+     *
      * @param ruleText The rule text
      */
     public void setRule(String ruleText) {
 
         ruleText = ruleText.toLowerCase();
 
-        switch(ruleText){
+        switch (ruleText) {
             case "classic":
                 rule = new ClassicRule(grid, neighbours);
                 break;
@@ -175,15 +252,17 @@ public class GameOfLife {
 
     /**
      * Sets cell state to true regardless of current state.
+     *
      * @param x the x coordinate in the grid.
      * @param y the y coordinate in the grid.
      */
-    public void setCellAlive(int x, int y){
+    public void setCellAlive(int x, int y) {
         grid[x][y] = true;
     }
 
     /**
      * Changes the state of a cell based on the grid coordinate.
+     *
      * @param x the x coordinate in the grid.
      * @param y the y coordinate in the grid.
      */
@@ -199,15 +278,14 @@ public class GameOfLife {
     public void createNeighboursGrid() {
         neighbours = new byte[grid.length][grid[0].length];
     }
-
     /**
      * Clears the grid of live cells
      */
-    public void clearGrid(){
+    public void clearGrid() {
 
-        for(int i = 0; i < grid.length; i++){
+        for (int i = 0; i < grid.length; i++) {
             Arrays.fill(grid[i], false);
-            Arrays.fill(neighbours[i], (byte)0);
+            Arrays.fill(neighbours[i], (byte) 0);
         }
     }
 
@@ -217,6 +295,10 @@ public class GameOfLife {
     public void updateRuleGrid() {
         rule.setGrid(grid);
         rule.setNeighbours(neighbours);
+    }
+
+    public void setCellCount(int cellCount) {
+        this.cellCount = cellCount;
     }
     //endregion
 }

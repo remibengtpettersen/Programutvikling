@@ -47,12 +47,12 @@ public class TheStrip {
 
         masterController.stage.setOnCloseRequest(event -> stage.close());
 
-        masterController.canvasController.getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
-        masterController.canvasController.getCanvas().setOnScrollFinished(event -> theStripController.updateStrip());
+        masterController.getCanvasController().getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
+        masterController.getCanvasController().getCanvas().setOnScrollFinished(event -> theStripController.updateStrip());
         stage.setOnCloseRequest(event -> {
-            masterController.canvasController.getCanvas().setOnMouseClicked(null);
-            masterController.canvasController.getCanvas().setOnScrollFinished(null);
-            masterController.menuController.setTheStripIsShowing(false);
+            masterController.getCanvasController().getCanvas().setOnMouseClicked(null);
+            masterController.getCanvasController().getCanvas().setOnScrollFinished(null);
+            masterController.getMenuController().setTheStripIsShowing(false);
         });
     }
 
@@ -61,8 +61,8 @@ public class TheStrip {
     }
 
     public void close() {
-        masterController.canvasController.getCanvas().setOnMouseClicked(null);
-        masterController.canvasController.getCanvas().setOnScrollFinished(null);
+        masterController.getCanvasController().getCanvas().setOnMouseClicked(null);
+        masterController.getCanvasController().getCanvas().setOnScrollFinished(null);
         stage.close();
     }
 }

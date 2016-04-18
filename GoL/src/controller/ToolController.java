@@ -67,8 +67,8 @@ public class ToolController {
      */
     public void changeCellColor(ActionEvent actionEvent) {
 
-        masterController.canvasController.setCellColor(cellColorPicker.getValue());    //ugly, but temporary
-        masterController.canvasController.renderCanvas();
+        masterController.getCanvasController().getCell().setColor(cellColorPicker.getValue());    //ugly, but temporary
+        masterController.getCanvasController().renderCanvas();
     }
 
     /**
@@ -77,8 +77,8 @@ public class ToolController {
      */
     public void changeBackgroundColor(ActionEvent actionEvent) {
 
-        masterController.canvasController.setBackgroundColor(backgroundColorPicker.getValue());    //ugly, but temporary
-        masterController.canvasController.renderCanvas();
+        masterController.getCanvasController().setBackgroundColor(backgroundColorPicker.getValue());    //ugly, but temporary
+        masterController.getCanvasController().renderCanvas();
     }
 
     /**
@@ -86,7 +86,7 @@ public class ToolController {
      */
     public void speedSliderDragged(){
 
-        masterController.canvasController.setFrameDelay((int)Math.exp(-speedSlider.getValue()/15));
+        masterController.getCanvasController().setFrameDelay((int)Math.exp(-speedSlider.getValue()/15));
     }
 
     /**
@@ -94,7 +94,7 @@ public class ToolController {
      */
     public void zoomSliderDragged(){
 
-        masterController.canvasController.setCellSize(Math.exp(zoomSlider.getValue()/28));
+        masterController.getCanvasController().setCellSize(Math.exp(zoomSlider.getValue()/28));
     }
 
     /**
@@ -119,11 +119,11 @@ public class ToolController {
 
         if (Objects.equals(btnPlay.getText(), "Play")) {
             changeIconToPause();
-            masterController.canvasController.startAnimation();
+            masterController.getCanvasController().startAnimation();
         }
         else {
             changeIconToPlay();
-            masterController.canvasController.stopAnimation();
+            masterController.getCanvasController().stopAnimation();
         }
     }
 

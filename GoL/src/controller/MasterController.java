@@ -3,6 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -23,14 +24,15 @@ public class MasterController {
     public Stage stage;
     public Scene scene;
 
-    @FXML public CanvasController canvasController;
-    @FXML public MenuController menuController;
-    @FXML public ToolController toolController;
+    @FXML private CanvasController canvasController;
+    @FXML private MenuController menuController;
+    @FXML private ToolController toolController;
 
     //region s305080
     TheStrip theStrip;
     //endregion
     private FileChooser patternChooser = new FileChooser();
+    private Configuration config;
 
     /**
      *
@@ -92,6 +94,16 @@ public class MasterController {
         }
     }
 
+    public CanvasController getCanvasController(){
+        return canvasController;
+    }
+    public ToolController getToolController(){
+        return toolController;
+    }
+    public MenuController getMenuController(){
+        return menuController;
+    }
+
     //region s305080
 
     /**
@@ -108,6 +120,10 @@ public class MasterController {
     void closeTheStrip(){
         theStrip.close();
         theStrip = null;
+    }
+
+    public Configuration getConfig() {
+        return configuration;
     }
     //endregion
 }

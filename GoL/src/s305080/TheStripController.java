@@ -34,12 +34,12 @@ public class TheStripController {
 
     public void updateStrip(){
 
-        minX = master.canvasController.getCurrViewMinX();
-        maxX = master.canvasController.getCurrViewMaxX();
-        minY = master.canvasController.getCurrViewMinY();
-        maxY = master.canvasController.getCurrViewMaxY();
+        minX = master.getCanvasController().getCurrViewMinX();
+        maxX = master.getCanvasController().getCurrViewMaxX();
+        minY = master.getCanvasController().getCurrViewMinY();
+        maxY = master.getCanvasController().getCurrViewMaxY();
 
-        gol.setGrid(copy(grid));
+        gol.deepCopyOnSet(grid);
         gol.updateRuleGrid();
 
 
@@ -93,9 +93,9 @@ public class TheStripController {
     }
 
     private void clearCanvasAndSetColors() {
-        gc.setFill(master.canvasController.getBackgroundColor());
+        gc.setFill(master.getCanvasController().getCell().getDeadColor());
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-        gc.setFill(master.canvasController.getCellColor());
+        gc.setFill(master.getCanvasController().getCell().getColor());
         gc.setStroke(gc.getFill());
     }
 
