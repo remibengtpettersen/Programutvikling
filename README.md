@@ -110,3 +110,6 @@ Added more unit test to GameOfLifeTest class. Coverage is now 80%.
 
 160414 09:57
 Added RuleFormatException. Several classes refactored and documented with JavaDoc.
+
+160418 11:34 
+Extracted cell object from canvas controller, created test class and refined zoom function.

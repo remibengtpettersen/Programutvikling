@@ -9,6 +9,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import model.Cell;
 
 import java.util.Objects;
 
@@ -20,9 +21,9 @@ public class ToolController {
     private MasterController masterController;
     private Image imgPause;
     private Image imgPlay;
-    private String pathImages = "/icons/";
-    private String playImageName = "arrows.png";
-    private String pauseImageName = "bars.png";
+
+    private byte zoomFactor;
+    private byte speedFactor = 15; //The empiric factor
 
     @FXML
     private ColorPicker cellColorPicker;
@@ -48,9 +49,12 @@ public class ToolController {
         this.masterController = masterController;
         cellColorPicker.setValue(Color.BLACK);
 
+        String pathImages = "/icons/";
+        String pauseImageName = "bars.png";
+        String playImageName = "arrows.png";
         imgPause = new Image(getClass().getResourceAsStream(pathImages + pauseImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
         imgPlay = new Image(getClass().getResourceAsStream(pathImages + playImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
-
+        zoomFactor = (byte)(zoomSlider.getMax() / Math.log(Cell.MAX_SIZE));
         try {
             cellColorPicker.setValue((Color) Color.class.getField(masterController.configuration.getCellColor()).get(null));
             backgroundColorPicker.setValue((Color) Color.class.getField(masterController.configuration.getBackgroundColor()).get(null));
@@ -86,7 +90,7 @@ public class ToolController {
      */
     public void speedSliderDragged(){
 
-        masterController.getCanvasController().setFrameDelay((int)Math.exp(-speedSlider.getValue()/15));
+        masterController.getCanvasController().setFrameDelay((int)Math.exp(-speedSlider.getValue()/speedFactor));
     }
 
     /**
@@ -94,7 +98,7 @@ public class ToolController {
      */
     public void zoomSliderDragged(){
 
-        masterController.getCanvasController().setCellSize(Math.exp(zoomSlider.getValue()/28));
+        masterController.getCanvasController().setCellSize(Math.exp(zoomSlider.getValue()/zoomFactor));
     }
 
     /**
@@ -151,18 +155,20 @@ public class ToolController {
      */
     public void setZoom(double zoom) {
 
-        zoomSlider.setValue(Math.log(zoom) * 28);
+        zoomSlider.setValue(Math.log(zoom) * zoomFactor);
+    }
+
+
+    public void setMinZoom(double minZoom) {
+        zoomSlider.setMin(Math.log(minZoom) * zoomFactor);
     }
 
     public void setSpeed(double speed) {
 
         if(speed < 0) speed = 0;
-        speedSlider.setValue(-Math.log(speed) * 15);
+        speedSlider.setValue(-Math.log(speed) * speedFactor);
     }
 
-    public void setMinZoom(double minZoom) {
-         zoomSlider.setMin(Math.log(minZoom) * 28);
-    }
 
     public void addSpeedValue(double deltaX) {
 

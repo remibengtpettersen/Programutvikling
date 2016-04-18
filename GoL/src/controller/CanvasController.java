@@ -347,17 +347,17 @@ public class CanvasController {
      */
     private void mouseScroll(ScrollEvent scrollEvent) {
 
-        double ratio1 = (boardOffsetX + scrollEvent.getX()) / cell.getSize();
-        double ratio2 = (boardOffsetY + scrollEvent.getY()) /  cell.getSize();
+        double absMPosXOnGrid = (boardOffsetX + scrollEvent.getX()) / cell.getSize();
+        double absMPosYOnGrid = (boardOffsetY + scrollEvent.getY()) /  cell.getSize();
 
-         cell.setSize(cell.getSize() * ( 1 + (scrollEvent.getDeltaY() / 150)));
+        cell.setSize(cell.getSize() * ( 1 + (scrollEvent.getDeltaY() / 150)));
 
         clampCellSize();
 
         masterController.getToolController().setZoom( cell.getSize());
 
-        boardOffsetX = (int) ( cell.getSize() * ratio1 - scrollEvent.getX());
-        boardOffsetY = (int) ( cell.getSize() * ratio2 - scrollEvent.getY());
+        boardOffsetX = (int) ( cell.getSize() * absMPosXOnGrid - scrollEvent.getX());
+        boardOffsetY = (int) ( cell.getSize() * absMPosYOnGrid - scrollEvent.getY());
 
         clampView();
         checkIfShouldStillDrawGrid();
@@ -687,18 +687,20 @@ public class CanvasController {
      */
     public void setCellSize(double newCellSize) {
 
-        double ratio1 = (boardOffsetX + canvas.getWidth() / 2) / cell.getSize();
-        double ratio2 = (boardOffsetY + canvas.getHeight() / 2) / cell.getSize();
+        double canvasCenterX = (boardOffsetX + canvas.getWidth() / 2) / cell.getSize();
+        double canvasCenterY = (boardOffsetY + canvas.getHeight() / 2) / cell.getSize();
 
         cell.setSize(newCellSize);
         clampCellSize();
 
-        boardOffsetX = (int) (cell.getSize() * ratio1 - canvas.getWidth() / 2);
-        boardOffsetY = (int) (cell.getSize() * ratio2 - canvas.getHeight() / 2);
+        boardOffsetX = (int) (cell.getSize() * canvasCenterX - canvas.getWidth() / 2);
+        boardOffsetY = (int) (cell.getSize() * canvasCenterY - canvas.getHeight() / 2);
 
         clampView();
 
         updateView();
+
+        checkIfShouldStillDrawGrid();
 
         if (!running || frameDelay > 0)
             renderCanvas();

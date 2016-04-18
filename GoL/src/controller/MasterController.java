@@ -51,9 +51,10 @@ public class MasterController {
         stage.setScene(scene);
         stage.show();
 
+        toolController.initialize(this);
         canvasController.initialize(this);
         menuController.initialize(this);
-        toolController.initialize(this);
+
 
         patternChooser.setTitle("Choose pattern file");
         patternChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GoL pattern files", "*.rle", "*.lif", "*.life", "*.cells"));
