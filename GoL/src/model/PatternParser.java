@@ -4,9 +4,8 @@ package model;
  * Created by Truls on 18/01/16.
  */
 
-import tools.Utilities;
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -189,7 +188,7 @@ public class PatternParser {
         patternMatcher = patternParameters.matcher(lineList.get(FIRST_LINE));
 
         if(!patternMatcher.matches()){
-            throw new PatternFormatException();
+            throw new PatternFormatException("Couldn't read Life 1.06 file");
         }
 
         int startPosX = Integer.parseInt(patternMatcher.group(1));
@@ -231,7 +230,7 @@ public class PatternParser {
             patternMatcher = patternParameters.matcher(lineList.get(i));
 
             if(!patternMatcher.matches()){
-                throw new PatternFormatException();
+                throw new PatternFormatException("Couldn't read Life 1.06 file");
             }
             patternArray[Integer.parseInt(patternMatcher.group(1)) - startPosX][Integer.parseInt(patternMatcher.group(2)) - startPosY] = true;
         }
@@ -252,7 +251,7 @@ public class PatternParser {
         patternMatcher = patternParameters.matcher(lineList.get(FIRST_LINE));
 
         if(!patternMatcher.matches()) {
-            throw new PatternFormatException();
+            throw new PatternFormatException("Couldn't read RLE file");
         }
 
         patternHeight = Integer.parseInt(patternMatcher.group(1));

@@ -4,7 +4,6 @@ import controller.MasterController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class TheStrip {
 
         masterController.stage.setOnCloseRequest(event -> stage.close());
 
-        masterController.canvasController.getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
+        masterController.getCanvasController().getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
     }
 
     private void bindCanvasToStage(Stage stage) {

@@ -44,7 +44,7 @@ public class MasterController {
      */
     public void initialize(Stage stage, BorderPane root) throws IOException {
 
-        configuration = new Configuration("../GoL/resources/config.properties");
+        configuration = new Configuration("./GoL/resources/config.properties");
 
         this.stage = stage;
         scene = new Scene(root, configuration.getWidth(), configuration.getHeight());

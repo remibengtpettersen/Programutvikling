@@ -5,8 +5,8 @@
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 
-<MenuBar  fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40"
-          xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
+<MenuBar fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40"
+         xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
     <Menu text="GoL">
         <MenuItem text="About" onAction="#onAbout"/>
         <MenuItem text="Preferences"/>
@@ -23,7 +23,7 @@
         <MenuItem text="Copy"/>
         <MenuItem text="Paste"/>
         <SeparatorMenuItem/>
-        <MenuItem text="Open editor"/>
+        <MenuItem text="Open editor S305073" onAction="#launchEditor"/>
     </Menu>
     <Menu text="View">
         <RadioMenuItem text="Static board"/>
@@ -43,8 +43,7 @@
         <MenuItem text="Custom rule" onAction="#setCustomRule"/>
     </Menu>
     <Menu text="Stats">
-        <MenuItem text="Show history"/>
-        <MenuItem text="Show evolution"/>
+        <MenuItem text="Show statistics - s305061" onAction="#openStatWindow"/>
     </Menu>
     <Menu text="Music">
         <CheckMenuItem text="Enable"/>

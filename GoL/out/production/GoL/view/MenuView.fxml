@@ -6,7 +6,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 
 <MenuBar  fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40"
-          xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
+          xmlns:fx="http://javafx.com/fxml">
     <Menu text="GoL">
         <MenuItem text="About" onAction="#onAbout"/>
         <MenuItem text="Preferences"/>
