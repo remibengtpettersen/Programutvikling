@@ -14,7 +14,7 @@
     </Menu>
     <Menu text="File">
         <MenuItem fx:id="openBtn" text="Open" onAction="#openFileChooser"/>
-        <MenuItem text="Save"/>
+        <MenuItem text="Save - s305080" onAction="#saveFile"/>
     </Menu>
     <Menu text="Edit">
         <MenuItem text="Clear board" onAction="#clearGrid"/>
@@ -23,11 +23,13 @@
         <MenuItem text="Copy"/>
         <MenuItem text="Paste"/>
         <SeparatorMenuItem/>
-        <MenuItem text="Open editor"/>
+        <MenuItem text="Open editor S305073" onAction="#launchEditor"/>
     </Menu>
     <Menu text="View">
         <RadioMenuItem text="Static board"/>
         <RadioMenuItem text="Dynamic board"/>
+        <SeparatorMenuItem/>
+        <RadioMenuItem fx:id="theStripS305080" text="The strip - s305080" onAction="#showTheStrip"/>
     </Menu>
     <Menu text="Rules">
         <MenuItem text="Conway" onAction="#setConwayRule"/>

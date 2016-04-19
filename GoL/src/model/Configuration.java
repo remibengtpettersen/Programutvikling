@@ -18,7 +18,7 @@ public class Configuration {
     private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 
     private InputStream inputStream;
-    private String propertiesFileName;
+    private String propertiesFileName; //= "./resources/config.properties";
     private Properties properties = new Properties();
     private File file;
     private String windowWidth;
@@ -35,6 +35,10 @@ public class Configuration {
     private String gameWidth;
     //endregion
 
+    /**
+     * Configuration constructor.
+     * @param propertiesFileName
+     */
     public Configuration(String propertiesFileName) {
         this.propertiesFileName = propertiesFileName;
         initialize();

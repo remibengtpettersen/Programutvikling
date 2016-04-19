@@ -93,5 +93,32 @@ Refactored and updated formatting for all classes in controller package.
 160405 12:47
 Created test classes for Custom rule, HighLife rule, Configuration, PatternParser and GameOfLife2D. 
 
+160412 12:14
+Added RuleParser, and moved formatRuleText from CustomRule to this class as a static function. Refactored the rule parsing algorithm, now uses regex.
+
+160412 13:48
+Removed Rule interface and GameOfLife and GameOfLife3D classes. Renamed Rule2D to Rule, and GameOfLife2D to GameOfLife.
+
+160412 17:10
+Added more unit test for Ruls. Refactored Rules and FileParser.Added Exceptions class for Evolve exceptions.
+
+160413 08:26
+Added constructor that takes a string argument for PatternFormatException and EvolveException.
+
+160413 11:04
+Added more unit test to GameOfLifeTest class. Coverage is now 80%.
+
+160414 09:57
+Added RuleFormatException. Several classes refactored and documented with JavaDoc.
+
+160418 11:34
+Extracted cell object from canvas controller, created test class and refined zoom function.
+
+160418 11:56
+Added Editor for task 6, extended tasks for s305073.
+
+160418 18:19
+Implemented onAction launchEditor for editor for extra task -Pattern Editor-. Also included stage for for S305073.
+
 160406 22:38
 Implemented simple statistics. The "Show history" button in "Stats", will now open a Linechart which shows population count and population growth

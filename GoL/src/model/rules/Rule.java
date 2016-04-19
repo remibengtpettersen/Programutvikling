@@ -1,36 +1,81 @@
 package model.rules;
 
+import model.EvolveException;
+
 /**
- * Interface for both two- and three-dimensional rules
- * Created on 12.02.2016.
+ * A base class for two-dimensional rules
+ * Created on 29.02.2016.
  * @author The group through pair programming
  */
-public interface Rule {
+public abstract class Rule {
+
+    //region fields
+    protected boolean[][] grid;
+    protected byte[][] neighbours;
+    protected String ruleText = "";
+    //endregion
+
+    //region constructor
+    /**
+     * Default constructor
+     * @param grid The grid to be evolved
+     * @param neighbours The neighbour grid used during evolution
+     */
+    public Rule(boolean[][] grid, byte[][] neighbours){
+
+        this.grid = grid;
+        this.neighbours = neighbours;
+    }
+    //endregion
+
+    //region setters
+    /**
+     * Sets the reference to the grid to be evolved
+     * @param grid Cell grid
+     */
+    public void setGrid(boolean[][] grid){this.grid = grid;}
+
+    /**
+     * Sets the reference to the neighbour grid to be used during evolution
+     * @param neighbours Neighbour grid
+     */
+    public void setNeighbours(byte[][] neighbours){this.neighbours = neighbours;}
+    //endregion
+
+    //region getters
+    /**
+     * Gets the reference to the grid to be evolved
+     * @return Cell grid
+     */
+    public boolean[][] getGrid(){ return grid; }
+
+    /**
+     * Gets the reference to the neighbour grid to be used during evolution
+     * @return Neighbour grid
+     */
+    public byte[][] getNeighbours(){ return neighbours; }
+    //endregion
 
     /**
      * Evolves the board one generation, based on the number of neighbours per cell.
      */
-    void evolve();
+    public abstract void evolve() throws EvolveException;
 
     /**
-     * Sets the reference to the grid to be evolved
-     * @param grid Reference to grid
+     * Returns the rule text of the rule
+     * @return Rule text
      */
-    void setGrid(boolean[][] grid);
+    @Override
+    public String toString(){
+        return ruleText;
+    }
 
     /**
-     * Sets the reference to the neighbourhood grid to be used during evolution
-     * @param neighbours Reference to neighbourhood grid
+     * Returns true if this rule's rule text is equivalent to another rule text
+     * @param otherRuleText the other rule text
+     * @return true if this rule's ruleText is equal to otherRuleText
      */
-    void setNeighbours(byte[][] neighbours);
-
-    /**
-     * Gets the reference to the grid to be evolved
-     */
-    boolean[][] getGrid();
-
-    /**
-     * Gets the reference to the neighbourhood grid to be used during evolution
-     */
-    byte[][] getNeighbours();
+    public boolean isEqual(String otherRuleText){
+        return ruleText.equalsIgnoreCase(otherRuleText);
+    }
 }

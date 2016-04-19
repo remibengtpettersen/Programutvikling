@@ -1,15 +1,17 @@
 package model.rules;
 
+import model.EvolveException;
+
 /**
  * A rule similar to the classic Conway rule, but will also allow cells to be born if they have 6 neighbours. Rulestring: B36/S23
  * Created by Andreas on 16.03.2016.
  */
-public class HighLifeRule extends Rule2D {
+public class HighLifeRule extends Rule {
 
     /**
-     * Constructor for the High Life rule
-     * @param grid reference to the cell grid to be evolved
-     * @param neighbours reference to the neighbours grid used during evolution
+     * HighLife constructor
+     * @param grid The cell grid to be evolved
+     * @param neighbours The neighbour grid used during evolution
      */
     public HighLifeRule(boolean[][] grid, byte[][] neighbours) {
 
@@ -19,23 +21,29 @@ public class HighLifeRule extends Rule2D {
     }
 
     @Override
-    public void evolve() {
+    public void evolve() throws EvolveException {
 
         for(int x = 0; x < grid.length; x++){
             for(int y = 0; y < grid[x].length; y++){
 
-                // if a cell has 3 neighbours it wil become alive independent if it is alive or dead
-                if(neighbours[x][y] == 3)
+                byte neighbourCount = neighbours[x][y];
+
+                if (neighbourCount < 0 || neighbourCount > 8)
+                    throw new EvolveException("Tried setting " + neighbourCount + " neighbours");
+
+                // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
+                else if (neighbourCount == 3)
                     grid[x][y] = true;
 
                 // if a cell is dead and has 6 neighbours, it will become alive. This is highLife's only difference
                 else if ((neighbours[x][y] == 6) && !grid[x][y])
                     grid[x][y] = true;
 
-                    // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
-                else if (neighbours[x][y] != 2)
+                // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
+                else if (neighbourCount != 2)
                     grid[x][y] = false;
 
+                // reset neighbour count for this cell
                 neighbours[x][y] = 0;
             }
         }

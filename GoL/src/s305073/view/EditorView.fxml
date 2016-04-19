@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane fx:controller="s305073.controller.EditorController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
+            maxHeight="-Infinity"
+            maxWidth="-Infinity"
+            minHeight="600.0"
+            minWidth="1200.0"
+            prefHeight="400.0"
+            prefWidth="1200.0">
+   <center>
+         <Canvas fx:id="canvasEditor"
+                 height="510.0"
+                 width="710.0"
+                 BorderPane.alignment="CENTER"
+                 onMouseClicked="#mouseClicked"
+                 onMouseDragged="#mouseDragged"/>
+   </center>
+   <left>
+      <VBox fx:id="vBoxMeta"
+            alignment="CENTER"
+            minHeight="500"
+            minWidth="200"
+            prefHeight="500.0"
+            prefWidth="201.0"
+            spacing="10.0"
+            style="-fx-background-color: bbbaaa;"
+            BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER"
+                   prefHeight="34.0"
+                   prefWidth="105.0"
+                   text="META DATA"
+                   textAlignment="CENTER" />
+            <TextField maxWidth="150"
+                       text="Pattern name" />
+            <TextField maxWidth="150"
+                       text="Author" />
+            <TextField maxWidth="150"
+                       text="Description" />
+            <TextField maxWidth="150"
+                       text="Rules" />
+            <TextField maxWidth="150"
+                       text="" />
+            <Button mnemonicParsing="false"
+                    prefHeight="27.0"
+                    prefWidth="150.0"
+                    text="Update strip" onAction="#updateStrip"/>
+            <Button mnemonicParsing="false"
+                    prefHeight="27.0"
+                    prefWidth="150.0"
+                    text="Save pattern" onAction="#savePatternToFile"/>
+            <Button mnemonicParsing="false"
+                    prefHeight="27.0"
+                    prefWidth="150.0"
+                    text="Close"
+                    onAction="#closeEditor" />
+            <RadioButton fx:id="rbtnCanvasGrid" text="Grid on/off" onAction="#triggerGridLines" selected="false"></RadioButton>
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <VBox fx:id="vBoxStrip"
+            maxHeight="320"
+            minHeight="320"
+            prefHeight="320.0">
+         <children>
+             <ScrollPane fx:id="scrollPane"
+                         prefHeight="300"
+                         maxHeight="320"
+                         minHeight="320"
+                         minViewportHeight="320" minWidth="1200" prefWidth="1200">
+                <HBox minWidth="5325">
+                   <Canvas fx:id="canvasStrip"
+                           height="300.0"
+                           width="5325.0" />
+                </HBox>
+             </ScrollPane>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>

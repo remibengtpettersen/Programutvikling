@@ -6,6 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Configuration;
+import model.Parser.PatternParser;
+import model.PatternFormatException;
+import s305080.theStrip.TheStrip;
 import model.*;
 import s305061.StatController;
 
@@ -21,12 +25,16 @@ public class MasterController {
     public Stage stage;
     public Scene scene;
 
-    @FXML public CanvasController canvasController;
-    @FXML public MenuController menuController;
-    @FXML public ToolController toolController;
-    @FXML public StatController statController;
+    @FXML private CanvasController canvasController;
+    @FXML private MenuController menuController;
+    @FXML private ToolController toolController;
+    @FXML private StatController statController;
 
+    //region s305080
+    TheStrip theStrip;
+    //endregion
     private FileChooser patternChooser = new FileChooser();
+    private Configuration config;
 
     /**
      *
@@ -36,7 +44,7 @@ public class MasterController {
      */
     public void initialize(Stage stage, BorderPane root) throws IOException {
 
-        configuration = new Configuration("./GoL/resources/config.properties");
+        configuration = new Configuration("../GoL/resources/config.properties");
 
         this.stage = stage;
         scene = new Scene(root, configuration.getWidth(), configuration.getHeight());
@@ -45,9 +53,10 @@ public class MasterController {
         stage.setScene(scene);
         stage.show();
 
+        toolController.initialize(this);
         canvasController.initialize(this);
         menuController.initialize(this);
-        toolController.initialize(this);
+
 
         patternChooser.setTitle("Choose pattern file");
         patternChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GoL pattern files", "*.rle", "*.lif", "*.life", "*.cells"));
@@ -133,6 +142,39 @@ public class MasterController {
 
         if(statController != null)
             statController.clearStats();
+    }
+    //endregion
+
+    public CanvasController getCanvasController(){
+        return canvasController;
+    }
+    public ToolController getToolController(){
+        return toolController;
+    }
+    public MenuController getMenuController(){
+        return menuController;
+    }
+
+    //region s305080
+
+    /**
+     * Displays theStrip
+     */
+    void showTheStrip() {
+        theStrip = new TheStrip();
+        theStrip.display(canvasController.gol.getGrid(), this);
+    }
+
+    /**
+     * Closes the Strip
+     */
+    void closeTheStrip(){
+        theStrip.close();
+        theStrip = null;
+    }
+
+    public Configuration getConfig() {
+        return configuration;
     }
     //endregion
 }

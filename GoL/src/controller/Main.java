@@ -2,9 +2,9 @@ package controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.rules.RuleParser;
 
 import java.io.IOException;
 
@@ -42,6 +42,6 @@ public class Main extends Application {
      * @param args
      */
     public static void main(String[] args) {
-       launch(args);
+        launch(args);
     }
 }
