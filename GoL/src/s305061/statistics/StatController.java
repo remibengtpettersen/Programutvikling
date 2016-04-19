@@ -1,4 +1,4 @@
-package s305061;
+package s305061.statistics;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

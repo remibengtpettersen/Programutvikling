@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import model.Configuration;
 import model.Parser.PatternParser;
 import model.PatternFormatException;
-import s305061.StatController;
+import s305061.statistics.StatController;
 import s305080.theStrip.TheStrip;
 
 import java.io.File;
@@ -82,7 +82,7 @@ public class MasterController {
     public void openStatWindow() {
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("../s305061/StatView.fxml"));
+                getClass().getResource("../s305061/statistics/StatView.fxml"));
 
         try {
             BorderPane root = loader.load();

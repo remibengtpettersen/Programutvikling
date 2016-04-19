@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
-<BorderPane fx:controller="s305061.StatController" xmlns:fx="http://javafx.com/fxml">
+<BorderPane fx:controller="s305061.statistics.StatController" xmlns:fx="http://javafx.com/fxml">
     <center>
         <LineChart fx:id="graph" createSymbols="false" animated="false">
             <xAxis><NumberAxis label="GoL evolusjon" /></xAxis> <!--lowerBound="0" upperBound="10" tickUnit="10"-->
