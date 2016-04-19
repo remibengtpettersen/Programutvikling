@@ -93,6 +93,9 @@ Refactored and updated formatting for all classes in controller package.
 160405 12:47
 Created test classes for Custom rule, HighLife rule, Configuration, PatternParser and GameOfLife2D. 
 
+160406 22:38
+Implemented simple statistics for s305061. The "Show history" button in "Stats", will now open a Linechart which shows population count and population growth
+
 160412 12:14
 Added RuleParser, and moved formatRuleText from CustomRule to this class as a static function. Refactored the rule parsing algorithm, now uses regex.
 
@@ -120,5 +123,5 @@ Added Editor for task 6, extended tasks for s305073.
 160418 18:19
 Implemented onAction launchEditor for editor for extra task -Pattern Editor-. Also included stage for for S305073.
 
-160406 22:38
-Implemented simple statistics. The "Show history" button in "Stats", will now open a Linechart which shows population count and population growth
+160419 13:21
+Implemented statistics for s305061. Merged with master

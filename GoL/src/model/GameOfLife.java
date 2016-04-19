@@ -287,6 +287,8 @@ public class GameOfLife {
             Arrays.fill(grid[i], false);
             Arrays.fill(neighbours[i], (byte) 0);
         }
+
+        cellCount = 0;
     }
 
     /**

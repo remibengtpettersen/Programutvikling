@@ -2,7 +2,6 @@ package s305061;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -20,10 +19,11 @@ public class StatController {
     @FXML private LineChart<Double, Double> graph;
     @FXML private TextField textField;
 
-    ObservableList<XYChart.Series<Double, Double>> lineChartData;
-    LineChart.Series<Double, Double> livingSeries;
-    LineChart.Series<Double, Double> growthSeries;
-    LineChart.Series<Double, Double> similaritySeries;
+    private ObservableList<XYChart.Series<Double, Double>> lineChartData;
+
+    private LineChart.Series<Double, Double> livingSeries;
+    private LineChart.Series<Double, Double> growthSeries;
+    private LineChart.Series<Double, Double> similaritySeries;
 
     private final float ALPHA = 0.5f;
     private final float BETA = 3.0f;
@@ -35,8 +35,11 @@ public class StatController {
         this.gol = gol;
     }
 
+    /**
+     * Initialization method. Called when statistics window opens
+     */
     @FXML
-    protected void initialize() {
+    private void initialize() {
 
         lineChartData = FXCollections.observableArrayList();
 
@@ -52,12 +55,12 @@ public class StatController {
         similaritySeries.setName("Similarity measure");
         lineChartData.add(similaritySeries);
 
-        graph.setCreateSymbols(false);
-        graph.setAnimated(false);
-
         graph.setData(lineChartData);
     }
 
+    /**
+     * Clears the statistics data elements from the line chart.
+     */
     public void clearStats(){
 
         livingSeries.getData().clear();
@@ -65,6 +68,11 @@ public class StatController {
         similaritySeries.getData().clear();
     }
 
+    /**
+     * Collects statistics for a specified number of iterations. Number of live cells, cell growth and similarity measure will be collected
+     * @param iterations Number of iterations to evolve and collect statistics from
+     * @return  An array of integer values representing live cells, cell growth and similarity measure for each iteration
+     */
     public int[][] getStatistics(int iterations){
 
         int[][] stats = new int[3][iterations];
@@ -74,6 +82,8 @@ public class StatController {
 
         int previousLiving = 0;
 
+        // for each iteration, add live cell count and cell growth to the array stats,
+        // then add the iteration's reduced representation to the array representations
         for(int iteration = 0; iteration < iterations; iteration++){
 
             int currentLiving = clonedGol.getCellCount();
@@ -91,42 +101,55 @@ public class StatController {
             previousLiving = currentLiving;
         }
 
+        // compare all the reduced representations with each other, return the best match for each iteration
         for(int repA = 0; repA < iterations; repA++) {
 
-            int maxP = 0;
+            int maxSimilarity = 0;
 
             for(int repB = 0; repB < iterations; repB++) {
 
                 if(repA == repB)
                     continue;
 
-                int p = compareRepresentations(representations[repA], representations[repB]);
+                int similarity = compareRepresentations(representations[repA], representations[repB]);
 
-                if (p > maxP){
-                    maxP = p;
+                if (similarity > maxSimilarity){
+                    maxSimilarity = similarity;
                 }
             }
 
-            stats[2][repA] = maxP;
+            stats[2][repA] = maxSimilarity;
         }
 
         return stats;
     }
 
+    /**
+     * Compares two reduced representations and calculate the similarity in percent
+     * @param repA A reduced representation of an iteration
+     * @param repB A reduced representation of another iteration
+     * @return Similarity of the two representations in percent
+     */
     private int compareRepresentations(double repA, double repB) {
 
         double min = Math.min(repA, repB);
         double max = Math.max(repA, repB);
 
-        int percent =(int)(100*min/max);
+        int similarity =(int)(100*min/max);
 
-        return percent;
+        return similarity;
     }
 
-    private float getGeometricFactor(GameOfLife game) {
+    /**
+     * Sums the x and y coordinates of all the live cells on the grid.
+     * Used in calculation of the similarity measure, enables the position of patterns to be a factor
+     * @param game Reference to the GameOfLife object to gather information from
+     * @return The geometric factor, the sum of x and y coordinates of live cells
+     */
+    private double getGeometricFactor(GameOfLife game) {
 
         boolean[][] grid = game.getGrid();
-        float geoFactor = 0;
+        double geoFactor = 0;
 
         for(int x = 0; x < grid[0].length; x++)
             for (int y = 0; y < grid.length; y++)
@@ -136,6 +159,11 @@ public class StatController {
         return geoFactor;
     }
 
+    /**
+     * Displays statistics at the line chart
+     * Calls clearStats() first, then loops through getStatistics(iterations) and adds the statistics to line chart
+     * @param iterations Number of iterations to evolve and display statistics for
+     */
     private void displayStatistics(int iterations){
 
         clearStats();
@@ -155,12 +183,17 @@ public class StatController {
         }
     }
 
+    /**
+     *  Called when GUI button "Show statistics" is clicked.
+     *  If the text in the text field is a number,
+     *  displayStatistics(iterations) will show statistics for that number of iterations
+     */
     @FXML
-    public void onButtonClicked(ActionEvent actionEvent) {
+    public void onButtonClicked() {
 
         String string = textField.getText();
 
-        Pattern p = Pattern.compile("\\d+");//"\\d+");
+        Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher(string);
 
         if(m.matches()) {
@@ -168,7 +201,8 @@ public class StatController {
             displayStatistics(iterations);
         }
         else {
-            textField.setText("Could not parse number");
+            textField.setText("");
+            textField.setPromptText("Could not parse number");
         }
     }
 }

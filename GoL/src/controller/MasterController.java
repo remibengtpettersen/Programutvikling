@@ -9,9 +9,8 @@ import javafx.stage.Stage;
 import model.Configuration;
 import model.Parser.PatternParser;
 import model.PatternFormatException;
-import s305080.theStrip.TheStrip;
-import model.*;
 import s305061.StatController;
+import s305080.theStrip.TheStrip;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,13 +27,15 @@ public class MasterController {
     @FXML private CanvasController canvasController;
     @FXML private MenuController menuController;
     @FXML private ToolController toolController;
+
+    //region s305061
     @FXML private StatController statController;
+    //endregion
 
     //region s305080
     TheStrip theStrip;
     //endregion
     private FileChooser patternChooser = new FileChooser();
-    private Configuration config;
 
     /**
      *
@@ -57,7 +58,6 @@ public class MasterController {
         canvasController.initialize(this);
         menuController.initialize(this);
 
-
         patternChooser.setTitle("Choose pattern file");
         patternChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GoL pattern files", "*.rle", "*.lif", "*.life", "*.cells"));
 
@@ -74,6 +74,37 @@ public class MasterController {
         canvasController.getCanvas().widthProperty().bind(scene.widthProperty());
         canvasController.getCanvas().heightProperty().bind(scene.heightProperty().subtract(70));
     }
+
+    //region s305061
+    /**
+     * Opens the statistics window
+     */
+    public void openStatWindow() {
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("../s305061/StatView.fxml"));
+
+        try {
+            BorderPane root = loader.load();
+            statController = loader.getController();
+
+            Stage statStage = new Stage();
+            statStage.setScene(new Scene(root));
+
+            statController.setGol(canvasController.gol);
+            statStage.setTitle("Statistics");
+
+            statStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load the statistics (s305061) FXML document, IO exception");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to load the statistics (s305061) FXML document");
+        }
+    }
+    //endregion
 
     /**
      * Opens the file chooser so the user can choose a pattern file to import
@@ -97,53 +128,7 @@ public class MasterController {
         }
     }
 
-    //region s305061
-    /**
-     * Opens the statistics window
-     */
-    public void openStatWindow() {
 
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("../s305061/StatView.fxml"));
-
-        try {
-            BorderPane root = loader.load();
-            statController = loader.getController();
-
-            Stage statStage = new Stage();
-            statStage.setScene(new Scene(root));
-
-            //statController.updateStats(canvasController.gol);
-            statController.setGol(canvasController.gol);
-            statStage.setTitle("Statistics");
-
-            statStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Failed to load the statistics (s305061) FXML document, IO exception");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Failed to load the statistics (s305061) FXML document, unknown exception");
-        }
-    }
-
-    public void updateGameInfo(GameOfLife gol) {
-
-        toolController.giveCellCount(gol.getCellCount());
-
-        //if(statController != null)
-            //statController.updateStats(gol);
-    }
-
-    public void clearGrid() {
-
-        canvasController.clearGrid();
-
-        if(statController != null)
-            statController.clearStats();
-    }
-    //endregion
 
     public CanvasController getCanvasController(){
         return canvasController;

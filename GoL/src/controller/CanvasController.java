@@ -74,7 +74,6 @@ public class CanvasController {
     private boolean importing = false;
     private boolean gridLines;
     private boolean userWantsGridLines;
-    private double maxCellSize = 50;
 
     public Canvas getCanvas() {
         return canvas;
@@ -152,13 +151,8 @@ public class CanvasController {
 
                         renderCanvas();
 
-                        //s305061
-                        masterController.updateGameInfo(gol);
-                        //masterController.toolController.giveCellCount(gol.getCellCount());
-                        //masterController.updateStatWindow(gol);
-
                         timer = now / 1000000;
-                        //masterController.getToolController().giveCellCount(gol.getCellCount());
+                        masterController.getToolController().giveCellCount(gol.getCellCount());
                     }
                 }
             }
