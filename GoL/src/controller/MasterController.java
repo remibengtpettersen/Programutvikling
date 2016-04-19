@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import model.Configuration;
 import model.Parser.PatternParser;
 import model.PatternFormatException;
-import s305080.TheStrip.TheStrip;
+import s305080.theStrip.TheStrip;
 
 import java.io.File;
 import java.io.IOException;

@@ -84,4 +84,9 @@ public class MetaDataController {
     public void setComunicationLink(ToFile comunicationLink) {
         this.toFile = comunicationLink;
     }
+
+    public void insertRule(String rule) {
+        rules.setText(rule);
+
+    }
 }

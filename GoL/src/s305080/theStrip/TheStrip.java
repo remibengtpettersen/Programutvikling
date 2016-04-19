@@ -1,4 +1,4 @@
-package s305080.TheStrip;
+package s305080.theStrip;
 
 import controller.MasterController;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +20,7 @@ public class TheStrip {
 
     public void display(boolean[][] grid, MasterController masterController){
         this.masterController = masterController;
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("../s305080/TheStrip.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TheStrip.fxml"));
         try {
             root = loader.load();
 

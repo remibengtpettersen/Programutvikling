@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.tools.javac.code.Attribute;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -16,6 +17,7 @@ import javafx.stage.FileChooser;
 import lieng.GIFWriter;
 import model.Cell;
 import model.GameOfLife;
+import model.rules.ClassicRule;
 import s305080.PatternSaver.ToFile;
 
 
