@@ -119,7 +119,7 @@ public class MasterController {
         }
     }
 
-    public void updateGameInfo(GameOfLife2D gol) {
+    public void updateGameInfo(GameOfLife gol) {
 
         toolController.giveCellCount(gol.getCellCount());
 

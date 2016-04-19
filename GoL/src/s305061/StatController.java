@@ -8,7 +8,6 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import model.GameOfLife;
-import model.GameOfLife2D;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,10 +29,10 @@ public class StatController {
     private final float BETA = 3.0f;
     private final float GAMMA = 0.25f;
 
-    private GameOfLife2D gol;
+    private GameOfLife gol;
 
     public void setGol(GameOfLife gol){
-        this.gol = (GameOfLife2D)gol;
+        this.gol = gol;
     }
 
     @FXML
@@ -71,7 +70,7 @@ public class StatController {
         int[][] stats = new int[3][iterations];
         double[] representations = new double[iterations];
 
-        GameOfLife2D clonedGol = gol.clone();
+        GameOfLife clonedGol = gol.clone();
 
         int previousLiving = 0;
 
@@ -124,7 +123,7 @@ public class StatController {
         return percent;
     }
 
-    private float getGeometricFactor(GameOfLife2D game) {
+    private float getGeometricFactor(GameOfLife game) {
 
         boolean[][] grid = game.getGrid();
         float geoFactor = 0;

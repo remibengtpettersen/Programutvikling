@@ -2,9 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14cae250-bc11-4f35-bee7-4c6ab9e65f4d" name="Default" comment="Implemented StatDataElement">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/model/GameOfLife2D.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GoL/src/model/GameOfLife3D.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/CanvasController.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/Main.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/MasterController.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/MenuController.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/ToolController.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/Configuration.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/GameOfLife.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/GameOfLife2D.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/GameOfLife3D.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/PatternFormatException.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/PatternParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/rules/ClassicRule.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/rules/CustomRule.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/rules/HighLifeRule.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/rules/Rule.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/rules/Rule2D.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/rules/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/rules/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/model/rules/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/s305080/ToFile.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/s305080/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/s305080/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/s305080/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test/ClassicRuleTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test/GameOfLife2DTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test/package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/Utilities.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/package-tree.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/model/GameOfLife2D.java" afterPath="$PROJECT_DIR$/GoL/src/model/GameOfLife2D.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/controller/MasterController.java" afterPath="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/model/GameOfLife.java" afterPath="$PROJECT_DIR$/GoL/src/model/GameOfLife.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305061/StatController.java" afterPath="$PROJECT_DIR$/GoL/src/s305061/StatController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" afterPath="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoL/src/test/GameOfLife2DTest.java" afterPath="$PROJECT_DIR$/GoL/src/test/GameOfLife2DTest.java" />
     </list>
     <list id="24e38efb-ef02-4415-8cf5-2c500c940368" name="Rejected commit: Default" comment="Implemented simple statistics" />
     <ignored path="Programutvikling.iws" />
@@ -32,117 +76,96 @@
     <favorites_list name="Programutvikling" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StatView.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/s305061/StatView.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StatController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/GoL/src/s305061/StatController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4474#4492#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomRule.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2023">
-              <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MenuView.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/view/MenuView.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="45" column="69" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="76" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/controller/MenuController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1428">
-              <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/model/GameOfLife.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StatDataElement.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/s305061/StatDataElement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameOfLife2D.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/model/GameOfLife2D.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Configuration.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/model/Configuration.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2295">
-              <caret line="155" column="52" selection-start-line="155" selection-start-column="52" selection-end-line="155" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1598">
-              <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.6430801">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/GoL/src/model/GameOfLife.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-2044">
+                  <caret line="30" column="7" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#4408#4409#0" expanded="true" />
+                    <element signature="e#4435#4436#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="381">
+                  <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="StatController.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/GoL/src/s305061/StatController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-1602">
+                  <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#930#931#0" expanded="true" />
+                    <element signature="e#960#961#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="194">
+                  <caret line="121" column="41" selection-start-line="121" selection-start-column="41" selection-end-line="121" selection-end-column="41" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TheStripController.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStripController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="276">
+                  <caret line="79" column="21" selection-start-line="79" selection-start-column="21" selection-end-line="79" selection-end-column="21" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="GameOfLife2DTest.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/GoL/src/test/GameOfLife2DTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="21">
+                  <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/GoL/src/model/GameOfLife.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="17">
+                  <caret line="30" column="7" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -186,20 +209,21 @@
         <option value="$PROJECT_DIR$/GoL/src/test/ClassicRuleTest.java" />
         <option value="$PROJECT_DIR$/GoL/src/test/ConfigurationTest.java" />
         <option value="$PROJECT_DIR$/GoL/src/tools/Utilities.java" />
-        <option value="$PROJECT_DIR$/GoL/src/test/GameOfLife2DTest.java" />
         <option value="$PROJECT_DIR$/GoL/resources/config.properties" />
         <option value="$PROJECT_DIR$/GoL/src/controller/MenuController.java" />
         <option value="$PROJECT_DIR$/GoL/src/view/StatView.fxml" />
-        <option value="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
         <option value="$PROJECT_DIR$/GoL/src/controller/StatController.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/GoL/src/view/MenuView.fxml" />
         <option value="$PROJECT_DIR$/GoL/src/s305061/StatDataElement.java" />
-        <option value="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
         <option value="$PROJECT_DIR$/GoL/src/s305061/StatView.fxml" />
-        <option value="$PROJECT_DIR$/GoL/src/model/GameOfLife.java" />
         <option value="$PROJECT_DIR$/GoL/src/model/GameOfLife2D.java" />
+        <option value="$PROJECT_DIR$/GoL/src/model/GameOfLife.java" />
+        <option value="$PROJECT_DIR$/GoL/src/controller/MasterController.java" />
+        <option value="$PROJECT_DIR$/GoL/src/s305080/TheStripController.java" />
+        <option value="$PROJECT_DIR$/GoL/src/test/GameOfLife2DTest.java" />
         <option value="$PROJECT_DIR$/GoL/src/s305061/StatController.java" />
+        <option value="$PROJECT_DIR$/GoL/src/controller/CanvasController.java" />
       </list>
     </option>
   </component>
@@ -209,10 +233,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1976" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="width" value="1232" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -239,7 +263,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -346,8 +372,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -840,7 +864,7 @@
     <option name="totallyTimeSpent" value="16389000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="1976" y="-8" width="1232" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -850,11 +874,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883817" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30944964" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3076075" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18976545" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18003413" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32819384" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -868,7 +893,6 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295302" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -907,20 +931,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GoL/src/test/PatternParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/model/Configuration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/model/Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1030,13 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/test/GameOfLife2DTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/test/HighLifeRuleTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1091,13 +1094,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2397">
-          <caret line="162" column="57" selection-start-line="162" selection-start-column="57" selection-end-line="162" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1632">
@@ -1149,13 +1145,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStripController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-826">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/model/rules/HighLifeRule.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1200,76 +1189,113 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="69" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="76" />
+        <state relative-caret-position="697">
+          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/controller/MenuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+        <state relative-caret-position="1615">
+          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/s305061/StatDataElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1598">
-          <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/s305061/StatDataElement.java" />
     <entry file="file://$PROJECT_DIR$/GoL/src/model/rules/CustomRule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2023">
-          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="1717">
+          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/model/Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2295">
-          <caret line="155" column="52" selection-start-line="155" selection-start-column="52" selection-end-line="155" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GoL/src/model/GameOfLife.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        <state relative-caret-position="2210">
+          <caret line="150" column="52" selection-start-line="150" selection-start-column="52" selection-end-line="150" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/model/GameOfLife2D.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+        <state relative-caret-position="-1466">
+          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/MasterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="121" column="41" selection-start-line="121" selection-start-column="41" selection-end-line="121" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/s305080/TheStripController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="79" column="21" selection-start-line="79" selection-start-column="21" selection-end-line="79" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/test/GameOfLife2DTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GoL/src/s305061/StatController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+        <state relative-caret-position="-1602">
+          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4474#4492#0" expanded="false" />
+            <element signature="e#930#931#0" expanded="true" />
+            <element signature="e#960#961#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/model/GameOfLife.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2044">
+          <caret line="30" column="7" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4408#4409#0" expanded="true" />
+            <element signature="e#4435#4436#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Programmer/Java/src.zip!/java/lang/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="423" column="0" selection-start-line="423" selection-start-column="0" selection-end-line="423" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Programmer/Java/src.zip!/java/net/URLClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="380" column="0" selection-start-line="380" selection-start-column="0" selection-end-line="380" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GoL/src/controller/CanvasController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
