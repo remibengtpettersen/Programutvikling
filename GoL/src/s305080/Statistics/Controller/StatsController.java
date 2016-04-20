@@ -1,5 +1,7 @@
 package s305080.Statistics.Controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -30,6 +32,7 @@ public class StatsController {
     private double alfa = 0.5;
     private double beta = 3.0;
     private double gamma = 0.25;
+    private final double maxIntervalLength = 15;
 
     public void setUp() {
         input.setOnKeyPressed(this::keyPressedInTextBox);
@@ -40,8 +43,22 @@ public class StatsController {
         similarity = new XYChart.Series();
         similarity.setName("Similarity");
         lineChart.getData().addAll(cellCount, difference, similarity);
+        addLineChartWidthListener();
         System.out.println("Initialize");
         statsGol = gol.clone();
+    }
+
+    private void addLineChartWidthListener() {
+        lineChart.widthProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if(lineChart.getWidth() / iterations < maxIntervalLength)
+                    lineChart.setCreateSymbols(false);
+                else
+                    lineChart.setCreateSymbols(true);
+            }
+        });
     }
 
     private void keyPressedInTextBox(KeyEvent keyEvent) {
@@ -66,6 +83,10 @@ public class StatsController {
 
         int [][] stats = getStats(statsGol, iterations);
         clearGraph();
+        if(lineChart.getWidth() / iterations < maxIntervalLength)
+            lineChart.setCreateSymbols(false);
+        else
+            lineChart.setCreateSymbols(true);
         displayStats(stats);
     }
 

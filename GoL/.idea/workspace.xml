@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="74063000-add0-466d-9af1-1c77d113eadb" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/view/MenuView.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/view/MenuView.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/MasterController.java" afterPath="$PROJECT_DIR$/src/controller/MasterController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305061/statistics/StatController.java" afterPath="$PROJECT_DIR$/src/s305061/statistics/StatController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java" afterPath="$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305080/Statistics/Stats.java" afterPath="$PROJECT_DIR$/src/s305080/Statistics/Stats.java" />
     </list>
     <ignored path="GoL.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +25,7 @@
     <favorites_list name="GoL" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.1">
+    <splitter split-orientation="horizontal" split-proportion="0.4079445">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="false">
@@ -92,8 +88,8 @@
           <file leaf-file-name="View.fxml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/View/View.fxml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+                <state relative-caret-position="285">
+                  <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
                   <folding />
                 </state>
               </provider>
@@ -141,11 +137,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Stats.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Stats.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/Stats.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="26" column="33" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+                <state relative-caret-position="300">
+                  <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -153,11 +149,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="StatsController.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="StatsController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="328">
-                  <caret line="57" column="13" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
+                <state relative-caret-position="-1080">
+                  <caret line="58" column="53" selection-start-line="58" selection-start-column="53" selection-end-line="58" selection-end-column="53" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -320,7 +316,6 @@
         <option value="$PROJECT_DIR$/src/s305080/Stats/View/View.fxml" />
         <option value="$PROJECT_DIR$/src/s305080/Stats.java" />
         <option value="$PROJECT_DIR$/src/model/GameOfLife.java" />
-        <option value="$PROJECT_DIR$/src/s305080/Statistics/View/View.fxml" />
         <option value="$PROJECT_DIR$/src/controller/ToolController.java" />
         <option value="$PROJECT_DIR$/src/s305080/theStrip/TheStrip.java" />
         <option value="$PROJECT_DIR$/src/s305080/Statistics/Stats.java" />
@@ -328,6 +323,7 @@
         <option value="$PROJECT_DIR$/src/controller/MenuController.java" />
         <option value="$PROJECT_DIR$/src/controller/MasterController.java" />
         <option value="$PROJECT_DIR$/src/s305061/statistics/StatController.java" />
+        <option value="$PROJECT_DIR$/src/s305080/Statistics/View/View.fxml" />
         <option value="$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java" />
       </list>
     </option>
@@ -1120,7 +1116,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46789000" />
+    <option name="totallyTimeSpent" value="47456000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="7" y="23" width="1815" height="1131" extended-state="0" />
@@ -1644,17 +1640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/View/View.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-840">
@@ -1695,20 +1680,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/Stats.java">
+    <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/View/View.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="26" column="33" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+        <state relative-caret-position="285">
+          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1080">
+          <caret line="58" column="53" selection-start-line="58" selection-start-column="53" selection-end-line="58" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java">
+    <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/Stats.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="57" column="13" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
+        <state relative-caret-position="300">
+          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
