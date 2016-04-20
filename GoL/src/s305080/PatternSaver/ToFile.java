@@ -1,60 +1,84 @@
-package s305080;
+package s305080.PatternSaver;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.GameOfLife;
+import tools.MessageBox;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 /**
  * Created by Truls on 29/03/16.
  */
 public class ToFile {
 
-    private static List <String> list;
-    private static int[] boundingBox;
-    private static boolean[][] grid;
+    private  List <String> list;
+    private  int[] boundingBox;
+    private  boolean[][] grid;
+    FileChooser saveFileChooser;
+    private Stage stage;
+    private String ruleText;
+    LagringsFormat format;
+    GameOfLife gol;
 
-    public static void writeToFile(boolean[][] grid, int[] boundingBox, Stage stage){
+
+    public enum LagringsFormat {
+        RLE, PlainText
+    }
+
+    public void writeToFile(GameOfLife gol, Stage stage){
+
+        this.gol = gol;
+        int [] boundingBox = gol.getBoundingBox();
 
         if(boundingBox[0] > boundingBox[1]){
+            MessageBox.alert("No pattern to save");
             System.out.println("YOU SHALL NOT SAVE");
             return; //throw exception
         }
-        ToFile.grid = grid;
-        ToFile.boundingBox = boundingBox;
+        this.grid = gol.getGrid();
+        this.boundingBox = boundingBox;
 
         list = new ArrayList<String>();
 
+        saveFileChooser = new FileChooser();
+
         try {
-            collectMetaData();
+            collectMetaData(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        FileChooser f = new FileChooser();
+        if(format == null)
+            return;
 
-        File file = f.showSaveDialog(stage);
+        File file = saveFileChooser.showSaveDialog(stage);
         if(file == null){
             return; //throw exception
         }
-      writeRLE(file);
-//    writePlainText(file);
+
+        if(format == LagringsFormat.RLE)
+            writeRLE(file);
+
+        if(format == LagringsFormat.PlainText)
+            writePlainText(file);
+
+
     }
 
-    private static void writeRLE(File file) {
+    private  void writeRLE(File file) {
 
         StringBuilder currentLine = new StringBuilder();
 
-        currentLine.append("x = "+(boundingBox[1]-boundingBox[0]+1)+", y = "+(boundingBox[3]-boundingBox[2]+1)+ ", rule = s32/b3");
+        currentLine.append("x = "+(boundingBox[1]-boundingBox[0]+1)+", y = "+(boundingBox[3]-boundingBox[2]+1) + ((ruleText == null)?"":", rule = " + ruleText));
 
         list.add(currentLine.toString());
 
@@ -116,7 +140,7 @@ public class ToFile {
 
     }
 
-    private static void writePlainText(File file) {
+    private void writePlainText(File file) {
 
         StringBuilder currentLine = new StringBuilder();
 
@@ -146,18 +170,40 @@ public class ToFile {
         }
     }
 
-    private static void collectMetaData() throws IOException {
+    private void collectMetaData(Stage primaryStage) throws IOException {
         Parent root;
-        FXMLLoader loader = new FXMLLoader(ToFile.class.getResource("../s305080/MetaData.fxml"));
-            root = loader.load();
-
-
-
+        FXMLLoader loader = new FXMLLoader(ToFile.class.getResource("MetaData.fxml"));
+        root = loader.load();
+        MetaDataController mController = loader.getController();
+        mController.setList(list);
         Scene scene = new Scene(root);
-        Stage stage = new Stage();
 
+        mController.setComunicationLink(this);
+        mController.insertRule(gol.getRule().toString());
+
+        stage = new Stage();
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(primaryStage);
+        root.requestFocus();
         stage.showAndWait();
+
+    }
+
+    public void setFormat(LagringsFormat format) {
+        this.format = format;
+    }
+
+    public void closeStage() {
+        stage.close();
+    }
+
+    public void setInitialFileName(String initialFileName) {
+        saveFileChooser.setInitialFileName(initialFileName);
+    }
+
+    public void setRuleText(String ruleText) {
+        this.ruleText = ruleText;
     }
 }

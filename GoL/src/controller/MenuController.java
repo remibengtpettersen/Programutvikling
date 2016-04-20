@@ -5,15 +5,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import model.rules.ClassicRule;
-import s305080.TheStrip;
 
-import java.io.File;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import s305073.controller.EditorController;
+
+
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -25,6 +26,8 @@ public class MenuController {
 
     @FXML
     private MenuItem openBtn;
+    @FXML
+    RadioMenuItem theStripS305080, statsS305080;
 
     /**
      * Stores the reference to the masterController
@@ -44,7 +47,7 @@ public class MenuController {
     }
 
     public void saveFile(){
-        masterController.canvasController.saveToFile();
+        masterController.getCanvasController().saveToFile();
     }
     public void onAbout(ActionEvent actionEvent) {
 
@@ -53,12 +56,12 @@ public class MenuController {
 
     public void setConwayRule(ActionEvent actionEvent) {
 
-        masterController.canvasController.setRule("classic");
+        masterController.getCanvasController().setRule("classic");
     }
 
     public void setHighLifeRule(ActionEvent actionEvent) {
 
-        masterController.canvasController.setRule("highlife");
+        masterController.getCanvasController().setRule("highlife");
     }
 
     /**
@@ -67,7 +70,7 @@ public class MenuController {
      */
     public void setCustomRule(ActionEvent actionEvent) {
 
-        TextInputDialog dialog = new TextInputDialog(masterController.canvasController.gol.getRule().toString());
+        TextInputDialog dialog = new TextInputDialog(masterController.getCanvasController().gol.getRule().toString());
 
         dialog.setTitle("Custom rule");
         dialog.setHeaderText("Enter custom rule code");
@@ -80,33 +83,95 @@ public class MenuController {
         if (result.isPresent()){
             System.out.println("Custom rule set: " + result.get());
 
-            masterController.canvasController.setRule(result.get());
+            masterController.getCanvasController().setRule(result.get());
         }
     }
 
     public void setLWDRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B3/S012345678");
+        masterController.getCanvasController().setRule("B3/S012345678");
     }
 
     public void setSeedsRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B2/S");
+        masterController.getCanvasController().setRule("B2/S");
     }
 
     public void setDiamoebaRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B35678/S5678");
+        masterController.getCanvasController().setRule("B35678/S5678");
     }
 
     public void setReplicatorRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B1357/S1357");
+        masterController.getCanvasController().setRule("B1357/S1357");
     }
 
     public void setDNNRule(ActionEvent actionEvent) {
-        masterController.canvasController.setRule("B3678/S34678");
+        masterController.getCanvasController().setRule("B3678/S34678");
     }
 
-    public void clearGrid(ActionEvent actionEvent) { masterController.canvasController.clearGrid(); }
+    public void clearGrid(ActionEvent actionEvent) { masterController.getCanvasController().clearGrid(); }
+
+
+
+    //region s305080
 
     public void showTheStrip(){
-        masterController.canvasController.showTheStrip();
+
+        if(!theStripS305080.isSelected())
+            masterController.closeTheStrip();
+        else
+            masterController.showTheStrip();
+    }
+    /**
+     * Changes the selected status of the radioMenuItem
+     * @param theStripIsShowing True if it should be selected, false if not
+     */
+    public void setTheStripIsShowing(boolean theStripIsShowing) {
+        theStripS305080.setSelected(theStripIsShowing);
+    }
+
+    public void showS305080Stats(){
+        if(!statsS305080.isSelected())
+            masterController.closeStats();
+        else
+            masterController.showStats();
+    }
+    /**
+     * Changes the selected status of the radioMenuItem
+     * @param theStripIsShowing True if it should be selected, false if not
+     */
+    public void setStatsShowing(boolean theStripIsShowing) {
+        statsS305080.setSelected(theStripIsShowing);
+    }
+
+    public void launchEditor(ActionEvent actionEvent) {
+        Stage editor = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../s305073/view/EditorView.fxml"));
+        editor.initModality(Modality.WINDOW_MODAL);
+        editor.initOwner(masterController.stage);
+
+        BorderPane root = null;
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(root, 1200, 1000);
+        editor.setScene(scene);
+
+        EditorController editorController = loader.getController();
+        editorController.getDeepCopyGol(masterController.getCanvasController().gol);
+        editorController.initialize(editor);
+
+        masterController.getCanvasController().stopAnimation();
+        masterController.getToolController().changeIconToPlay();
+
+        editor.setTitle("Pattern Editor");
+        editor.showAndWait();
+    }
+    //endregion
+    public void openStatWindow(ActionEvent actionEvent) {
+
+        masterController.openStatWindow();
     }
 }

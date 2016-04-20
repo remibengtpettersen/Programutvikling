@@ -20,7 +20,7 @@ public class ClassicRuleTest {
 
     private Rule rule;
     private boolean[][] gridBluePrint;
-    byte[][] neighboursBluePrint;
+    private byte[][] neighboursBluePrint;
 
     /**
      * Creates a grid to be evolved and a neighbour grid that is pre populated with neighbours count. The neighbour aggregator is tested elsewhere.

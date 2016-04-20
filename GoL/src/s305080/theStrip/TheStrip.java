@@ -1,10 +1,9 @@
-package s305080;
+package s305080.theStrip;
 
 import controller.MasterController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,10 +15,12 @@ public class TheStrip {
 
     Parent root;
     TheStripController theStripController;
+    Stage stage;
+    MasterController masterController;
 
     public void display(boolean[][] grid, MasterController masterController){
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("../s305080/TheStrip.fxml"));
+        this.masterController = masterController;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TheStrip.fxml"));
         try {
             root = loader.load();
 
@@ -31,7 +32,7 @@ public class TheStrip {
         }
 
         Scene scene = new Scene(root);
-        Stage stage = new Stage();
+        stage = new Stage();
 
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
@@ -42,13 +43,23 @@ public class TheStrip {
         stage.setX(masterController.stage.getX()+masterController.stage.getWidth());
         stage.setY(masterController.stage.getY());
 
-        masterController.stage.setOnCloseRequest(event -> stage.close());
 
-        masterController.canvasController.getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
-        stage.setOnCloseRequest(event -> masterController.canvasController.getCanvas().setOnMouseClicked(null));
+        masterController.getCanvasController().getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
+        masterController.getCanvasController().getCanvas().setOnScrollFinished(event -> theStripController.updateStrip());
+        stage.setOnCloseRequest(event -> {
+            masterController.getCanvasController().getCanvas().setOnMouseClicked(null);
+            masterController.getCanvasController().getCanvas().setOnScrollFinished(null);
+            masterController.getMenuController().setTheStripIsShowing(false);
+        });
     }
 
     private void bindCanvasToStage(Stage stage) {
         theStripController.canvas.heightProperty().bind(stage.heightProperty().subtract(40));
+    }
+
+    public void close() {
+        masterController.getCanvasController().getCanvas().setOnMouseClicked(null);
+        masterController.getCanvasController().getCanvas().setOnScrollFinished(null);
+        stage.close();
     }
 }

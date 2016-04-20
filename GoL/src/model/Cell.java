@@ -2,6 +2,7 @@ package model;
 
 import javafx.scene.paint.Color;
 
+
 /**
  * Created by Truls on 18/04/16.
  */
@@ -11,6 +12,13 @@ public class Cell {
     private double spacing = 0.1;
     public final static byte MAX_SIZE = 100;
 
+    public Cell(double size, double spacing, Color color, Color deadColor, Color ghostColor) {
+        setSize(size);
+        setSpacing(spacing);
+        setColor(color);
+        setDeadColor(deadColor);
+        setGhostColor(ghostColor);
+    };
 
     public Cell(Configuration configuration){
         try {
@@ -24,6 +32,13 @@ public class Cell {
 
         size = configuration.getCellSize();
     }
+
+    @Override
+    public Cell clone() {
+        Cell clone = new Cell(size, spacing, color, deadColor, ghostColor);
+        return clone;
+    }
+
     /**
      * Calculates the color just in between the background color and the cell color
      */

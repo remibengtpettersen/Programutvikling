@@ -1,9 +1,6 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.io.*;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +15,7 @@ public class Configuration {
     private static final Logger LOGGER = Logger.getLogger(Configuration.class.getName());
 
     private InputStream inputStream;
-    private String propertiesFileName;
+    private String propertiesFileName; //= "./resources/config.properties";
     private Properties properties = new Properties();
     private File file;
     private String windowWidth;
