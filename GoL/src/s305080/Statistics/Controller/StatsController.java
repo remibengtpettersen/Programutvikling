@@ -5,11 +5,9 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import model.GameOfLife;
 import tools.MessageBox;
-import tools.Utilities;
 
 
 /**
@@ -19,23 +17,34 @@ public class StatsController {
     @FXML
     TextField input;
     @FXML
-    LineChart<Number,Number> lineChart;
+    LineChart<Integer,Integer> lineChart;
     @FXML
     NumberAxis xAxis, yAxis;
-    XYChart.Series cellCount;
-    XYChart.Series difference;
-    XYChart.Series something;
+    private XYChart.Series<Integer, Integer> cellCount;
+    private XYChart.Series<Integer, Integer> difference;
+    private XYChart.Series<Integer, Integer> similarity;
     private GameOfLife statsGol;
     private GameOfLife gol;
     private int lastCellCount;
     private int iterations;
+    private double alfa = 0.5;
+    private double beta = 3.0;
+    private double gamma = 0.25;
 
-
-    public StatsController(){
-
+    public void setUp() {
+        input.setOnKeyPressed(this::keyPressedInTextBox);
+        cellCount = new XYChart.Series();
+        cellCount.setName("Cellcount");
+        difference = new XYChart.Series();
+        difference.setName("Difference");
+        similarity = new XYChart.Series();
+        similarity.setName("Similarity");
+        lineChart.getData().addAll(cellCount, difference, similarity);
+        System.out.println("Initialize");
+        statsGol = gol.clone();
     }
 
-    private void keyPressed(KeyEvent keyEvent) {
+    private void keyPressedInTextBox(KeyEvent keyEvent) {
         if(keyEvent.getCode().toString().equals("ENTER"))
             try {
                 iterations = Integer.parseInt(input.getText());
@@ -44,7 +53,7 @@ public class StatsController {
                 else
                     updateStats();
             }
-            catch (Exception e){
+            catch (NumberFormatException e){
                 input.setText(input.getText().replaceAll("[\\D]*", ""));
             }
 
@@ -52,47 +61,84 @@ public class StatsController {
 
     private void updateStats() {
 
+        statsGol.deepCopyOnSet(gol.getGrid());
+        setCorrectRule();
+
+        int [][] stats = getStats(statsGol, iterations);
+        clearGraph();
+        displayStats(stats);
+    }
+
+    private int[][] getStats(GameOfLife gol, int iterations) {
+        int [][] data = new int[4][iterations];
+        double[] phies = new double[iterations];
+        for (int i = 0; i < iterations; i++) {
+
+            phies[i]  = phi(gol.getGrid());
+            if(i > 0){
+                data[1][i] = gol.getCellCount() - data[0][i - 1];
+            }
+            data[0][i] = gol.getCellCount();
+            lastCellCount = data[0][i];
+            gol.nextGeneration();
+        }
+        for (int i = 0; i < iterations; i++) {
+
+            for (int j = 0; j < iterations; j++) {
+
+                if(i != j) {
+                    int currentComparing = (int) (100 * Math.min(phies[i], phies[j]) / Math.max(phies[i], phies[j]));
+
+                    if (data[2][i] < currentComparing) {
+                        data[2][i] = currentComparing;
+                    }
+                }
+            }
+        }
+
+        return data;
+    }
+
+    private void clearGraph() {
         lineChart.setAnimated(false);
         cellCount.getData().clear();
         difference.getData().clear();
+        similarity.getData().clear();
         lineChart.setAnimated(true);
+    }
 
-        System.out.println(statsGol.getRule().toString().equals(gol.getRule().toString()));
+    private void displayStats(int[][] data) {
+        for (int i = 0; i < iterations; i++) {
+            cellCount.getData().add(new XYChart.Data<>(i, data[0][i]));
+            difference.getData().add(new XYChart.Data<>(i, data[1][i]));
+            similarity.getData().add(new XYChart.Data<>(i, data[2][i]));
+        }
+    }
 
-        statsGol.deepCopyOnSet(gol.getGrid());
-
+    private void setCorrectRule() {
         if(!statsGol.getRule().toString().equals(gol.getRule().toString())) {
             statsGol.setRule(gol.getRule().toString());
         }else {
             statsGol.updateRuleGrid();
         }
+    }
 
-        for (int i = 0; i < iterations; i++) {
-            statsGol.nextGeneration();
-            cellCount.getData().add(new XYChart.Data(i, statsGol.getCellCount()));
-            if(i > 0)
-                difference.getData().add(new XYChart.Data(i, statsGol.getCellCount() - lastCellCount));
-            lastCellCount = statsGol.getCellCount();
+    private double phi(boolean[][] grid) {
+        return alfa * statsGol.getCellCount()
+                + beta * (statsGol.getCellCount() - lastCellCount)
+                + gamma * g(statsGol.getGrid());
+    }
+
+    public int g(boolean[][] grid){
+        int count = 0;
+        int[] boundingBox = statsGol.getBoundingBox();
+        for (int x = boundingBox[0]; x <= boundingBox[1]; x++) {
+            for (int y = boundingBox[2]; y <= boundingBox[3]; y++) {
+                if(grid[x][y])
+                    count += (x + y);
+            }
         }
-
-
-        System.out.println(2);
-    }
-
-    public void initializing() {
-        input.setOnKeyPressed(this::keyPressed);
-        cellCount = new XYChart.Series();
-        cellCount.setName("Cellcount");
-        difference = new XYChart.Series();
-        difference.setName("Difference");
-        lineChart.getData().addAll(cellCount, difference);
-        System.out.println("Initialize");
-        statsGol = gol.clone();
-
-    }
-
-    private void textChanged(InputMethodEvent inputMethodEvent) {
-        System.out.println(2);
+        return count;
     }
 
     public void setGameOfLife(GameOfLife gameOfLife) {

@@ -36,7 +36,7 @@ public class Stats {
         stage.show();
 
         sController.setGameOfLife(gol);
-        sController.initializing();
+        sController.setUp();
 
         stage.setOnCloseRequest(event -> masterController.getMenuController().setStatsShowing(false));
         stage.setX(0);

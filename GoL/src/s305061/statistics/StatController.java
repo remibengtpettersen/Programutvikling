@@ -155,7 +155,6 @@ public class StatController {
             for (int y = 0; y < grid.length; y++)
                 if(grid[x][y])
                     geoFactor += x + y;
-
         return geoFactor;
     }
 
