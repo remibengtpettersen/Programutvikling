@@ -207,22 +207,27 @@ public class GameOfLife {
         int length_x = endPoint_x - startPoint_x;
         int length_y = endPoint_y - startPoint_y;
 
-        boolean[][] gridExtracted = new boolean[length_x][length_y];
 
-        int k = 0, t = 0;
+        if(length_x > 0 && length_y > 0){
 
-        for (int i = startPoint_x; i < startPoint_x + length_x; i++) {
-            for (int j = startPoint_y; j < startPoint_y + length_y; j++) {
-                if (getGrid()[i][j]) {
-                    gridExtracted[k][t] = getGrid()[i][j];
+            boolean[][] gridExtracted = new boolean[length_x][length_y];
+
+            int k = 0, t = 0;
+
+            for (int i = startPoint_x; i < startPoint_x + length_x; i++) {
+                for (int j = startPoint_y; j < startPoint_y + length_y; j++) {
+                    if (getGrid()[i][j]) {
+                        gridExtracted[k][t] = getGrid()[i][j];
+                    }
+                    t++;
                 }
-                t++;
+                k++;
+                t = 0;
             }
-            k++;
-            t = 0;
-        }
 
-        return gridExtracted;
+            return gridExtracted;
+        } else
+            return null;
     }
     //endregion
 

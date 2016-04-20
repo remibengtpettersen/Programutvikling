@@ -20,7 +20,7 @@
 
             <Label text="Number of iterations:"/>
             <TextField fx:id="textField" text="10" />
-            <Button text="Show statistics" onAction="#onButtonClicked"/>
+            <Button text="Show statistics" onAction="#onInput"/>
         </HBox>
     </bottom>
 </BorderPane>

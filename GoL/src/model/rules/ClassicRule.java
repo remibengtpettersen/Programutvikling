@@ -35,18 +35,14 @@ public class ClassicRule extends Rule {
                 // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
                 else if (neighbourCount == 3) {
                     grid[x][y] = true;
-                    System.out.print("1");
                 }
                 // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
                 else if (neighbourCount != 2) {
                     grid[x][y] = false;
-                    System.out.print("0");
                 }
                 // reset neighbour count for this cell
                 neighbours[x][y] = 0;
             }
         }
-
-        System.out.println();
     }
 }

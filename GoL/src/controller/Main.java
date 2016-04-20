@@ -5,10 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.GameOfLife;
-import model.rules.RuleParser;
-import s305061.ToGif;
+import s305061.gif.ToGif;
 
-import java.awt.*;
 import java.io.IOException;
 
 
@@ -45,9 +43,8 @@ public class Main extends Application {
      * @param args
      */
     public static void main(String[] args) {
-        //launch(args);
+        launch(args);
         //
-
         GameOfLife gol = new GameOfLife(20, 20);
 
         //gol.getGrid()[4][3] = true;
@@ -69,9 +66,8 @@ public class Main extends Application {
             }*/
 
 
-
         try {
-            ToGif.startWriteGolSequenceToGIF(gol);
+            ToGif.startWriteGolSequenceToGIF(gol, 1);
         } catch (IOException e) {
             e.printStackTrace();
         }

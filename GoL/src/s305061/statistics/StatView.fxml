@@ -9,18 +9,17 @@
 <BorderPane fx:controller="s305061.statistics.StatController" xmlns:fx="http://javafx.com/fxml">
     <center>
         <LineChart fx:id="graph" createSymbols="false" animated="false">
-            <xAxis><NumberAxis label="GoL evolusjon" /></xAxis> <!--lowerBound="0" upperBound="10" tickUnit="10"-->
-            <yAxis><NumberAxis /></yAxis> <!--lowerBound="-20" upperBound="110" tickUnit="10"-->
+            <xAxis><NumberAxis label="GoL evolusjon" /></xAxis>
+            <yAxis><NumberAxis /></yAxis>
         </LineChart>
     </center>
     <bottom>
-        <!--<Button text="Test" onAction="#test"/>-->
         <HBox spacing="10" alignment="center" >
             <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
 
             <Label text="Number of iterations:"/>
-            <TextField fx:id="textField" text="10" />
-            <Button text="Show statistics" onAction="#onButtonClicked"/>
+            <TextField fx:id="textField" text="10" onAction="#onInput" />
+            <Button text="Show statistics" onAction="#onInput"/>
         </HBox>
     </bottom>
 </BorderPane>

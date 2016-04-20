@@ -15,6 +15,8 @@
     <Menu text="File">
         <MenuItem fx:id="openBtn" text="Open" onAction="#openFileChooser"/>
         <MenuItem text="Save - s305080" onAction="#saveFile"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="Save GIF - s305061" onAction="#openGifWindow"/>
     </Menu>
     <Menu text="Edit">
         <MenuItem text="Clear board" onAction="#clearGrid"/>
@@ -44,6 +46,7 @@
     </Menu>
     <Menu text="Stats">
         <MenuItem text="Show statistics - s305061" onAction="#openStatWindow"/>
+        <RadioMenuItem fx:id="statsS305080" text="Show stats - s305080" onAction="#showS305080Stats"/>
     </Menu>
     <Menu text="Music">
         <CheckMenuItem text="Enable"/>

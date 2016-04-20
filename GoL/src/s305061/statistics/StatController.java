@@ -135,7 +135,7 @@ public class StatController {
         double min = Math.min(repA, repB);
         double max = Math.max(repA, repB);
 
-        int similarity =(int)(100*min/max);
+        int similarity = (int)(100*min/max);
 
         return similarity;
     }
@@ -184,12 +184,12 @@ public class StatController {
     }
 
     /**
-     *  Called when GUI button "Show statistics" is clicked.
+     *  Called when GUI button "Show statistics" is clicked, or if enter is pressed while in text field.
      *  If the text in the text field is a number,
      *  displayStatistics(iterations) will show statistics for that number of iterations
      */
     @FXML
-    public void onButtonClicked() {
+    public void onInput() {
 
         String string = textField.getText();
 

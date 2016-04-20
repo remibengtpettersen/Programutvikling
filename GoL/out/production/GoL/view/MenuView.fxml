@@ -6,7 +6,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 
 <MenuBar fx:controller="controller.MenuController" xmlns="http://javafx.com/javafx/8.0.40"
-         xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
+         xmlns:fx="http://javafx.com/fxml">
     <Menu text="GoL">
         <MenuItem text="About" onAction="#onAbout"/>
         <MenuItem text="Preferences"/>
@@ -43,13 +43,10 @@
         <MenuItem text="Custom rule" onAction="#setCustomRule"/>
     </Menu>
     <Menu text="Stats">
-<<<<<<< HEAD
         <MenuItem text="Show statistics - s305061" onAction="#openStatWindow"/>
-=======
         <MenuItem text="Show history"/>
         <MenuItem text="Show evolution"/>
         <RadioMenuItem fx:id="statsS305080" text="Show stats - s305080" onAction="#showS305080Stats"/>
->>>>>>> Statistics
     </Menu>
     <Menu text="Music">
         <CheckMenuItem text="Enable"/>
