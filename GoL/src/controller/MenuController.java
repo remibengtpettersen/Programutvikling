@@ -7,15 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
-<<<<<<< HEAD
-=======
 
->>>>>>> Statistics
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import s305073.controller.EditorController;
-import s305080.Statistics.Stats;
+
 
 import java.io.IOException;
 import java.util.Optional;
