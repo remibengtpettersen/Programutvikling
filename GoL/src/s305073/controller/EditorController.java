@@ -1,19 +1,24 @@
 package s305073.controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 import javafx.stage.Stage;
 import model.Cell;
+import model.Configuration;
 import model.GameOfLife;
+import controller.MasterController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +40,6 @@ public class EditorController {
     private double canvasWidthToHeightRatio;
     private double stripToEditorWidthRatio;
     private double stripToEditorHeightRatio;
-    private List<boolean[][]> generationList;
 
     @FXML private Canvas canvasEditor;
     @FXML private Canvas canvasStrip;
@@ -43,17 +47,16 @@ public class EditorController {
     @FXML private VBox vBoxMeta;
     @FXML private RadioButton rbtnCanvasGrid;
     private Color gridLineColor = Color.WHITE;
-    private double gridLineSize = 0.5;
+    private double gridLineSize = 0.1;
+    private int percent = 10;
+    private double offset_x;
 
     public EditorController() {
 
-        generationList = new ArrayList<>();
     }
 
     public void initialize(Stage editor){
         setGraphicsContextToEditor();
-
-        cell.setSize(10);
 
         initializeScrollPane();
         initializeCanvasSizeListener();
@@ -162,13 +165,14 @@ public class EditorController {
 
     public void setGridLines() {
         setGraphicsContextToEditor();
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(0.5);
+        gc.setStroke(cell.getGhostColor());
+        gc.setLineWidth(cell.getSpacing());
 
         for (int i = 0; i < canvasEditor.getWidth(); i += cell.getSize()) {
             for (int j = 0; j < canvasEditor.getHeight(); j += cell.getSize()) {
-                gc.strokeLine(i, 0, i, canvasEditor.getHeight());
-                gc.strokeLine(0, i, canvasEditor.getWidth(), i);
+                gc.strokeLine(i + cell.getSpacing(), 0, i + cell.getSpacing(), canvasEditor.getHeight());
+                gc.strokeLine(0, i + cell.getSpacing(), canvasEditor.getWidth(), i + cell.getSpacing());
+
             }
         }
     }
@@ -176,10 +180,10 @@ public class EditorController {
     private void fillCellPosition(int x_coordinate, int y_coordinate, Color color) {
         gc.setFill(color);
 
-        gc.fillRect(x_coordinate * cell.getSize(),
-                y_coordinate * cell.getSize(),
-                cell.getSize() * cell.getSpacing(),
-                cell.getSize() * cell.getSpacing());
+        gc.fillRect(x_coordinate * cell.getSize() + cell.getSpacing(),
+                    y_coordinate * cell.getSize() + cell.getSpacing(),
+                    cell.getSize() - (cell.getSpacing()),
+                    cell.getSize() - (cell.getSpacing()));
     }
 
     private void fillStripPosition(int x_coordinate, int y_coordinate, Color color) {
@@ -200,8 +204,8 @@ public class EditorController {
     }
 
     public void mouseClicked(MouseEvent event) {
-        int gridLocation_x = (int)event.getX() / (int) cell.getSize();
-        int gridLocation_y = (int)event.getY() / (int) cell.getSize();
+        int gridLocation_x = (int)(event.getX() / cell.getSize());
+        int gridLocation_y = (int)(event.getY() / cell.getSize());
 
         game.getGrid()[gridLocation_x][gridLocation_y] = true;
 
@@ -260,18 +264,17 @@ public class EditorController {
 
     private void clearGridLines() {
         setGraphicsContextToEditor();
-        gc.setStroke(gridLineColor);
-        gc.setLineWidth(gridLineSize);
-
-        for (int i = 0; i < canvasEditor.getWidth(); i += cell.getSize()) {
-            for (int j = 0; j < canvasEditor.getHeight(); j += cell.getSize()) {
-                gc.strokeLine(i, 0, i, canvasEditor.getHeight());
-                gc.strokeLine(0, i, canvasEditor.getWidth(), i);
-            }
-        }
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0, 0, canvasEditor.getWidth(), canvasEditor.getHeight());
+        renderEditor();
     }
 
     @FXML
     public void savePatternToFile(ActionEvent actionEvent) {
     }
+
+    public void getDeepCopyCell(Cell cell) {
+        this.cell = cell;
+    }
+
 }
