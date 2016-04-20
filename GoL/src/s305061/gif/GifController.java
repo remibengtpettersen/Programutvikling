@@ -16,46 +16,64 @@ import java.util.regex.Pattern;
  */
 public class GifController {
 
-
     @FXML public Canvas canvas;
-    @FXML private TextField iterationField;
-    @FXML private TextField scaleField;
-    @FXML private TextField originXField;
-    @FXML private TextField originYField;
-    @FXML private TextField widthField;
-    @FXML private TextField heightField;
+
+    @FXML private TextField iterationTextField;
+    @FXML private TextField scaleTextField;
+    @FXML private TextField fileNameTextField;
+    @FXML private TextField timeTextField;
+
+    @FXML private TextField leftTextField;
+    @FXML private TextField topTextField;
+    @FXML private TextField rightTextField;
+    @FXML private TextField bottomTextField;
 
     private GameOfLife gol;
 
     private int iterations = 10;
     private int scale = 10;
-    private int originX = 0;
-    private int originY = 0;
-    //private int width = 10;
-    //private int height = 10;
+    private String fileName = "test.gif";
+    private int timeBetweenFrames = 16;
 
-    private int patternWidth = 10;
-    private int patternHeight = 10;
+    private int left = 0;
+    private int top = 0;
+    private int right = 10;
+    private int bottom = 10;
 
-    private int getGifWidth(){ return patternWidth*scale; }
-    private int getGifHeight(){ return patternHeight*scale; }
+    private int getPatternWidth(){ return right-left; }
+    private int getPatternHeight(){ return bottom-top; }
 
-    private String path = "test.gif";
-    private int timePerMilliSecond = 500/60; //1000/60
+    private int getGifWidth(){ return getPatternWidth()*scale; }
+    private int getGifHeight(){ return getPatternHeight()*scale; }
 
-    public void setGol(GameOfLife gol) {
-        this.gol = gol;
+    private void setTimeBetweenFrames(int timeBetweenFrames){
+        this.timeBetweenFrames = timeBetweenFrames;
     }
 
-    public void crop() {
+    private void setFileName(String fileName){
+
+        if(fileName.endsWith(".gif")){
+            this.fileName = fileName;
+        } else {
+            this.fileName = fileName + ".gif";
+        }
+    }
+
+    public void initialize(GameOfLife gol) {
+
+        this.gol = gol;
+
+        autoCrop();
+    }
+
+    public void autoCrop() {
 
         int[] rectangle = gol.getBoundingBox();
 
-        originX = rectangle[0];
-        originY = rectangle[2];
-
-        patternWidth = rectangle[1] - rectangle[0] + 1;
-        patternHeight = rectangle[3] - rectangle[2] + 1;
+        left = rectangle[0];
+        right = rectangle[1];
+        top = rectangle[2];
+        bottom = rectangle[3];
 
         pushVariablesToTextFields();
     }
@@ -73,23 +91,25 @@ public class GifController {
 
     private void pushVariablesToTextFields(){
 
-        iterationField.setText(""+iterations);
-        scaleField.setText(""+scale);
-        originXField.setText(""+originX);
-        originYField.setText(""+originY);
-        widthField.setText(""+patternWidth);
-        heightField.setText(""+patternHeight);
+        leftTextField.setText(""+left);
+        topTextField.setText(""+top);
+        rightTextField.setText(""+right);
+        bottomTextField.setText(""+bottom);
     }
 
     @FXML
     private void pullVariablesFromTextFields(){
 
-        iterations = parseTextToInt(iterationField.getText());
-        scale = parseTextToInt(scaleField.getText());
-        originX = parseTextToInt(originXField.getText());
-        originY = parseTextToInt(originYField.getText());
-        patternWidth = parseTextToInt(widthField.getText());
-        patternHeight = parseTextToInt(heightField.getText());
+        iterations = parseTextToInt(iterationTextField.getText());
+        scale = parseTextToInt(scaleTextField.getText());
+
+        setFileName(fileNameTextField.getText());
+        setTimeBetweenFrames(parseTextToInt(timeTextField.getText()));
+
+        left = parseTextToInt(leftTextField.getText());
+        top = parseTextToInt(topTextField.getText());
+        right = parseTextToInt(rightTextField.getText());
+        bottom = parseTextToInt(bottomTextField.getText());
     }
 
     private int parseTextToInt(String string){
@@ -109,7 +129,7 @@ public class GifController {
 
         GameOfLife clonedGol = game.clone();
 
-        GIFWriter gifWriter = new GIFWriter(getGifWidth(), getGifHeight(), path, timePerMilliSecond);
+        GIFWriter gifWriter = new GIFWriter(getGifWidth(), getGifHeight(), fileName, timeBetweenFrames);
 
         writeGoLSequenceToGIF(gifWriter, clonedGol, iterations);
     }
@@ -125,11 +145,11 @@ public class GifController {
             //<draw game board to current image in writer>
 
 
-            for (int gameX = originX; gameX < originX+patternWidth; gameX++)
-                for (int gameY = originY; gameY < originY+patternHeight; gameY++){
+            for (int gameX = left; gameX < right; gameX++)
+                for (int gameY = top; gameY < bottom; gameY++){
 
-                    int gifX = (gameX - originX) * scale;
-                    int gifY = (gameY - originY) * scale;
+                    int gifX = (gameX - left) * scale;
+                    int gifY = (gameY - top) * scale;
 
                     int gifMaxX = gifX + scale - 1;
                     int gifMaxY = gifY + scale - 1;
