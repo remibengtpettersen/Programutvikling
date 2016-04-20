@@ -1,4 +1,4 @@
-package s305080;
+package s305080.PatternSaver;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -74,7 +74,7 @@ public class MetaDataController {
         if(!rules.getText().matches("[ ]*")){
             toFile.setRuleText(rules.getText());
         }
-        toFile.setFormat(ToFile.LagringsFormat.PlainText);
+        toFile.setFormat(ToFile.LagringsFormat.RLE);
     }
 
     public void setList(List<String> list){
@@ -83,5 +83,10 @@ public class MetaDataController {
 
     public void setComunicationLink(ToFile comunicationLink) {
         this.toFile = comunicationLink;
+    }
+
+    public void insertRule(String rule) {
+        rules.setText(rule);
+
     }
 }

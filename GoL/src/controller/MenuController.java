@@ -7,17 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
-import model.rules.ClassicRule;
 import s305073.controller.EditorController;
-import s305080.TheStrip;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -159,4 +153,8 @@ public class MenuController {
         editor.showAndWait();
     }
     //endregion
+    public void openStatWindow(ActionEvent actionEvent) {
+
+        masterController.openStatWindow();
+    }
 }

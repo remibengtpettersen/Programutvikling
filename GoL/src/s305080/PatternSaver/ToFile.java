@@ -1,4 +1,4 @@
-package s305080;
+package s305080.PatternSaver;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,14 +7,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.GameOfLife;
+import tools.MessageBox;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 /**
  * Created by Truls on 29/03/16.
@@ -24,23 +23,24 @@ public class ToFile {
     private  List <String> list;
     private  int[] boundingBox;
     private  boolean[][] grid;
-    FileChooser f;
+    FileChooser saveFileChooser;
     private Stage stage;
     private String ruleText;
     LagringsFormat format;
+    GameOfLife gol;
 
-    public void setFormat(LagringsFormat format) {
-        this.format = format;
-    }
 
     public enum LagringsFormat {
         RLE, PlainText
     }
 
     public void writeToFile(GameOfLife gol, Stage stage){
+
+        this.gol = gol;
         int [] boundingBox = gol.getBoundingBox();
 
         if(boundingBox[0] > boundingBox[1]){
+            MessageBox.alert("No pattern to save");
             System.out.println("YOU SHALL NOT SAVE");
             return; //throw exception
         }
@@ -49,10 +49,10 @@ public class ToFile {
 
         list = new ArrayList<String>();
 
-        f = new FileChooser();
+        saveFileChooser = new FileChooser();
 
         try {
-            collectMetaData();
+            collectMetaData(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,7 +60,7 @@ public class ToFile {
         if(format == null)
             return;
 
-        File file = f.showSaveDialog(stage);
+        File file = saveFileChooser.showSaveDialog(stage);
         if(file == null){
             return; //throw exception
         }
@@ -170,21 +170,29 @@ public class ToFile {
         }
     }
 
-    private void collectMetaData() throws IOException {
+    private void collectMetaData(Stage primaryStage) throws IOException {
         Parent root;
-        FXMLLoader loader = new FXMLLoader(ToFile.class.getResource("../s305080/MetaData.fxml"));
-            root = loader.load();
+        FXMLLoader loader = new FXMLLoader(ToFile.class.getResource("MetaData.fxml"));
+        root = loader.load();
         MetaDataController mController = loader.getController();
         mController.setList(list);
         Scene scene = new Scene(root);
-        stage = new Stage();
 
         mController.setComunicationLink(this);
+        mController.insertRule(gol.getRule().toString());
 
+        stage = new Stage();
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(primaryStage);
+        root.requestFocus();
         stage.showAndWait();
 
+    }
+
+    public void setFormat(LagringsFormat format) {
+        this.format = format;
     }
 
     public void closeStage() {
@@ -192,7 +200,7 @@ public class ToFile {
     }
 
     public void setInitialFileName(String initialFileName) {
-        f.setInitialFileName(initialFileName);
+        saveFileChooser.setInitialFileName(initialFileName);
     }
 
     public void setRuleText(String ruleText) {

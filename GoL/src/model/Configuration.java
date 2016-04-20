@@ -1,9 +1,6 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.io.*;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;

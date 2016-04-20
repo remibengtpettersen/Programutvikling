@@ -2,8 +2,6 @@ package model;
 
 import javafx.scene.paint.Color;
 
-import static sun.jvm.hotspot.oops.MethodData.cellSize;
-
 
 /**
  * Created by Truls on 18/04/16.

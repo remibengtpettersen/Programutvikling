@@ -1,10 +1,11 @@
-package s305080;
+package s305080.theStrip;
 
 import controller.MasterController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.transform.Affine;
+import model.Cell;
 import model.GameOfLife;
 
 /**
@@ -20,8 +21,10 @@ public class TheStripController {
     int minY;
     int maxY;
 
+    Cell cell;
+
     @FXML
-    Canvas canvas;
+    public Canvas canvas;
     GraphicsContext gc;
 
     private GameOfLife gol;
@@ -32,6 +35,9 @@ public class TheStripController {
 
     }
 
+    /**
+     * Updates the Strip with the information from the current board
+     */
     public void updateStrip(){
 
         minX = master.getCanvasController().getCurrViewMinX();
@@ -40,8 +46,11 @@ public class TheStripController {
         maxY = master.getCanvasController().getCurrViewMaxY();
 
         gol.deepCopyOnSet(grid);
-        gol.updateRuleGrid();
 
+        if(gol.getRule().toString().equals(master.getCanvasController().gol.getRule().toString())) //for some reason this always returns false :/
+            gol.updateRuleGrid();
+        else
+            gol.setRule(master.getCanvasController().gol.getRule().toString()); System.out.println("changed rule");
 
 
         cellSize = canvas.getHeight()/(maxY - minY);
@@ -71,8 +80,6 @@ public class TheStripController {
             tx += (maxX - minX) * cellSize;
         }
 
-
-
         /*
         for(int i = 0; i < canvas.getWidth(); i += (maxX - minX) * cellSize){
             for(int x = minX; x < maxX; x++){
@@ -87,27 +94,15 @@ public class TheStripController {
         }
         */
 
-
-
-
     }
 
     private void clearCanvasAndSetColors() {
-        gc.setFill(master.getCanvasController().getCell().getDeadColor());
+        gc.setFill(cell.getDeadColor());
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-        gc.setFill(master.getCanvasController().getCell().getColor());
+        gc.setFill(cell.getColor());
         gc.setStroke(gc.getFill());
     }
 
-    private boolean[][] copy(boolean[][] array) {
-
-        boolean[][] copiedBoard = new boolean[array.length][array.length];
-
-        for(int i = 0; i < array.length; i++){
-            copiedBoard[i] = array[i].clone();
-        }
-         return copiedBoard;
-    }
 
     public void setGrid(boolean[][] grid) {
         gc = canvas.getGraphicsContext2D();
@@ -124,5 +119,6 @@ public class TheStripController {
 
     public void setMaster(MasterController master) {
         this.master = master;
+        cell = master.getCanvasController().cell;
     }
 }
