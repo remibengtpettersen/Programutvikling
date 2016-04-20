@@ -15,7 +15,7 @@
                  width="710.0"
                  BorderPane.alignment="CENTER"
                  onMouseClicked="#mouseClicked"
-                 onMouseDragged="#mouseDragged"/>
+                 onMouseDragged="#mouseDragged"></Canvas>
    </center>
    <left>
       <VBox fx:id="vBoxMeta"

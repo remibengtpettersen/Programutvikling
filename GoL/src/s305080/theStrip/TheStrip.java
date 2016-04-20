@@ -43,7 +43,6 @@ public class TheStrip {
         stage.setX(masterController.stage.getX()+masterController.stage.getWidth());
         stage.setY(masterController.stage.getY());
 
-        masterController.stage.setOnCloseRequest(event -> stage.close());
 
         masterController.getCanvasController().getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());
         masterController.getCanvasController().getCanvas().setOnScrollFinished(event -> theStripController.updateStrip());
