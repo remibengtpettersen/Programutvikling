@@ -46,7 +46,7 @@ public class Stats {
 
         Stage stage = new Stage();
 
-        gol = gol.clone();
+        dGol = dGol.clone();
 
         stage.setTitle("Line Chart Sample");
         //defining the axes
@@ -64,8 +64,8 @@ public class Stats {
         series.setName("Number of cells");
         //populating the series with data
         for (int i = 0; i < 100; i++) {
-            series.getData().add(new XYChart.Data(i,gol.getCellCount()));
-            gol.nextGeneration();
+            series.getData().add(new XYChart.Data(i,dGol.getCellCount()));
+            dGol.nextGeneration();
         }
         Scene scene  = new Scene(lineChart,800,600);
         lineChart.getData().add(series);

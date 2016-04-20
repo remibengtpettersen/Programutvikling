@@ -15,11 +15,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import lieng.GIFWriter;
 import model.Cell;
+import model.DynamicGameOfLife;
 import model.GameOfLife;
 import s305080.PatternSaver.ToFile;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * The controller that handles everything that happens on the canvas.
@@ -34,6 +36,7 @@ import java.util.Optional;
  */
 public class CanvasController {
 
+    public DynamicGameOfLife dGol;
     public GameOfLife gol;
     private MasterController masterController;
     @FXML
@@ -47,7 +50,7 @@ public class CanvasController {
 
     private short boardWidth;
     private short boardHeight;
-    private boolean[][] grid;
+    private CopyOnWriteArrayList<CopyOnWriteArrayList<Boolean>> grid;
 
     private int frameDelay;
     private boolean running = true;
@@ -88,8 +91,8 @@ public class CanvasController {
         this.masterController = masterController;
         initializeGameParameters();
 
-        gol = new GameOfLife(boardWidth, boardHeight);
-        grid = gol.getGrid();
+        dGol = new DynamicGameOfLife(boardWidth, boardHeight);
+        grid = dGol.getGrid();
         gc = canvas.getGraphicsContext2D();
 
         clampCellSize();
@@ -124,12 +127,12 @@ public class CanvasController {
 
         currViewMinX = (int) (boardOffsetX / cell.getSize());
         currViewMaxX = (int) ((boardOffsetX + canvas.getWidth()) / cell.getSize()) + 1;
-        if (currViewMaxX > grid.length)
+        if (currViewMaxX > grid.size())
             currViewMaxX--;
 
         currViewMinY = (int)(boardOffsetY / cell.getSize());
         currViewMaxY = (int) ((boardOffsetY + canvas.getHeight()) / cell.getSize()) + 1;
-        if (currViewMaxY > grid[0].length)
+        if (currViewMaxY > grid.get(0).size())
             currViewMaxY--;
     }
 
@@ -147,12 +150,12 @@ public class CanvasController {
                 if (now / 1000000 - timer > frameDelay) {
 
                     if(!busy) {
-                        gol.nextGeneration();
+                        dGol.nextGeneration();
 
                         renderCanvas();
 
                         timer = now / 1000000;
-                        masterController.getToolController().giveCellCount(gol.getCellCount());
+                        masterController.getToolController().giveCellCount(dGol.getCellCount());
                     }
                 }
             }
@@ -196,7 +199,8 @@ public class CanvasController {
         if (code.equals("S")) {
             busy = true;
             try {
-                saveToGif();
+               // saveToGif();
+                throw new IOException();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -204,8 +208,8 @@ public class CanvasController {
         }
         if (code.equals("D")) {
 
-            saveToFile();
-            System.out.println(gol.getBoundingBox()[0] + " " + gol.getBoundingBox()[1] + " " + gol.getBoundingBox()[2] + " " + gol.getBoundingBox()[3] + " ");
+           // saveToFile();
+            System.out.println(dGol.getBoundingBox()[0] + " " + dGol.getBoundingBox()[1] + " " + dGol.getBoundingBox()[2] + " " + dGol.getBoundingBox()[3] + " ");
 
         }
     }
@@ -276,7 +280,7 @@ public class CanvasController {
 
             int gridClickX = getGridPosX(mouseEvent.getX());
             int gridClickY = getGridPosY(mouseEvent.getY());
-            gol.changeCellState(gridClickX, gridClickY);
+            dGol.changeCellState(gridClickX, gridClickY);
 
             if (!running || frameDelay > 0)
             renderCanvas();
@@ -315,7 +319,7 @@ public class CanvasController {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
                 drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY), getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
             } else {
-                gol.setCellAlive(getGridPosX(currMousePosX), getGridPosY(currMousePosY));
+                dGol.setCellAlive(getGridPosX(currMousePosX), getGridPosY(currMousePosY));
                 drawCell(getGridPosX(currMousePosX), getGridPosY(currMousePosY));
             }
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
@@ -476,7 +480,7 @@ public class CanvasController {
         for (int x = currViewMinX; x < currViewMaxX; x++) {
             for (int y = currViewMinY; y < currViewMaxY; y++) {
 
-                if (grid[x][y])
+                if (grid.get(x).get(y))
                     drawCell(x, y);
             }
         }
@@ -527,7 +531,7 @@ public class CanvasController {
                         int posY = getGridPosY(currMousePosY) - importPattern[x].length / 2 + y;
 
                         if (posY >= 0 && posY < boardHeight)
-                            gol.setCellAlive(posX, posY);
+                            dGol.setCellAlive(posX, posY);
                     }
                 }
             }
@@ -543,7 +547,7 @@ public class CanvasController {
      */
     public void clearGrid() {
 
-        gol.clearGrid();
+        dGol.clearGrid();
         renderCanvas();
     }
 
@@ -573,7 +577,7 @@ public class CanvasController {
         int lineLength = Math.abs((Math.abs(width) < Math.abs(height)) ? height : width);
         int x1, y1;
         for (int i = 0; i < lineLength; i++) {
-            gol.setCellAlive(x1 = (x + i * width / lineLength), y1 = (y + i * height / lineLength));
+            dGol.setCellAlive(x1 = (x + i * width / lineLength), y1 = (y + i * height / lineLength));
             drawCell(x1, y1);
         }
     }
@@ -623,21 +627,21 @@ public class CanvasController {
      */
     private void resizeGrid(int width, int height) {
 
-        int minWidth = (width < grid.length) ? width : grid.length;
-        int minHeight = (height < grid[0].length) ? height : grid[0].length;
+        int minWidth = (width < grid.size()) ? width : grid.size();
+        int minHeight = (height < grid.get(0).size()) ? height : grid.get(0).size();
 
         boolean[][] temp = new boolean[width][height];
 
         for (int x = 0; x < minWidth; x++) {
-            System.arraycopy(grid[x], 0, temp[x], 0, minHeight);
+           // System.arraycopy(grid.get(x), 0, temp[x], 0, minHeight);
         }
 
         gol.setGrid(temp);
         gol.createNeighboursGrid();
         gol.updateRuleGrid();
-        grid = gol.getGrid();
-        boardWidth = (short) grid.length;
-        boardHeight = (short) grid[0].length;
+        grid = dGol.getGrid();
+        boardWidth = (short) grid.size();
+        boardHeight = (short) grid.get(0).size();
     }
 
     //region Animation control
@@ -733,11 +737,11 @@ public class CanvasController {
 
     public void setRule(String ruleText) {
 
-        gol.setRule(ruleText);
+        dGol.setRule(ruleText);
     }
 
     //endregion
-
+/*
     // region s305080 extra task
     private void saveToGif() throws IOException {
 
@@ -751,10 +755,10 @@ public class CanvasController {
 
         int milliSeconds = frameDelay;
 
-        boolean[][] gridCopy = new boolean[grid.length][grid[0].length];
+        boolean[][] gridCopy = new boolean[grid.size()][grid.get(0).size()];
 
-        for (int i = 0; i < grid.length; i++) {
-            gridCopy[i] = grid[i].clone();
+        for (int i = 0; i < grid.size(); i++) {
+            gridCopy[i] = (boolean[]) grid.get(i).clone();
         }
 
         GIFWriter gifWriter = new GIFWriter(width, height, path, milliSeconds);
@@ -766,7 +770,7 @@ public class CanvasController {
             gifWriter.fillRect(0, width - 1, 0, height - 1, new java.awt.Color((int) (255 * cell.getDeadColor().getRed()), (int) (255 * cell.getDeadColor().getGreen()), (int) (255 * cell.getDeadColor().getBlue())));
             for (int x = 0; x < gifWidth - 1; x++) {
                 for (int y = 0; y < gifHeight - 1; y++) {
-                    if (grid[x + currViewMinX][y + currViewMinY]) {
+                    if (grid.get(x + currViewMinX).get(y + currViewMinY)) {
                         gifWriter.fillRect(
                                 x * width / gifWidth, (x + 1) * width / gifWidth,
                                 y * height / gifHeight, (y + 1) * height / gifHeight,
@@ -778,34 +782,16 @@ public class CanvasController {
                 }
             }
 
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
-            gol.nextGeneration();
+            dGol.nextGeneration();
+
 
             gifWriter.insertAndProceed();
         }
 
         gifWriter.close();
 
-        for (int i = 0; i < grid.length; i++) {
-            grid[i] = gridCopy[i];
+        for (int i = 0; i < grid.size(); i++) {
+            grid.set(i, gridCopy.get(i));
         }
 
         System.out.println("Done");
@@ -813,12 +799,12 @@ public class CanvasController {
 
     void saveToFile() {
         busy = true;
-        new ToFile().writeToFile(gol, masterController.stage);
+        new ToFile().writeToFile(dGol, masterController.stage);
         busy = false;
     }
 
     //endregion
-
+*/
 
 
     //region getters
