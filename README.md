@@ -125,3 +125,6 @@ Implemented onAction launchEditor for editor for extra task -Pattern Editor-. Al
 
 160419 13:21
 Implemented statistics for s305061. Merged with master
+
+160421 22:41
+Added progress indicator to s305061 statistics
