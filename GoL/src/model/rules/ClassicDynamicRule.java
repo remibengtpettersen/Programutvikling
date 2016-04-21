@@ -29,16 +29,18 @@ public class ClassicDynamicRule {
         ruleText = "B3/S23";
     }
 
+    public void evolve(int start, int stop) throws EvolveException {
 
-    public void evolve() throws EvolveException {
-
-        for(int x = 0; x < grid.size(); x++){
+        for(int x = start; x < stop; x++){
             for(int y = 0; y < grid.get(x).size(); y++){
 
                 int neighbourCount = neighbours.get(x).get(y).get();
 
                 if (neighbourCount < 0 || neighbourCount > 8)
+                {
+                    neighbours.get(x).get(y).set(0);
                     throw new EvolveException("Tried setting " + neighbourCount + " neighbours");
+                }
 
                     // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
                 else if (neighbourCount == 3)

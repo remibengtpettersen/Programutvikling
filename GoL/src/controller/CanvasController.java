@@ -18,6 +18,7 @@ import model.GameOfLife;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -34,6 +35,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * save to gif
  */
 public class CanvasController {
+
+     private List<Thread> workers = new ArrayList<Thread>();
+
 
     public DynamicGameOfLife dGol;
     public GameOfLife gol;
@@ -76,6 +80,7 @@ public class CanvasController {
     private boolean importing = false;
     private boolean gridLines;
     private boolean userWantsGridLines;
+    private int threads = Runtime.getRuntime().availableProcessors();
 
     public Canvas getCanvas() {
         return canvas;
@@ -158,6 +163,10 @@ public class CanvasController {
 
                     if(!busy) {
                         dGol.nextGeneration();
+                        dGol.nextGeneration();
+                        dGol.nextGeneration();
+                        dGol.nextGeneration();
+                        dGol.nextGeneration();
 
                         renderCanvas();
 
@@ -168,6 +177,7 @@ public class CanvasController {
             }
         };
     }
+
 
     /**
      * Sets up all the listeners needed for the simulation of Game of Life
@@ -333,7 +343,7 @@ public class CanvasController {
                 int y = getGridPosY(currMousePosY);
                 fitTo(x, y);
                 dGol.setCellAlive(x, y);
-                drawCell(x, y);
+                drawCell((x < 0)?0:x, (y < 0)? 0 : y);
             }
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
@@ -521,10 +531,10 @@ public class CanvasController {
         gc.setStroke(cell.getGhostColor());
 
         for (int i = currViewMinX; i < currViewMaxX; i++) {
-            gc.strokeLine(i * cell.getSize() - boardOffsetX - cell.getSize() * cell.getSpacing() / 2, 0, i * cell.getSize() - boardOffsetX - cell.getSize() * cell.getSpacing() / 2, canvas.getHeight());
+            gc.strokeLine(i * cell.getSize() - boardOffsetX - cell.getSize() * cell.getSpacing() / 2, -boardOffsetY, i * cell.getSize() - boardOffsetX - cell.getSize() * cell.getSpacing() / 2, -boardOffsetY + grid.get(0).size()*cell.getSize());
         }
         for (int i = currViewMinY; i < currViewMaxY; i++) {
-            gc.strokeLine(0, i * cell.getSize() - boardOffsetY - cell.getSize() * cell.getSpacing() / 2, canvas.getWidth(), i * cell.getSize() - boardOffsetY - cell.getSize() * cell.getSpacing() / 2);
+            gc.strokeLine(-boardOffsetX, i * cell.getSize() - boardOffsetY - cell.getSize() * cell.getSpacing() / 2, -boardOffsetX + grid.size() * cell.getSize(), i * cell.getSize() - boardOffsetY - cell.getSize() * cell.getSpacing() / 2);
         }
     }
 
@@ -554,10 +564,10 @@ public class CanvasController {
                 if (importPattern[x][y]) {
                     int posX = getGridPosX(currMousePosX) - importPattern.length / 2 + x;
 
-                    if (posX >= 0 && posX < boardWidth) {
+                    if (posX >= 0 ) {
                         int posY = getGridPosY(currMousePosY) - importPattern[x].length / 2 + y;
 
-                        if (posY >= 0 && posY < boardHeight)
+                        if (posY >= 0 )
                             dGol.setCellAlive(posX, posY);
                     }
                 }
@@ -604,7 +614,9 @@ public class CanvasController {
         int lineLength = Math.abs((Math.abs(width) < Math.abs(height)) ? height : width);
         int x1, y1;
         for (int i = 0; i < lineLength; i++) {
-            dGol.setCellAlive(x1 = (x + i * width / lineLength), y1 = (y + i * height / lineLength));
+
+            fitTo(x1 = (x + i * width / lineLength), y1 = (y + i * height / lineLength));
+            dGol.setCellAlive(x1 =(x1 < 0) ? 0 : x1, y1 = (y1 < 0)?0:y1);
             drawCell(x1, y1);
         }
     }

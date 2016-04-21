@@ -3,6 +3,7 @@ package model;
 import model.rules.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -11,7 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class DynamicGameOfLife{
 
+    int treads = Runtime.getRuntime().availableProcessors();
 
+    private List<Thread> workers = new ArrayList<Thread>();
 
 
     private ArrayList<ArrayList<AtomicBoolean>> grid;
@@ -58,24 +61,67 @@ public class DynamicGameOfLife{
      * Evolves the grid one generation
      */
     public void nextGeneration() {
-        aggregateNeighbours();
-
+        createWorkers1();
         try {
-            rule.evolve();
-        } catch (EvolveException e) {
+            runWorkers();
+        } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+        workers.clear();
+        createWorkers2();
+        try {
+            runWorkers();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        workers.clear();
+    }
+
+
+
+    public void createWorkers1() {
+        for (int i = 0; i < treads; i++) {
+            final int finalI = i;
+            workers.add(new Thread(() -> {
+                aggregateNeighbours(finalI * grid.size()/treads, (finalI + 1) * grid.size()/treads);
+            }));
+        }
+    }
+    public void createWorkers2() {
+        for (int i = 0; i < treads; i++) {
+            final int finalI = i;
+            workers.add(new Thread(() -> {
+                try {
+                    rule.evolve(finalI * grid.size()/treads, (finalI + 1) * grid.size()/treads);
+                } catch (EvolveException e) {
+                    e.printStackTrace();
+                }
+            }));
         }
     }
 
-    ;
+    public void runWorkers() throws InterruptedException {
+        for (Thread t : workers) {
+            t.start();
+        }
+
+        // vent på at alle trådene har kjørt ferdig før vi returnerer
+        for (Thread t : workers) {
+            t.join();
+        }
+    }
+
+
 
     /**
      * For each alive cell, it increments the adjacent cells neighbour count.
      * Also calculates the live cell count
+     * @param start
+     * @param stop
      */
-    public void aggregateNeighbours() {
+    public void aggregateNeighbours(int start, int stop) {
         cellCount = 0;
-        for (int x = 0; x < grid.size(); x++) {
+        for (int x = start; x < stop; x++) {
             for (int y = 0; y < grid.get(x).size(); y++) {
                 if (grid.get(x).get(y).get()) {
                     cellCount++;
@@ -93,7 +139,7 @@ public class DynamicGameOfLife{
                                    if (b < 0)
                                        increaseYTop(1);
                                    if(b >= grid.get(0).size())
-                                       increaseYDown(1);
+                                       increaseYBottom(1);
                                    neighbours.get((a < 0)? 0 : a).get((b < 0)? 0 : b).incrementAndGet();
                                }
 
@@ -214,7 +260,7 @@ public class DynamicGameOfLife{
 
             int diffY = y - grid.get(0).size() + 1;
             if(diffY > 0)
-                increaseYDown(diffY);
+                increaseYBottom(diffY);
 
             grid.get(x).get(y).set(true);
         }
@@ -240,7 +286,7 @@ public class DynamicGameOfLife{
 
             int diffY = y - grid.get(0).size() + 1;
             if(diffY > 0)
-                increaseYDown(diffY);
+                increaseYBottom(diffY);
 
             grid.get(x).get(y).set(!grid.get(x).get(y).get());
         }
@@ -259,7 +305,7 @@ public class DynamicGameOfLife{
         }
     }
 
-    public void increaseYDown(int diffY){
+    public void increaseYBottom(int diffY){
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j <= diffY; j++){
                 grid.get(i).add(new AtomicBoolean(false));
@@ -273,9 +319,9 @@ public class DynamicGameOfLife{
             grid.add(0, new ArrayList<>());
             neighbours.add(0, new ArrayList<>());
 
-            for (int j = 0; j < grid.get(0).size(); j++) {
-                grid.get(grid.size() - 1).add(new AtomicBoolean(false));
-                neighbours.get(grid.size() - 1).add(new AtomicInteger(0));
+            for (int j = 0; j < grid.get(1).size(); j++) {
+                grid.get(0).add(new AtomicBoolean(false));
+                neighbours.get(0).add(new AtomicInteger(0));
             }
         }
     }
