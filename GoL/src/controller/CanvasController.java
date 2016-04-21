@@ -12,16 +12,15 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import lieng.GIFWriter;
 import model.Cell;
 import model.DynamicGameOfLife;
 import model.GameOfLife;
-import s305080.PatternSaver.ToFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * The controller that handles everything that happens on the canvas.
@@ -50,7 +49,7 @@ public class CanvasController {
 
     private short boardWidth;
     private short boardHeight;
-    private CopyOnWriteArrayList<CopyOnWriteArrayList<Boolean>> grid;
+    private ArrayList<ArrayList<AtomicBoolean>> grid;
 
     private int frameDelay;
     private boolean running = true;
@@ -128,12 +127,20 @@ public class CanvasController {
         currViewMinX = (int) (boardOffsetX / cell.getSize());
         currViewMaxX = (int) ((boardOffsetX + canvas.getWidth()) / cell.getSize()) + 1;
         if (currViewMaxX > grid.size())
-            currViewMaxX--;
+            currViewMaxX = grid.size();
 
         currViewMinY = (int)(boardOffsetY / cell.getSize());
         currViewMaxY = (int) ((boardOffsetY + canvas.getHeight()) / cell.getSize()) + 1;
         if (currViewMaxY > grid.get(0).size())
-            currViewMaxY--;
+            currViewMaxY = grid.get(0).size();
+
+        if (currViewMinY < 0)
+            currViewMinY = 0;
+        if (currViewMinX < 0)
+            currViewMinX = 0;
+
+
+
     }
 
     /**
@@ -280,7 +287,10 @@ public class CanvasController {
 
             int gridClickX = getGridPosX(mouseEvent.getX());
             int gridClickY = getGridPosY(mouseEvent.getY());
-            dGol.changeCellState(gridClickX, gridClickY);
+
+            fitTo(gridClickX, gridClickY);
+
+            dGol.changeCellState((gridClickX < 0)? 0 : gridClickX, (gridClickY < 0)? 0 : gridClickY);
 
             if (!running || frameDelay > 0)
             renderCanvas();
@@ -319,8 +329,11 @@ public class CanvasController {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
                 drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY), getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
             } else {
-                dGol.setCellAlive(getGridPosX(currMousePosX), getGridPosY(currMousePosY));
-                drawCell(getGridPosX(currMousePosX), getGridPosY(currMousePosY));
+                int x = getGridPosX(currMousePosX);
+                int y = getGridPosY(currMousePosY);
+                fitTo(x, y);
+                dGol.setCellAlive(x, y);
+                drawCell(x, y);
             }
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
@@ -339,6 +352,18 @@ public class CanvasController {
         prevMousePosX = currMousePosX;
         prevMousePosY = currMousePosY;
 
+
+    }
+
+    private void fitTo(int x, int y) {
+        if(x < 0){
+            dGol.increaseXLeft(Math.abs(x));
+            boardOffsetX -= (x - 1) * cell.getSize();
+        }
+        if(y < 0){
+            dGol.increaseYTop(Math.abs(x));
+            boardOffsetY -= (y - 1) * cell.getSize();
+        }
 
     }
 
@@ -387,7 +412,7 @@ public class CanvasController {
      */
     private void clampCellSize() {
 
-        if (cell.getSize() * boardWidth < canvas.getWidth()) {
+       /* if (cell.getSize() * boardWidth < canvas.getWidth()) {
             cell.setSize(canvas.getWidth() / boardWidth);
         }
 
@@ -395,7 +420,7 @@ public class CanvasController {
             cell.setSize(canvas.getHeight() / boardHeight);
         } else if (cell.getSize() > Cell.MAX_SIZE) {
             cell.setSize(Cell.MAX_SIZE);
-        }
+        }*/
     }
 
     /**
@@ -403,8 +428,8 @@ public class CanvasController {
      */
     private void clampView() {
 
-        boardOffsetX = clamp(boardOffsetX, 0, (int) (cell.getSize() * boardWidth - canvas.getWidth()));
-        boardOffsetY = clamp(boardOffsetY, 0, (int) (cell.getSize() * boardHeight - canvas.getHeight()));
+      //  boardOffsetX = clamp(boardOffsetX, 0, (int) (cell.getSize() * boardWidth - canvas.getWidth()));
+       // boardOffsetY = clamp(boardOffsetY, 0, (int) (cell.getSize() * boardHeight - canvas.getHeight()));
     }
 
     /**
@@ -465,6 +490,8 @@ public class CanvasController {
         if (gridLines)
             if (userWantsGridLines)
                 renderGridLines();
+        gc.strokeRect(-boardOffsetX, -boardOffsetY, grid.size() * cell.getSize(), grid.get(0).size() * cell.getSize());
+
     }
 
     /**
@@ -477,10 +504,10 @@ public class CanvasController {
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         gc.setFill(cell.getColor());
-        for (int x = currViewMinX; x < currViewMaxX; x++) {
-            for (int y = currViewMinY; y < currViewMaxY; y++) {
+        for (int x = currViewMinX; x < grid.size(); x++) {
+            for (int y = currViewMinY; y < grid.get(0).size(); y++) {
 
-                if (grid.get(x).get(y))
+                if (grid.get(x).get(y).get())
                     drawCell(x, y);
             }
         }

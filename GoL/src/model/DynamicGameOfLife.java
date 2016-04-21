@@ -2,7 +2,9 @@ package model;
 
 import model.rules.*;
 
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Truls on 20/04/16.
@@ -12,8 +14,8 @@ public class DynamicGameOfLife{
 
 
 
-    private CopyOnWriteArrayList<CopyOnWriteArrayList<Boolean>> grid;
-    private CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> neighbours;
+    private ArrayList<ArrayList<AtomicBoolean>> grid;
+    private ArrayList<ArrayList<AtomicInteger>> neighbours;
     private ClassicDynamicRule rule;
     private int cellCount = 0;
 
@@ -36,15 +38,15 @@ public class DynamicGameOfLife{
      * array to keep track of the neighbour count to the corresponding cells in the other array
      */
     private void createGameBoard(int width, int height) {
-        grid = new CopyOnWriteArrayList<>();
-        neighbours = new CopyOnWriteArrayList<>();
+        grid = new ArrayList<>();
+        neighbours = new ArrayList<>();
 
         for (int x = 0; x < width; x++) {
-            grid.add(new CopyOnWriteArrayList<>());
-            neighbours.add(new CopyOnWriteArrayList<>());
+            grid.add(new ArrayList<>());
+            neighbours.add(new ArrayList<>());
             for (int y = 0; y < height; y++) {
-                grid.get(x).add(false);
-                neighbours.get(x).add(0);
+                grid.get(x).add(new AtomicBoolean(false));
+                neighbours.get(x).add(new AtomicInteger(0));
             }
         }
     }
@@ -73,14 +75,28 @@ public class DynamicGameOfLife{
      */
     public void aggregateNeighbours() {
         cellCount = 0;
-        for (int x = 1; x < grid.size() - 1; x++) {
-            for (int y = 1; y < grid.get(x).size() - 1; y++) {
-                if (grid.get(x).get(y)) {
+        for (int x = 0; x < grid.size(); x++) {
+            for (int y = 0; y < grid.get(x).size(); y++) {
+                if (grid.get(x).get(y).get()) {
                     cellCount++;
                     for (int a = x - 1; a <= x + 1; a++) {
                         for (int b = y - 1; b <= y + 1; b++) {
                             if (a != x || b != y) {
-                                neighbours.get(a).set(b, neighbours.get(a).get(b) + 1);
+                               try{
+                                   neighbours.get(a).get(b).incrementAndGet();
+                               }
+                               catch (IndexOutOfBoundsException e){
+                                   if (a < 0)
+                                       increaseXLeft(1);
+                                   if(a >= grid.size())
+                                       increaseXRight(1);
+                                   if (b < 0)
+                                       increaseYTop(1);
+                                   if(b >= grid.get(0).size())
+                                       increaseYDown(1);
+                                   neighbours.get((a < 0)? 0 : a).get((b < 0)? 0 : b).incrementAndGet();
+                               }
+
                             }
                         }
                     }
@@ -114,7 +130,7 @@ public class DynamicGameOfLife{
      *
      * @return The neighbour-2D-array
      */
-    public CopyOnWriteArrayList<CopyOnWriteArrayList<Integer>> getNeighbours() {
+    public ArrayList<ArrayList<AtomicInteger>> getNeighbours() {
         return neighbours;
     }
 
@@ -123,7 +139,7 @@ public class DynamicGameOfLife{
      *
      * @return The cell-2D-array
      */
-    public CopyOnWriteArrayList<CopyOnWriteArrayList<Boolean>> getGrid() {
+    public ArrayList<ArrayList<AtomicBoolean>> getGrid() {
         return grid;
     }
 
@@ -166,7 +182,7 @@ public class DynamicGameOfLife{
      *
      * @param grid Cell grid
      */
-    public void setGrid(CopyOnWriteArrayList<CopyOnWriteArrayList<Boolean>> grid) {
+    public void setGrid(ArrayList<ArrayList<AtomicBoolean>> grid) {
         this.grid = grid;
     }
 
@@ -187,7 +203,21 @@ public class DynamicGameOfLife{
      * @param y the y coordinate in the grid.
      */
     public void setCellAlive(int x, int y) {
-        grid.get(x).set(y, true);
+        try {
+            grid.get(x).get(y).set(true);
+        }
+        catch (IndexOutOfBoundsException e) {
+            int diffX = x - grid.size() + 1;
+
+            if(diffX > 0)
+                increaseXRight(diffX);
+
+            int diffY = y - grid.get(0).size() + 1;
+            if(diffY > 0)
+                increaseYDown(diffY);
+
+            grid.get(x).get(y).set(true);
+        }
     }
 
     /**
@@ -197,7 +227,66 @@ public class DynamicGameOfLife{
      * @param y the y coordinate in the grid.
      */
     public void changeCellState(int x, int y) {
-        grid.get(x).set(y, !grid.get(x).get(y));
+
+
+        try {
+            grid.get(x).get(y).set(!grid.get(x).get(y).get());
+        }
+        catch (IndexOutOfBoundsException e) {
+            int diffX = x - grid.size() + 1;
+
+            if(diffX > 0)
+                increaseXRight(diffX);
+
+            int diffY = y - grid.get(0).size() + 1;
+            if(diffY > 0)
+                increaseYDown(diffY);
+
+            grid.get(x).get(y).set(!grid.get(x).get(y).get());
+        }
+    }
+
+
+    public void increaseXRight(int diffX) {
+        for (int i = 0; i <= diffX; i++){
+            grid.add(new ArrayList<>());
+            neighbours.add(new ArrayList<>());
+
+            for (int j = 0; j < grid.get(0).size(); j++) {
+                grid.get(grid.size() - 1).add(new AtomicBoolean(false));
+                neighbours.get(grid.size() - 1).add(new AtomicInteger(0));
+            }
+        }
+    }
+
+    public void increaseYDown(int diffY){
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j <= diffY; j++){
+                grid.get(i).add(new AtomicBoolean(false));
+                neighbours.get(i).add(new AtomicInteger(0));
+            }
+        }
+    }
+
+    public void increaseXLeft(int diffX) {
+        for (int i = 0; i <= diffX; i++){
+            grid.add(0, new ArrayList<>());
+            neighbours.add(0, new ArrayList<>());
+
+            for (int j = 0; j < grid.get(0).size(); j++) {
+                grid.get(grid.size() - 1).add(new AtomicBoolean(false));
+                neighbours.get(grid.size() - 1).add(new AtomicInteger(0));
+            }
+        }
+    }
+
+    public void increaseYTop(int diffY){
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j <= diffY; j++){
+                grid.get(i).add(0, new AtomicBoolean(false));
+                neighbours.get(i).add(0, new AtomicInteger(0));
+            }
+        }
     }
 
     /**
