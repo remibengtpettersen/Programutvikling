@@ -11,7 +11,7 @@
 <BorderPane fx:controller="s305061.statistics.StatController" xmlns:fx="http://javafx.com/fxml">
     <center>
         <LineChart fx:id="graph" createSymbols="false" animated="false">
-            <xAxis><NumberAxis label="GoL evolusjon" /></xAxis>
+            <xAxis><NumberAxis label="GoL evolution" /></xAxis>
             <yAxis><NumberAxis /></yAxis>
         </LineChart>
     </center>
