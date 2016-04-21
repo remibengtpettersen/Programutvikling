@@ -44,6 +44,7 @@
     </Menu>
     <Menu text="Stats">
         <MenuItem text="Show statistics - s305061" onAction="#openStatWindow"/>
+        <RadioMenuItem fx:id="statsS305080" text="Show stats - s305080" onAction="#showS305080Stats"/>
     </Menu>
     <Menu text="Music">
         <CheckMenuItem text="Enable"/>

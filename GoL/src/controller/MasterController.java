@@ -10,8 +10,8 @@ import model.Configuration;
 import model.Parser.PatternParser;
 import model.PatternFormatException;
 import s305061.statistics.StatController;
+import s305080.Statistics.Stats;
 import s305080.theStrip.TheStrip;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -34,8 +34,10 @@ public class MasterController {
 
     //region s305080
     TheStrip theStrip;
+    Stats stats;
     //endregion
     private FileChooser patternChooser = new FileChooser();
+
 
     /**
      *
@@ -148,7 +150,28 @@ public class MasterController {
     void showTheStrip() {
         theStrip = new TheStrip();
         theStrip.display(canvasController.gol.getGrid(), this);
+        if(stats == null)
+            stage.setOnCloseRequest(event -> closeTheStrip());
+        else{
+            stage.setOnCloseRequest(event -> {
+                closeTheStrip();
+                closeStats();
+            });
+        }
     }
+    public void showStats() {
+        stats = new Stats();
+        stats.display(canvasController.gol, this);
+        if(theStrip == null)
+            stage.setOnCloseRequest(event -> closeStats());
+        else{
+            stage.setOnCloseRequest(event -> {
+                closeTheStrip();
+                closeStats();
+            });
+        }
+    }
+
 
     /**
      * Closes the Strip
@@ -158,9 +181,17 @@ public class MasterController {
         theStrip = null;
     }
 
+
+    public void closeStats() {
+        stats.close();
+        stats = null;
+    }
+
     public Configuration getConfig() {
         return configuration;
     }
+
+
     //endregion
 }
 

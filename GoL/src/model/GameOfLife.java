@@ -108,11 +108,20 @@ public class GameOfLife {
     public void deepCopyOnSet(boolean[][] grid) {
 
         boolean[][] copiedBoard = new boolean[grid.length][grid.length];
+        neighbours = new byte[grid.length][grid.length];
 
         for(int i = 0; i < grid.length; i++){
             copiedBoard[i] = grid[i].clone();
         }
         this.grid = copiedBoard;
+        cellCount = 0;
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[0].length; y++) {
+                if(grid[x][y]){
+                    cellCount++;
+                }
+            }
+        }
     }
 
     //region Getters
