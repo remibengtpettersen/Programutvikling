@@ -161,7 +161,7 @@ public class MasterController {
     }
     public void showStats() {
         stats = new Stats();
-        stats.display(canvasController.gol, this);
+        stats.display(canvasController.dGol, this);
         if(theStrip == null)
             stage.setOnCloseRequest(event -> closeStats());
         else{

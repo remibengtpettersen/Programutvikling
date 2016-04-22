@@ -8,8 +8,12 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import model.DynamicGameOfLife;
 import model.GameOfLife;
 import tools.MessageBox;
+
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 /**
@@ -25,8 +29,8 @@ public class StatsController {
     private XYChart.Series<Integer, Integer> cellCount;
     private XYChart.Series<Integer, Integer> difference;
     private XYChart.Series<Integer, Integer> similarity;
-    private GameOfLife statsGol;
-    private GameOfLife gol;
+    private DynamicGameOfLife statsGol;
+    private DynamicGameOfLife gol;
     private int lastCellCount;
     private int iterations;
     private double alfa = 0.5;
@@ -50,7 +54,6 @@ public class StatsController {
 
     private void addLineChartWidthListener() {
         lineChart.widthProperty().addListener(new ChangeListener<Number>() {
-
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if(lineChart.getWidth() / iterations < maxIntervalLength)
@@ -90,7 +93,7 @@ public class StatsController {
         displayStats(stats);
     }
 
-    private int[][] getStats(GameOfLife gol, int iterations) {
+    private int[][] getStats(DynamicGameOfLife gol, int iterations) {
         int [][] data = new int[4][iterations];
         double[] phies = new double[iterations];
         for (int i = 0; i < iterations; i++) {
@@ -144,25 +147,25 @@ public class StatsController {
         }
     }
 
-    private double phi(boolean[][] grid) {
+    private double phi(ArrayList<ArrayList<AtomicBoolean>> grid) {
         return alfa * statsGol.getCellCount()
                 + beta * (statsGol.getCellCount() - lastCellCount)
                 + gamma * g(statsGol.getGrid());
     }
 
-    public int g(boolean[][] grid){
+    public int g(ArrayList<ArrayList<AtomicBoolean>> grid){
         int count = 0;
         int[] boundingBox = statsGol.getBoundingBox();
         for (int x = boundingBox[0]; x <= boundingBox[1]; x++) {
             for (int y = boundingBox[2]; y <= boundingBox[3]; y++) {
-                if(grid[x][y])
+                if(grid.get(x).get(y).get())
                     count += (x + y);
             }
         }
         return count;
     }
 
-    public void setGameOfLife(GameOfLife gameOfLife) {
+    public void setGameOfLife(DynamicGameOfLife gameOfLife) {
         gol = gameOfLife;
 
     }

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.DynamicGameOfLife;
 import model.GameOfLife;
 import s305080.Statistics.Controller.StatsController;
 
@@ -19,7 +20,7 @@ public class Stats {
     private Stage stage;
     private MasterController masterController;
 
-    public void display(GameOfLife gol, MasterController masterController){
+    public void display(DynamicGameOfLife gol, MasterController masterController){
 
         this.masterController = masterController;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("View/View.fxml"));

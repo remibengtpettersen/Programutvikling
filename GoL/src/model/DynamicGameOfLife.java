@@ -68,9 +68,8 @@ public class DynamicGameOfLife{
      * Evolves the grid one generation
      */
     public void nextGeneration() {
-
+        cellCount = 0;
         shrinkBoard();
-
         createWorkers1();
         try {
             runWorkers();
@@ -167,7 +166,7 @@ public class DynamicGameOfLife{
      * @param stop
      */
     public void aggregateNeighbours(int start, int stop) {
-        cellCount = 0;
+
         for (int x = start; x < stop; x++) {
             for (int y = 1; y < grid.get(x).size() - 1; y++) {
                 if (grid.get(x).get(y).get()) {
@@ -213,15 +212,32 @@ public class DynamicGameOfLife{
      * @return the cloned GameOfLife object
      */
     @Override
-    public GameOfLife clone() {
-        return null;
+    public DynamicGameOfLife clone() {
+        DynamicGameOfLife gameOfLife = new DynamicGameOfLife(getGrid().size(), getGrid().get(0).size());
+        gameOfLife.deepCopyOnSet(grid);
+        gameOfLife.setRule(getRule().toString());
+        gameOfLife.setCellCount(cellCount);
+
+        //gameOfLife.setCell(getCell());
+
+        return gameOfLife;
     }
 
     /**
      * Deep copies the grid and sets it.
      * @param grid the grid to be deep copied and set.
      */
-    public void deepCopyOnSet(boolean[][] grid) {
+    public void deepCopyOnSet(ArrayList<ArrayList<AtomicBoolean>> grid) {
+        cellCount = 0;
+        this.grid.clear();
+        for (int x = 0; x < grid.size(); x++) {
+            this.grid.add(new ArrayList<>());
+            for (int y = 0; y < grid.get(x).size(); y++) {
+                if(grid.get(x).get(y).get())
+                    cellCount++;
+                this.grid.get(x).add(new AtomicBoolean(grid.get(x).get(y).get()));
+            }
+        }
 
     }
 
