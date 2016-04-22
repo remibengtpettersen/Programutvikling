@@ -1,10 +1,13 @@
 package s305061.statistics;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import model.GameOfLife;
 
@@ -18,6 +21,7 @@ public class StatController {
 
     @FXML private LineChart<Double, Double> graph;
     @FXML private TextField textField;
+    @FXML private ProgressIndicator progressIndicator;
 
     private ObservableList<XYChart.Series<Double, Double>> lineChartData;
 
@@ -31,9 +35,13 @@ public class StatController {
 
     private GameOfLife gol;
 
+    private Task worker;
+
     public void setGol(GameOfLife gol){
         this.gol = gol;
     }
+
+    private void setProgress(double progress){ progressIndicator.setProgress(progress); }
 
     /**
      * Initialization method. Called when statistics window opens
@@ -82,6 +90,8 @@ public class StatController {
 
         int previousLiving = 0;
 
+        setProgress(0);
+
         // for each iteration, add live cell count and cell growth to the array stats,
         // then add the iteration's reduced representation to the array representations
         for(int iteration = 0; iteration < iterations; iteration++){
@@ -99,6 +109,8 @@ public class StatController {
 
             clonedGol.nextGeneration();
             previousLiving = currentLiving;
+
+            setProgress(((double)(iteration)/(double)iterations));
         }
 
         // compare all the reduced representations with each other, return the best match for each iteration
@@ -119,7 +131,11 @@ public class StatController {
             }
 
             stats[2][repA] = maxSimilarity;
+
+            //setProgress(0.9 + 0.1*((double)repA/(double)(iterations)));
         }
+
+        setProgress(1);
 
         return stats;
     }
@@ -160,16 +176,16 @@ public class StatController {
 
     /**
      * Displays statistics at the line chart
-     * Calls clearStats() first, then loops through getStatistics(iterations) and adds the statistics to line chart
-     * @param iterations Number of iterations to evolve and display statistics for
+     * Calls clearStats() to empty the line chart, then loops through getStatistics(iterations) and adds the statistics to line chart
+     * @param stats An array of statistic data elements
      */
-    private void displayStatistics(int iterations){
+    private void displayStatistics(int[][] stats){
 
         clearStats();
 
-        int[][] stats = getStatistics(iterations);
+        int iterations = stats[0].length;
 
-        for(int iteration = 0; iteration < stats[0].length; iteration++){
+        for(int iteration = 0; iteration < iterations; iteration++){
 
             livingSeries.getData().add(new XYChart.Data<>(
                     (double)iteration, (double)stats[0][iteration]));
@@ -183,12 +199,13 @@ public class StatController {
     }
 
     /**
-     *  Called when GUI button "Show statistics" is clicked.
+     *  Called when GUI button "Show statistics" is clicked,
+     *  or if the enter key is pressed while in the iteration text field.
      *  If the text in the text field is a number,
      *  displayStatistics(iterations) will show statistics for that number of iterations
      */
     @FXML
-    public void onButtonClicked() {
+    public void onInputEntered() {
 
         String string = textField.getText();
 
@@ -197,11 +214,32 @@ public class StatController {
 
         if(m.matches()) {
             int iterations = Integer.parseInt(m.group());
-            displayStatistics(iterations);
+
+            Task task = createTask(iterations);
+            new Thread(task).start();
         }
         else {
             textField.setText("");
             textField.setPromptText("Could not parse number");
         }
+    }
+
+    private Task createTask(int iterations){
+
+        return new Task() {
+            @Override
+            protected Object call() throws Exception {
+
+                int[][] stats = getStatistics(iterations);
+
+                Platform.runLater(new Runnable() {
+                    @Override public void run() {
+                        displayStatistics(stats);
+                    }
+                });
+
+                return true;
+            }
+        };
     }
 }
