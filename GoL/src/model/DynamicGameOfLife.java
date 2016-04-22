@@ -14,8 +14,11 @@ public class DynamicGameOfLife{
 
     int treads = Runtime.getRuntime().availableProcessors();
 
-    private List<Thread> workers = new ArrayList<Thread>();
+    private List<Thread> workers = new ArrayList<>();
 
+    // Offset to use when grid is expanded to left and upwards
+    public int cellOffsetX = 0;
+    public int cellOffsetY = 0;
 
     private ArrayList<ArrayList<AtomicBoolean>> grid;
     private ArrayList<ArrayList<AtomicInteger>> neighbours;
