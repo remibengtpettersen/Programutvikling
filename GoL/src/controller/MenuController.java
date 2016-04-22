@@ -47,7 +47,7 @@ public class MenuController {
     }
 
     public void saveFile(){
-        masterController.getCanvasController().saveToFile();
+       // masterController.getCanvasController().saveToFile();
     }
     public void onAbout(ActionEvent actionEvent) {
 
@@ -70,7 +70,7 @@ public class MenuController {
      */
     public void setCustomRule(ActionEvent actionEvent) {
 
-        TextInputDialog dialog = new TextInputDialog(masterController.getCanvasController().gol.getRule().toString());
+        TextInputDialog dialog = new TextInputDialog(masterController.getCanvasController().dGol.getRule().toString());
 
         dialog.setTitle("Custom rule");
         dialog.setHeaderText("Enter custom rule code");

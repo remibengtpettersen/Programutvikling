@@ -47,10 +47,10 @@ public class TheStripController {
 
         gol.deepCopyOnSet(grid);
 
-        if(gol.getRule().toString().equals(master.getCanvasController().gol.getRule().toString())) //for some reason this always returns false :/
+        if(gol.getRule().toString().equals(master.getCanvasController().dGol.getRule().toString())) //for some reason this always returns false :/
             gol.updateRuleGrid();
         else
-            gol.setRule(master.getCanvasController().gol.getRule().toString()); System.out.println("changed rule");
+            gol.setRule(master.getCanvasController().dGol.getRule().toString()); System.out.println("changed rule");
 
 
         cellSize = canvas.getHeight()/(maxY - minY);
@@ -84,12 +84,12 @@ public class TheStripController {
         for(int i = 0; i < canvas.getWidth(); i += (maxX - minX) * cellSize){
             for(int x = minX; x < maxX; x++){
                 for(int y = minY; y < maxY; y++){
-                    if(gol.getGrid()[x][y]){
+                    if(dGol.getGrid()[x][y]){
                         gc.fillRect(i + cellSize * x - minX * cellSize, cellSize * y - minY * cellSize, cellSize * 0.9, cellSize * 0.9);
                     }
                 }
             }
-            gol.nextGeneration();
+            dGol.nextGeneration();
             gc.strokeLine(i,0,i,canvas.getHeight());
         }
         */
