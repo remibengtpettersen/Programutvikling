@@ -131,13 +131,13 @@ public class CanvasController {
      */
     private void updateView() {
 
-        currViewMinX = (int) (boardOffsetX / cell.getSize());
-        currViewMaxX = (int) ((boardOffsetX + canvas.getWidth()) / cell.getSize()) + 1;
+        currViewMinX = (int) (getCommonOffsetX() / cell.getSize());
+        currViewMaxX = (int) ((getCommonOffsetX() + canvas.getWidth()) / cell.getSize()) + 1;
         if (currViewMaxX > grid.size())
             currViewMaxX = grid.size();
 
-        currViewMinY = (int)(boardOffsetY / cell.getSize());
-        currViewMaxY = (int) ((boardOffsetY + canvas.getHeight()) / cell.getSize()) + 1;
+        currViewMinY = (int)(getCommonOffsetY() / cell.getSize());
+        currViewMaxY = (int) ((getCommonOffsetY() + canvas.getHeight()) / cell.getSize()) + 1;
         if (currViewMaxY > grid.get(0).size())
             currViewMaxY = grid.get(0).size();
 
@@ -342,8 +342,8 @@ public class CanvasController {
                 int x = getGridPosX(currMousePosX);
                 int y = getGridPosY(currMousePosY);
                 fitTo(x, y);
-                dGol.setCellAlive(x, y);
-                drawCell((x < 0)?0:x, (y < 0)? 0 : y);
+                dGol.setCellAlive(x =(x < 0)?0:x, y = (y < 0)? 0 : y);
+                drawCell(x, y);
             }
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
@@ -384,8 +384,8 @@ public class CanvasController {
      */
     private void mouseScroll(ScrollEvent scrollEvent) {
 
-        double absMPosXOnGrid = (boardOffsetX + scrollEvent.getX()) / cell.getSize();
-        double absMPosYOnGrid = (boardOffsetY + scrollEvent.getY()) /  cell.getSize();
+        double absMPosXOnGrid = (getCommonOffsetX() + scrollEvent.getX()) / cell.getSize();
+        double absMPosYOnGrid = (getCommonOffsetY() + scrollEvent.getY()) /  cell.getSize();
 
         cell.setSize(cell.getSize() * ( 1 + (scrollEvent.getDeltaY() / 150)));
 
@@ -393,8 +393,10 @@ public class CanvasController {
 
         masterController.getToolController().setZoom( cell.getSize());
 
-        boardOffsetX = (int) ( cell.getSize() * absMPosXOnGrid - scrollEvent.getX());
-        boardOffsetY = (int) ( cell.getSize() * absMPosYOnGrid - scrollEvent.getY());
+        // boardOffsetX = (int) ( cell.getSize() * absMPosXOnGrid - scrollEvent.getX() - dGol.getOffsetX() * cell.getSize());
+        // boardOffsetY = (int) ( cell.getSize() * absMPosYOnGrid - scrollEvent.getY() - dGol.getOffsetY() * cell.getSize());
+        boardOffsetX = (int) ((absMPosXOnGrid - dGol.getOffsetX()) * cell.getSize() - scrollEvent.getX());
+        boardOffsetY = (int) ((absMPosYOnGrid - dGol.getOffsetY()) * cell.getSize() - scrollEvent.getY());
 
         clampView();
         checkIfShouldStillDrawGrid();
@@ -457,11 +459,11 @@ public class CanvasController {
 
     // region canvas to grid converter
     private int getGridPosX(double x) {
-        return (int)Math.floor((x + boardOffsetX) / cell.getSize());
+        return (int)Math.floor((x + getCommonOffsetX()) / cell.getSize());
     }
 
     private int getGridPosY(double y) {
-        return (int) Math.floor((y + boardOffsetY) / cell.getSize());
+        return (int) Math.floor((y + getCommonOffsetY()) / cell.getSize());
     }
     // endregion
 
@@ -474,7 +476,7 @@ public class CanvasController {
      * @return a x coordinate on the canvas.
      */
     private double getCanvasPosX(int x) {
-        return x * cell.getSize() - boardOffsetX;
+        return x * cell.getSize() - getCommonOffsetX();
     }
 
     /**
@@ -484,15 +486,15 @@ public class CanvasController {
      * @return a y coordinate on the canvas.
      */
     private double getCanvasPosY(int y) {
-        return y * cell.getSize() - boardOffsetY;
+        return y * cell.getSize() - getCommonOffsetY();
     }
     //endregion
 
-     int getCommonOffsetX(){
-         return (int)(boardOffsetX + dGol.getOffsetX() * cell.getSize());
+     double getCommonOffsetX(){
+         return (boardOffsetX + dGol.getOffsetX() * cell.getSize());
      }
-    int getCommonOffsetY(){
-        return (int)(boardOffsetY + dGol.getOffsetY() * cell.getSize());
+    double getCommonOffsetY(){
+        return (boardOffsetY + dGol.getOffsetY() * cell.getSize());
     }
 
 
@@ -508,7 +510,7 @@ public class CanvasController {
         if (gridLines)
             if (userWantsGridLines)
                 renderGridLines();
-        gc.strokeRect(-boardOffsetX, -boardOffsetY, grid.size() * cell.getSize(), grid.get(0).size() * cell.getSize());
+        gc.strokeRect(-getCommonOffsetX(), -getCommonOffsetY(), grid.size() * cell.getSize(), grid.get(0).size() * cell.getSize());
 
     }
 
@@ -539,10 +541,10 @@ public class CanvasController {
         gc.setStroke(cell.getGhostColor());
 
         for (int i = currViewMinX; i < currViewMaxX; i++) {
-            gc.strokeLine(i * cell.getSize() - boardOffsetX - cell.getSize() * cell.getSpacing() / 2, -boardOffsetY, i * cell.getSize() - boardOffsetX - cell.getSize() * cell.getSpacing() / 2, -boardOffsetY + grid.get(0).size()*cell.getSize());
+            gc.strokeLine(i * cell.getSize() - getCommonOffsetX() - cell.getSize() * cell.getSpacing() / 2, -getCommonOffsetY(), i * cell.getSize() - getCommonOffsetX() - cell.getSize() * cell.getSpacing() / 2, -getCommonOffsetY() + grid.get(0).size()*cell.getSize());
         }
         for (int i = currViewMinY; i < currViewMaxY; i++) {
-            gc.strokeLine(-boardOffsetX, i * cell.getSize() - boardOffsetY - cell.getSize() * cell.getSpacing() / 2, -boardOffsetX + grid.size() * cell.getSize(), i * cell.getSize() - boardOffsetY - cell.getSize() * cell.getSpacing() / 2);
+            gc.strokeLine(-getCommonOffsetX(), i * cell.getSize() - getCommonOffsetY() - cell.getSize() * cell.getSpacing() / 2, -getCommonOffsetX() + grid.size() * cell.getSize(), i * cell.getSize() - getCommonOffsetY() - cell.getSize() * cell.getSpacing() / 2);
         }
     }
 
@@ -615,6 +617,17 @@ public class CanvasController {
      * @param y2 The second coordinate of the end cell
      */
     private void drawLine(int x, int y, int x2, int y2) {
+
+        int ofsetX = dGol.getOffsetX();
+        int ofsetY = dGol.getOffsetY();
+        fitTo(x, y);
+        ofsetX -= dGol.getOffsetX();
+        ofsetY -= dGol.getOffsetY();
+
+        x -= ofsetX;
+        x2 -= ofsetX;
+        y -= ofsetY;
+        y2 -= ofsetY;
 
         int width = x2 - x;
         int height = y2 - y;
@@ -736,14 +749,14 @@ public class CanvasController {
      */
     public void setCellSize(double newCellSize) {
 
-        double canvasCenterX = (boardOffsetX + canvas.getWidth() / 2) / cell.getSize();
-        double canvasCenterY = (boardOffsetY + canvas.getHeight() / 2) / cell.getSize();
+        double canvasCenterX = (getCommonOffsetX() + canvas.getWidth() / 2) / cell.getSize();
+        double canvasCenterY = (getCommonOffsetY() + canvas.getHeight() / 2) / cell.getSize();
 
         cell.setSize(newCellSize);
         clampCellSize();
 
-        boardOffsetX = (int) (cell.getSize() * canvasCenterX - canvas.getWidth() / 2);
-        boardOffsetY = (int) (cell.getSize() * canvasCenterY - canvas.getHeight() / 2);
+        boardOffsetX = (int) (cell.getSize() * canvasCenterX - canvas.getWidth() / 2 - dGol.getOffsetX() * cell.getSize());
+        boardOffsetY = (int) (cell.getSize() * canvasCenterY - canvas.getHeight() / 2 - dGol.getOffsetY() * cell.getSize());
 
         clampView();
 

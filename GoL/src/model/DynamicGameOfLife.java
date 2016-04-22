@@ -330,7 +330,7 @@ public class DynamicGameOfLife{
     }
 
     public void increaseXLeft(int diffX) {
-        cellOffsetX += diffX + 1;
+        cellOffsetX += diffX;
         for (int i = 0; i < diffX; i++){
             grid.add(0, new ArrayList<>());
             neighbours.add(0, new ArrayList<>());
@@ -343,7 +343,7 @@ public class DynamicGameOfLife{
     }
 
     public void increaseYTop(int diffY){
-        cellOffsetY += diffY + 1;
+        cellOffsetY += diffY;
         System.out.println(diffY);
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < diffY; j++){
