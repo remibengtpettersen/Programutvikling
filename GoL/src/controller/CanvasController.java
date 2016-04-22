@@ -71,6 +71,8 @@ public class CanvasController {
     private int boardOffsetX = 50;
     private int boardOffsetY = 50;
 
+
+
     private int currViewMinX;
     private int currViewMaxX;
     private int currViewMinY;
@@ -163,10 +165,7 @@ public class CanvasController {
 
                     if(!busy) {
                         dGol.nextGeneration();
-                        dGol.nextGeneration();
-                        dGol.nextGeneration();
-                        dGol.nextGeneration();
-                        dGol.nextGeneration();
+
 
                         renderCanvas();
 
@@ -297,6 +296,7 @@ public class CanvasController {
 
             int gridClickX = getGridPosX(mouseEvent.getX());
             int gridClickY = getGridPosY(mouseEvent.getY());
+            System.out.println(gridClickX + " " + gridClickY);
 
             fitTo(gridClickX, gridClickY);
 
@@ -368,11 +368,11 @@ public class CanvasController {
     private void fitTo(int x, int y) {
         if(x < 0){
             dGol.increaseXLeft(Math.abs(x));
-            boardOffsetX -= (x - 1) * cell.getSize();
+           // boardOffsetX -= (x - 1) * cell.getSize();
         }
         if(y < 0){
-            dGol.increaseYTop(Math.abs(x));
-            boardOffsetY -= (y - 1) * cell.getSize();
+            dGol.increaseYTop(Math.abs(y));
+            //boardOffsetY -= (y - 1) * cell.getSize();
         }
 
     }
@@ -457,11 +457,11 @@ public class CanvasController {
 
     // region canvas to grid converter
     private int getGridPosX(double x) {
-        return (int) ((x + boardOffsetX) / cell.getSize());
+        return (int)Math.floor((x + boardOffsetX) / cell.getSize());
     }
 
     private int getGridPosY(double y) {
-        return (int) ((y + boardOffsetY) / cell.getSize());
+        return (int) Math.floor((y + boardOffsetY) / cell.getSize());
     }
     // endregion
 
@@ -487,6 +487,14 @@ public class CanvasController {
         return y * cell.getSize() - boardOffsetY;
     }
     //endregion
+
+     int getCommonOffsetX(){
+         return (int)(boardOffsetX + dGol.getOffsetX() * cell.getSize());
+     }
+    int getCommonOffsetY(){
+        return (int)(boardOffsetY + dGol.getOffsetY() * cell.getSize());
+    }
+
 
     /**
      * Renders everything on the canvas

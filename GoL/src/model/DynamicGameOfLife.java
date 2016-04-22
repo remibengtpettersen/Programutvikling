@@ -12,13 +12,17 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class DynamicGameOfLife{
 
-    int treads = Runtime.getRuntime().availableProcessors();
+    //int treads = Runtime.getRuntime().availableProcessors();
+    int treads = 1;
+
 
     private List<Thread> workers = new ArrayList<>();
 
     // Offset to use when grid is expanded to left and upwards
-    public int cellOffsetX = 0;
-    public int cellOffsetY = 0;
+
+
+    private int cellOffsetX = 0;
+    private int cellOffsetY = 0;
 
     private ArrayList<ArrayList<AtomicBoolean>> grid;
     private ArrayList<ArrayList<AtomicInteger>> neighbours;
@@ -135,15 +139,23 @@ public class DynamicGameOfLife{
                                    neighbours.get(a).get(b).incrementAndGet();
                                }
                                catch (IndexOutOfBoundsException e){
-                                   if (a < 0)
+                                   if (a < 0) {
                                        increaseXLeft(1);
+                                       stop++;
+                                       x++;
+                                   }
                                    if(a >= grid.size())
+                                   {
                                        increaseXRight(1);
-                                   if (b < 0)
+                                   }
+                                   if (b < 0) {
                                        increaseYTop(1);
+                                       y++;
+                                   }
                                    if(b >= grid.get(0).size())
                                        increaseYBottom(1);
-                                   neighbours.get((a < 0)? 0 : a).get((b < 0)? 0 : b).incrementAndGet();
+
+                                   neighbours.get(a = (a < 0)? 0 : a).get(b = (b < 0)? 0 : b).incrementAndGet();
                                }
 
                             }
@@ -297,7 +309,7 @@ public class DynamicGameOfLife{
 
 
     public void increaseXRight(int diffX) {
-        for (int i = 0; i <= diffX; i++){
+        for (int i = 0; i < diffX; i++){
             grid.add(new ArrayList<>());
             neighbours.add(new ArrayList<>());
 
@@ -310,7 +322,7 @@ public class DynamicGameOfLife{
 
     public void increaseYBottom(int diffY){
         for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j <= diffY; j++){
+            for (int j = 0; j < diffY; j++){
                 grid.get(i).add(new AtomicBoolean(false));
                 neighbours.get(i).add(new AtomicInteger(0));
             }
@@ -318,7 +330,8 @@ public class DynamicGameOfLife{
     }
 
     public void increaseXLeft(int diffX) {
-        for (int i = 0; i <= diffX; i++){
+        cellOffsetX += diffX + 1;
+        for (int i = 0; i < diffX; i++){
             grid.add(0, new ArrayList<>());
             neighbours.add(0, new ArrayList<>());
 
@@ -330,8 +343,10 @@ public class DynamicGameOfLife{
     }
 
     public void increaseYTop(int diffY){
+        cellOffsetY += diffY + 1;
+        System.out.println(diffY);
         for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j <= diffY; j++){
+            for (int j = 0; j < diffY; j++){
                 grid.get(i).add(0, new AtomicBoolean(false));
                 neighbours.get(i).add(0, new AtomicInteger(0));
             }
@@ -361,6 +376,14 @@ public class DynamicGameOfLife{
 
     public void setCellCount(int cellCount) {
         this.cellCount = cellCount;
+    }
+
+    public int getOffsetX() {
+        return cellOffsetX;
+    }
+
+    public int getOffsetY() {
+        return cellOffsetY;
     }
     //endregion
 }
