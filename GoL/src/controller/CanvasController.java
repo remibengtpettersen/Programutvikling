@@ -108,7 +108,7 @@ public class CanvasController {
         initializeAnimation();
         checkIfShouldStillDrawGrid();
         masterController.getToolController().setZoom(cell.getSize());
-        startAnimation();
+       // startAnimation();
     }
 
     /**
@@ -393,8 +393,6 @@ public class CanvasController {
 
         masterController.getToolController().setZoom( cell.getSize());
 
-        // boardOffsetX = (int) ( cell.getSize() * absMPosXOnGrid - scrollEvent.getX() - dGol.getOffsetX() * cell.getSize());
-        // boardOffsetY = (int) ( cell.getSize() * absMPosYOnGrid - scrollEvent.getY() - dGol.getOffsetY() * cell.getSize());
         boardOffsetX = (int) ((absMPosXOnGrid - dGol.getOffsetX()) * cell.getSize() - scrollEvent.getX());
         boardOffsetY = (int) ((absMPosYOnGrid - dGol.getOffsetY()) * cell.getSize() - scrollEvent.getY());
 

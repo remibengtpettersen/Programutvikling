@@ -82,8 +82,27 @@ public class DynamicGameOfLife{
             e.printStackTrace();
         }
         workers.clear();
+        shrinkBoard();
     }
 
+    private void shrinkBoard() {
+        int [] bBox = getBoundingBox();
+        if (bBox[0] > 1){
+            decreaseXLeft(bBox[0] - 1);
+            bBox[1] -= bBox[0] - 1;
+        }
+        if (bBox[1] < grid.size() - 2){
+            decreaseXRight(grid.size() - bBox[1] - 2);
+        }
+        if (bBox[2] > 1){
+            decreaseYTop(bBox[2] - 1);
+            bBox[3] -= bBox[2] - 1;
+        }
+        if (bBox[3] < grid.get(0).size() - 2){
+            decreaseYBottom(grid.get(0).size() - bBox[3] - 2);
+        }
+
+    }
 
 
     public void createWorkers1() {
@@ -228,11 +247,31 @@ public class DynamicGameOfLife{
      * @return
      */
     public int[] getBoundingBox() {
-        return null;
-    }
+        int[] boundingBox = new int[4]; // minrow maxrow mincolumn maxcolumn boundingBox[0] = board.length;
 
-    public boolean[][] getPatternFromGrid() {
-        return null;
+        boundingBox[0] = grid.size();
+        boundingBox[1] = 0;
+        boundingBox[2] = grid.get(0).size();
+        boundingBox[3] = 0;
+
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid.get(i).size(); j++) {
+                if (!grid.get(i).get(j).get()) continue;
+                if (i < boundingBox[0]) {
+                    boundingBox[0] = i;
+                }
+                if (i > boundingBox[1]) {
+                    boundingBox[1] = i;
+                }
+                if (j < boundingBox[2]) {
+                    boundingBox[2] = j;
+                }
+                if (j > boundingBox[3]) {
+                    boundingBox[3] = j;
+                }
+            }
+        }
+        return boundingBox;
     }
     //endregion
 
@@ -349,6 +388,40 @@ public class DynamicGameOfLife{
             for (int j = 0; j < diffY; j++){
                 grid.get(i).add(0, new AtomicBoolean(false));
                 neighbours.get(i).add(0, new AtomicInteger(0));
+            }
+        }
+    }
+
+    public void decreaseXRight(int diffX) {
+        for (int i = 0; i < diffX; i++){
+            grid.remove(grid.size() - 1);
+            neighbours.remove(neighbours.size() - 1);
+        }
+    }
+
+    public void decreaseYBottom(int diffY){
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < diffY; j++){
+                grid.get(i).remove(grid.get(i).size() - 1);
+                neighbours.get(i).remove(neighbours.get(i).size() - 1);
+            }
+        }
+    }
+
+    public void decreaseXLeft(int diffX) {
+        cellOffsetX -= diffX;
+        for (int i = 0; i < diffX; i++){
+            grid.remove(0);
+            neighbours.remove(0);
+        }
+    }
+
+    public void decreaseYTop(int diffY){
+        cellOffsetY -= diffY;
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < diffY; j++){
+                grid.get(i).remove(0);
+                neighbours.get(i).remove(0);
             }
         }
     }
