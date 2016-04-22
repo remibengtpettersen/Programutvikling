@@ -12,8 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class DynamicGameOfLife{
 
-    //int treads = Runtime.getRuntime().availableProcessors();
-    int treads = 1;
+    int treads = Runtime.getRuntime().availableProcessors();
+    //int treads = 1;
 
 
     private List<Thread> workers = new ArrayList<>();
@@ -68,6 +68,9 @@ public class DynamicGameOfLife{
      * Evolves the grid one generation
      */
     public void nextGeneration() {
+
+        shrinkBoard();
+
         createWorkers1();
         try {
             runWorkers();
@@ -82,7 +85,7 @@ public class DynamicGameOfLife{
             e.printStackTrace();
         }
         workers.clear();
-        shrinkBoard();
+
     }
 
     private void shrinkBoard() {
@@ -91,15 +94,29 @@ public class DynamicGameOfLife{
             decreaseXLeft(bBox[0] - 1);
             bBox[1] -= bBox[0] - 1;
         }
+        else if(bBox[0] == 0){
+            increaseXLeft(1);
+            bBox[1] += 1;
+        }
         if (bBox[1] < grid.size() - 2){
             decreaseXRight(grid.size() - bBox[1] - 2);
+        }
+        else if(bBox[1] == grid.size() - 1){
+            increaseXRight(1);
         }
         if (bBox[2] > 1){
             decreaseYTop(bBox[2] - 1);
             bBox[3] -= bBox[2] - 1;
         }
+        else if (bBox[2] == 0){
+            increaseYTop(1);
+            bBox[3] += 1;
+        }
         if (bBox[3] < grid.get(0).size() - 2){
             decreaseYBottom(grid.get(0).size() - bBox[3] - 2);
+        }
+        else if(bBox[3] == grid.get(0).size() - 1){
+            increaseYBottom(1);
         }
 
     }
@@ -109,7 +126,11 @@ public class DynamicGameOfLife{
         for (int i = 0; i < treads; i++) {
             final int finalI = i;
             workers.add(new Thread(() -> {
-                aggregateNeighbours(finalI * grid.size()/treads, (finalI + 1) * grid.size()/treads);
+                int start = finalI * grid.size()/treads;
+                int stop = (finalI + 1) * grid.size()/treads;
+                start = (start == 0)? 1: start;
+                stop = (stop == grid.size() - 1)?grid.size() - 2 : stop;
+                aggregateNeighbours(start, stop);
             }));
         }
     }
@@ -148,14 +169,15 @@ public class DynamicGameOfLife{
     public void aggregateNeighbours(int start, int stop) {
         cellCount = 0;
         for (int x = start; x < stop; x++) {
-            for (int y = 0; y < grid.get(x).size(); y++) {
+            for (int y = 1; y < grid.get(x).size() - 1; y++) {
                 if (grid.get(x).get(y).get()) {
                     cellCount++;
                     for (int a = x - 1; a <= x + 1; a++) {
                         for (int b = y - 1; b <= y + 1; b++) {
                             if (a != x || b != y) {
+                                neighbours.get(a).get(b).incrementAndGet();
                                try{
-                                   neighbours.get(a).get(b).incrementAndGet();
+
                                }
                                catch (IndexOutOfBoundsException e){
                                    if (a < 0) {

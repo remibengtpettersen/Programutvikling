@@ -166,7 +166,6 @@ public class CanvasController {
                     if(!busy) {
                         dGol.nextGeneration();
 
-
                         renderCanvas();
 
                         timer = now / 1000000;
