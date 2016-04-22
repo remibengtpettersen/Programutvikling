@@ -271,6 +271,12 @@ public class DynamicGameOfLife{
                 }
             }
         }
+        if (boundingBox[1] < boundingBox[0]){
+            boundingBox[0] = 0;
+            boundingBox[1] = 0;
+            boundingBox[2] = 0;
+            boundingBox[3] = 0;
+        }
         return boundingBox;
     }
     //endregion

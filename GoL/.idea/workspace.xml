@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74063000-add0-466d-9af1-1c77d113eadb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/config.properties" afterPath="$PROJECT_DIR$/resources/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/src/controller/CanvasController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/DynamicGameOfLife.java" afterPath="$PROJECT_DIR$/src/model/DynamicGameOfLife.java" />
     </list>
     <ignored path="GoL.iws" />
@@ -185,8 +183,8 @@
           <file leaf-file-name="DynamicGameOfLife.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/model/DynamicGameOfLife.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="279">
-                  <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
+                <state relative-caret-position="594">
+                  <caret line="277" column="31" selection-start-line="277" selection-start-column="31" selection-end-line="277" selection-end-column="31" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#5697#5698#0" expanded="true" />
@@ -199,14 +197,14 @@
                     <element signature="e#6463#6464#0" expanded="true" />
                     <element signature="e#6596#6597#0" expanded="true" />
                     <element signature="e#6623#6624#0" expanded="true" />
-                    <element signature="e#7817#7818#0" expanded="true" />
-                    <element signature="e#7849#7850#0" expanded="true" />
-                    <element signature="e#12360#12361#0" expanded="true" />
-                    <element signature="e#12402#12403#0" expanded="true" />
-                    <element signature="e#12433#12434#0" expanded="true" />
-                    <element signature="e#12467#12468#0" expanded="true" />
-                    <element signature="e#12498#12499#0" expanded="true" />
-                    <element signature="e#12532#12533#0" expanded="true" />
+                    <element signature="e#8001#8002#0" expanded="true" />
+                    <element signature="e#8033#8034#0" expanded="true" />
+                    <element signature="e#12544#12545#0" expanded="true" />
+                    <element signature="e#12586#12587#0" expanded="true" />
+                    <element signature="e#12617#12618#0" expanded="true" />
+                    <element signature="e#12651#12652#0" expanded="true" />
+                    <element signature="e#12682#12683#0" expanded="true" />
+                    <element signature="e#12716#12717#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -1133,7 +1131,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74487000" />
+    <option name="totallyTimeSpent" value="74794000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="8" y="23" width="1832" height="1131" extended-state="0" />
@@ -1212,7 +1210,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/DynamicGameOfLife.java</url>
-          <line>332</line>
+          <line>338</line>
           <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
@@ -1790,8 +1788,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/DynamicGameOfLife.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
+        <state relative-caret-position="594">
+          <caret line="277" column="31" selection-start-line="277" selection-start-column="31" selection-end-line="277" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5697#5698#0" expanded="true" />
@@ -1804,14 +1802,14 @@
             <element signature="e#6463#6464#0" expanded="true" />
             <element signature="e#6596#6597#0" expanded="true" />
             <element signature="e#6623#6624#0" expanded="true" />
-            <element signature="e#7817#7818#0" expanded="true" />
-            <element signature="e#7849#7850#0" expanded="true" />
-            <element signature="e#12360#12361#0" expanded="true" />
-            <element signature="e#12402#12403#0" expanded="true" />
-            <element signature="e#12433#12434#0" expanded="true" />
-            <element signature="e#12467#12468#0" expanded="true" />
-            <element signature="e#12498#12499#0" expanded="true" />
-            <element signature="e#12532#12533#0" expanded="true" />
+            <element signature="e#8001#8002#0" expanded="true" />
+            <element signature="e#8033#8034#0" expanded="true" />
+            <element signature="e#12544#12545#0" expanded="true" />
+            <element signature="e#12586#12587#0" expanded="true" />
+            <element signature="e#12617#12618#0" expanded="true" />
+            <element signature="e#12651#12652#0" expanded="true" />
+            <element signature="e#12682#12683#0" expanded="true" />
+            <element signature="e#12716#12717#0" expanded="true" />
           </folding>
         </state>
       </provider>
