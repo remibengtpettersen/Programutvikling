@@ -163,13 +163,13 @@ public class CanvasController {
                         renderCanvas();
 
                         timer = now / 1000000;
-                        masterController.getToolController().giveCellCount(gol.getCellCount());
+
+                        giveCellCount();
                     }
                 }
             }
         };
     }
-
 
     /**
      * Sets up all the listeners needed for the simulation of Game of Life
@@ -294,6 +294,7 @@ public class CanvasController {
             fitTo(gridClickX, gridClickY);
 
             gol.changeCellState((gridClickX < 0)? 0 : gridClickX, (gridClickY < 0)? 0 : gridClickY);
+            giveCellCount();
 
             if (!running || frameDelay > 0)
                 renderCanvas();
@@ -331,11 +332,13 @@ public class CanvasController {
         if (b == MouseButton.PRIMARY) {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
                 drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY), getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
+                giveCellCount();
             } else {
                 int x = getGridPosX(currMousePosX);
                 int y = getGridPosY(currMousePosY);
                 fitTo(x, y);
                 gol.setCellAlive(x =(x < 0)?0:x, y = (y < 0)? 0 : y);
+                giveCellCount();
                 drawCell(x, y);
             }
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
@@ -789,6 +792,10 @@ public class CanvasController {
     public void setRule(String ruleText) {
 
         gol.setRule(ruleText);
+    }
+
+    private void giveCellCount() {
+        masterController.getToolController().giveCellCount(gol.getCellCount());
     }
 
     //endregion

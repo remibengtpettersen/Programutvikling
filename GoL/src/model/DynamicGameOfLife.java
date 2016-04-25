@@ -27,7 +27,7 @@ public class DynamicGameOfLife{
     private ArrayList<ArrayList<AtomicBoolean>> grid;
     private ArrayList<ArrayList<AtomicInteger>> neighbours;
     private DynamicRule rule;
-    private int cellCount = 0;
+    private AtomicInteger cellCount = new AtomicInteger(0);
 
     /**
      * GameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
@@ -63,7 +63,7 @@ public class DynamicGameOfLife{
      * Evolves the grid one generation
      */
     public void nextGeneration() {
-        cellCount = 0;
+        //cellCount.set(0);
         fitBoardToPattern();
         createCountingThreads();
         try {
@@ -163,7 +163,7 @@ public class DynamicGameOfLife{
         for (int x = start; x < stop; x++) {
             for (int y = 1; y < grid.get(x).size() - 1; y++) {
                 if (grid.get(x).get(y).get()) {
-                    cellCount++;
+                    //cellCount.incrementAndGet();
                     for (int a = x - 1; a <= x + 1; a++) {
                         for (int b = y - 1; b <= y + 1; b++) {
                             if (a != x || b != y) {
@@ -204,7 +204,7 @@ public class DynamicGameOfLife{
      * @return The live cell count
      */
     public int getCellCount() {
-        return cellCount;
+        return cellCount.get();
     }
 
     /**
@@ -264,7 +264,13 @@ public class DynamicGameOfLife{
     }
 
     public boolean isCellAlive(int x, int y){
-        return  grid.get(x).get(y).get();
+
+        try {
+            return grid.get(x).get(y).get();
+        }
+        catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     /**
@@ -276,7 +282,7 @@ public class DynamicGameOfLife{
         DynamicGameOfLife gameOfLife = new DynamicGameOfLife();
         gameOfLife.deepCopyOnSet(grid);
         gameOfLife.setRule(getRule().toString());
-        gameOfLife.setCellCount(cellCount);
+        gameOfLife.setCellCount(cellCount.get());
 
         //gameOfLife.setCell(getCell());
 
@@ -288,15 +294,15 @@ public class DynamicGameOfLife{
      * @param grid the grid to be deep copied and set.
      */
     public void deepCopyOnSet(ArrayList<ArrayList<AtomicBoolean>> grid) {
-        cellCount = 0;
+        //cellCount.set(0);
         neighbours.clear();
         this.grid.clear();
         for (int x = 0; x < grid.size(); x++) {
             this.grid.add(new ArrayList<>());
             neighbours.add(new ArrayList<>());
             for (int y = 0; y < grid.get(x).size(); y++) {
-                if(grid.get(x).get(y).get())
-                    cellCount++;
+                //if(grid.get(x).get(y).get())
+                    //cellCount.incrementAndGet();
                 this.grid.get(x).add(new AtomicBoolean(grid.get(x).get(y).get()));
                 neighbours.get(x).add(new AtomicInteger(0));
             }
@@ -346,20 +352,26 @@ public class DynamicGameOfLife{
      * @param y the y coordinate in the grid.
      */
     public void setCellAlive(int x, int y) {
-        try {
-            grid.get(x).get(y).set(true);
-        }
-        catch (IndexOutOfBoundsException e) {
-            int diffX = x - getGridWidth() + 1;
 
-            if(diffX > 0)
-                increaseXRight(diffX);
+        if(!isCellAlive(x,y)) {
 
-            int diffY = y - getGridHeight() + 1;
-            if(diffY > 0)
-                increaseYBottom(diffY);
+            cellCount.incrementAndGet();
 
-            grid.get(x).get(y).set(true);
+            try {
+                grid.get(x).get(y).set(true);
+            }
+            catch (IndexOutOfBoundsException e) {
+
+                int diffX = x - getGridWidth() + 1;
+                if(diffX > 0)
+                    increaseXRight(diffX);
+
+                int diffY = y - getGridHeight() + 1;
+                if(diffY > 0)
+                    increaseYBottom(diffY);
+
+                grid.get(x).get(y).set(true);
+            }
         }
     }
 
@@ -370,20 +382,26 @@ public class DynamicGameOfLife{
      * @param y the y coordinate in the grid.
      */
     public void setCellDead(int x, int y) {
-        try {
-            grid.get(x).get(y).set(false);
-        }
-        catch (IndexOutOfBoundsException e) {
-            int diffX = x - getGridWidth() + 1;
 
-            if(diffX > 0)
-                increaseXRight(diffX);
+        if(isCellAlive(x,y)) {
 
-            int diffY = y - getGridHeight() + 1;
-            if(diffY > 0)
-                increaseYBottom(diffY);
+            cellCount.decrementAndGet();
 
-            grid.get(x).get(y).set(false);
+            try {
+                grid.get(x).get(y).set(false);
+            }
+            catch (IndexOutOfBoundsException e) {
+
+                int diffX = x - getGridWidth() + 1;
+                if(diffX > 0)
+                    increaseXRight(diffX);
+
+                int diffY = y - getGridHeight() + 1;
+                if(diffY > 0)
+                    increaseYBottom(diffY);
+
+                grid.get(x).get(y).set(false);
+            }
         }
     }
 
@@ -395,28 +413,15 @@ public class DynamicGameOfLife{
      */
     public void changeCellState(int x, int y) {
 
-
-        try {
-            grid.get(x).get(y).set(!grid.get(x).get(y).get());
-        }
-        catch (IndexOutOfBoundsException e) {
-            int diffX = x - grid.size() + 1;
-
-            if(diffX > 0)
-                increaseXRight(diffX);
-
-            int diffY = y - grid.get(0).size() + 1;
-            if(diffY > 0)
-                increaseYBottom(diffY);
-
-            grid.get(x).get(y).set(!grid.get(x).get(y).get());
-        }
+        if(isCellAlive(x,y))
+            setCellDead(x,y);
+        else
+            setCellAlive(x,y);
     }
 
     public void resetNeighboursAt(int x, int y){
         neighbours.get(x).get(y).set(0);
     }
-
 
     public void increaseXRight(int diffX) {
         for (int i = 0; i < diffX; i++){
@@ -509,7 +514,7 @@ public class DynamicGameOfLife{
      * Clears the grid of live cells
      */
     public void clearGrid() {
-        
+
         grid.clear();
         neighbours.clear();
 
@@ -529,7 +534,7 @@ public class DynamicGameOfLife{
     }*/
 
     public void setCellCount(int cellCount) {
-        this.cellCount = cellCount;
+        this.cellCount.set(cellCount);
     }
 
     public int getOffsetX() {

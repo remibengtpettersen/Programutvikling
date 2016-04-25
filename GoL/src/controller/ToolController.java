@@ -110,11 +110,6 @@ public class ToolController {
         cellCountLabel.setText("Cellcount: "+cellCount);
     }
 
-    public void displayRule(int cellCount) {
-
-        cellCountLabel.setText("Cellcount: "+cellCount);
-    }
-
     /**
      * Toggles between pause and play game
      * @param actionEvent

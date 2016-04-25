@@ -36,8 +36,6 @@ public class StatController {
 
     private DynamicGameOfLife gol;
 
-    private Task worker;
-
     public void setGol(DynamicGameOfLife gol){
         this.gol = gol;
     }
@@ -111,7 +109,7 @@ public class StatController {
             clonedGol.nextGeneration();
             previousLiving = currentLiving;
 
-            setProgress(((double)(iteration)/(double)iterations));
+            setProgress(((double)iteration/(double)iterations));
         }
 
         // compare all the reduced representations with each other, return the best match for each iteration
@@ -149,6 +147,9 @@ public class StatController {
      */
     private int compareRepresentations(double repA, double repB) {
 
+        repA = Math.abs(repA);
+        repB = Math.abs(repB);
+
         double min = Math.min(repA, repB);
         double max = Math.max(repA, repB);
 
@@ -160,7 +161,7 @@ public class StatController {
     /**
      * Sums the x and y coordinates of all the live cells on the grid.
      * Used in calculation of the similarity measure, enables the position of patterns to be a factor
-     * @param game Reference to the GameOfLife object to gather information from
+     * @param gol Reference to the DynamicGameOfLife object to gather information from
      * @return The geometric factor, the sum of x and y coordinates of live cells
      */
     private double getGeometricFactor(DynamicGameOfLife gol) {
