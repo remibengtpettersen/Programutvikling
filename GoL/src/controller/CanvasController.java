@@ -14,13 +14,11 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import model.Cell;
 import model.DynamicGameOfLife;
-import model.GameOfLife;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -39,8 +37,7 @@ public class CanvasController {
      private List<Thread> workers = new ArrayList<Thread>();
 
 
-    public DynamicGameOfLife dGol;
-    public GameOfLife gol;
+    public DynamicGameOfLife gol;
     private MasterController masterController;
     @FXML
     private Canvas canvas;
@@ -97,8 +94,8 @@ public class CanvasController {
         this.masterController = masterController;
         initializeGameParameters();
 
-        dGol = new DynamicGameOfLife();
-        grid = dGol.getGrid();
+        gol = new DynamicGameOfLife();
+        grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
 
         clampCellSize();
@@ -108,7 +105,7 @@ public class CanvasController {
         initializeAnimation();
         checkIfShouldStillDrawGrid();
         masterController.getToolController().setZoom(cell.getSize());
-       // startAnimation();
+        startAnimation();
     }
 
     /**
@@ -145,9 +142,6 @@ public class CanvasController {
             currViewMinY = 0;
         if (currViewMinX < 0)
             currViewMinX = 0;
-
-
-
     }
 
     /**
@@ -164,12 +158,12 @@ public class CanvasController {
                 if (now / 1000000 - timer > frameDelay) {
 
                     if(!busy) {
-                        dGol.nextGeneration();
-
+                        gol.nextGeneration();
+                        updateView();
                         renderCanvas();
 
                         timer = now / 1000000;
-                        masterController.getToolController().giveCellCount(dGol.getCellCount());
+                        masterController.getToolController().giveCellCount(gol.getCellCount());
                     }
                 }
             }
@@ -224,7 +218,7 @@ public class CanvasController {
         if (code.equals("D")) {
 
            // saveToFile();
-            System.out.println(dGol.getBoundingBox()[0] + " " + dGol.getBoundingBox()[1] + " " + dGol.getBoundingBox()[2] + " " + dGol.getBoundingBox()[3] + " ");
+            System.out.println(gol.getBoundingBox()[0] + " " + gol.getBoundingBox()[1] + " " + gol.getBoundingBox()[2] + " " + gol.getBoundingBox()[3] + " ");
 
         }
     }
@@ -299,7 +293,7 @@ public class CanvasController {
 
             fitTo(gridClickX, gridClickY);
 
-            dGol.changeCellState((gridClickX < 0)? 0 : gridClickX, (gridClickY < 0)? 0 : gridClickY);
+            gol.changeCellState((gridClickX < 0)? 0 : gridClickX, (gridClickY < 0)? 0 : gridClickY);
 
             if (!running || frameDelay > 0)
                 renderCanvas();
@@ -341,7 +335,7 @@ public class CanvasController {
                 int x = getGridPosX(currMousePosX);
                 int y = getGridPosY(currMousePosY);
                 fitTo(x, y);
-                dGol.setCellAlive(x =(x < 0)?0:x, y = (y < 0)? 0 : y);
+                gol.setCellAlive(x =(x < 0)?0:x, y = (y < 0)? 0 : y);
                 drawCell(x, y);
             }
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
@@ -366,11 +360,11 @@ public class CanvasController {
 
     private void fitTo(int x, int y) {
         if(x < 0){
-            dGol.increaseXLeft(Math.abs(x));
+            gol.increaseXLeft(Math.abs(x));
            // boardOffsetX -= (x - 1) * cell.getSize();
         }
         if(y < 0){
-            dGol.increaseYTop(Math.abs(y));
+            gol.increaseYTop(Math.abs(y));
             //boardOffsetY -= (y - 1) * cell.getSize();
         }
 
@@ -392,8 +386,8 @@ public class CanvasController {
 
         masterController.getToolController().setZoom( cell.getSize());
 
-        boardOffsetX = (int) ((absMPosXOnGrid - dGol.getOffsetX()) * cell.getSize() - scrollEvent.getX());
-        boardOffsetY = (int) ((absMPosYOnGrid - dGol.getOffsetY()) * cell.getSize() - scrollEvent.getY());
+        boardOffsetX = (int) ((absMPosXOnGrid - gol.getOffsetX()) * cell.getSize() - scrollEvent.getX());
+        boardOffsetY = (int) ((absMPosYOnGrid - gol.getOffsetY()) * cell.getSize() - scrollEvent.getY());
 
         clampView();
         checkIfShouldStillDrawGrid();
@@ -488,10 +482,10 @@ public class CanvasController {
     //endregion
 
      double getCommonOffsetX(){
-         return (boardOffsetX + dGol.getOffsetX() * cell.getSize());
+         return (boardOffsetX + gol.getOffsetX() * cell.getSize());
      }
     double getCommonOffsetY(){
-        return (boardOffsetY + dGol.getOffsetY() * cell.getSize());
+        return (boardOffsetY + gol.getOffsetY() * cell.getSize());
     }
 
 
@@ -575,7 +569,7 @@ public class CanvasController {
                         int posY = getGridPosY(currMousePosY) - importPattern[x].length / 2 + y;
 
                         if (posY >= 0 )
-                            dGol.setCellAlive(posX, posY);
+                            gol.setCellAlive(posX, posY);
                     }
                 }
             }
@@ -591,7 +585,7 @@ public class CanvasController {
      */
     public void clearGrid() {
 
-        dGol.clearGrid();
+        gol.clearGrid();
         renderCanvas();
     }
 
@@ -615,11 +609,11 @@ public class CanvasController {
      */
     private void drawLine(int x, int y, int x2, int y2) {
 
-        int ofsetX = dGol.getOffsetX();
-        int ofsetY = dGol.getOffsetY();
+        int ofsetX = gol.getOffsetX();
+        int ofsetY = gol.getOffsetY();
         fitTo(x, y);
-        ofsetX -= dGol.getOffsetX();
-        ofsetY -= dGol.getOffsetY();
+        ofsetX -= gol.getOffsetX();
+        ofsetY -= gol.getOffsetY();
 
         x -= ofsetX;
         x2 -= ofsetX;
@@ -634,7 +628,7 @@ public class CanvasController {
         for (int i = 0; i < lineLength; i++) {
 
             fitTo(x1 = (x + i * width / lineLength), y1 = (y + i * height / lineLength));
-            dGol.setCellAlive(x1 =(x1 < 0) ? 0 : x1, y1 = (y1 < 0)?0:y1);
+            gol.setCellAlive(x1 =(x1 < 0) ? 0 : x1, y1 = (y1 < 0)?0:y1);
             drawCell(x1, y1);
         }
     }
@@ -693,10 +687,10 @@ public class CanvasController {
            // System.arraycopy(grid.get(x), 0, temp[x], 0, minHeight);
         }
 
-        gol.setGrid(temp);
+        /*gol.setGrid(temp);
         gol.createNeighboursGrid();
-        gol.updateRuleGrid();
-        grid = dGol.getGrid();
+        gol.updateRuleGrid();*/
+        grid = gol.getGrid();
         boardWidth = (short) grid.size();
         boardHeight = (short) grid.get(0).size();
     }
@@ -752,8 +746,8 @@ public class CanvasController {
         cell.setSize(newCellSize);
         clampCellSize();
 
-        boardOffsetX = (int) (cell.getSize() * canvasCenterX - canvas.getWidth() / 2 - dGol.getOffsetX() * cell.getSize());
-        boardOffsetY = (int) (cell.getSize() * canvasCenterY - canvas.getHeight() / 2 - dGol.getOffsetY() * cell.getSize());
+        boardOffsetX = (int) (cell.getSize() * canvasCenterX - canvas.getWidth() / 2 - gol.getOffsetX() * cell.getSize());
+        boardOffsetY = (int) (cell.getSize() * canvasCenterY - canvas.getHeight() / 2 - gol.getOffsetY() * cell.getSize());
 
         clampView();
 
@@ -794,7 +788,7 @@ public class CanvasController {
 
     public void setRule(String ruleText) {
 
-        dGol.setRule(ruleText);
+        gol.setRule(ruleText);
     }
 
     //endregion
@@ -839,7 +833,7 @@ public class CanvasController {
                 }
             }
 
-            dGol.nextGeneration();
+            gol.nextGeneration();
 
 
             gifWriter.insertAndProceed();
@@ -856,7 +850,7 @@ public class CanvasController {
 
     void saveToFile() {
         busy = true;
-        new ToFile().writeToFile(dGol, masterController.stage);
+        new ToFile().writeToFile(gol, masterController.stage);
         busy = false;
     }
 

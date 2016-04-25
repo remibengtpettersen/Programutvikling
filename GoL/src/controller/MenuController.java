@@ -70,7 +70,7 @@ public class MenuController {
      */
     public void setCustomRule(ActionEvent actionEvent) {
 
-        TextInputDialog dialog = new TextInputDialog(masterController.getCanvasController().dGol.getRule().toString());
+        TextInputDialog dialog = new TextInputDialog(masterController.getCanvasController().gol.getRule().toString());
 
         dialog.setTitle("Custom rule");
         dialog.setHeaderText("Enter custom rule code");
@@ -160,7 +160,7 @@ public class MenuController {
         editor.setScene(scene);
 
         EditorController editorController = loader.getController();
-        editorController.getDeepCopyGol(masterController.getCanvasController().gol);
+        //editorController.getDeepCopyGol(masterController.getCanvasController().gol);
         //editorController.initialize(editor);
 
         masterController.getCanvasController().stopAnimation();

@@ -47,7 +47,7 @@ public class MasterController {
      */
     public void initialize(Stage stage, BorderPane root) throws IOException {
 
-        configuration = new Configuration("./GoL/resources/config.properties");
+        configuration = new Configuration("../GoL/resources/config.properties");
 
         this.stage = stage;
         scene = new Scene(root, configuration.getWidth(), configuration.getHeight());
@@ -149,7 +149,7 @@ public class MasterController {
      */
     void showTheStrip() {
         theStrip = new TheStrip();
-        theStrip.display(canvasController.gol.getGrid(), this);
+        //theStrip.display(canvasController.gol.getGrid(), this);
         if(stats == null)
             stage.setOnCloseRequest(event -> closeTheStrip());
         else{
@@ -161,7 +161,7 @@ public class MasterController {
     }
     public void showStats() {
         stats = new Stats();
-        stats.display(canvasController.dGol, this);
+        stats.display(canvasController.gol, this);
         if(theStrip == null)
             stage.setOnCloseRequest(event -> closeStats());
         else{

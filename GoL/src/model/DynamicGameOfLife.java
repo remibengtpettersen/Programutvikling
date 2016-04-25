@@ -509,7 +509,15 @@ public class DynamicGameOfLife{
      * Clears the grid of live cells
      */
     public void clearGrid() {
+        
+        grid.clear();
+        neighbours.clear();
 
+        grid.add(new ArrayList<>());
+        neighbours.add(new ArrayList<>());
+
+        grid.get(0).add(new AtomicBoolean(false));
+        neighbours.get(0).add(new AtomicInteger(0));
     }
 
     /**

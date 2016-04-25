@@ -9,6 +9,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
+import model.DynamicGameOfLife;
 import model.GameOfLife;
 
 import java.util.regex.Matcher;
@@ -33,11 +34,11 @@ public class StatController {
     private final float BETA = 3.0f;
     private final float GAMMA = 0.25f;
 
-    private GameOfLife gol;
+    private DynamicGameOfLife gol;
 
     private Task worker;
 
-    public void setGol(GameOfLife gol){
+    public void setGol(DynamicGameOfLife gol){
         this.gol = gol;
     }
 
@@ -86,7 +87,7 @@ public class StatController {
         int[][] stats = new int[3][iterations];
         double[] representations = new double[iterations];
 
-        GameOfLife clonedGol = gol.clone();
+        DynamicGameOfLife clonedGol = gol.clone();
 
         int previousLiving = 0;
 
@@ -162,14 +163,13 @@ public class StatController {
      * @param game Reference to the GameOfLife object to gather information from
      * @return The geometric factor, the sum of x and y coordinates of live cells
      */
-    private double getGeometricFactor(GameOfLife game) {
+    private double getGeometricFactor(DynamicGameOfLife gol) {
 
-        boolean[][] grid = game.getGrid();
         double geoFactor = 0;
 
-        for(int x = 0; x < grid[0].length; x++)
-            for (int y = 0; y < grid.length; y++)
-                if(grid[x][y])
+        for(int x = 0; x < gol.getGridWidth(); x++)
+            for (int y = 0; y < gol.getGridHeight(); y++)
+                if(gol.isCellAlive(x,y))
                     geoFactor += x + y;
         return geoFactor;
     }
