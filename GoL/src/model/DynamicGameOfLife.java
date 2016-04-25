@@ -12,11 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class DynamicGameOfLife{
 
-    int treads = Runtime.getRuntime().availableProcessors();
-    //int treads = 1;
+    private int availableProcessors = Runtime.getRuntime().availableProcessors();
+    //int availableProcessors = 1;
 
 
-    private List<Thread> workers = new ArrayList<>();
+    private List<Thread> threads = new ArrayList<>();
 
     // Offset to use when grid is expanded to left and upwards
 
@@ -32,12 +32,10 @@ public class DynamicGameOfLife{
     /**
      * GameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
      *
-     * @param width
-     * @param height
      */
-    public DynamicGameOfLife(int width, int height) {
+    public DynamicGameOfLife() {
 
-        createGameBoard(width, height);
+        createGameBoard();
         setRule("classic");
     }
 
@@ -47,18 +45,15 @@ public class DynamicGameOfLife{
      * Creates the boolean 2D Array to keep track of dead and live cells, and the 2D byte-
      * array to keep track of the neighbour count to the corresponding cells in the other array
      */
-    private void createGameBoard(int width, int height) {
+    private void createGameBoard() {
         grid = new ArrayList<>();
         neighbours = new ArrayList<>();
 
-        for (int x = 0; x < width; x++) {
-            grid.add(new ArrayList<>());
-            neighbours.add(new ArrayList<>());
-            for (int y = 0; y < height; y++) {
-                grid.get(x).add(new AtomicBoolean(false));
-                neighbours.get(x).add(new AtomicInteger(0));
-            }
-        }
+        grid.add(new ArrayList<>());
+        neighbours.add(new ArrayList<>());
+        grid.get(0).add(new AtomicBoolean(false));
+        neighbours.get(0).add(new AtomicInteger(0));
+
     }
     //endregion
 
@@ -69,25 +64,23 @@ public class DynamicGameOfLife{
      */
     public void nextGeneration() {
         cellCount = 0;
-        shrinkBoard();
-        createWorkers1();
+        fitBoardToPattern();
+        createCountingThreads();
         try {
-            runWorkers();
+            runThreads();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        workers.clear();
-        createWorkers2();
+        createEvolveThreads();
         try {
-            runWorkers();
+            runThreads();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        workers.clear();
 
     }
 
-    private void shrinkBoard() {
+    private void fitBoardToPattern() {
         int [] bBox = getBoundingBox();
         if (bBox[0] > 1){
             decreaseXLeft(bBox[0] - 1);
@@ -103,6 +96,7 @@ public class DynamicGameOfLife{
         else if(bBox[1] == grid.size() - 1){
             increaseXRight(1);
         }
+
         if (bBox[2] > 1){
             decreaseYTop(bBox[2] - 1);
             bBox[3] -= bBox[2] - 1;
@@ -121,24 +115,24 @@ public class DynamicGameOfLife{
     }
 
 
-    public void createWorkers1() {
-        for (int i = 0; i < treads; i++) {
+    public void createCountingThreads() {
+        for (int i = 0; i < availableProcessors; i++) {
             final int finalI = i;
-            workers.add(new Thread(() -> {
-                int start = finalI * grid.size()/treads;
-                int stop = (finalI + 1) * grid.size()/treads;
+            threads.add(new Thread(() -> {
+                int start = finalI * grid.size()/ availableProcessors;
+                int stop = (finalI + 1) * grid.size()/ availableProcessors;
                 start = (start == 0)? 1: start;
-                stop = (stop == grid.size() - 1)?grid.size() - 2 : stop;
+                stop = (stop == grid.size() - 1)?grid.size() - 1 : stop;
                 aggregateNeighbours(start, stop);
             }));
         }
     }
-    public void createWorkers2() {
-        for (int i = 0; i < treads; i++) {
+    public void createEvolveThreads() {
+        for (int i = 0; i < availableProcessors; i++) {
             final int finalI = i;
-            workers.add(new Thread(() -> {
+            threads.add(new Thread(() -> {
                 try {
-                    rule.evolve(finalI * grid.size()/treads, (finalI + 1) * grid.size()/treads);
+                    rule.evolve(finalI * grid.size()/ availableProcessors, (finalI + 1) * grid.size()/ availableProcessors);
                 } catch (EvolveException e) {
                     e.printStackTrace();
                 }
@@ -146,15 +140,16 @@ public class DynamicGameOfLife{
         }
     }
 
-    public void runWorkers() throws InterruptedException {
-        for (Thread t : workers) {
+    public void runThreads() throws InterruptedException {
+        for (Thread t : threads) {
             t.start();
         }
 
         // vent på at alle trådene har kjørt ferdig før vi returnerer
-        for (Thread t : workers) {
+        for (Thread t : threads) {
             t.join();
         }
+        threads.clear();
     }
 
 
@@ -175,29 +170,6 @@ public class DynamicGameOfLife{
                         for (int b = y - 1; b <= y + 1; b++) {
                             if (a != x || b != y) {
                                 neighbours.get(a).get(b).incrementAndGet();
-                               try{
-
-                               }
-                               catch (IndexOutOfBoundsException e){
-                                   if (a < 0) {
-                                       increaseXLeft(1);
-                                       stop++;
-                                       x++;
-                                   }
-                                   if(a >= grid.size())
-                                   {
-                                       increaseXRight(1);
-                                   }
-                                   if (b < 0) {
-                                       increaseYTop(1);
-                                       y++;
-                                   }
-                                   if(b >= grid.get(0).size())
-                                       increaseYBottom(1);
-
-                                   neighbours.get(a = (a < 0)? 0 : a).get(b = (b < 0)? 0 : b).incrementAndGet();
-                               }
-
                             }
                         }
                     }
@@ -213,7 +185,7 @@ public class DynamicGameOfLife{
      */
     @Override
     public DynamicGameOfLife clone() {
-        DynamicGameOfLife gameOfLife = new DynamicGameOfLife(getGrid().size(), getGrid().get(0).size());
+        DynamicGameOfLife gameOfLife = new DynamicGameOfLife();
         gameOfLife.deepCopyOnSet(grid);
         gameOfLife.setRule(getRule().toString());
         gameOfLife.setCellCount(cellCount);
@@ -229,13 +201,16 @@ public class DynamicGameOfLife{
      */
     public void deepCopyOnSet(ArrayList<ArrayList<AtomicBoolean>> grid) {
         cellCount = 0;
+        neighbours.clear();
         this.grid.clear();
         for (int x = 0; x < grid.size(); x++) {
             this.grid.add(new ArrayList<>());
+            neighbours.add(new ArrayList<>());
             for (int y = 0; y < grid.get(x).size(); y++) {
                 if(grid.get(x).get(y).get())
                     cellCount++;
                 this.grid.get(x).add(new AtomicBoolean(grid.get(x).get(y).get()));
+                neighbours.get(x).add(new AtomicInteger(0));
             }
         }
 
@@ -310,10 +285,10 @@ public class DynamicGameOfLife{
             }
         }
         if (boundingBox[1] < boundingBox[0]){
-            boundingBox[0] = 0;
-            boundingBox[1] = 0;
-            boundingBox[2] = 0;
-            boundingBox[3] = 0;
+            boundingBox[0] = 1;
+            boundingBox[1] = 1;
+            boundingBox[2] = 1;
+            boundingBox[3] = 1;
         }
         return boundingBox;
     }
@@ -489,6 +464,8 @@ public class DynamicGameOfLife{
      * Updates the rule's references to this class' cell grid and neighbour grid
      */
     public void updateRuleGrid() {
+        rule.setGrid(grid);
+        rule.setNeighbours(neighbours);
     }
 
     public void setCellCount(int cellCount) {

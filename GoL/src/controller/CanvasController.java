@@ -97,7 +97,7 @@ public class CanvasController {
         this.masterController = masterController;
         initializeGameParameters();
 
-        dGol = new DynamicGameOfLife(boardWidth, boardHeight);
+        dGol = new DynamicGameOfLife();
         grid = dGol.getGrid();
         gc = canvas.getGraphicsContext2D();
 

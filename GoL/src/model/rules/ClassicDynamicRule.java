@@ -55,4 +55,12 @@ public class ClassicDynamicRule {
             }
         }
     }
+
+    public void setGrid(ArrayList<ArrayList<AtomicBoolean>> grid) {
+        this.grid = grid;
+    }
+
+    public void setNeighbours(ArrayList<ArrayList<AtomicInteger>> neighbours) {
+        this.neighbours = neighbours;
+    }
 }
