@@ -99,6 +99,7 @@ public class StatsController {
         for (int i = 0; i < iterations; i++) {
 
             phies[i]  = phi(gol.getGrid());
+            System.out.println(phies[i]);
             if(i > 0){
                 data[1][i] = gol.getCellCount() - data[0][i - 1];
             }
