@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Andreas on 29.02.2016.
  */
+@Deprecated
 public class GameOfLifeTest {
 
     @Rule

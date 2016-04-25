@@ -12,6 +12,7 @@ import java.util.Arrays;
  *
  * @author The group through pair programing.
  */
+@Deprecated
 public class GameOfLife {
 
     private boolean[][] grid;

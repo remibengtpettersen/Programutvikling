@@ -142,9 +142,9 @@ public class StatsController {
     private void setCorrectRule() {
         if(!statsGol.getRule().toString().equals(gol.getRule().toString())) {
             statsGol.setRule(gol.getRule().toString());
-        }else {
+        }/*else {
             statsGol.updateRuleGrid();
-        }
+        }*/
     }
 
     private double phi(ArrayList<ArrayList<AtomicBoolean>> grid) {

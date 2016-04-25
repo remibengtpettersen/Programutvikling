@@ -6,6 +6,7 @@ import model.EvolveException;
  * A rule similar to the classic Conway rule, but will also allow cells to be born if they have 6 neighbours. Rulestring: B36/S23
  * Created by Andreas on 16.03.2016.
  */
+@Deprecated
 public class HighLifeRule extends Rule {
 
     /**
@@ -31,15 +32,15 @@ public class HighLifeRule extends Rule {
                 if (neighbourCount < 0 || neighbourCount > 8)
                     throw new EvolveException("Tried setting " + neighbourCount + " neighbours");
 
-                // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
+                    // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
                 else if (neighbourCount == 3)
                     grid[x][y] = true;
 
-                // if a cell is dead and has 6 neighbours, it will become alive. This is highLife's only difference
+                    // if a cell is dead and has 6 neighbours, it will become alive. This is highLife's only difference
                 else if ((neighbours[x][y] == 6) && !grid[x][y])
                     grid[x][y] = true;
 
-                // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
+                    // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
                 else if (neighbourCount != 2)
                     grid[x][y] = false;
 

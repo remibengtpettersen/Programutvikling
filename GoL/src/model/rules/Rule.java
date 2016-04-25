@@ -7,6 +7,7 @@ import model.EvolveException;
  * Created on 29.02.2016.
  * @author The group through pair programming
  */
+@Deprecated
 public abstract class Rule {
 
     //region fields

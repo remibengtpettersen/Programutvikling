@@ -1,16 +1,11 @@
 package test;
 
-import javafx.scene.paint.Color;
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import model.Configuration;
-import model.rules.ClassicRule;
 import org.junit.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-
-import static org.junit.Assert.*;
 
 /**
  */

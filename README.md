@@ -128,3 +128,6 @@ Implemented statistics for s305061. Merged with master
 
 160421 22:41
 Added progress indicator to s305061 statistics
+
+160425 10:05
+Implemented dynamic rule classes. The static rule classes and GameOfLife are now deprecated.

@@ -302,7 +302,7 @@ public class CanvasController {
             dGol.changeCellState((gridClickX < 0)? 0 : gridClickX, (gridClickY < 0)? 0 : gridClickY);
 
             if (!running || frameDelay > 0)
-            renderCanvas();
+                renderCanvas();
 
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY)
             if (running) {

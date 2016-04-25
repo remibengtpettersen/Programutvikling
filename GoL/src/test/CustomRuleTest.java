@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  */
+@Deprecated
 public class CustomRuleTest {
 
     private Rule rule;

@@ -7,12 +7,12 @@ import model.rules.Rule;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import tools.Utilities;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  */
+@Deprecated
 public class ClassicRuleTest {
 
     @org.junit.Rule

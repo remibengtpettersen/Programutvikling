@@ -7,6 +7,7 @@ import model.EvolveException;
  * Created on 12.02.2016.
  * This class provides the default rules for game of life as defined by Conway.
  */
+@Deprecated
 public class ClassicRule extends Rule {
 
     /**
@@ -32,11 +33,11 @@ public class ClassicRule extends Rule {
                 if (neighbourCount < 0 || neighbourCount > 8)
                     throw new EvolveException("Tried setting " + neighbourCount + " neighbours");
 
-                // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
+                    // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
                 else if (neighbourCount == 3)
                     grid[x][y] = true;
 
-                // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
+                    // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
                 else if (neighbourCount != 2)
                     grid[x][y] = false;
 
