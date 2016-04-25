@@ -459,7 +459,6 @@ public class DynamicGameOfLife{
 
     public void increaseYTop(int diffY){
         cellOffsetY += diffY;
-        System.out.println(diffY);
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < diffY; j++){
                 grid.get(i).add(0, new AtomicBoolean(false));

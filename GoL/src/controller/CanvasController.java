@@ -80,6 +80,7 @@ public class CanvasController {
     private boolean gridLines;
     private boolean userWantsGridLines;
     private int threads = Runtime.getRuntime().availableProcessors();
+    private Thread thread;
 
     public Canvas getCanvas() {
         return canvas;
@@ -98,8 +99,6 @@ public class CanvasController {
         grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
 
-        clampCellSize();
-        clampView();
         updateView();
         initializeListeners();
         initializeAnimation();
@@ -149,6 +148,7 @@ public class CanvasController {
      */
     private void initializeAnimation() {
 
+        thread = new Thread();
         animationTimer = new AnimationTimer() {
 
             @Override
@@ -158,8 +158,13 @@ public class CanvasController {
                 if (now / 1000000 - timer > frameDelay) {
 
                     if(!busy) {
-                        gol.nextGeneration();
-                        updateView();
+                        if(!thread.isAlive()){
+                            thread = new Thread(() -> {
+                                gol.nextGeneration();
+
+                            });
+                            thread.start();
+                        }
                         renderCanvas();
 
                         timer = now / 1000000;
@@ -190,10 +195,7 @@ public class CanvasController {
     }
 
     private void fitContentToWindow() {
-        clampCellSize();
-        clampView();
         calculateMinCellSize();
-        updateView();
         if (!running || frameDelay > 0)
             renderCanvas();
     }
@@ -347,10 +349,6 @@ public class CanvasController {
                 boardOffsetY += prevMousePosY - currMousePosY;
             }
 
-            clampView();
-
-            updateView();
-
             if (!running || frameDelay > 0)
                 renderCanvas();
         }
@@ -385,19 +383,15 @@ public class CanvasController {
 
         cell.setSize(cell.getSize() * ( 1 + (scrollEvent.getDeltaY() / 150)));
 
-        clampCellSize();
-
         masterController.getToolController().setZoom( cell.getSize());
 
         boardOffsetX = (int) ((absMPosXOnGrid - gol.getOffsetX()) * cell.getSize() - scrollEvent.getX());
         boardOffsetY = (int) ((absMPosYOnGrid - gol.getOffsetY()) * cell.getSize() - scrollEvent.getY());
 
-        clampView();
+
         checkIfShouldStillDrawGrid();
 
         masterController.getToolController().addSpeedValue(scrollEvent.getDeltaX() / 5);
-
-        updateView();
 
         if (!running || frameDelay > 0)
             renderCanvas();
@@ -413,30 +407,6 @@ public class CanvasController {
 
     //region Clamping
 
-    /**
-     * Keeps the cell size within it´s boundaries.
-     */
-    private void clampCellSize() {
-
-       /* if (cell.getSize() * boardWidth < canvas.getWidth()) {
-            cell.setSize(canvas.getWidth() / boardWidth);
-        }
-
-        if (cell.getSize() * boardHeight < canvas.getHeight()) {
-            cell.setSize(canvas.getHeight() / boardHeight);
-        } else if (cell.getSize() > Cell.MAX_SIZE) {
-            cell.setSize(Cell.MAX_SIZE);
-        }*/
-    }
-
-    /**
-     * Keeps the board inside the canvas
-     */
-    private void clampView() {
-
-      //  boardOffsetX = clamp(boardOffsetX, 0, (int) (cell.getSize() * boardWidth - canvas.getWidth()));
-       // boardOffsetY = clamp(boardOffsetY, 0, (int) (cell.getSize() * boardHeight - canvas.getHeight()));
-    }
 
     /**
      * Keeps the val between min and max
@@ -497,6 +467,7 @@ public class CanvasController {
      */
     public void renderCanvas() {
 
+        updateView();
         renderLife();
 
         if (importing)
@@ -504,7 +475,8 @@ public class CanvasController {
         if (gridLines)
             if (userWantsGridLines)
                 renderGridLines();
-        gc.strokeRect(-getCommonOffsetX(), -getCommonOffsetY(), grid.size() * cell.getSize(), grid.get(0).size() * cell.getSize());
+        //to see where the grid is
+        //gc.strokeRect(-getCommonOffsetX(), -getCommonOffsetY(), grid.size() * cell.getSize(), grid.get(0).size() * cell.getSize());
 
     }
 
@@ -518,8 +490,8 @@ public class CanvasController {
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         gc.setFill(cell.getColor());
-        for (int x = currViewMinX; x < grid.size(); x++) {
-            for (int y = currViewMinY; y < grid.get(0).size(); y++) {
+        for (int x = currViewMinX; x < currViewMaxX; x++) {
+            for (int y = currViewMinY; y < currViewMaxY; y++) {
 
                 if (grid.get(x).get(y).get())
                     drawCell(x, y);
@@ -533,13 +505,15 @@ public class CanvasController {
     private void renderGridLines() {
 
         gc.setStroke(cell.getGhostColor());
+        double x;
+        for (double i = 0; i < canvas.getWidth(); i += cell.getSize()){
+            gc.strokeLine( x = -getCommonOffsetX() % cell.getSize() + i - cell.getSize() * cell.getSpacing() /2, 0, x, canvas.getHeight());
+        }
+        double y;
+        for (double i = 0; i < canvas.getHeight(); i += cell.getSize()){
+            gc.strokeLine(0, y = -getCommonOffsetY() % cell.getSize() + i - cell.getSize() * cell.getSpacing() /2,canvas.getWidth(), y);
+        }
 
-        for (int i = currViewMinX; i < currViewMaxX; i++) {
-            gc.strokeLine(i * cell.getSize() - getCommonOffsetX() - cell.getSize() * cell.getSpacing() / 2, -getCommonOffsetY(), i * cell.getSize() - getCommonOffsetX() - cell.getSize() * cell.getSpacing() / 2, -getCommonOffsetY() + grid.get(0).size()*cell.getSize());
-        }
-        for (int i = currViewMinY; i < currViewMaxY; i++) {
-            gc.strokeLine(-getCommonOffsetX(), i * cell.getSize() - getCommonOffsetY() - cell.getSize() * cell.getSpacing() / 2, -getCommonOffsetX() + grid.size() * cell.getSize(), i * cell.getSize() - getCommonOffsetY() - cell.getSize() * cell.getSpacing() / 2);
-        }
     }
 
     /**
@@ -567,14 +541,16 @@ public class CanvasController {
             for (int y = 0; y < importPattern[x].length; y++) {
                 if (importPattern[x][y]) {
                     int posX = getGridPosX(currMousePosX) - importPattern.length / 2 + x;
+                    int posY = getGridPosY(currMousePosY) - importPattern[x].length / 2 + y;
 
-                    if (posX >= 0 ) {
-                        int posY = getGridPosY(currMousePosY) - importPattern[x].length / 2 + y;
-
-                        if (posY >= 0 )
-                            gol.setCellAlive(posX, posY);
+                    if (posX < 0 || posY < 0) {
+                        fitTo(posX, posY);
+                        posX = getGridPosX(currMousePosX) - importPattern.length / 2 + x;
+                        posY = getGridPosY(currMousePosY) - importPattern[x].length / 2 + y;
                     }
+                    gol.setCellAlive(posX, posY);
                 }
+
             }
         }
         importing = false;
@@ -582,6 +558,7 @@ public class CanvasController {
         if (!running || frameDelay > 0)
             renderCanvas();
     }
+
 
     /**
      * Kills all cells on grid
@@ -636,68 +613,6 @@ public class CanvasController {
         }
     }
 
-    /**
-     * Displays a window that tells the user that the current import pattern is bigger than the current GoL universe
-     */
-    private void displayImportTooBigDialog() {
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
-        alert.setTitle("Pattern too big");
-        alert.setHeaderText("The pattern you imported seems to bee bigger than the current game of life universe.");
-        alert.setContentText("Do you want to mage the universe bigger?");
-
-        ButtonType yesBtn = new ButtonType("Yes");
-        ButtonType noBtn = new ButtonType("No");
-        ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(yesBtn, noBtn, cancelBtn);
-
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if (result.get() == yesBtn) {
-            resizeGridToImport();
-        }else if(result.get() == noBtn){
-
-        }
-        else {
-            importing = false;
-        }
-    }
-
-    /**
-     * Resize the GoL grid to fit the import
-     */
-    private void resizeGridToImport() {
-
-        resizeGrid((int) (importPattern.length * 1.2), (int) (importPattern[0].length * 1.2));
-    }
-
-    /**
-     * Resizes the GoL universe to the given width and height
-     *
-     * @param width  the new width
-     * @param height the nwe height
-     */
-    private void resizeGrid(int width, int height) {
-
-        int minWidth = (width < grid.size()) ? width : grid.size();
-        int minHeight = (height < grid.get(0).size()) ? height : grid.get(0).size();
-
-        boolean[][] temp = new boolean[width][height];
-
-        for (int x = 0; x < minWidth; x++) {
-           // System.arraycopy(grid.get(x), 0, temp[x], 0, minHeight);
-        }
-
-        /*gol.setGrid(temp);
-        gol.createNeighboursGrid();
-        gol.updateRuleGrid();*/
-        grid = gol.getGrid();
-        boardWidth = (short) grid.size();
-        boardHeight = (short) grid.get(0).size();
-    }
-
     //region Animation control
 
     /**
@@ -747,14 +662,10 @@ public class CanvasController {
         double canvasCenterY = (getCommonOffsetY() + canvas.getHeight() / 2) / cell.getSize();
 
         cell.setSize(newCellSize);
-        clampCellSize();
 
         boardOffsetX = (int) (cell.getSize() * canvasCenterX - canvas.getWidth() / 2 - gol.getOffsetX() * cell.getSize());
         boardOffsetY = (int) (cell.getSize() * canvasCenterY - canvas.getHeight() / 2 - gol.getOffsetY() * cell.getSize());
 
-        clampView();
-
-        updateView();
 
         checkIfShouldStillDrawGrid();
 
@@ -773,11 +684,6 @@ public class CanvasController {
 
         if (importPattern != null) {
             importing = true;
-            if (importPattern.length > boardWidth || importPattern[0].length > boardHeight) {
-                displayImportTooBigDialog();
-            }
-        } else {
-            System.out.println("ISNULL");
         }
     }
 
