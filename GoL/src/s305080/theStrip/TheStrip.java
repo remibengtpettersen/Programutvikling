@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by Truls on 06/04/16.
@@ -18,7 +20,7 @@ public class TheStrip {
     Stage stage;
     MasterController masterController;
 
-    public void display(boolean[][] grid, MasterController masterController){
+    public void display(ArrayList<ArrayList<AtomicBoolean>> grid, MasterController masterController){
         this.masterController = masterController;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TheStrip.fxml"));
         try {
