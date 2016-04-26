@@ -47,7 +47,7 @@ public class MenuController {
     }
 
     public void saveFile(){
-       // masterController.getCanvasController().saveToFile();
+       masterController.getCanvasController().saveToFile();
     }
     public void onAbout(ActionEvent actionEvent) {
 

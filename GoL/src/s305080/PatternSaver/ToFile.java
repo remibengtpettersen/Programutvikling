@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.DynamicGameOfLife;
 import model.GameOfLife;
 import tools.MessageBox;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by Truls on 29/03/16.
@@ -22,19 +24,19 @@ public class ToFile {
 
     private  List <String> list;
     private  int[] boundingBox;
-    private  boolean[][] grid;
+    private ArrayList<ArrayList<AtomicBoolean>> grid;
     FileChooser saveFileChooser;
     private Stage stage;
     private String ruleText;
     LagringsFormat format;
-    GameOfLife gol;
+    DynamicGameOfLife gol;
 
 
     public enum LagringsFormat {
         RLE, PlainText
     }
 
-    public void writeToFile(GameOfLife gol, Stage stage){
+    public void writeToFile(DynamicGameOfLife gol, Stage stage){
 
         this.gol = gol;
         int [] boundingBox = gol.getBoundingBox();
@@ -47,7 +49,7 @@ public class ToFile {
         this.grid = gol.getGrid();
         this.boundingBox = boundingBox;
 
-        list = new ArrayList<String>();
+        list = new ArrayList<>();
 
         saveFileChooser = new FileChooser();
 
@@ -94,7 +96,7 @@ public class ToFile {
                     counter++;
                     firstInLine = false;
                 }
-                else if(lastBit == grid[x][y]){
+                else if(lastBit == grid.get(x).get(y).get()){
                     counter ++;
                     if (currentLine.length() > 40){
                         list.add(currentLine.toString());
@@ -110,7 +112,7 @@ public class ToFile {
                     }
                     counter = 1;
                 }
-                lastBit = grid[x][y];
+                lastBit = grid.get(x).get(y).get();
 
             }
 
@@ -148,7 +150,7 @@ public class ToFile {
 
             for(int x = boundingBox[0]; x <= boundingBox[1]; x++){
 
-                if(grid[x][y]){
+                if(grid.get(x).get(y).get()){
                     currentLine.append('O');
                 }
                 else

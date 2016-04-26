@@ -14,6 +14,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import model.Cell;
 import model.DynamicGameOfLife;
+import s305080.PatternSaver.ToFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -764,7 +765,7 @@ public class CanvasController {
         }
 
         System.out.println("Done");
-    }
+    }*/
 
     void saveToFile() {
         busy = true;
@@ -773,7 +774,7 @@ public class CanvasController {
     }
 
     //endregion
-*/
+
 
 
     //region getters
