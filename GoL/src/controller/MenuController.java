@@ -9,6 +9,7 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
 
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import s305073.controller.EditorController;
@@ -112,7 +113,6 @@ public class MenuController {
 
 
     //region s305080
-
     public void showTheStrip(){
 
         if(!theStripS305080.isSelected())
@@ -141,6 +141,7 @@ public class MenuController {
     public void setStatsShowing(boolean theStripIsShowing) {
         statsS305080.setSelected(theStripIsShowing);
     }
+    // endregion
 
     public void launchEditor(ActionEvent actionEvent) {
         Stage editor = new Stage();
@@ -148,7 +149,7 @@ public class MenuController {
         editor.initModality(Modality.WINDOW_MODAL);
         editor.initOwner(masterController.stage);
 
-        BorderPane root = null;
+        GridPane root = null;
 
         try {
             root = loader.load();
@@ -156,20 +157,24 @@ public class MenuController {
             e.printStackTrace();
         }
 
-        Scene scene = new Scene(root, 1200, 1000);
+        Scene scene = new Scene(root, 1000, 700);
         editor.setScene(scene);
 
         EditorController editorController = loader.getController();
-        //editorController.getDeepCopyGol(masterController.getCanvasController().gol);
-        //editorController.initialize(editor);
+        editorController.getDeepCopyGol(masterController.getCanvasController().gol);
+        editorController.loadPattern();
 
         masterController.getCanvasController().stopAnimation();
         masterController.getToolController().changeIconToPlay();
 
         editor.setTitle("Pattern Editor");
+
+        editor.setX(550);
+        editor.setY(250);
         editor.showAndWait();
+        editor = null;
     }
-    //endregion
+
     public void openStatWindow(ActionEvent actionEvent) {
 
         masterController.openStatWindow();
