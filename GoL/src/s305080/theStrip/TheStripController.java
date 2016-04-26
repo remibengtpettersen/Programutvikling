@@ -106,13 +106,13 @@ public class TheStripController {
     private void updateView() {
         minX = (int) (getCommonOffsetX() / cellSize);
         maxX = (int) ((getCommonOffsetX() + width) / cellSize) + 1;
-        if (maxX > grid.size())
-            maxX = grid.size();
+        if (maxX > gol.getGridWidth())
+            maxX = gol.getGridWidth();
 
         minY = (int) (getCommonOffsetY() / cellSize);
         maxY = (int) ((getCommonOffsetY() + canvas.getHeight()) / cellSize) + 1;
-        if (maxY > grid.get(0).size())
-            maxY = grid.get(0).size();
+        if (maxY > gol.getGridHeight())
+            maxY = gol.getGridHeight();
 
         if (minY < 0)
             minY = 0;
@@ -121,7 +121,8 @@ public class TheStripController {
     }
 
     private void renderLife() {
-
+        gc.setFill(cell.getDeadColor());
+        gc.fillRect(0, 0, width, canvas.getHeight());
         gc.setFill(cell.getColor());
         for (int x = minX; x < maxX; x++) {
             for (int y = minY; y < maxY; y++) {
@@ -134,7 +135,9 @@ public class TheStripController {
     }
 
     private void drawCell(int x, int y) {
-        gc.fillRect(x * cellSize - getCommonOffsetX(), y * cellSize - getCommonOffsetY(), cellSize - cellSize * cell.getSpacing(), cellSize - cellSize * cell.getSpacing());
+        double x1 = x * cellSize - getCommonOffsetX();
+        double xWidth = (x1 < 0) ? cellSize - cellSize * cell.getSpacing() + x1 : cellSize - cellSize * cell.getSpacing();
+        gc.fillRect((x1 < 0) ? 0 : x1, y * cellSize - getCommonOffsetY(), xWidth, cellSize - cellSize * cell.getSpacing());
     }
 
 

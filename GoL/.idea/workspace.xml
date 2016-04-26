@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="62642b30-8555-47bc-ae52-013508c69347" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/src/controller/CanvasController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/MasterController.java" afterPath="$PROJECT_DIR$/src/controller/MasterController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/DynamicGameOfLife.java" afterPath="$PROJECT_DIR$/src/model/DynamicGameOfLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305080/theStrip/TheStrip.java" afterPath="$PROJECT_DIR$/src/s305080/theStrip/TheStrip.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java" afterPath="$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java" />
     </list>
     <ignored path="GoL.iws" />
@@ -29,7 +25,7 @@
     <favorites_list name="GoL" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.456869">
+    <splitter split-orientation="horizontal" split-proportion="0.23072626">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="false">
@@ -94,13 +90,13 @@
           <file leaf-file-name="TheStripController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="421">
-                  <caret line="55" column="47" selection-start-line="55" selection-start-column="47" selection-end-line="55" selection-end-column="47" />
+                <state relative-caret-position="346">
+                  <caret line="109" column="37" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
                   <folding>
-                    <element signature="e#4606#4607#0" expanded="true" />
-                    <element signature="e#4666#4667#0" expanded="true" />
-                    <element signature="e#4706#4707#0" expanded="true" />
-                    <element signature="e#4766#4767#0" expanded="true" />
+                    <element signature="e#4845#4846#0" expanded="true" />
+                    <element signature="e#4905#4906#0" expanded="true" />
+                    <element signature="e#4945#4946#0" expanded="true" />
+                    <element signature="e#5005#5006#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -716,12 +712,12 @@
       <option name="presentableId" value="Default" />
       <updated>1461572260084</updated>
       <workItem from="1461573143877" duration="5142000" />
-      <workItem from="1461650693300" duration="9299000" />
+      <workItem from="1461650693300" duration="10966000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14441000" />
+    <option name="totallyTimeSpent" value="16108000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="40" y="23" width="1832" height="1131" extended-state="0" />
@@ -735,7 +731,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07988451" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30606353" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -974,13 +970,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="55" column="47" selection-start-line="55" selection-start-column="47" selection-end-line="55" selection-end-column="47" />
+        <state relative-caret-position="346">
+          <caret line="109" column="37" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
           <folding>
-            <element signature="e#4606#4607#0" expanded="true" />
-            <element signature="e#4666#4667#0" expanded="true" />
-            <element signature="e#4706#4707#0" expanded="true" />
-            <element signature="e#4766#4767#0" expanded="true" />
+            <element signature="e#4845#4846#0" expanded="true" />
+            <element signature="e#4905#4906#0" expanded="true" />
+            <element signature="e#4945#4946#0" expanded="true" />
+            <element signature="e#5005#5006#0" expanded="true" />
           </folding>
         </state>
       </provider>
