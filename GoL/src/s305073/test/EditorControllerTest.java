@@ -44,8 +44,8 @@ public class EditorControllerTest {
     public void test_SizeofPattern() {
         EditorController editorController = new EditorController();
         GameOfLife gol = new GameOfLife(7, 7);
-        Cell cell = new Cell(Color.BLACK, Color.WHITE);
-        cell.setSize(10);
+        //Cell cell = new Cell(Color.BLACK, Color.WHITE);
+        //cell.setSize(10);
 
         gol.getGrid()[1][2] = true;
         gol.getGrid()[2][3] = true;
@@ -54,7 +54,7 @@ public class EditorControllerTest {
 
         //editorController.getDeepCopyGol(gol);
 
-        double size = 4 * cell.getSize();
+        //double size = 4 * cell.getSize();
 
     }
 }

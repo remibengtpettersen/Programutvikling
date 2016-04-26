@@ -12,7 +12,11 @@ public class Cell {
     private double spacing = 0.1;
     public final static byte MAX_SIZE = 100;
 
-    public Cell(){};
+    public Cell(){
+        color = Color.BLACK;
+        deadColor = Color.WHITE;
+        calculateGhostColor();
+    };
 
     public Cell(Configuration configuration){
         try {

@@ -162,7 +162,7 @@ public class MenuController {
 
         EditorController editorController = loader.getController();
         editorController.getDeepCopyGol(masterController.getCanvasController().gol);
-        editorController.loadPattern();
+        editorController.loadEditor();
 
         masterController.getCanvasController().stopAnimation();
         masterController.getToolController().changeIconToPlay();

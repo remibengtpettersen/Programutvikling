@@ -80,7 +80,7 @@ public class DynamicGameOfLife{
 
     }
 
-    private void fitBoardToPattern() {
+    public void fitBoardToPattern() {
         int [] bBox = getBoundingBox();
         if (bBox[0] > 1){
             decreaseXLeft(bBox[0] - 1);

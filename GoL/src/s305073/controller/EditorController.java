@@ -23,26 +23,16 @@ public class EditorController {
     private DynamicGameOfLife gol;
     private Cell cell;
     private GraphicsContext gc;
-    private boolean gridLines;
     private double dragStartX;
     private double dragStartY;
-    private double dragX;
-    private double dragY;
     private double canvasOffsetX;
     private double canvasOffsetY;
-    private boolean clickEnable = true;
-    private int cellOffset;
     private boolean dragging = false;
-    private int gridOffsetX;
-    private int gridOffsetY;
-    private int offset = 0;
-
 
     public EditorController() {
-        cell = new Cell(Color.BLACK, Color.WHITE);
+        cell = new Cell();
         cell.setSize(50);
         cell.setSpacing(0.1);
-
     }
 
     public void initialize() {
@@ -56,10 +46,55 @@ public class EditorController {
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    public void loadPattern() {
+    public void loadEditor() {
+        scaleToCanvasSize();
+        centerOnCanvas();
+
         draw();
-        //drawGridLines();
     }
+
+    private void centerOnCanvas() {
+        gol.fitBoardToPattern();
+
+        double patternWidth = gol.getGridWidth();
+        double patternPixelWidth = patternWidth * cell.getSize();
+        System.out.println("Pattern width pixels :" + patternWidth * cell.getSize());
+
+        double patternHeight = gol.getGridHeight();
+        double patternPixelHeight = patternHeight * cell.getSize();
+        System.out.println("Pattern height pixels :" + patternHeight * cell.getSize());
+
+        double patternWidthCenter = patternPixelWidth / 2;
+        System.out.println("Pattern width (px) center :" + patternWidthCenter);
+
+        double patternHeightCenter = patternPixelHeight / 2;
+        System.out.println("Pattern height (px) center" + patternHeightCenter);
+
+        double canvasWidthCenter = canvas.getWidth() / 2;
+        System.out.println("Canvas W center (px): " + canvasWidthCenter);
+        double canvasHeightCenter = canvas.getHeight() / 2;
+        System.out.println("Canvas H center (px): " + canvasHeightCenter);
+
+        double patternLengthHeightRatio = patternWidth / patternHeight;
+        System.out.println("Lenght/Height: " + patternLengthHeightRatio);
+
+        canvasOffsetX = canvasWidthCenter - patternWidthCenter + gol.getOffsetX() * cell.getSize();
+        canvasOffsetY = canvasHeightCenter - patternHeightCenter + gol.getOffsetY() * cell.getSize();
+
+        System.out.println("Pattern start x on screen: " + canvasOffsetX);
+        System.out.println("Pattern start y on screen: " + canvasOffsetY);
+
+        if (patternLengthHeightRatio > 1) {
+            System.out.println("Width is greater than height");
+        }
+        else {
+            System.out.println("Height is grater than width");
+        }
+    }
+
+    private void scaleToCanvasSize() {
+    }
+
 
     private void draw() {
         gc.setFill(cell.getDeadColor());
@@ -74,7 +109,6 @@ public class EditorController {
                 }
             }
         }
-        gridOffsetX = 0;
     }
 
     public void getDeepCopyGol(DynamicGameOfLife gol) {
@@ -95,7 +129,6 @@ public class EditorController {
             canvasOffsetX = event.getX() - dragStartX;
             canvasOffsetY = event.getY() - dragStartY;
             draw();
-            //drawGridLines();
         }
     }
 
@@ -145,8 +178,6 @@ public class EditorController {
         }
 
         dragging = false;
-        offset = 50;
-        System.out.println(canvasOffsetX);
     }
 
     public void onScroll(ScrollEvent event) {
@@ -192,5 +223,11 @@ public class EditorController {
 
     public void closeEditor(ActionEvent actionEvent) {
 
+    }
+
+    public void onMouseMoved(MouseEvent event) {
+        if (event.isAltDown()) {
+            System.out.println("(" + event.getX() + ", " + event.getY() + ")");
+        }
     }
 }
