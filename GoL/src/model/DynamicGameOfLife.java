@@ -264,11 +264,10 @@ public class DynamicGameOfLife{
     }
 
     public boolean isCellAlive(int x, int y){
-
-        try {
-            return grid.get(x).get(y).get();
+        try{
+            return  grid.get(x).get(y).get();
         }
-        catch (IndexOutOfBoundsException e) {
+        catch(IndexOutOfBoundsException e){
             return false;
         }
     }
@@ -296,6 +295,8 @@ public class DynamicGameOfLife{
     public void deepCopyOnSet(ArrayList<ArrayList<AtomicBoolean>> grid) {
         //cellCount.set(0);
         neighbours.clear();
+        cellOffsetX = 0;
+        cellOffsetY = 0;
         this.grid.clear();
         for (int x = 0; x < grid.size(); x++) {
             this.grid.add(new ArrayList<>());

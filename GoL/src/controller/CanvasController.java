@@ -158,14 +158,15 @@ public class CanvasController {
                 if (now / 1000000 - timer > frameDelay) {
 
                     if(!busy) {
+                        gol.nextGeneration();
+                        renderCanvas();
                         if(!thread.isAlive()){
                             thread = new Thread(() -> {
-                                gol.nextGeneration();
 
                             });
                             thread.start();
                         }
-                        renderCanvas();
+
 
                         timer = now / 1000000;
 
@@ -319,7 +320,7 @@ public class CanvasController {
      *
      * @param mouseEvent
      */
-    private void mouseDrag(MouseEvent mouseEvent) {
+    private void mouseDrag(MouseEvent mouseEvent){
 
         if (!mouseOnCanvas)
             return;
@@ -333,8 +334,11 @@ public class CanvasController {
 
         if (b == MouseButton.PRIMARY) {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
+
                 drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY), getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
+
                 giveCellCount();
+
             } else {
                 int x = getGridPosX(currMousePosX);
                 int y = getGridPosY(currMousePosY);
@@ -454,10 +458,10 @@ public class CanvasController {
     }
     //endregion
 
-     double getCommonOffsetX(){
+    public double getCommonOffsetX(){
          return (boardOffsetX + gol.getOffsetX() * cell.getSize());
      }
-    double getCommonOffsetY(){
+    public double getCommonOffsetY(){
         return (boardOffsetY + gol.getOffsetY() * cell.getSize());
     }
 
@@ -493,8 +497,9 @@ public class CanvasController {
         for (int x = currViewMinX; x < currViewMaxX; x++) {
             for (int y = currViewMinY; y < currViewMaxY; y++) {
 
-                if (grid.get(x).get(y).get())
-                    drawCell(x, y);
+                    if (gol.isCellAlive(x, y))
+                        drawCell(x, y);
+
             }
         }
     }
