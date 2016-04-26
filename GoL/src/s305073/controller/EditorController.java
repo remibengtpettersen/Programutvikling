@@ -1,7 +1,6 @@
 package s305073.controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,7 +20,9 @@ public class EditorController {
     @FXML private Canvas strip;
 
     private DynamicGameOfLife gol;
-    private Cell cell;
+    private DynamicGameOfLife golStrip;
+    private Cell editorCell;
+    private Cell stripCell;
     private GraphicsContext gc;
     private double dragStartX;
     private double dragStartY;
@@ -30,82 +31,162 @@ public class EditorController {
     private boolean dragging = false;
 
     public EditorController() {
-        cell = new Cell();
-        cell.setSize(50);
-        cell.setSpacing(0.1);
+        // create cell for editor window.
+        editorCell = new Cell();
+        editorCell.setSize(100);
+        editorCell.setSpacing(0.1);
+
+
+        // create cell for stip window.
+        stripCell = new Cell();
+        stripCell.setSize(100);
+        editorCell.setSpacing(0.1);
     }
 
     public void initialize() {
-        gc = canvas.getGraphicsContext2D();
+        setStripColor();
         setCanvasColor();
         drawGridLines();
     }
 
+    private void setStripColor() {
+        gc = strip.getGraphicsContext2D();
+        gc.setFill(editorCell.getDeadColor());
+        gc.fillRect(0, 0, strip.getWidth(), strip.getHeight());
+    }
+
     private void setCanvasColor() {
-        gc.setFill(cell.getDeadColor());
+        gc = canvas.getGraphicsContext2D();
+        gc.setFill(editorCell.getDeadColor());
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    public void loadEditor() {
-        scaleToCanvasSize();
-        centerOnCanvas();
+    public void displayPattern() {
+        // editor canvas.
+        scaleToEditorCanvas();
+        centerOnEditorCanvas();
+        drawEditorCanvas();
 
-        draw();
+        // strip
+        updateStrip();
     }
 
-    private void centerOnCanvas() {
+    @FXML
+    private void updateStrip() {
+        golStrip = gol.clone();
+        gc = strip.getGraphicsContext2D();
+        gc.setFill(Color.BLACK);
+
+        System.out.println(golStrip.getOffsetX());
+
+        for (int i = 0; i < golStrip.getGridWidth(); i++) {
+            for (int j = 0; j < golStrip.getGridHeight(); j++) {
+                if (golStrip.isCellAlive(i, j)) {
+                    drawCellOnStripCanvas(i, j);
+                }
+            }
+        }
+
+
+
+        /*String[] string = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
+
+        editorCell.setSize(5);
+        gc = strip.getGraphicsContext2D();
+
+        golStrip = gol.clone();
+
+        Affine form = new Affine();
+        double padding = 0;
+        double tx = padding;
+
+        for (int i = 0; i < 20; i++) {
+            form.setTx(tx);
+            gc.setTransform(form);
+            gc.setFill(Color.OLIVEDRAB);
+            gc.fillRect(0, 0, 25, 180);
+            gc.setFill(Color.BLACK);
+            String number = "1";
+            gc.fillText(number, 5, 15);
+            gc.setFill(editorCell.getColor());
+            gc.strokeRect(30, 5, 285, 170);
+            golStrip.nextGeneration();
+            drawStrip();
+            tx += 320;
+        }
+
+        form.setTx(0.0);
+        gc.setTransform(form);*/
+    }
+
+    private void drawCellOnStripCanvas(int i, int j) {
+        
+    }
+
+    private void drawStrip() {
+        editorCell.setSize(1);
+        // Wet asphalt
+        gc.setFill(Color.web("#34495e"));
+        gc.fillRect(25, 0, 295, 180);
+        // cloud
+        gc.setFill(Color.web("#fbfcfc"));
+        gc.fillRect(30, 5, 285, 170);
+
+        gc.setFill(editorCell.getColor());
+        for (int i = 0; i < golStrip.getGridWidth(); i++) {
+            for (int j = 0; j < golStrip.getGridHeight(); j++) {
+                if (golStrip.isCellAlive(i, j)) {
+                    drawCellOnEditorCanvas(i, j);
+                }
+            }
+        }
+    }
+
+    private void centerOnEditorCanvas() {
         gol.fitBoardToPattern();
 
-        double patternWidth = gol.getGridWidth();
-        double patternPixelWidth = patternWidth * cell.getSize();
-        System.out.println("Pattern width pixels :" + patternWidth * cell.getSize());
+        // calculate pattern center in 2D.
+        double patternWidthCenter = gol.getGridWidth() * editorCell.getSize() / 2;
+        double patternHeightCenter = gol.getGridHeight() * editorCell.getSize() / 2;
 
-        double patternHeight = gol.getGridHeight();
-        double patternPixelHeight = patternHeight * cell.getSize();
-        System.out.println("Pattern height pixels :" + patternHeight * cell.getSize());
-
-        double patternWidthCenter = patternPixelWidth / 2;
-        System.out.println("Pattern width (px) center :" + patternWidthCenter);
-
-        double patternHeightCenter = patternPixelHeight / 2;
-        System.out.println("Pattern height (px) center" + patternHeightCenter);
-
+        // calculate canvas center in 2D.
         double canvasWidthCenter = canvas.getWidth() / 2;
-        System.out.println("Canvas W center (px): " + canvasWidthCenter);
         double canvasHeightCenter = canvas.getHeight() / 2;
-        System.out.println("Canvas H center (px): " + canvasHeightCenter);
 
-        double patternLengthHeightRatio = patternWidth / patternHeight;
-        System.out.println("Lenght/Height: " + patternLengthHeightRatio);
+        // set drawEditorCanvas coordinates, x and y.
+        canvasOffsetX = canvasWidthCenter - patternWidthCenter + gol.getOffsetX() * editorCell.getSize();
+        canvasOffsetY = canvasHeightCenter - patternHeightCenter + gol.getOffsetY() * editorCell.getSize();
+    }
 
-        canvasOffsetX = canvasWidthCenter - patternWidthCenter + gol.getOffsetX() * cell.getSize();
-        canvasOffsetY = canvasHeightCenter - patternHeightCenter + gol.getOffsetY() * cell.getSize();
+    private void scaleToEditorCanvas() {
+        double patternWidth = gol.getGridWidth() * editorCell.getSize();
+        double patternHeight = gol.getGridHeight() * editorCell.getSize();
 
-        System.out.println("Pattern start x on screen: " + canvasOffsetX);
-        System.out.println("Pattern start y on screen: " + canvasOffsetY);
-
-        if (patternLengthHeightRatio > 1) {
-            System.out.println("Width is greater than height");
+        if (patternHeight > canvas.getHeight()) {
+            while (patternHeight > canvas.getHeight()) {
+                editorCell.setSize(editorCell.getSize() * 0.99);
+                patternHeight = gol.getGridHeight() * editorCell.getSize();
+            }
         }
-        else {
-            System.out.println("Height is grater than width");
+
+        if (patternWidth > canvas.getWidth()) {
+            while (patternWidth > canvas.getWidth()) {
+                editorCell.setSize(editorCell.getSize() * 0.99);
+                patternWidth = gol.getGridWidth() * editorCell.getSize();
+            }
         }
     }
 
-    private void scaleToCanvasSize() {
-    }
-
-
-    private void draw() {
-        gc.setFill(cell.getDeadColor());
+    private void drawEditorCanvas() {
+        gc.setFill(editorCell.getDeadColor());
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        gc.setFill(cell.getColor());
-        gc.strokeRect(getCommonOffsetX(), getCommonOffsetY(), gol.getGridWidth() * cell.getSize(), gol.getGridHeight() * cell.getSize());
+        gc.setFill(editorCell.getColor());
+        gc.strokeRect(getCommonOffsetX(), getCommonOffsetY(), gol.getGridWidth() * editorCell.getSize(), gol.getGridHeight() * editorCell.getSize());
         for (int i = 0; i < gol.getGridWidth(); i++) {
             for (int j = 0; j < gol.getGridHeight(); j++) {
                 if (gol.isCellAlive(i, j)) {
-                    drawCell(i, j);
+                    drawCellOnEditorCanvas(i, j);
                 }
             }
         }
@@ -128,12 +209,8 @@ public class EditorController {
         if (event.isSecondaryButtonDown()) {
             canvasOffsetX = event.getX() - dragStartX;
             canvasOffsetY = event.getY() - dragStartY;
-            draw();
+            drawEditorCanvas();
         }
-    }
-
-    @FXML
-    private void onMouseReleased(Event event) {
     }
 
     private void fitTo(int x, int y) {
@@ -147,10 +224,9 @@ public class EditorController {
 
     public void onMouseClicked(MouseEvent event) {
         if (!dragging) {
-            int pos_x = (int) (Math.floor((event.getX() - getCommonOffsetX()) / cell.getSize()));
-            int pos_y = (int) (Math.floor((event.getY() - getCommonOffsetY()) / cell.getSize()));
+            int pos_x = (int) (Math.floor((event.getX() - getCommonOffsetX()) / editorCell.getSize()));
+            int pos_y = (int) (Math.floor((event.getY() - getCommonOffsetY()) / editorCell.getSize()));
 
-            System.out.println("(" + pos_x + ", " + pos_y + ")");
             MouseButton mouseButton = event.getButton();
 
             fitTo(pos_x, pos_y);
@@ -165,18 +241,17 @@ public class EditorController {
             }
 
             if (mouseButton == MouseButton.PRIMARY) {
-                gc.setFill(cell.getColor());
+                gc.setFill(editorCell.getColor());
                 gol.setCellAlive(pos_x, pos_y);
             }
 
             if (mouseButton == MouseButton.SECONDARY) {
-                gc.setFill(cell.getDeadColor());
+                gc.setFill(editorCell.getDeadColor());
                 gol.setCellDead(pos_x, pos_y);
             }
 
-            draw();
+            drawEditorCanvas();
         }
-
         dragging = false;
     }
 
@@ -184,37 +259,35 @@ public class EditorController {
     }
 
     double getCommonOffsetX(){
-        return (canvasOffsetX - gol.getOffsetX() * cell.getSize());
+        return (canvasOffsetX - gol.getOffsetX() * editorCell.getSize());
     }
 
     double getCommonOffsetY(){
-        return (canvasOffsetY - gol.getOffsetY() * cell.getSize());
+        return (canvasOffsetY - gol.getOffsetY() * editorCell.getSize());
     }
 
     private double getCanvasPosX(int x) {
-        return ((x) * cell.getSize()) + getCommonOffsetX();
+        return ((x) * editorCell.getSize()) + getCommonOffsetX();
     }
 
     private double getCanvasPosY(int y) {
-        return ((y) * cell.getSize()) + getCommonOffsetY();
+        return ((y) * editorCell.getSize()) + getCommonOffsetY();
     }
 
-    private void drawCell(int x, int y) {
+    private void drawCellOnEditorCanvas(int x, int y) {
         gc.fillRect(getCanvasPosX(x),
                     getCanvasPosY(y),
-                    cell.getSize() - cell.getSize() * cell.getSpacing(),
-                    cell.getSize() - cell.getSize() * cell.getSpacing());
+                    editorCell.getSize() - editorCell.getSize() * editorCell.getSpacing(),
+                    editorCell.getSize() - editorCell.getSize() * editorCell.getSpacing());
     }
 
-    /**
-     * Draws the grid lines on the canvas
-     */
     private void drawGridLines() {
+        gc = canvas.getGraphicsContext2D();
         gc.setLineWidth(0.1);
         gc.setStroke(Color.BLACK);
 
-        for (int i = 0; i < canvas.getHeight(); i += cell.getSize()) {
-            for (int j = 0; j < canvas.getWidth() ; j += cell.getSize()) {
+        for (int i = 0; i < canvas.getHeight(); i += editorCell.getSize()) {
+            for (int j = 0; j < canvas.getWidth() ; j += editorCell.getSize()) {
                 gc.strokeLine(0, i + canvasOffsetY ,canvas.getWidth(), i + canvasOffsetY);
                 gc.strokeLine(j + canvasOffsetX, 0, j + canvasOffsetX, canvas.getHeight());
             }

@@ -24,7 +24,7 @@
         <TextField promptText="Rule" prefWidth="200"></TextField>
 
         <!--Buttons-->
-        <Button fx:id="btnUpdateStrip" text="Update strip" prefWidth="200"></Button>
+        <Button fx:id="btnUpdateStrip" onAction="#updateStrip" text="Update strip" prefWidth="200"></Button>
         <Button fx:id="btnSave" text="Save" prefWidth="200"></Button>
         <Button fx:id="btnGridLines" text="Grid on/off" prefWidth="200"></Button>
         <Button fx:id="btnClose" text="Close" onAction="#closeEditor" prefWidth="200"></Button>
@@ -33,15 +33,14 @@
       <Canvas fx:id="canvas" width="800" height="500" GridPane.columnIndex="1"
               onMousePressed="#onMousePressed"
               onMouseDragged="#onMouseDragged"
-              onMouseReleased="#onMouseReleased"
               onMouseClicked="#onMouseClicked"
-              onScroll="#onScroll"
-              onMouseMoved="#onMouseMoved">
+              onMouseMoved="#onMouseMoved"
+              onScroll="#onScroll">
       </Canvas>
    </HBox>
    <VBox GridPane.rowIndex="1">
-      <ScrollPane fx:id="scrollPane" prefWidth="1200" prefHeight="200" vbarPolicy="NEVER">
-         <Canvas fx:id="strip" width="5000" height="250"></Canvas>
+      <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="200" vbarPolicy="NEVER">
+         <Canvas fx:id="strip" width="6400" height="180"></Canvas>
       </ScrollPane>
    </VBox>
 </GridPane>
