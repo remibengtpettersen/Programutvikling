@@ -4,26 +4,43 @@
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 <GridPane fx:controller="s305073.controller.EditorController" xmlns:fx="http://javafx.com/fxml">
    <HBox GridPane.rowIndex="0" prefWidth="300">
-      <GridPane>
-      <VBox prefHeight="300" spacing="20" style="-fx-background-color: #61a2b1" alignment="CENTER" GridPane.columnIndex="0">
-            <Label text="META DATA" style="-fx-font-weight: bold"></Label>
-            <TextField promptText="Name" prefWidth="200"></TextField>
-            <TextField promptText="Author" prefWidth="200"></TextField>
-            <TextField promptText="Description" prefWidth="200"></TextField>
-            <TextField promptText="Rule" prefWidth="200"></TextField>
-            <Button text="Update strip" prefWidth="200"></Button>
-            <Button text="Save" prefWidth="200"></Button>
-            <Button text="Grid on/off" prefWidth="200"></Button>
+      <VBox prefHeight="300" spacing="20" alignment="CENTER" GridPane.columnIndex="0" style="-fx-background-color: olivedrab">
+
+          <padding>
+          <Insets left="10" right="10"/>
+          </padding>
+
+          <!--Label-->
+        <Label text="META DATA" style="-fx-font-weight: bold"></Label>
+
+        <!--Text fields -->
+        <TextField promptText="Name" prefWidth="200"></TextField>
+        <TextField promptText="Author" prefWidth="200"></TextField>
+        <TextField promptText="Description" prefWidth="200"></TextField>
+        <TextField promptText="Rule" prefWidth="200"></TextField>
+
+        <!--Buttons-->
+        <Button fx:id="btnUpdateStrip" text="Update strip" prefWidth="200"></Button>
+        <Button fx:id="btnSave" text="Save" prefWidth="200"></Button>
+        <Button fx:id="btnGridLines" text="Grid on/off" prefWidth="200"></Button>
+        <Button fx:id="btnClose" text="Close" onAction="#closeEditor" prefWidth="200"></Button>
+
       </VBox>
-      <Canvas fx:id="canvas" width="800" height="500" GridPane.columnIndex="1"></Canvas>
-      </GridPane>
+      <Canvas fx:id="canvas" width="800" height="500" GridPane.columnIndex="1"
+              onMousePressed="#onMousePressed"
+              onMouseDragged="#onMouseDragged"
+              onMouseReleased="#onMouseReleased"
+              onMouseClicked="#onMouseClicked"
+              onScroll="#onScroll">
+      </Canvas>
    </HBox>
-   <VBox GridPane.rowIndex="1" spacing="10">
-      <ScrollPane fx:id="scrollPane" prefWidth="1200" vbarPolicy="NEVER">
+   <VBox GridPane.rowIndex="1">
+      <ScrollPane fx:id="scrollPane" prefWidth="1200" prefHeight="200" vbarPolicy="NEVER">
          <Canvas fx:id="strip" width="5000" height="250"></Canvas>
       </ScrollPane>
-      <Button text="Close" prefWidth="160"></Button>
    </VBox>
 </GridPane>
