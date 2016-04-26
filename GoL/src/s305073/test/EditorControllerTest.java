@@ -44,7 +44,7 @@ public class EditorControllerTest {
     public void test_SizeofPattern() {
         EditorController editorController = new EditorController();
         GameOfLife gol = new GameOfLife(7, 7);
-        Cell cell = new Cell(Color.BLACK, Color.WHITE);
+        Cell cell = new Cell();
         cell.setSize(10);
 
         gol.getGrid()[1][2] = true;

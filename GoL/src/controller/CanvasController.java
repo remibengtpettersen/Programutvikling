@@ -4,9 +4,6 @@ import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -19,7 +16,6 @@ import s305080.PatternSaver.ToFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -192,12 +188,11 @@ public class CanvasController {
 
         masterController.scene.setOnKeyPressed(this::keyPressed);
 
-        canvas.widthProperty().addListener(evt -> fitContentToWindow());
-        canvas.heightProperty().addListener(evt -> fitContentToWindow());
+        canvas.widthProperty().addListener(evt -> canvasFollowWindow());
+        canvas.heightProperty().addListener(evt -> canvasFollowWindow());
     }
 
-    private void fitContentToWindow() {
-        calculateMinCellSize();
+    private void canvasFollowWindow() {
         if (!running || frameDelay > 0)
             renderCanvas();
     }
@@ -647,15 +642,6 @@ public class CanvasController {
         cell.setDeadColor(backgroundColor);
     }
 
-
-
-    /**
-     * Gives the minimum cell size to the zoom slider
-     */
-    private void calculateMinCellSize() {
-        double minCellSize = (canvas.getWidth() / boardWidth > canvas.getHeight() / boardHeight) ? canvas.getWidth() / boardHeight : canvas.getHeight() / boardHeight;
-        masterController.getToolController().setMinZoom(minCellSize);
-    }
 
     /**
      * Setts the cell size to be the newCellSize

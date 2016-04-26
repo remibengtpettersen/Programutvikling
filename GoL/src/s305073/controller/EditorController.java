@@ -39,7 +39,7 @@ public class EditorController {
 
 
     public EditorController() {
-        cell = new Cell(Color.BLACK, Color.WHITE);
+        cell = new Cell();
         cell.setSize(50);
         cell.setSpacing(0.1);
 

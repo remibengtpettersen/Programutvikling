@@ -55,6 +55,10 @@ public class ToolController {
         imgPause = new Image(getClass().getResourceAsStream(pathImages + pauseImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
         imgPlay = new Image(getClass().getResourceAsStream(pathImages + playImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
         zoomFactor = (byte)(zoomSlider.getMax() / Math.log(Cell.MAX_SIZE));
+        zoomSlider.setMin(2);
+        zoomSlider.setMax(150);
+
+
         try {
             cellColorPicker.setValue((Color) Color.class.getField(masterController.configuration.getCellColor()).get(null));
             backgroundColorPicker.setValue((Color) Color.class.getField(masterController.configuration.getBackgroundColor()).get(null));
@@ -97,8 +101,9 @@ public class ToolController {
      * Changes the cellSize in the simulation when the zoomSlider is dragged
      */
     public void zoomSliderDragged(){
+        System.out.println(zoomSlider.getValue());
 
-        masterController.getCanvasController().setCellSize(Math.exp(zoomSlider.getValue()/zoomFactor));
+        masterController.getCanvasController().setCellSize(Math.exp(zoomSlider.getValue()/zoomFactor) + 1);
     }
 
     /**
@@ -149,8 +154,8 @@ public class ToolController {
      * @param zoom the zoom value to match
      */
     public void setZoom(double zoom) {
-
         zoomSlider.setValue(Math.log(zoom) * zoomFactor);
+        System.out.println(Math.log(zoom) * zoomFactor);
     }
 
 

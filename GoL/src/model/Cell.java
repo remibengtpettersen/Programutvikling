@@ -11,6 +11,8 @@ public class Cell {
     private double size;
     private double spacing = 0.1;
     public final static byte MAX_SIZE = 100;
+    public final static double MIN_SIZE = 0.1;
+
 
     public Cell(){};
 
@@ -76,6 +78,9 @@ public class Cell {
     public void setSize(double size) {
         if (size > MAX_SIZE) {
             this.size = MAX_SIZE;
+        }
+        else if (size < MIN_SIZE){
+            this.size = MIN_SIZE;
         }
         else {
             this.size = size;
