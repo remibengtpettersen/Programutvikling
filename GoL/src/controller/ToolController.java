@@ -55,8 +55,8 @@ public class ToolController {
         imgPause = new Image(getClass().getResourceAsStream(pathImages + pauseImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
         imgPlay = new Image(getClass().getResourceAsStream(pathImages + playImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
         zoomFactor = (byte)(zoomSlider.getMax() / Math.log(Cell.MAX_SIZE));
-        zoomSlider.setMin(2);
-        zoomSlider.setMax(150);
+        zoomSlider.setMin(Math.log(Cell.MIN_SIZE));
+        zoomSlider.setMax(Math.log(Cell.MAX_SIZE));
 
 
         try {
@@ -103,7 +103,7 @@ public class ToolController {
     public void zoomSliderDragged(){
         System.out.println(zoomSlider.getValue());
 
-        masterController.getCanvasController().setCellSize(Math.exp(zoomSlider.getValue()/zoomFactor) + 1);
+        masterController.getCanvasController().setCellSize(Math.exp(zoomSlider.getValue()));
     }
 
     /**
@@ -154,13 +154,8 @@ public class ToolController {
      * @param zoom the zoom value to match
      */
     public void setZoom(double zoom) {
-        zoomSlider.setValue(Math.log(zoom) * zoomFactor);
-        System.out.println(Math.log(zoom) * zoomFactor);
-    }
-
-
-    public void setMinZoom(double minZoom) {
-        zoomSlider.setMin(Math.log(minZoom) * zoomFactor);
+        zoomSlider.setValue(Math.log(zoom));
+        System.out.println(Math.log(zoom));
     }
 
     public void setSpeed(double speed) {

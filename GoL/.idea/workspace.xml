@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62642b30-8555-47bc-ae52-013508c69347" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/s305073/view/EditorView.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/s305073/view/EditorView.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GoL/view/MenuView.fxml" afterPath="$PROJECT_DIR$/out/production/GoL/view/MenuView.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/config.properties" afterPath="$PROJECT_DIR$/resources/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/src/controller/CanvasController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/ToolController.java" afterPath="$PROJECT_DIR$/src/controller/ToolController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Cell.java" afterPath="$PROJECT_DIR$/src/model/Cell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305073/controller/EditorController.java" afterPath="$PROJECT_DIR$/src/s305073/controller/EditorController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305073/test/EditorControllerTest.java" afterPath="$PROJECT_DIR$/src/s305073/test/EditorControllerTest.java" />
     </list>
     <ignored path="GoL.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +24,7 @@
     <favorites_list name="GoL" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6551724">
+    <splitter split-orientation="horizontal" split-proportion="0.5626256">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="false">
@@ -75,25 +67,22 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="192" column="5" selection-start-line="192" selection-start-column="5" selection-end-line="192" selection-end-column="5" />
+                <state relative-caret-position="463">
+                  <caret line="394" column="0" selection-start-line="394" selection-start-column="0" selection-end-line="394" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ToolController.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="ToolController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/controller/ToolController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="414">
-                  <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
-                  <folding>
-                    <element signature="e#5014#5015#0" expanded="true" />
-                    <element signature="e#5079#5080#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="274">
+                  <caret line="109" column="50" selection-start-line="109" selection-start-column="50" selection-end-line="109" selection-end-column="50" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -138,7 +127,7 @@
           <file leaf-file-name="TheStripController.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="346">
+                <state relative-caret-position="331">
                   <caret line="109" column="37" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
                   <folding />
                 </state>
@@ -785,12 +774,12 @@
       <workItem from="1461650693300" duration="10966000" />
       <workItem from="1461662118394" duration="103000" />
       <workItem from="1461665530704" duration="1079000" />
-      <workItem from="1461666715689" duration="1371000" />
+      <workItem from="1461666715689" duration="1999000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18661000" />
+    <option name="totallyTimeSpent" value="19289000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="44" y="23" width="1832" height="1131" extended-state="0" />
@@ -1206,14 +1195,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="192" column="5" selection-start-line="192" selection-start-column="5" selection-end-line="192" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/DynamicGameOfLife.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3705">
@@ -1232,12 +1213,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/ToolController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
-          <folding>
-            <element signature="e#5014#5015#0" expanded="true" />
-            <element signature="e#5079#5080#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="274">
+          <caret line="109" column="50" selection-start-line="109" selection-start-column="50" selection-end-line="109" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="394" column="0" selection-start-line="394" selection-start-column="0" selection-end-line="394" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
