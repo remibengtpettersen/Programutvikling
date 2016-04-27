@@ -19,9 +19,10 @@
     <Menu text="Edit">
         <MenuItem text="Clear board" onAction="#clearGrid"/>
         <SeparatorMenuItem/>
-        <MenuItem text="Cut"/>
-        <MenuItem text="Copy"/>
-        <MenuItem text="Paste"/>
+        <RadioMenuItem fx:id="markupS305080" text="Markup - s305080" onAction="#activateMarkup"/>
+        <MenuItem text="Cut - ctrl + x"/>
+        <MenuItem text="Copy - ctrl + c"/>
+        <MenuItem text="Paste - ctrl + v"/>
         <SeparatorMenuItem/>
         <MenuItem text="Open editor s305073" onAction="#launchEditor"/>
     </Menu>

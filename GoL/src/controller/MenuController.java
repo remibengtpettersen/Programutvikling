@@ -28,7 +28,7 @@ public class MenuController {
     @FXML
     private MenuItem openBtn;
     @FXML
-    RadioMenuItem theStripS305080, statsS305080;
+    RadioMenuItem theStripS305080, statsS305080, markupS305080;
 
     /**
      * Stores the reference to the masterController
@@ -178,5 +178,14 @@ public class MenuController {
     public void openStatWindow(ActionEvent actionEvent) {
 
         masterController.openStatWindow();
+    }
+
+    public void activateMarkup() {
+        if (markupS305080.isSelected()){
+            masterController.getCanvasController().activateMarkup();
+        }
+        else {
+            masterController.getCanvasController().deactivateMarkup();
+        }
     }
 }

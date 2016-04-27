@@ -79,6 +79,10 @@ public class CanvasController {
     private int threads = Runtime.getRuntime().availableProcessors();
     private Thread thread;
 
+    //s305080
+    int [] markup;
+    private List<String> buttonsPressed;
+
     public Canvas getCanvas() {
         return canvas;
     }
@@ -95,6 +99,7 @@ public class CanvasController {
         gol = new DynamicGameOfLife();
         grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
+        buttonsPressed = new ArrayList<>();
 
         updateView();
         initializeListeners();
@@ -187,6 +192,7 @@ public class CanvasController {
         canvas.setOnMouseEntered(this::mouseCanvasEnter);
 
         masterController.scene.setOnKeyPressed(this::keyPressed);
+        masterController.scene.setOnKeyReleased(this::keyReleased);
 
         canvas.widthProperty().addListener(evt -> canvasFollowWindow());
         canvas.heightProperty().addListener(evt -> canvasFollowWindow());
@@ -204,21 +210,33 @@ public class CanvasController {
 
         String code = keyEvent.getCode().toString();
 
-        if (code.equals("S")) {
-            busy = true;
-            try {
-               // saveToGif();
-                throw new IOException();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            busy = false;
+        if (!buttonsPressed.contains(code)){
+            buttonsPressed.add(code);
+            System.out.println(code);
         }
-        if (code.equals("D")) {
 
-           // saveToFile();
-            System.out.println(gol.getBoundingBox()[0] + " " + gol.getBoundingBox()[1] + " " + gol.getBoundingBox()[2] + " " + gol.getBoundingBox()[3] + " ");
+        if (code.equals("C")) {
+            if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")){
+                copyMarkedArea();
+            }
+            else if (buttonsPressed.contains("COMMAND")){
+                copyMarkedArea();
+            }
+        }
+        else if (code.equals("V")){
+            if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")){
+                if (importPattern != null){
+                    importing = true;
+                }
+            }
+        }
+    }
 
+    private void keyReleased(KeyEvent keyEvent) {
+        String code = keyEvent.getCode().toString();
+
+        if (buttonsPressed.contains(code)){
+            buttonsPressed.remove(code);
         }
     }
 
@@ -344,11 +362,7 @@ public class CanvasController {
                 drawCell(x, y);
             }
             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-            if (prevMousePosX != 0 || prevMousePosY != 0) {
-                boardOffsetX += prevMousePosX - currMousePosX;
-                boardOffsetY += prevMousePosY - currMousePosY;
-            }
-
+            moveBoard(currMousePosX, currMousePosY);
             if (!running || frameDelay > 0)
                 renderCanvas();
         }
@@ -357,6 +371,14 @@ public class CanvasController {
         prevMousePosY = currMousePosY;
 
 
+    }
+
+    private void moveBoard(int currMousePosX, int currMousePosY) {
+
+        if (prevMousePosX != 0 || prevMousePosY != 0) {
+            boardOffsetX += prevMousePosX - currMousePosX;
+            boardOffsetY += prevMousePosY - currMousePosY;
+        }
     }
 
     private void fitTo(int x, int y) {
@@ -475,9 +497,19 @@ public class CanvasController {
         if (gridLines)
             if (userWantsGridLines)
                 renderGridLines();
+
+        if (markup != null){
+            renderMarkup();
+        }
         //to see where the grid is
         //gc.strokeRect(-getCommonOffsetX(), -getCommonOffsetY(), grid.size() * cell.getSize(), grid.get(0).size() * cell.getSize());
 
+    }
+
+
+
+    private void drawMarkup(int x, int y) {
+        gc.fillRect(x * cell.getSize() - boardOffsetX, y * cell.getSize() - boardOffsetY, cell.getSize() - cell.getSize() * cell.getSpacing(), cell.getSize() - cell.getSize() * cell.getSpacing());
     }
 
     /**
@@ -697,8 +729,9 @@ public class CanvasController {
     }
 
     //endregion
-/*
+
     // region s305080 extra task
+    /*
     private void saveToGif() throws IOException {
 
         FileChooser fileChooser = new FileChooser();
@@ -758,6 +791,109 @@ public class CanvasController {
         new ToFile().writeToFile(gol, masterController.stage);
         busy = false;
     }
+
+    private void renderMarkup() {
+
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(4);
+        gc.strokeRect(getCanvasPosXMarkup((markup[0] < markup[2])?markup[0]:markup[2]) - cell.getSize() * cell.getSpacing() / 2,
+                getCanvasPosYMarkup((markup[1] < markup[3])?markup[1]:markup[3]) - cell.getSize() * cell.getSpacing() / 2,
+                (Math.abs(markup[0] - markup[2]) + 1) * cell.getSize(),
+                (Math.abs(markup[1] - markup[3]) + 1) * cell.getSize());
+        gc.setLineWidth(1);
+
+
+
+        //getCanvasPosX(markup[1])
+        //getCanvasPosY(markup[3])
+    }
+    private double getCanvasPosXMarkup(int x) {
+        return x * cell.getSize() - boardOffsetX;
+    }
+
+    private double getCanvasPosYMarkup(int y) {
+        return y * cell.getSize() - boardOffsetY;
+    }
+
+    private void mouseDragMarkup(MouseEvent mouseEvent){
+
+
+        if (!mouseOnCanvas)
+            return;
+
+        MouseButton b = mouseEvent.getButton();
+
+
+
+        // gets mouse coordinates on canvas.
+        currMousePosX = (int) mouseEvent.getX();
+        currMousePosY = (int) mouseEvent.getY();
+
+        if (b == MouseButton.PRIMARY) { if(!mouseDrag){
+            markup[0] = (int)Math.floor((mouseEvent.getX() + boardOffsetX) / cell.getSize());
+            markup[1] = (int)Math.floor((mouseEvent.getY() + boardOffsetY) / cell.getSize());
+            markup[2] = (int)Math.floor((mouseEvent.getX() + boardOffsetX) / cell.getSize());
+            markup[3] = (int)Math.floor((mouseEvent.getY() + boardOffsetY) / cell.getSize());
+        }
+        else{
+            markup[2] = (int)Math.floor((mouseEvent.getX() + boardOffsetX) / cell.getSize());
+            markup[3] = (int)Math.floor((mouseEvent.getY() + boardOffsetY) / cell.getSize());
+        }
+        } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+            moveBoard(currMousePosX, currMousePosY);
+        }
+        if (!running || frameDelay > 0)
+            renderCanvas();
+        prevMousePosX = currMousePosX;
+        prevMousePosY = currMousePosY;
+
+        mouseDrag = true;
+    }
+
+    public void activateMarkup() {
+        canvas.setOnMouseDragged(this::mouseDragMarkup);
+        markup = new int[4];
+    }
+    public void deactivateMarkup() {
+        canvas.setOnMouseDragged(this::mouseDrag);
+        markup = null;
+    }
+
+    private void copyMarkedArea() {
+        if (markup == null){
+            return;
+        }
+        int x1 = getGridPosX(getCanvasPosXMarkup((markup[0] < markup[2]) ? markup[0] : markup[2]));
+        int y1 = getGridPosY(getCanvasPosYMarkup((markup[1] < markup[3]) ? markup[1] : markup[3]));
+        int x2 = getGridPosX(getCanvasPosXMarkup((markup[0] > markup[2]) ? markup[0] : markup[2]));
+        int y2 = getGridPosY(getCanvasPosYMarkup((markup[1] > markup[3]) ? markup[1] : markup[3]));
+        gc.setFill(Color.RED);
+        drawCell(x1, y1);
+        drawCell(x2, y2);
+        gc.setFill(cell.getColor());
+        boolean[][] clipboard = new boolean[1 + x2 - x1][1 + y2 - y1];
+        int cX = 0, cY = 0;
+        for (int x = x1; x <= x2; x++) {
+            for (int y = y1; y <= y2; y++) {
+                try{
+                    if (gol.isCellAlive(x, y)){
+                        clipboard[cX][cY] = true;
+                    }
+                }
+                catch (IndexOutOfBoundsException e){
+
+                }
+                cY++;
+            }
+            cX++;
+            cY = 0;
+        }
+
+        importPattern = clipboard;
+
+
+    }
+
 
     //endregion
 

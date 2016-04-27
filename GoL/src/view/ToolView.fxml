@@ -27,12 +27,10 @@
     <ColorPicker fx:id="cellColorPicker" prefWidth="100" onAction="#changeCellColor"/>
     <ColorPicker fx:id="backgroundColorPicker" prefWidth="100" onAction="#changeBackgroundColor"/>
 
-    <ChoiceBox value="Cell">
+    <ChoiceBox fx:id="mouseAction" value="MouseAction">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="Cell"/>
-                <String fx:value="Glider"/>
-                <String fx:value="Block"/>
             </FXCollections>
         </items>
     </ChoiceBox>

@@ -1,16 +1,13 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import model.Cell;
-
 import java.util.Objects;
 
 /**
@@ -22,7 +19,6 @@ public class ToolController {
     private Image imgPause;
     private Image imgPlay;
 
-    private byte zoomFactor;
     private byte speedFactor = 15; //The empiric factor
 
     @FXML
@@ -40,6 +36,7 @@ public class ToolController {
     @FXML
     private ImageView imgViewBtnPlay;
 
+
     /**
      * Does the necessary preparations for this controller to be used.
      * @param masterController the reference to the masterController
@@ -54,7 +51,6 @@ public class ToolController {
         String playImageName = "arrows.png";
         imgPause = new Image(getClass().getResourceAsStream(pathImages + pauseImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
         imgPlay = new Image(getClass().getResourceAsStream(pathImages + playImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
-        zoomFactor = (byte)(zoomSlider.getMax() / Math.log(Cell.MAX_SIZE));
         zoomSlider.setMin(Math.log(Cell.MIN_SIZE));
         zoomSlider.setMax(Math.log(Cell.MAX_SIZE));
 
@@ -67,6 +63,8 @@ public class ToolController {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
+
+
     }
 
     /**
@@ -170,4 +168,5 @@ public class ToolController {
         speedSlider.setValue(speedSlider.getValue()+deltaX);
         speedSliderDragged();
     }
+
 }
