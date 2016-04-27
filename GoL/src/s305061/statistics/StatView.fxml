@@ -22,7 +22,7 @@
             <Label text="Number of iterations:"/>
             <TextField fx:id="textField" text="10" onAction="#onInputEntered"/>
             <Button text="Show statistics" onAction="#onInputEntered"/>
-            <ProgressIndicator fx:id="progressIndicator" progress="0"/>
+            <ProgressBar fx:id="progressBar" progress="0"/>
         </HBox>
     </bottom>
 </BorderPane>

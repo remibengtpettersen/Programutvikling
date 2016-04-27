@@ -7,13 +7,9 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import model.DynamicGameOfLife;
-import model.GameOfLife;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by And on 06.04.2016.
@@ -22,7 +18,7 @@ public class StatController {
 
     @FXML private LineChart<Double, Double> graph;
     @FXML private TextField textField;
-    @FXML private ProgressIndicator progressIndicator;
+    @FXML private ProgressBar progressBar;
 
     private ObservableList<XYChart.Series<Double, Double>> lineChartData;
 
@@ -34,13 +30,23 @@ public class StatController {
     private final float BETA = 3.0f;
     private final float GAMMA = 0.25f;
 
+    private boolean busy = false;
+
     private DynamicGameOfLife gol;
 
+    /**
+     * Sets a reference to the DynamicGameOfLife object to be cloned for statistics gathering
+     * @param gol Original DynamicGameOfLife object
+     */
     public void setGol(DynamicGameOfLife gol){
         this.gol = gol;
     }
 
-    private void setProgress(double progress){ progressIndicator.setProgress(progress); }
+    /**
+     * Sets the progress of the progress bar
+     * @param progress Progress from 0.0 to 1.0
+     */
+    private void setProgress(double progress){ progressBar.setProgress(progress); }
 
     /**
      * Initialization method. Called when statistics window opens
@@ -109,7 +115,7 @@ public class StatController {
             clonedGol.nextGeneration();
             previousLiving = currentLiving;
 
-            setProgress(((double)iteration/(double)iterations));
+            setProgress(0.9*((double)iteration/(double)iterations));
         }
 
         // compare all the reduced representations with each other, return the best match for each iteration
@@ -131,7 +137,7 @@ public class StatController {
 
             stats[2][repA] = maxSimilarity;
 
-            //setProgress(0.9 + 0.1*((double)repA/(double)(iterations)));
+            setProgress(0.9 + 0.1*((double)repA/(double)(iterations)));
         }
 
         setProgress(1);
@@ -172,6 +178,7 @@ public class StatController {
             for (int y = 0; y < gol.getGridHeight(); y++)
                 if(gol.isCellAlive(x,y))
                     geoFactor += x + y;
+
         return geoFactor;
     }
 
@@ -209,38 +216,58 @@ public class StatController {
     public void onInputEntered() {
 
         String string = textField.getText();
+        int iterations;
 
-        Pattern p = Pattern.compile("\\d+");
-        Matcher m = p.matcher(string);
-
-        if(m.matches()) {
-            int iterations = Integer.parseInt(m.group());
-
-            Task task = createTask(iterations);
-            new Thread(task).start();
+        try{
+            iterations = Integer.parseInt(string);
         }
-        else {
+        catch (NumberFormatException e){
             textField.setText("");
             textField.setPromptText("Could not parse number");
+            return;
         }
+
+        getAndDisplayConcurrently(iterations);
     }
 
-    private Task createTask(int iterations){
+    /**
+     * Will get and display statistics concurrently, without freezing the game or GUI.
+     * @param iterations Number of iterations to evolve and collect statistics from
+     */
+    private void getAndDisplayConcurrently(int iterations){
 
-        return new Task() {
+        if(busy)
+            return;
+
+        Task task = new Task() {
             @Override
-            protected Object call() throws Exception {
+            protected Void call() throws Exception  {
 
+                busy = true;
                 int[][] stats = getStatistics(iterations);
 
-                Platform.runLater(new Runnable() {
-                    @Override public void run() {
-                        displayStatistics(stats);
-                    }
+                Platform.runLater(() -> {
+
+                    displayStatistics(stats);
+                    busy = false;
                 });
 
-                return true;
+                return null;
             }
         };
+
+        Thread thread = new Thread(task);
+        thread.start();
+    }
+
+    /**
+     * Will get and display statistics without the use of concurrency.
+     * @param iterations Number of iterations to evolve and collect statistics from
+     */
+    @Deprecated
+    private void getAndDisplaySequentially(int iterations){
+
+        int[][] stats = getStatistics(iterations);
+        displayStatistics(stats);
     }
 }

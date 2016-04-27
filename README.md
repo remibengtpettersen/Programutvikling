@@ -131,3 +131,6 @@ Added progress indicator to s305061 statistics
 
 160425 10:05
 Implemented dynamic rule classes. The static rule classes and GameOfLife are now deprecated.
+
+160427 10:49
+Refactored s305061 StatController. Replaced ProgressIndicator with ProgressBar, which solved all previous bugs. Added busy flag, to prevent creation multiple task
