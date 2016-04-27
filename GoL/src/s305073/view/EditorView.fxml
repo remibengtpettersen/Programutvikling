@@ -30,17 +30,18 @@
         <Button fx:id="btnClose" text="Close" onAction="#closeEditor" prefWidth="200"></Button>
 
       </VBox>
-      <Canvas fx:id="canvas" width="800" height="500" GridPane.columnIndex="1"
-              onMousePressed="#onMousePressed"
-              onMouseDragged="#onMouseDragged"
-              onMouseClicked="#onMouseClicked"
-              onMouseMoved="#onMouseMoved"
+      <Canvas fx:id="editor" width="800" height="500" GridPane.columnIndex="1"
+              onMousePressed="#onMousePressedEditor"
+              onMouseDragged="#onMouseDraggedEditor"
+              onMouseClicked="#onMouseClickedEditor"
+              onMouseMoved="#onMouseMovedEditor"
               onScroll="#EditorCanvas">
       </Canvas>
    </HBox>
    <VBox GridPane.rowIndex="1">
-      <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="200" vbarPolicy="ALWAYS">
-         <Canvas fx:id="strip" width="288" height="180"></Canvas>
+      <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="200" vbarPolicy="NEVER">
+         <Canvas fx:id="strip" width="5760" height="180"
+                 onMouseMoved="#onMouseMovedStrip"></Canvas>
       </ScrollPane>
    </VBox>
 </GridPane>
