@@ -80,7 +80,7 @@ public class CanvasController {
     private Thread thread;
 
     //s305080
-    int [] markup;
+    double [] markup;
     private List<String> buttonsPressed;
 
     public Canvas getCanvas() {
@@ -219,18 +219,20 @@ public class CanvasController {
             if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")){
                 copyMarkedArea();
             }
-            else if (buttonsPressed.contains("COMMAND")){
-                copyMarkedArea();
+        }
+        else if (code.equals("X")) {
+            if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")){
+                cutMarkedArea();
             }
         }
         else if (code.equals("V")){
             if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")){
-                if (importPattern != null){
-                    importing = true;
-                }
+                pasteClipBoard();
             }
         }
     }
+
+
 
     private void keyReleased(KeyEvent keyEvent) {
         String code = keyEvent.getCode().toString();
@@ -730,6 +732,29 @@ public class CanvasController {
 
     //endregion
 
+    //region getters
+    public int getCurrViewMinX() {
+        return currViewMinX;
+    }
+
+    public int getCurrViewMaxX() {
+        return currViewMaxX;
+    }
+
+    public int getCurrViewMinY() {
+        return currViewMinY;
+    }
+
+    public int getCurrViewMaxY() {
+        return currViewMaxY;
+    }
+
+    public Cell getCell() {
+        return cell;
+    }
+
+    //endregion
+
     // region s305080 extra task
     /*
     private void saveToGif() throws IOException {
@@ -792,14 +817,26 @@ public class CanvasController {
         busy = false;
     }
 
+
+    public void activateMarkup() {
+        canvas.setOnMouseDragged(this::mouseDragMarkup);
+    }
+
+    public void deactivateMarkup() {
+        canvas.setOnMouseDragged(this::mouseDrag);
+        removeMarkedArea();
+    }
+
     private void renderMarkup() {
 
         gc.setStroke(Color.RED);
         gc.setLineWidth(4);
-        gc.strokeRect(getCanvasPosXMarkup((markup[0] < markup[2])?markup[0]:markup[2]) - cell.getSize() * cell.getSpacing() / 2,
-                getCanvasPosYMarkup((markup[1] < markup[3])?markup[1]:markup[3]) - cell.getSize() * cell.getSpacing() / 2,
-                (Math.abs(markup[0] - markup[2]) + 1) * cell.getSize(),
-                (Math.abs(markup[1] - markup[3]) + 1) * cell.getSize());
+
+        gc.strokeRect(getCanvasPosXMarkup(Math.floor((markup[0] < markup[2])?markup[0]:markup[2])) - cell.getSize() * cell.getSpacing() / 2,
+                getCanvasPosYMarkup(Math.floor((markup[1] < markup[3])?markup[1]:markup[3])) - cell.getSize() * cell.getSpacing() / 2,
+                (Math.abs(Math.floor(markup[0]) - Math.floor(markup[2])) + 1) * cell.getSize(),
+                (Math.abs(Math.floor(markup[1]) - Math.floor(markup[3])) + 1) * cell.getSize());
+
         gc.setLineWidth(1);
 
 
@@ -807,11 +844,11 @@ public class CanvasController {
         //getCanvasPosX(markup[1])
         //getCanvasPosY(markup[3])
     }
-    private double getCanvasPosXMarkup(int x) {
+    private double getCanvasPosXMarkup(double x) {
         return x * cell.getSize() - boardOffsetX;
     }
 
-    private double getCanvasPosYMarkup(int y) {
+    private double getCanvasPosYMarkup(double y) {
         return y * cell.getSize() - boardOffsetY;
     }
 
@@ -829,16 +866,20 @@ public class CanvasController {
         currMousePosX = (int) mouseEvent.getX();
         currMousePosY = (int) mouseEvent.getY();
 
-        if (b == MouseButton.PRIMARY) { if(!mouseDrag){
-            markup[0] = (int)Math.floor((mouseEvent.getX() + boardOffsetX) / cell.getSize());
-            markup[1] = (int)Math.floor((mouseEvent.getY() + boardOffsetY) / cell.getSize());
-            markup[2] = (int)Math.floor((mouseEvent.getX() + boardOffsetX) / cell.getSize());
-            markup[3] = (int)Math.floor((mouseEvent.getY() + boardOffsetY) / cell.getSize());
-        }
-        else{
-            markup[2] = (int)Math.floor((mouseEvent.getX() + boardOffsetX) / cell.getSize());
-            markup[3] = (int)Math.floor((mouseEvent.getY() + boardOffsetY) / cell.getSize());
-        }
+        if (b == MouseButton.PRIMARY) {
+            if (markup == null){
+                markup = new double[4];
+            }
+            if(!mouseDrag){
+                markup[0] = (mouseEvent.getX() + boardOffsetX) / cell.getSize();
+                markup[1] = (mouseEvent.getY() + boardOffsetY) / cell.getSize();
+                markup[2] = (mouseEvent.getX() + boardOffsetX) / cell.getSize();
+                markup[3] = (mouseEvent.getY() + boardOffsetY) / cell.getSize();
+            }
+            else{
+                markup[2] = (mouseEvent.getX() + boardOffsetX) / cell.getSize();
+                markup[3] = (mouseEvent.getY() + boardOffsetY) / cell.getSize();
+            }
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             moveBoard(currMousePosX, currMousePosY);
         }
@@ -850,31 +891,24 @@ public class CanvasController {
         mouseDrag = true;
     }
 
-    public void activateMarkup() {
-        canvas.setOnMouseDragged(this::mouseDragMarkup);
-        markup = new int[4];
-    }
-    public void deactivateMarkup() {
-        canvas.setOnMouseDragged(this::mouseDrag);
-        markup = null;
+    public void pasteClipBoard() {
+        if (importPattern != null){
+            importing = true;
+        }
     }
 
-    private void copyMarkedArea() {
+    public void copyMarkedArea() {
         if (markup == null){
             return;
         }
-        int x1 = getGridPosX(getCanvasPosXMarkup((markup[0] < markup[2]) ? markup[0] : markup[2]));
-        int y1 = getGridPosY(getCanvasPosYMarkup((markup[1] < markup[3]) ? markup[1] : markup[3]));
-        int x2 = getGridPosX(getCanvasPosXMarkup((markup[0] > markup[2]) ? markup[0] : markup[2]));
-        int y2 = getGridPosY(getCanvasPosYMarkup((markup[1] > markup[3]) ? markup[1] : markup[3]));
-        gc.setFill(Color.RED);
-        drawCell(x1, y1);
-        drawCell(x2, y2);
-        gc.setFill(cell.getColor());
-        boolean[][] clipboard = new boolean[1 + x2 - x1][1 + y2 - y1];
+
+        int [] cornerCells = getCornerCells();
+
+        boolean[][] clipboard = new boolean[1 + cornerCells[2] - cornerCells[0]][1 + cornerCells[3] - cornerCells[1]];
+
         int cX = 0, cY = 0;
-        for (int x = x1; x <= x2; x++) {
-            for (int y = y1; y <= y2; y++) {
+        for (int x = cornerCells[0]; x <=  cornerCells[2]; x++) {
+            for (int y = cornerCells[1]; y <= cornerCells[3]; y++) {
                 try{
                     if (gol.isCellAlive(x, y)){
                         clipboard[cX][cY] = true;
@@ -891,33 +925,58 @@ public class CanvasController {
 
         importPattern = clipboard;
 
+        if (!running || frameDelay > 0)
+            renderCanvas();
 
+
+    }
+
+    public void cutMarkedArea() {
+
+        if (markup == null){
+            return;
+        }
+        int [] cornerCells = getCornerCells();
+
+        boolean[][] clipboard = new boolean[1 + cornerCells[2] - cornerCells[0]][1 + cornerCells[3] - cornerCells[1]];
+
+        int cX = 0, cY = 0;
+        for (int x = cornerCells[0]; x <=  cornerCells[2]; x++) {
+            for (int y = cornerCells[1]; y <= cornerCells[3]; y++) {
+                try{
+                    if (gol.isCellAlive(x, y)){
+                        clipboard[cX][cY] = true;
+                    }
+                    gol.setCellDead(x, y);
+                }
+                catch (IndexOutOfBoundsException e){
+
+                }
+                cY++;
+            }
+            cX++;
+            cY = 0;
+        }
+
+        importPattern = clipboard;
+        if (!running || frameDelay > 0)
+            renderCanvas();
+
+    }
+    public int[] getCornerCells() {
+        int [] cornerCells = new int [4];
+        cornerCells[0] = getGridPosX(getCanvasPosXMarkup((markup[0] < markup[2]) ? markup[0] : markup[2]));
+        cornerCells[1] = getGridPosY(getCanvasPosYMarkup((markup[1] < markup[3]) ? markup[1] : markup[3]));
+        cornerCells[2] = getGridPosX(getCanvasPosXMarkup((markup[0] > markup[2]) ? markup[0] : markup[2]));
+        cornerCells[3] = getGridPosY(getCanvasPosYMarkup((markup[1] > markup[3]) ? markup[1] : markup[3]));
+        return cornerCells;
+    }
+
+    private void removeMarkedArea() {
+        markup = null;
     }
 
 
     //endregion
 
-
-
-    //region getters
-    public int getCurrViewMinX() {
-        return currViewMinX;
-    }
-
-    public int getCurrViewMaxX() {
-        return currViewMaxX;
-    }
-
-    public int getCurrViewMinY() {
-        return currViewMinY;
-    }
-
-    public int getCurrViewMaxY() {
-        return currViewMaxY;
-    }
-
-    public Cell getCell() {
-        return cell;
-    }
-    //endregion
 }

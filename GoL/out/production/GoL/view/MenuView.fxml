@@ -20,9 +20,9 @@
         <MenuItem text="Clear board" onAction="#clearGrid"/>
         <SeparatorMenuItem/>
         <RadioMenuItem fx:id="markupS305080" text="Markup - s305080" onAction="#activateMarkup"/>
-        <MenuItem text="Cut - ctrl + x"/>
-        <MenuItem text="Copy - ctrl + c"/>
-        <MenuItem text="Paste - ctrl + v"/>
+        <MenuItem fx:id="cut" text="Cut - ctrl + x" onAction="#cut"/>
+        <MenuItem fx:id="copy" text="Copy - ctrl + c" onAction="#copy"/>
+        <MenuItem fx:id="paste" text="Paste - ctrl + v" onAction="#paste"/>
         <SeparatorMenuItem/>
         <MenuItem text="Open editor s305073" onAction="#launchEditor"/>
     </Menu>

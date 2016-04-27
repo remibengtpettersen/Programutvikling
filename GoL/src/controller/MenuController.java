@@ -23,6 +23,9 @@ import java.util.Optional;
  * */
 public class MenuController {
 
+    public MenuItem cut;
+    public MenuItem copy;
+    public MenuItem paste;
     private MasterController masterController;
 
     @FXML
@@ -187,5 +190,17 @@ public class MenuController {
         else {
             masterController.getCanvasController().deactivateMarkup();
         }
+    }
+
+    public void cut() {
+        masterController.getCanvasController().cutMarkedArea();
+    }
+
+    public void copy() {
+        masterController.getCanvasController().copyMarkedArea();
+    }
+
+    public void paste() {
+        masterController.getCanvasController().pasteClipBoard();
     }
 }
