@@ -35,12 +35,12 @@
               onMouseDragged="#onMouseDragged"
               onMouseClicked="#onMouseClicked"
               onMouseMoved="#onMouseMoved"
-              onScroll="#onScroll">
+              onScroll="#EditorCanvas">
       </Canvas>
    </HBox>
    <VBox GridPane.rowIndex="1">
-      <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="200" vbarPolicy="NEVER">
-         <Canvas fx:id="strip" width="6400" height="180"></Canvas>
+      <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="200" vbarPolicy="ALWAYS">
+         <Canvas fx:id="strip" width="288" height="180"></Canvas>
       </ScrollPane>
    </VBox>
 </GridPane>
