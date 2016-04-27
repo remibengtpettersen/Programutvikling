@@ -52,9 +52,7 @@ public class EditorController {
     }
 
     public void initialize() {
-        setStripColor();
-        setCanvasColor();
-        //drawEditorGridLines();
+
     }
 
     public void getDeepCopyGol(DynamicGameOfLife gol) {
@@ -62,31 +60,26 @@ public class EditorController {
     }
 
     public void displayPattern() {
-        // editor
+        centerPatternInEditor();
+        updateEditor();
+
+        updateStrip();
+    }
+
+    private void centerPatternInEditor() {
         editorCell.setSize(Cell.MAX_SIZE);
         editorCell = scalePatternToCanvas(golEditor, editor, editorCell);
         editorOffset = centerPatternOnCanvas(golEditor, editor, editorCell);
-        updateEditor();
-
-        // strip
-        stripCell.setSize(Cell.MAX_SIZE);
-
-        golStrip = golEditor.clone();
-
-        stripCell = scalePatternToCanvas(golStrip, strip, stripCell);
-        stripOffset = centerPatternOnCanvas(golStrip, strip, stripCell);
-        updateStrip();
-        gc = editor.getGraphicsContext2D();
     }
 
     private void setStripColor() {
-        gc = strip.getGraphicsContext2D();
+        setGraphicsContectForEditor();
         gc.setFill(editorCell.getDeadColor());
         gc.fillRect(0, 0, strip.getWidth(), strip.getHeight());
     }
 
     private void setCanvasColor() {
-        gc = editor.getGraphicsContext2D();
+        setGraphicsContectForEditor();
         gc.setFill(editorCell.getDeadColor());
         gc.fillRect(0, 0, editor.getWidth(), editor.getHeight());
     }
@@ -97,18 +90,6 @@ public class EditorController {
                 getStripPosY(y),
                 stripCell.getSize() - stripCell.getSize() * stripCell.getSpacing(),
                 stripCell.getSize() - stripCell.getSize() * stripCell.getSpacing());
-    }
-
-    public void drawStrip() {
-        gc.setFill(stripCell.getColor());
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
-                System.out.println(golStrip.getGridWidth());
-                if (golStrip.isCellAlive(i, j)) {
-                    drawOnStrip(i, j);
-                }
-            }
-        }
     }
 
     private Point centerPatternOnCanvas(DynamicGameOfLife gol, Canvas canvas, Cell cell) {
@@ -132,19 +113,20 @@ public class EditorController {
     }
 
     private Cell scalePatternToCanvas(DynamicGameOfLife gol, Canvas canvas, Cell cell) {
+        int padding = 5;
 
         double patternWidth = gol.getGridWidth() * cell.getSize();
         double patternHeight = gol.getGridHeight() * cell.getSize();
 
-        if (patternHeight > canvas.getHeight()) {
-            while (patternHeight + 10 > canvas.getHeight()) {
+        if (patternHeight + cell.getSize() *  padding > canvas.getHeight()) {
+            while (patternHeight + cell.getSize() * padding > canvas.getHeight()) {
                 cell.setSize(cell.getSize() * 0.99);
                 patternHeight = gol.getGridHeight() * cell.getSize();
             }
         }
 
-        if (patternWidth > canvas.getWidth()) {
-            while (patternWidth + 10 > canvas.getWidth()) {
+        if (patternWidth + cell.getSize() * padding > canvas.getWidth()) {
+            while (patternWidth + cell.getSize() * padding > canvas.getWidth()) {
                 cell.setSize(cell.getSize() * 0.99);
                 patternWidth = gol.getGridWidth() * cell.getSize();
             }
@@ -154,11 +136,9 @@ public class EditorController {
     }
 
     private void updateEditor() {
-        gc.setFill(editorCell.getDeadColor());
-        gc.fillRect(0, 0, editor.getWidth(), editor.getHeight());
-
+        setGraphicsContectForEditor();
         gc.setFill(editorCell.getColor());
-        gc.strokeRect(getCommonEditorOffsetX(), getCommonEditorOffsetY(), golEditor.getGridWidth() * editorCell.getSize(), golEditor.getGridHeight() * editorCell.getSize());
+
         for (int i = 0; i < golEditor.getGridWidth(); i++) {
             for (int j = 0; j < golEditor.getGridHeight(); j++) {
                 if (golEditor.isCellAlive(i, j)) {
@@ -209,7 +189,7 @@ public class EditorController {
     }
 
     private void drawEditorGridLines() {
-        gc = editor.getGraphicsContext2D();
+        setGraphicsContectForEditor();
         gc.setLineWidth(0.1);
         gc.setStroke(Color.BLACK);
 
@@ -232,28 +212,74 @@ public class EditorController {
 
     @FXML
     private void updateStrip() {
-        gc = strip.getGraphicsContext2D();
-        gc.setFill(stripCell.getColor());
-
-        int counter = 0;
         Affine form = new Affine();
-        double padding = 150 - strip.getWidth() / 2;
+
+        double offset = 150;
+        double width = 290;
+        double padding = offset - strip.getWidth() / 2;
         double tx = padding;
-        double timer = 0;
+
+        // setup pattern.
+        deepCopyPatternInEditor();
+        centerPatternInStrip();
+        setGraphicsContextForStrip();
+        configureStripParameters();
+
+        // draws twenty generations in strip.
         for (int i = 0; i < 20; i++) {
-            counter++;
-            //System.out.println(counter);
             form.setTx(tx);
             gc.setTransform(form);
-            timer = System.currentTimeMillis();
+            golStrip.nextGeneration();
             drawStrip();
-            //System.out.println(System.currentTimeMillis() - timer);
-            tx += 290;
-            System.out.println(-1);
+            drawLine();
+            tx += width;
         }
 
+        // resets strip
         form.setTx(0.0);
         gc.setTransform(form);
+
+        // sets GC back to editor.
+        setGraphicsContectForEditor();
+    }
+
+    private void setGraphicsContectForEditor() {
+        gc = editor.getGraphicsContext2D();
+    }
+
+    private void centerPatternInStrip() {
+        stripCell.setSize(Cell.MAX_SIZE);
+        stripCell = scalePatternToCanvas(golStrip, strip, stripCell);
+        stripOffset = centerPatternOnCanvas(golStrip, strip, stripCell);
+    }
+
+    private void setGraphicsContextForStrip() {
+        gc = strip.getGraphicsContext2D();
+    }
+
+    private void configureStripParameters() {
+        gc.setFill(Color.BLACK);
+        gc.setStroke(Color.OLIVEDRAB);
+        gc.setLineWidth(10);
+    }
+
+    private void deepCopyPatternInEditor() {
+        golStrip = golEditor.clone();
+    }
+
+    public void drawStrip() {
+        //gc.clearRect(0, 0, strip.widthProperty().doubleValue(), strip.heightProperty().doubleValue());
+        for (int i = 0; i < 288 / stripCell.getSize(); i++) {
+            for (int j = 0; j < 180 / stripCell.getSize() ; j++) {
+                if (golStrip.isCellAlive(i, j)) {
+                    drawOnStrip(i, j);
+                }
+            }
+        }
+    }
+
+    private void drawLine() {
+        gc.strokeLine(290 + 140, 0, 290 + 140, 180);
     }
 
     @FXML
@@ -286,8 +312,13 @@ public class EditorController {
 
         if (event.isSecondaryButtonDown()) {
             editorOffset.setLocation(event.getX() - mouseClickStart.getX(), event.getY() - mouseClickStart.getY());
+            clearEditor();
             updateEditor();
         }
+    }
+
+    private void clearEditor() {
+        gc.clearRect(0, 0, editor.widthProperty().doubleValue(), editor.heightProperty().doubleValue());
     }
 
     @FXML
@@ -297,6 +328,7 @@ public class EditorController {
     @FXML
     private void onMouseClickedEditor(MouseEvent event) {
         MouseButton mouseButton = event.getButton();
+        gc.setFill(editorCell.getColor());
 
         if (!isDrag) {
             int pos_x = (int) (Math.floor((event.getX() - getCommonEditorOffsetX()) / editorCell.getSize()));
@@ -314,17 +346,24 @@ public class EditorController {
             }
 
             if (mouseButton == MouseButton.PRIMARY) {
-                gc.setFill(editorCell.getColor());
                 golEditor.setCellAlive(pos_x, pos_y);
             }
 
             if (mouseButton == MouseButton.SECONDARY) {
-                gc.setFill(editorCell.getDeadColor());
                 golEditor.setCellDead(pos_x, pos_y);
             }
 
+            clearEditor();
             updateEditor();
+
+            clearStrip();
+            updateStrip();
         }
         isDrag = false;
+    }
+
+    private void clearStrip() {
+        setGraphicsContextForStrip();
+        gc.clearRect(0, 0, strip.widthProperty().doubleValue(), strip.heightProperty().doubleValue());
     }
 }

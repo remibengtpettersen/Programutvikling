@@ -40,7 +40,7 @@
    </HBox>
    <VBox GridPane.rowIndex="1">
       <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="200" vbarPolicy="NEVER">
-         <Canvas fx:id="strip" width="5760" height="180"
+         <Canvas fx:id="strip" width="5800" height="180"
                  onMouseMoved="#onMouseMovedStrip"></Canvas>
       </ScrollPane>
    </VBox>
