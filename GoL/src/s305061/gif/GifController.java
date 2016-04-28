@@ -11,6 +11,7 @@ import java.io.IOException;
 /**
  * @author Andreas s305061
  * Controller for GIF window.
+ * Handles GIF creation with GIFLib, in addition to GUI control
  */
 public class GifController {
 
@@ -139,6 +140,7 @@ public class GifController {
             timeTextField.setText("" + timeBetweenFrames);
         }
 
+        // boundary
         leftTextField.setText(""+left);
         topTextField.setText(""+top);
         rightTextField.setText(""+right);
@@ -197,7 +199,7 @@ public class GifController {
      * @param writer GIFWriter from GIFLib
      * @param game The cloned game class to be animated
      * @param counter Counter to determine when to stop recursive method. Initially set as number of generations/frames
-     * @throws IOException
+     * @throws IOException IO exception, thrown by GIFLib
      */
     private void writeGoLSequenceToGIF(lieng.GIFWriter writer, DynamicGameOfLife game, int counter) throws IOException {
 
@@ -206,15 +208,17 @@ public class GifController {
             writer.close();
         } else {
 
-            // add image (frame) to gif
+            // add new image (frame) to gif
             writer.createNextImage();
 
+            // these are 0 and 0 the first instance (reset in clone() method),
+            // then they will increase according to the movement of the pattern
             int offsetX = game.getOffsetX();
             int offsetY = game.getOffsetY();
 
-            // draw game board to current image in writer
-            for (int gameX = left + offsetX; gameX <= right; gameX++)
-                for (int gameY = top + offsetY; gameY <= bottom; gameY++){
+            // draw current generation of the game board to current image in writer
+            for (int gameX = left + offsetX; gameX <= right + offsetX; gameX++)
+                for (int gameY = top + offsetY; gameY <= bottom + offsetY; gameY++){
 
                     if(game.isCellAlive(gameX, gameY)){
 
