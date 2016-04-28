@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -9,6 +10,7 @@ import javafx.stage.Stage;
 import model.Configuration;
 import model.Parser.PatternParser;
 import model.PatternFormatException;
+import s305061.gif.GifController;
 import s305061.statistics.StatController;
 import s305080.Statistics.Stats;
 import s305080.theStrip.TheStrip;
@@ -30,6 +32,7 @@ public class MasterController {
 
     //region s305061
     @FXML private StatController statController;
+    @FXML private GifController gifController;
     //endregion
 
     //region s305080
@@ -78,8 +81,9 @@ public class MasterController {
     }
 
     //region s305061
+
     /**
-     * Opens the statistics window
+     * Opens the s305061 statistics window
      */
     public void openStatWindow() {
 
@@ -87,7 +91,7 @@ public class MasterController {
                 getClass().getResource("../s305061/statistics/StatView.fxml"));
 
         try {
-            BorderPane root = loader.load();
+            Parent root = loader.load();
             statController = loader.getController();
 
             Stage statStage = new Stage();
@@ -106,6 +110,33 @@ public class MasterController {
             System.out.println("Failed to load the statistics (s305061) FXML document");
         }
     }
+
+    public void openGifWindow() {
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("../s305061/gif/GifView.fxml"));
+
+        try {
+            Parent root = loader.load();
+            gifController = loader.getController();
+
+            Stage gifStage = new Stage();
+            gifStage.setScene(new Scene(root));
+
+            gifController.initialize(canvasController.gol);
+            gifStage.setTitle("Create GIF");
+
+            gifStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load the gif (s305061) FXML document, IO exception");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to load the gif (s305061) FXML document");
+        }
+    }
+    //endregion
     //endregion
 
     /**

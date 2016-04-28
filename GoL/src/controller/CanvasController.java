@@ -65,8 +65,6 @@ public class CanvasController {
     private int boardOffsetX = 50;
     private int boardOffsetY = 50;
 
-
-
     private int currViewMinX;
     private int currViewMaxX;
     private int currViewMinY;
@@ -116,7 +114,6 @@ public class CanvasController {
         boardHeight = masterController.configuration.getGameHeight();
         userWantsGridLines = masterController.configuration.isGridLinesOn();
         masterController.getToolController().setSpeed(frameDelay);
-
     }
 
     /**
@@ -163,7 +160,6 @@ public class CanvasController {
                             });
                             thread.start();
                         }
-
 
                         timer = now / 1000000;
 
@@ -493,8 +489,8 @@ public class CanvasController {
         for (int x = currViewMinX; x < currViewMaxX; x++) {
             for (int y = currViewMinY; y < currViewMaxY; y++) {
 
-                    if (gol.isCellAlive(x, y))
-                        drawCell(x, y);
+                if (gol.isCellAlive(x, y))
+                    drawCell(x, y);
 
             }
         }
@@ -555,6 +551,7 @@ public class CanvasController {
             }
         }
         importing = false;
+        giveCellCount();
 
         if (!running || frameDelay > 0)
             renderCanvas();
@@ -567,6 +564,7 @@ public class CanvasController {
     public void clearGrid() {
 
         gol.clearGrid();
+        giveCellCount();
         renderCanvas();
     }
 

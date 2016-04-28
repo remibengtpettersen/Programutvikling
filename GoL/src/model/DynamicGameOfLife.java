@@ -63,7 +63,7 @@ public class DynamicGameOfLife{
      * Evolves the grid one generation
      */
     public void nextGeneration() {
-        //cellCount.set(0);
+
         fitBoardToPattern();
         createCountingThreads();
         try {
@@ -77,10 +77,9 @@ public class DynamicGameOfLife{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
-    private void fitBoardToPattern() {
+    public void fitBoardToPattern() {
         int [] bBox = getBoundingBox();
         if (bBox[0] > 1){
             decreaseXLeft(bBox[0] - 1);
@@ -163,7 +162,6 @@ public class DynamicGameOfLife{
         for (int x = start; x < stop; x++) {
             for (int y = 1; y < grid.get(x).size() - 1; y++) {
                 if (grid.get(x).get(y).get()) {
-                    //cellCount.incrementAndGet();
                     for (int a = x - 1; a <= x + 1; a++) {
                         for (int b = y - 1; b <= y + 1; b++) {
                             if (a != x || b != y) {
@@ -255,6 +253,8 @@ public class DynamicGameOfLife{
         return boundingBox;
     }
 
+
+
     public int getGridWidth(){ return grid.size(); }
 
     public int getGridHeight(){ return grid.get(0).size(); }
@@ -293,7 +293,6 @@ public class DynamicGameOfLife{
      * @param grid the grid to be deep copied and set.
      */
     public void deepCopyOnSet(ArrayList<ArrayList<AtomicBoolean>> grid) {
-        //cellCount.set(0);
         neighbours.clear();
         cellOffsetX = 0;
         cellOffsetY = 0;
@@ -302,8 +301,6 @@ public class DynamicGameOfLife{
             this.grid.add(new ArrayList<>());
             neighbours.add(new ArrayList<>());
             for (int y = 0; y < grid.get(x).size(); y++) {
-                //if(grid.get(x).get(y).get())
-                    //cellCount.incrementAndGet();
                 this.grid.get(x).add(new AtomicBoolean(grid.get(x).get(y).get()));
                 neighbours.get(x).add(new AtomicInteger(0));
             }
@@ -514,6 +511,8 @@ public class DynamicGameOfLife{
      * Clears the grid of live cells
      */
     public void clearGrid() {
+
+        cellCount.set(0);
 
         grid.clear();
         neighbours.clear();

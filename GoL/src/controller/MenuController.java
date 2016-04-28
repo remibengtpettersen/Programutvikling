@@ -175,8 +175,16 @@ public class MenuController {
         editor = null;
     }
 
+
+    //region s305061
     public void openStatWindow(ActionEvent actionEvent) {
 
         masterController.openStatWindow();
     }
+
+    public void openGifWindow(ActionEvent actionEvent) {
+
+        masterController.openGifWindow();
+    }
+    //endregion
 }

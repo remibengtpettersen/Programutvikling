@@ -12,7 +12,9 @@ import javafx.scene.control.TextField;
 import model.DynamicGameOfLife;
 
 /**
- * Created by And on 06.04.2016.
+ * @author Andreas s305061
+ * Controller for statistics window.
+ * Handles statistics gathering in addition to GUI control
  */
 public class StatController {
 
