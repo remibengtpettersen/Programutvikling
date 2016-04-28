@@ -23,12 +23,15 @@ import java.util.Optional;
  * */
 public class MenuController {
 
+    public MenuItem cut;
+    public MenuItem copy;
+    public MenuItem paste;
     private MasterController masterController;
 
     @FXML
     private MenuItem openBtn;
     @FXML
-    RadioMenuItem theStripS305080, statsS305080;
+    RadioMenuItem theStripS305080, statsS305080, markupS305080;
 
     /**
      * Stores the reference to the masterController
@@ -187,4 +190,25 @@ public class MenuController {
         masterController.openGifWindow();
     }
     //endregion
+
+    public void activateMarkup() {
+        if (markupS305080.isSelected()){
+            masterController.getCanvasController().activateMarkup();
+        }
+        else {
+            masterController.getCanvasController().deactivateMarkup();
+        }
+    }
+
+    public void cut() {
+        masterController.getCanvasController().cutMarkedArea();
+    }
+
+    public void copy() {
+        masterController.getCanvasController().copyMarkedArea();
+    }
+
+    public void paste() {
+        masterController.getCanvasController().pasteClipBoard();
+    }
 }
