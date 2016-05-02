@@ -29,14 +29,14 @@ public class ToFile {
     private Stage stage;
     private String ruleText;
     LagringsFormat format;
-    DynamicGameOfLife gol;
+    GameOfLife gol;
 
 
     public enum LagringsFormat {
         RLE, PlainText
     }
 
-    public void writeToFile(DynamicGameOfLife gol, Stage stage){
+    public void writeToFile(GameOfLife gol, Stage stage){
 
         this.gol = gol;
         int [] boundingBox = gol.getBoundingBox();
@@ -46,7 +46,7 @@ public class ToFile {
             System.out.println("YOU SHALL NOT SAVE");
             return; //throw exception
         }
-        this.grid = gol.getGrid();
+       // this.grid = gol.getGrid();
         this.boundingBox = boundingBox;
 
         list = new ArrayList<>();

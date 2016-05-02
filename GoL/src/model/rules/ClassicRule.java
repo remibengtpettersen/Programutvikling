@@ -1,49 +1,56 @@
 package model.rules;
 
+import model.DynamicGameOfLife;
 import model.EvolveException;
+import model.GameOfLife;
 
 /**
- * The original Game of Life rule made by John Conway in 1970. Rulestring: B3/S23
- * Created on 12.02.2016.
- * This class provides the default rules for game of life as defined by Conway.
+ * Created by Truls on 20/04/16.
  */
-@Deprecated
 public class ClassicRule extends Rule {
+
+
+    private final String ruleText;
+    //private ArrayList<ArrayList<AtomicBoolean>> grid;
+    //private ArrayList<ArrayList<AtomicInteger>> neighbours;
 
     /**
      * ClassicRule constructor
-     * @param grid The cell grid to be evolved
-     * @param neighbours The neighbour grid used during evolution
      */
-    public ClassicRule(boolean[][] grid, byte[][] neighbours){
+    public ClassicRule(GameOfLife gol){
 
-        super(grid, neighbours);
+        super(gol);
 
         ruleText = "B3/S23";
     }
 
     @Override
-    public void evolve() throws EvolveException {
+    public void evolve(int start, int stop) throws EvolveException {
 
-        for(int x = 0; x < grid.length; x++){
-            for(int y = 0; y < grid[x].length; y++){
+        for(int x = start; x < stop; x++){
+            for(int y = 0; y < gol.getGridHeight(); y++){
 
-                byte neighbourCount = neighbours[x][y];
+                int neighbourCount = gol.getNeighboursAt(x,y);
 
                 if (neighbourCount < 0 || neighbourCount > 8)
+                {
+                    gol.resetNeighboursAt(x,y);
                     throw new EvolveException("Tried setting " + neighbourCount + " neighbours");
+                }
 
                     // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
                 else if (neighbourCount == 3)
-                    grid[x][y] = true;
+                    gol.setCellAlive(x,y);
 
                     // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
                 else if (neighbourCount != 2)
-                    grid[x][y] = false;
+                    gol.setCellDead(x,y);
 
                 // reset neighbour count for this cell
-                neighbours[x][y] = 0;
+                gol.resetNeighboursAt(x,y);
             }
         }
     }
+
+
 }

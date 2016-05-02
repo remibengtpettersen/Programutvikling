@@ -2,6 +2,7 @@ package model;
 
 import model.rules.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -10,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Created by Truls on 20/04/16.
  */
-public class DynamicGameOfLife{
+public class DynamicGameOfLife extends GameOfLife{
 
     private int availableProcessors = Runtime.getRuntime().availableProcessors();
     //int availableProcessors = 1;
@@ -26,11 +27,11 @@ public class DynamicGameOfLife{
 
     private ArrayList<ArrayList<AtomicBoolean>> grid;
     private ArrayList<ArrayList<AtomicInteger>> neighbours;
-    private DynamicRule rule;
+    private Rule rule;
     private AtomicInteger cellCount = new AtomicInteger(0);
 
     /**
-     * GameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
+     * StaticGameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
      *
      */
     public DynamicGameOfLife() {
@@ -210,7 +211,7 @@ public class DynamicGameOfLife{
      *
      * @return The rule
      */
-    public DynamicRule getRule() {
+    public Rule getRule() {
         return rule;
     }
 
@@ -273,8 +274,8 @@ public class DynamicGameOfLife{
     }
 
     /**
-     * Clones the GameOfLife object
-     * @return the cloned GameOfLife object
+     * Clones the StaticGameOfLife object
+     * @return the cloned StaticGameOfLife object
      */
     @Override
     public DynamicGameOfLife clone() {
@@ -327,19 +328,19 @@ public class DynamicGameOfLife{
      */
     public void setRule(String ruleText) {
 
-        //rule = new ClassicDynamicRule(this);
+        //rule = new ClassicRule(this);
 
         ruleText = ruleText.toLowerCase();
 
         switch (ruleText) {
             case "classic":
-                rule = new ClassicDynamicRule(this);
+                rule = new ClassicRule(this);
                 break;
             case "highlife":
-                rule = new HighLifeDynamicRule(this);
+                rule = new HighLifeRule(this);
                 break;
             default:
-                rule = new CustomDynamicRule(this, ruleText);
+                rule = new CustomRule(this, ruleText);
         }
     }
 
@@ -420,6 +421,9 @@ public class DynamicGameOfLife{
     public void resetNeighboursAt(int x, int y){
         neighbours.get(x).get(y).set(0);
     }
+
+
+
 
     public void increaseXRight(int diffX) {
         for (int i = 0; i < diffX; i++){

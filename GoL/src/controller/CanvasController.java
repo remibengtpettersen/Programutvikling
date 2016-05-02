@@ -11,6 +11,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import model.Cell;
 import model.DynamicGameOfLife;
+import model.GameOfLife;
 import s305080.PatternSaver.ToFile;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class CanvasController {
      private List<Thread> workers = new ArrayList<Thread>();
 
 
-    public DynamicGameOfLife gol;
+    public GameOfLife gol;
     private MasterController masterController;
     @FXML
     private Canvas canvas;
@@ -47,7 +48,6 @@ public class CanvasController {
 
     private short boardWidth;
     private short boardHeight;
-    private ArrayList<ArrayList<AtomicBoolean>> grid;
 
     private int frameDelay;
     private boolean running = true;
@@ -86,7 +86,7 @@ public class CanvasController {
     }
 
     /**
-     * Sets master controller, creates an instance of the GameOfLife object and prepares the grid and gets the Graphics Content of the canvas.
+     * Sets master controller, creates an instance of the StaticGameOfLife object and prepares the grid and gets the Graphics Content of the canvas.
      * Also it sets up listeners and prepare the animation. Final it launches the animation.
      */
     public void initialize(MasterController masterController) {
@@ -95,7 +95,6 @@ public class CanvasController {
         initializeGameParameters();
 
         gol = new DynamicGameOfLife();
-        grid = gol.getGrid();
         gc = canvas.getGraphicsContext2D();
         buttonsPressed = new ArrayList<>();
 
@@ -128,13 +127,13 @@ public class CanvasController {
 
         currViewMinX = (int) (getCommonOffsetX() / cell.getSize());
         currViewMaxX = (int) ((getCommonOffsetX() + canvas.getWidth()) / cell.getSize()) + 1;
-        if (currViewMaxX > grid.size())
-            currViewMaxX = grid.size();
+        if (currViewMaxX > gol.getGridWidth())
+            currViewMaxX = gol.getGridWidth();
 
         currViewMinY = (int)(getCommonOffsetY() / cell.getSize());
         currViewMaxY = (int) ((getCommonOffsetY() + canvas.getHeight()) / cell.getSize()) + 1;
-        if (currViewMaxY > grid.get(0).size())
-            currViewMaxY = grid.get(0).size();
+        if (currViewMaxY > gol.getGridHeight())
+            currViewMaxY = gol.getGridHeight();
 
         if (currViewMinY < 0)
             currViewMinY = 0;
@@ -381,11 +380,11 @@ public class CanvasController {
 
     private void fitTo(int x, int y) {
         if(x < 0){
-            gol.increaseXLeft(Math.abs(x));
+            ((DynamicGameOfLife) gol).increaseXLeft(Math.abs(x));
            // boardOffsetX -= (x - 1) * cell.getSize();
         }
         if(y < 0){
-            gol.increaseYTop(Math.abs(y));
+            ((DynamicGameOfLife)gol).increaseYTop(Math.abs(y));
             //boardOffsetY -= (y - 1) * cell.getSize();
         }
 

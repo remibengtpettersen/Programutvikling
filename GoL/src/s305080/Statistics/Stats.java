@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.DynamicGameOfLife;
-import model.GameOfLife;
 import s305080.Statistics.Controller.StatsController;
 
 import java.io.IOException;

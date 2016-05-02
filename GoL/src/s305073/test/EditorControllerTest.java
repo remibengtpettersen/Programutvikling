@@ -1,15 +1,10 @@
 package s305073.test;
 
-import javafx.scene.paint.Color;
 import model.Cell;
 import model.DynamicGameOfLife;
-import model.GameOfLife;
-import org.junit.After;
-import org.junit.Before;
+import model.StaticGameOfLife;
 import org.junit.Test;
 import s305073.controller.EditorController;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by remibengtpettersen on 13.04.2016.
@@ -43,7 +38,7 @@ public class EditorControllerTest {
     @Test
     public void test_SizeofPattern() {
         EditorController editorController = new EditorController();
-        GameOfLife gol = new GameOfLife(7, 7);
+        StaticGameOfLife gol = new StaticGameOfLife(7, 7);
         Cell cell = new Cell();
         cell.setSize(10);
 

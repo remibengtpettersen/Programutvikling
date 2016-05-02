@@ -7,7 +7,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.transform.Affine;
 import model.Cell;
 import model.DynamicGameOfLife;
-import model.GameOfLife;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;

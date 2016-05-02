@@ -9,7 +9,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import model.DynamicGameOfLife;
-import model.GameOfLife;
 import tools.MessageBox;
 
 import java.util.ArrayList;

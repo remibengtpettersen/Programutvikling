@@ -1,10 +1,8 @@
 package test;
 
-import model.EvolveException;
-import model.GameOfLife;
+import model.StaticGameOfLife;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
-import tools.Utilities;
 
 import static org.junit.Assert.*;
 
@@ -12,17 +10,17 @@ import static org.junit.Assert.*;
  * Created by Andreas on 29.02.2016.
  */
 @Deprecated
-public class GameOfLifeTest {
+public class StaticGameOfLifeTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    static GameOfLife gol;
+    static StaticGameOfLife gol;
     static boolean [][] grid;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        gol = new GameOfLife(5, 5);
+        gol = new StaticGameOfLife(5, 5);
     }
 
     @After
@@ -32,11 +30,11 @@ public class GameOfLifeTest {
 
     @Test
     public void testCreateGameBoard(){
-        GameOfLife gameofLife = new GameOfLife(5, 5);
-        assertEquals(5, gameofLife.getGrid().length);
-        assertEquals(5, gameofLife.getGrid()[0].length);
-        assertEquals(5, gameofLife.getNeighbours().length);
-        assertEquals(5, gameofLife.getNeighbours()[0].length);
+        StaticGameOfLife staticGameofLife = new StaticGameOfLife(5, 5);
+        assertEquals(5, staticGameofLife.getGrid().length);
+        assertEquals(5, staticGameofLife.getGrid()[0].length);
+        assertEquals(5, staticGameofLife.getNeighbours().length);
+        assertEquals(5, staticGameofLife.getNeighbours()[0].length);
     }
 
     @Test
@@ -94,11 +92,11 @@ public class GameOfLifeTest {
 
     @Test
     public void testIfOneCellIsAliveThenNextGenerationSetCellDead() {
-        GameOfLife gameOfLife = new GameOfLife(4, 4);
-        gameOfLife.setCellAlive(1, 1);
-        gameOfLife.aggregateNeighbours();
+        StaticGameOfLife staticGameOfLife = new StaticGameOfLife(4, 4);
+        staticGameOfLife.setCellAlive(1, 1);
+        staticGameOfLife.aggregateNeighbours();
 
-        gameOfLife.nextGeneration();
-        assertFalse(gameOfLife.getGrid()[1][1]);
+        staticGameOfLife.nextGeneration();
+        assertFalse(staticGameOfLife.getGrid()[1][1]);
     }
 }

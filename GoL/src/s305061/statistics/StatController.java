@@ -10,6 +10,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import model.DynamicGameOfLife;
+import model.GameOfLife;
 
 /**
  * @author Andreas s305061
@@ -34,13 +35,13 @@ public class StatController {
 
     private boolean busy = false;
 
-    private DynamicGameOfLife gol;
+    private GameOfLife gol;
 
     /**
      * Sets a reference to the DynamicGameOfLife object to be cloned for statistics gathering
      * @param gol Original DynamicGameOfLife object
      */
-    public void setGol(DynamicGameOfLife gol){
+    public void setGol(GameOfLife gol){
         this.gol = gol;
     }
 
@@ -93,7 +94,7 @@ public class StatController {
         int[][] stats = new int[3][iterations];
         double[] representations = new double[iterations];
 
-        DynamicGameOfLife clonedGol = gol.clone();
+        GameOfLife clonedGol = gol.clone();
 
         int previousLiving = 0;
 
@@ -172,7 +173,7 @@ public class StatController {
      * @param gol Reference to the DynamicGameOfLife object to gather information from
      * @return The geometric factor, the sum of x and y coordinates of live cells
      */
-    private double getGeometricFactor(DynamicGameOfLife gol) {
+    private double getGeometricFactor(GameOfLife gol) {
 
         double geoFactor = 0;
 

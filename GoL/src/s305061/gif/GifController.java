@@ -3,7 +3,7 @@ package s305061.gif;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import lieng.GIFWriter;
-import model.DynamicGameOfLife;
+import model.GameOfLife;
 
 import java.awt.*;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class GifController {
     @FXML private TextField rightTextField;
     @FXML private TextField bottomTextField;
 
-    private DynamicGameOfLife gol;
+    private GameOfLife gol;
 
     private int iterations = 10;
     private int scale = 10;
@@ -88,7 +88,7 @@ public class GifController {
      * Will set a reference to a game object to be cloned and animated, then automatically crop the board
      * @param gol Reference to a game object
      */
-    public void initialize(DynamicGameOfLife gol) {
+    public void initialize(GameOfLife gol) {
 
         this.gol = gol;
 
@@ -184,9 +184,9 @@ public class GifController {
      * @param iterations Number of iterations to evolve, also number of frames to be added to gif
      * @throws IOException IO exception, thrown by GIFLib
      */
-    public void startWriteGolSequenceToGIF(DynamicGameOfLife originalGol, int iterations) throws IOException {
+    public void startWriteGolSequenceToGIF(GameOfLife originalGol, int iterations) throws IOException {
 
-        DynamicGameOfLife clonedGol = originalGol.clone();
+        GameOfLife clonedGol = originalGol.clone();
 
         GIFWriter gifWriter = new GIFWriter(getGifWidth(), getGifHeight(), fileName, timeBetweenFrames);
 
@@ -201,7 +201,7 @@ public class GifController {
      * @param counter Counter to determine when to stop recursive method. Initially set as number of generations/frames
      * @throws IOException IO exception, thrown by GIFLib
      */
-    private void writeGoLSequenceToGIF(lieng.GIFWriter writer, DynamicGameOfLife game, int counter) throws IOException {
+    private void writeGoLSequenceToGIF(GIFWriter writer, GameOfLife game, int counter) throws IOException {
 
         // condition to end recursion
         if(counter <= 0){

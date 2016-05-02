@@ -1,13 +1,14 @@
 package model.rules;
 
+import model.DynamicGameOfLife;
 import model.EvolveException;
+import model.GameOfLife;
 
 /**
  * A custom rule based on an input string
  * Created on 12.02.2016.
  * @author The group through pair programming.
  */
-@Deprecated
 public class CustomRule extends Rule {
 
     private boolean[] shouldBeBorn;
@@ -15,13 +16,11 @@ public class CustomRule extends Rule {
 
     /**
      * CustomRule constructor.
-     * @param grid reference to the cell grid to be evolved
-     * @param neighbours reference to the neighbours grid used during evolution
      * @param rawRuleText the input rule text
      */
-    public CustomRule(boolean[][] grid, byte[][] neighbours, String rawRuleText) {
+    public CustomRule(GameOfLife gol, String rawRuleText) {
 
-        super(grid, neighbours);
+        super(gol);
 
         try {
             ruleText = RuleParser.formatRuleText(rawRuleText);
@@ -31,6 +30,8 @@ public class CustomRule extends Rule {
         }
 
         parseRuleText();
+
+        System.out.println("Parsed: " + ruleText);
     }
 
     /**
@@ -67,8 +68,6 @@ public class CustomRule extends Rule {
                 }
             }
         }
-
-        System.out.println("Parsed: " + ruleText);
     }
 
     /**
@@ -76,26 +75,26 @@ public class CustomRule extends Rule {
      * shouldBeBorn and shouldSurvive arrays which again are based on the rule text
      */
     @Override
-    public void evolve() throws EvolveException {
+    public void evolve(int start, int stop) throws EvolveException {
 
-        for(int x = 0; x < grid.length; x++) {
-            for (int y = 0; y < grid[x].length; y++) {
+        for(int x = start; x < stop; x++) {
+            for (int y = 0; y < gol.getGridHeight(); y++) {
 
-                byte neighbourCount = neighbours[x][y];
+                int neighbourCount = gol.getNeighboursAt(x,y);
 
                 if (neighbourCount < 0 || neighbourCount > 8)
                     throw new EvolveException("Tried setting " + neighbourCount + " neighbours");
 
-                if(grid[x][y]){                         // If cell is alive
-                    if(!shouldSurvive[neighbourCount])  // If the cell isn't supposed to survive,
-                        grid[x][y] = false;             // the cell would die
+                if(gol.isCellAlive(x,y)){                           // If cell is alive
+                    if(!shouldSurvive[neighbourCount])      // If the cell isn't supposed to survive,
+                        gol.setCellDead(x,y);               // the cell would die
                 }
-                else {                                  // If cell is dead
-                    if(shouldBeBorn[neighbourCount])    // If the cell is supposed to be born,
-                        grid[x][y] = true;              // the cell should be born
+                else {                                      // If cell is dead
+                    if(shouldBeBorn[neighbourCount])        // If the cell is supposed to be born,
+                        gol.setCellAlive(x,y);              // the cell should be born
                 }
 
-                neighbours[x][y] = 0;                   //resets number of neighbours
+                gol.resetNeighboursAt(x,y);                //resets number of neighbours
             }
         }
     }

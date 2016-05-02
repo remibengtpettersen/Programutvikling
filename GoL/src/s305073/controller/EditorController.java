@@ -14,6 +14,7 @@ import model.Cell;
 import model.DynamicGameOfLife;
 
 import lieng.*;
+import model.GameOfLife;
 
 import java.awt.*;
 import java.io.IOException;
@@ -30,8 +31,8 @@ public class EditorController {
     @FXML private ScrollPane scrollPane;
 
     // GoL object
-    private DynamicGameOfLife golEditor;
-    private DynamicGameOfLife golStrip;
+    private GameOfLife golEditor;
+    private GameOfLife golStrip;
 
     // cell used in editor and strip
     private Cell editorCell;
@@ -66,7 +67,7 @@ public class EditorController {
         editorCell.setSpacing(0.1);
     }
 
-    public void getDeepCopyGol(DynamicGameOfLife gol) {
+    public void getDeepCopyGol(GameOfLife gol) {
         this.golEditor = gol.clone();
     }
 
@@ -232,10 +233,10 @@ public class EditorController {
 
     private void fitTo(int x, int y) {
         if(x < 0){
-            golEditor.increaseXLeft(Math.abs(x));
+           // golEditor.increaseXLeft(Math.abs(x));
         }
         if(y < 0){
-            golEditor.increaseYTop(Math.abs(y));
+            //golEditor.increaseYTop(Math.abs(y));
         }
     }
 
@@ -421,7 +422,7 @@ public class EditorController {
         int height = 100;
         int timeMilliSeconds = 1000;
 
-        DynamicGameOfLife golGif;
+        GameOfLife golGif;
         lieng.GIFWriter gifWriter = new GIFWriter(width, height, fileName, timeMilliSeconds);
         golGif = golEditor.clone();
 
