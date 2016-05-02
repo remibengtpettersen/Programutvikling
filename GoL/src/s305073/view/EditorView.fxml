@@ -24,23 +24,25 @@
         <TextField promptText="Rule" prefWidth="200"></TextField>
 
         <!--Buttons-->
-        <Button fx:id="btnUpdateStrip" text="Update strip" prefWidth="200"></Button>
-        <Button fx:id="btnSave" text="Save" prefWidth="200"></Button>
+        <Button fx:id="btnUpdateStrip" onAction="#updateStrip" text="Update strip" prefWidth="200"></Button>
+        <Button fx:id="btnSave" text="Save" prefWidth="200" onAction="#saveToFile"></Button>
         <Button fx:id="btnGridLines" text="Grid on/off" prefWidth="200"></Button>
+        <Button fx:id="btnReset" text="Clear" onAction="#resetEditor" prefWidth="200"></Button>
         <Button fx:id="btnClose" text="Close" onAction="#closeEditor" prefWidth="200"></Button>
 
       </VBox>
-      <Canvas fx:id="canvas" width="800" height="500" GridPane.columnIndex="1"
-              onMousePressed="#onMousePressed"
-              onMouseDragged="#onMouseDragged"
-              onMouseReleased="#onMouseReleased"
-              onMouseClicked="#onMouseClicked"
-              onScroll="#onScroll">
+      <Canvas fx:id="editor" width="800" height="500" GridPane.columnIndex="1"
+              onMousePressed="#onMousePressedEditor"
+              onMouseDragged="#onMouseDraggedEditor"
+              onMouseClicked="#onMouseClickedEditor"
+              onMouseMoved="#onMouseMovedEditor"
+              onScroll="#onScrollEditorCanvas">
       </Canvas>
    </HBox>
-   <VBox GridPane.rowIndex="1">
-      <ScrollPane fx:id="scrollPane" prefWidth="1200" prefHeight="200" vbarPolicy="NEVER">
-         <Canvas fx:id="strip" width="5000" height="250"></Canvas>
+   <VBox fx:id="vBoxScrollPane" GridPane.rowIndex="1">
+      <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="208" vbarPolicy="NEVER">
+         <Canvas fx:id="strip" width="6000" height="188"
+                 onMouseMoved="#onMouseMovedStrip"></Canvas>
       </ScrollPane>
    </VBox>
 </GridPane>

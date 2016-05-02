@@ -14,7 +14,11 @@ public class Cell {
     public final static double MIN_SIZE = 0.1;
 
 
-    public Cell(){};
+    public Cell(){
+        color = Color.BLACK;
+        deadColor = Color.WHITE;
+        calculateGhostColor();
+    };
 
     public Cell(Configuration configuration){
         try {

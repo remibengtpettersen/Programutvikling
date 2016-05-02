@@ -54,7 +54,7 @@ public class EditorControllerTest {
 
         //editorController.getDeepCopyGol(gol);
 
-        double size = 4 * cell.getSize();
+        //double size = 4 * cell.getSize();
 
     }
 }
