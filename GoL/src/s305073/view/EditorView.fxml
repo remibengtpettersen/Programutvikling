@@ -25,8 +25,9 @@
 
         <!--Buttons-->
         <Button fx:id="btnUpdateStrip" onAction="#updateStrip" text="Update strip" prefWidth="200"></Button>
-        <Button fx:id="btnSave" text="Save" prefWidth="200"></Button>
+        <Button fx:id="btnSave" text="Save" prefWidth="200" onAction="#saveToFile"></Button>
         <Button fx:id="btnGridLines" text="Grid on/off" prefWidth="200"></Button>
+        <Button fx:id="btnReset" text="Clear" onAction="#resetEditor" prefWidth="200"></Button>
         <Button fx:id="btnClose" text="Close" onAction="#closeEditor" prefWidth="200"></Button>
 
       </VBox>
@@ -35,12 +36,12 @@
               onMouseDragged="#onMouseDraggedEditor"
               onMouseClicked="#onMouseClickedEditor"
               onMouseMoved="#onMouseMovedEditor"
-              onScroll="#EditorCanvas">
+              onScroll="#onScrollEditorCanvas">
       </Canvas>
    </HBox>
-   <VBox GridPane.rowIndex="1">
-      <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="200" vbarPolicy="NEVER">
-         <Canvas fx:id="strip" width="5800" height="180"
+   <VBox fx:id="vBoxScrollPane" GridPane.rowIndex="1">
+      <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="208" vbarPolicy="NEVER">
+         <Canvas fx:id="strip" width="6000" height="188"
                  onMouseMoved="#onMouseMovedStrip"></Canvas>
       </ScrollPane>
    </VBox>
