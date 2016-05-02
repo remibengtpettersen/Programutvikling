@@ -33,9 +33,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class CanvasController {
 
-     private List<Thread> workers = new ArrayList<Thread>();
-
-
     public GameOfLife gol;
     private MasterController masterController;
     @FXML
@@ -95,7 +92,7 @@ public class CanvasController {
         this.masterController = masterController;
         initializeGameParameters();
 
-        gol = new StaticGameOfLife(2500,2500);
+        gol = new StaticGameOfLife(250,250);
         //gol = new DynamicGameOfLife();
 
         gc = canvas.getGraphicsContext2D();

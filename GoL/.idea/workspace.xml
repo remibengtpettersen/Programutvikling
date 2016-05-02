@@ -4,10 +4,14 @@
     <list default="true" id="62642b30-8555-47bc-ae52-013508c69347" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/CanvasController.java" afterPath="$PROJECT_DIR$/src/controller/CanvasController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/MasterController.java" afterPath="$PROJECT_DIR$/src/controller/MasterController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/DynamicGameOfLife.java" afterPath="$PROJECT_DIR$/src/model/DynamicGameOfLife.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/GameOfLife.java" afterPath="$PROJECT_DIR$/src/model/GameOfLife.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/StaticGameOfLife.java" afterPath="$PROJECT_DIR$/src/model/StaticGameOfLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305073/test/EditorControllerTest.java" afterPath="$PROJECT_DIR$/src/s305073/test/EditorControllerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305080/theStrip/TheStrip.java" afterPath="$PROJECT_DIR$/src/s305080/theStrip/TheStrip.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java" afterPath="$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/ClassicRuleTest.java" afterPath="$PROJECT_DIR$/src/test/ClassicRuleTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/HighLifeRuleTest.java" afterPath="$PROJECT_DIR$/src/test/HighLifeRuleTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/StaticGameOfLifeTest.java" afterPath="$PROJECT_DIR$/src/test/StaticGameOfLifeTest.java" />
     </list>
     <ignored path="GoL.iws" />
@@ -40,10 +44,6 @@
                   <caret line="68" column="66" selection-start-line="68" selection-start-column="66" selection-end-line="68" selection-end-column="66" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#3242#3243#0" expanded="true" />
-                    <element signature="e#3287#3288#0" expanded="true" />
-                    <element signature="e#3319#3320#0" expanded="true" />
-                    <element signature="e#3357#3358#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -52,36 +52,10 @@
           <file leaf-file-name="StaticGameOfLife.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/model/StaticGameOfLife.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="285">
-                  <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+                <state relative-caret-position="257">
+                  <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#4100#4101#0" expanded="true" />
-                    <element signature="e#4133#4134#0" expanded="true" />
-                    <element signature="e#4267#4268#0" expanded="true" />
-                    <element signature="e#4294#4295#0" expanded="true" />
-                    <element signature="e#4433#4434#0" expanded="true" />
-                    <element signature="e#4471#4472#0" expanded="true" />
-                    <element signature="e#5647#5648#0" expanded="true" />
-                    <element signature="e#5681#5682#0" expanded="true" />
-                    <element signature="e#5729#5730#0" expanded="true" />
-                    <element signature="e#5766#5767#0" expanded="true" />
-                    <element signature="e#5828#5829#0" expanded="true" />
-                    <element signature="e#5873#5874#0" expanded="true" />
-                    <element signature="e#5935#5936#0" expanded="true" />
-                    <element signature="e#5974#5975#0" expanded="true" />
-                    <element signature="e#6983#6984#0" expanded="true" />
-                    <element signature="e#7015#7016#0" expanded="true" />
-                    <element signature="e#7787#7788#0" expanded="true" />
-                    <element signature="e#7823#7824#0" expanded="true" />
-                    <element signature="e#8058#8059#0" expanded="true" />
-                    <element signature="e#8095#8096#0" expanded="true" />
-                    <element signature="e#8324#8325#0" expanded="true" />
-                    <element signature="e#8373#8374#0" expanded="true" />
-                    <element signature="e#9026#9027#0" expanded="true" />
-                    <element signature="e#9071#9072#0" expanded="true" />
-                    <element signature="e#9136#9137#0" expanded="true" />
-                    <element signature="e#9175#9176#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -100,7 +74,7 @@
           <file leaf-file-name="StaticGameOfLifeTest.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/test/StaticGameOfLifeTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="304">
+                <state relative-caret-position="735">
                   <caret line="49" column="36" selection-start-line="0" selection-start-column="2" selection-end-line="101" selection-end-column="3" />
                   <folding />
                 </state>
@@ -120,7 +94,7 @@
           <file leaf-file-name="HighLifeRule.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/model/rules/HighLifeRule.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
+                <state relative-caret-position="195">
                   <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
                   <folding />
                 </state>
@@ -130,7 +104,7 @@
           <file leaf-file-name="ClassicRule.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/model/rules/ClassicRule.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="54">
+                <state relative-caret-position="255">
                   <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
                   <folding />
                 </state>
@@ -162,10 +136,12 @@
           <file leaf-file-name="StatController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/s305061/statistics/StatController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1575">
+                <state relative-caret-position="1545">
                   <caret line="115" column="105" selection-start-line="115" selection-start-column="105" selection-end-line="115" selection-end-column="105" />
                   <folding>
                     <element signature="imports" expanded="false" />
+                    <element signature="e#1346#1347#0" expanded="false" />
+                    <element signature="e#1376#1377#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -178,8 +154,8 @@
           <file leaf-file-name="MasterController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/controller/MasterController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2595">
-                  <caret line="194" column="9" selection-start-line="194" selection-start-column="9" selection-end-line="194" selection-end-column="9" />
+                <state relative-caret-position="2415">
+                  <caret line="182" column="23" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
                   <folding />
                 </state>
               </provider>
@@ -188,8 +164,8 @@
           <file leaf-file-name="DynamicGameOfLife.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/model/DynamicGameOfLife.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
-                  <caret line="66" column="7" selection-start-line="66" selection-start-column="7" selection-end-line="77" selection-end-column="9" />
+                <state relative-caret-position="175">
+                  <caret line="241" column="10" selection-start-line="241" selection-start-column="10" selection-end-line="241" selection-end-column="10" />
                   <folding>
                     <element signature="e#818#843#0" expanded="false" />
                   </folding>
@@ -197,11 +173,41 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="CanvasController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="317">
-                  <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+                <state relative-caret-position="450">
+                  <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TheStrip.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/s305080/theStrip/TheStrip.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="210">
+                  <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TheStripController.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="444">
+                  <caret line="62" column="36" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="StatsController.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="304">
+                  <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
@@ -217,22 +223,12 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ToFile.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="ToFile.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/s305080/PatternSaver/ToFile.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="495">
                   <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                    <element signature="e#5346#5347#0" expanded="false" />
-                    <element signature="e#5382#5383#0" expanded="false" />
-                    <element signature="e#5414#5415#0" expanded="false" />
-                    <element signature="e#5443#5444#0" expanded="false" />
-                    <element signature="e#5505#5506#0" expanded="false" />
-                    <element signature="e#5572#5573#0" expanded="false" />
-                    <element signature="e#5620#5621#0" expanded="false" />
-                    <element signature="e#5660#5661#0" expanded="false" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -240,19 +236,29 @@
           <file leaf-file-name="EditorController.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/s305073/controller/EditorController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="644">
+                <state relative-caret-position="5865">
                   <caret line="426" column="13" selection-start-line="426" selection-start-column="13" selection-end-line="426" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="HighLifeRuleTest.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/test/HighLifeRuleTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="840">
-                  <caret line="56" column="51" selection-start-line="56" selection-start-column="51" selection-end-line="56" selection-end-column="51" />
-                  <folding />
+                  <folding>
+                    <element signature="imports" expanded="false" />
+                    <element signature="e#1742#1743#0" expanded="false" />
+                    <element signature="e#1786#1787#0" expanded="false" />
+                    <element signature="e#5872#5873#0" expanded="false" />
+                    <element signature="e#5950#5951#0" expanded="false" />
+                    <element signature="e#5993#5994#0" expanded="false" />
+                    <element signature="e#6071#6072#0" expanded="false" />
+                    <element signature="e#6381#6382#0" expanded="false" />
+                    <element signature="e#6457#6458#0" expanded="false" />
+                    <element signature="e#6499#6500#0" expanded="false" />
+                    <element signature="e#6575#6576#0" expanded="false" />
+                    <element signature="e#8595#8596#0" expanded="false" />
+                    <element signature="e#8645#8646#0" expanded="false" />
+                    <element signature="e#8693#8694#0" expanded="false" />
+                    <element signature="e#8742#8743#0" expanded="false" />
+                    <element signature="e#8948#8949#0" expanded="false" />
+                    <element signature="e#8992#8993#0" expanded="false" />
+                    <element signature="e#9341#9342#0" expanded="false" />
+                    <element signature="e#9416#9417#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -265,26 +271,6 @@
                   <folding>
                     <element signature="e#1225#1226#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CustomRuleTest.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/test/CustomRuleTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="285">
-                  <caret line="19" column="31" selection-start-line="0" selection-start-column="2" selection-end-line="59" selection-end-column="3" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ClassicRuleTest.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/test/ClassicRuleTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="14" column="21" selection-start-line="0" selection-start-column="2" selection-end-line="136" selection-end-column="3" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -312,7 +298,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java" />
-        <option value="$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java" />
         <option value="$PROJECT_DIR$/src/model/Cell.java" />
         <option value="$PROJECT_DIR$/resources/config.properties" />
         <option value="$PROJECT_DIR$/src/controller/ToolController.java" />
@@ -328,17 +313,19 @@
         <option value="$PROJECT_DIR$/src/model/rules/CustomRule.java" />
         <option value="$PROJECT_DIR$/src/test/HighLifeRuleTest.java" />
         <option value="$PROJECT_DIR$/src/controller/Main.java" />
-        <option value="$PROJECT_DIR$/src/controller/MasterController.java" />
         <option value="$PROJECT_DIR$/src/s305061/statistics/StatController.java" />
         <option value="$PROJECT_DIR$/src/s305061/gif/GifController.java" />
         <option value="$PROJECT_DIR$/src/s305080/PatternSaver/ToFile.java" />
         <option value="$PROJECT_DIR$/src/s305073/controller/EditorController.java" />
-        <option value="$PROJECT_DIR$/src/model/DynamicGameOfLife.java" />
         <option value="$PROJECT_DIR$/src/test/StaticGameOfLifeTest.java" />
         <option value="$PROJECT_DIR$/src/s305073/test/EditorControllerTest.java" />
-        <option value="$PROJECT_DIR$/src/model/StaticGameOfLife.java" />
         <option value="$PROJECT_DIR$/src/model/GameOfLife.java" />
+        <option value="$PROJECT_DIR$/src/s305080/theStrip/TheStrip.java" />
+        <option value="$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java" />
+        <option value="$PROJECT_DIR$/src/model/DynamicGameOfLife.java" />
+        <option value="$PROJECT_DIR$/src/controller/MasterController.java" />
         <option value="$PROJECT_DIR$/src/controller/CanvasController.java" />
+        <option value="$PROJECT_DIR$/src/model/StaticGameOfLife.java" />
       </list>
     </option>
   </component>
@@ -378,6 +365,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -442,6 +432,68 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="s305080" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="theStrip" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="s305080" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="s305080" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PatternSaver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -488,9 +540,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -966,11 +1015,12 @@
       <workItem from="1461666715689" duration="1999000" />
       <workItem from="1462179464255" duration="3095000" />
       <workItem from="1462221434856" duration="2812000" />
+      <workItem from="1462224683597" duration="1082000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25196000" />
+    <option name="totallyTimeSpent" value="26278000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="25" y="23" width="1832" height="1131" extended-state="0" />
@@ -984,12 +1034,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20404235" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20307988" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16536313" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32627526" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1000,7 +1051,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32660902" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1060,20 +1110,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/s305080/theStrip/TheStrip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1088,13 +1124,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="86" selection-start-line="22" selection-start-column="86" selection-end-line="22" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="109" column="37" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1161,7 +1190,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-595">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1187,7 +1215,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="735">
           <caret line="49" column="38" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1241,20 +1268,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/MasterController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2595">
-          <caret line="194" column="9" selection-start-line="194" selection-start-column="9" selection-end-line="194" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/s305061/statistics/StatController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
+        <state relative-caret-position="1545">
           <caret line="115" column="105" selection-start-line="115" selection-start-column="105" selection-end-line="115" selection-end-column="105" />
           <folding>
             <element signature="imports" expanded="false" />
+            <element signature="e#1346#1347#0" expanded="false" />
+            <element signature="e#1376#1377#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1267,35 +1288,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/s305080/PatternSaver/ToFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#5346#5347#0" expanded="false" />
-            <element signature="e#5382#5383#0" expanded="false" />
-            <element signature="e#5414#5415#0" expanded="false" />
-            <element signature="e#5443#5444#0" expanded="false" />
-            <element signature="e#5505#5506#0" expanded="false" />
-            <element signature="e#5572#5573#0" expanded="false" />
-            <element signature="e#5620#5621#0" expanded="false" />
-            <element signature="e#5660#5661#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/s305073/controller/EditorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
+        <state relative-caret-position="5865">
           <caret line="426" column="13" selection-start-line="426" selection-start-column="13" selection-end-line="426" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1742#1743#0" expanded="false" />
+            <element signature="e#1786#1787#0" expanded="false" />
+            <element signature="e#5872#5873#0" expanded="false" />
+            <element signature="e#5950#5951#0" expanded="false" />
+            <element signature="e#5993#5994#0" expanded="false" />
+            <element signature="e#6071#6072#0" expanded="false" />
+            <element signature="e#6381#6382#0" expanded="false" />
+            <element signature="e#6457#6458#0" expanded="false" />
+            <element signature="e#6499#6500#0" expanded="false" />
+            <element signature="e#6575#6576#0" expanded="false" />
+            <element signature="e#8595#8596#0" expanded="false" />
+            <element signature="e#8645#8646#0" expanded="false" />
+            <element signature="e#8693#8694#0" expanded="false" />
+            <element signature="e#8742#8743#0" expanded="false" />
+            <element signature="e#8948#8949#0" expanded="false" />
+            <element signature="e#8992#8993#0" expanded="false" />
+            <element signature="e#9341#9342#0" expanded="false" />
+            <element signature="e#9416#9417#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/rules/ClassicRule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
+        <state relative-caret-position="255">
           <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
           <folding />
         </state>
@@ -1305,25 +1328,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="192" column="46" selection-start-line="192" selection-start-column="46" selection-end-line="192" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/rules/HighLifeRule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
+        <state relative-caret-position="195">
           <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/DynamicGameOfLife.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2010">
-          <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
-          <folding>
-            <element signature="e#818#843#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1337,7 +1349,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/StaticGameOfLifeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
+        <state relative-caret-position="735">
           <caret line="49" column="36" selection-start-line="0" selection-start-column="2" selection-end-line="101" selection-end-column="3" />
           <folding />
         </state>
@@ -1351,61 +1363,81 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/s305080/theStrip/TheStripController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="62" column="36" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/s305080/Statistics/Controller/StatsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/DynamicGameOfLife.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="241" column="10" selection-start-line="241" selection-start-column="10" selection-end-line="241" selection-end-column="10" />
+          <folding>
+            <element signature="e#818#843#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/s305080/theStrip/TheStrip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/MasterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2415">
+          <caret line="182" column="23" selection-start-line="182" selection-start-column="23" selection-end-line="182" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/GameOfLife.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="68" column="66" selection-start-line="68" selection-start-column="66" selection-end-line="68" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3242#3243#0" expanded="true" />
-            <element signature="e#3287#3288#0" expanded="true" />
-            <element signature="e#3319#3320#0" expanded="true" />
-            <element signature="e#3357#3358#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/StaticGameOfLife.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/CanvasController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+        <state relative-caret-position="450">
+          <caret line="94" column="41" selection-start-line="94" selection-start-column="41" selection-end-line="94" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/StaticGameOfLife.java">
+    <entry file="file://$PROJECT_DIR$/src/s305080/PatternSaver/ToFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4100#4101#0" expanded="true" />
-            <element signature="e#4133#4134#0" expanded="true" />
-            <element signature="e#4267#4268#0" expanded="true" />
-            <element signature="e#4294#4295#0" expanded="true" />
-            <element signature="e#4433#4434#0" expanded="true" />
-            <element signature="e#4471#4472#0" expanded="true" />
-            <element signature="e#5647#5648#0" expanded="true" />
-            <element signature="e#5681#5682#0" expanded="true" />
-            <element signature="e#5729#5730#0" expanded="true" />
-            <element signature="e#5766#5767#0" expanded="true" />
-            <element signature="e#5828#5829#0" expanded="true" />
-            <element signature="e#5873#5874#0" expanded="true" />
-            <element signature="e#5935#5936#0" expanded="true" />
-            <element signature="e#5974#5975#0" expanded="true" />
-            <element signature="e#6983#6984#0" expanded="true" />
-            <element signature="e#7015#7016#0" expanded="true" />
-            <element signature="e#7787#7788#0" expanded="true" />
-            <element signature="e#7823#7824#0" expanded="true" />
-            <element signature="e#8058#8059#0" expanded="true" />
-            <element signature="e#8095#8096#0" expanded="true" />
-            <element signature="e#8324#8325#0" expanded="true" />
-            <element signature="e#8373#8374#0" expanded="true" />
-            <element signature="e#9026#9027#0" expanded="true" />
-            <element signature="e#9071#9072#0" expanded="true" />
-            <element signature="e#9136#9137#0" expanded="true" />
-            <element signature="e#9175#9176#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="495">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>

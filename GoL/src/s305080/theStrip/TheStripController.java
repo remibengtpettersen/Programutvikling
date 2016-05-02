@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.transform.Affine;
 import model.Cell;
 import model.DynamicGameOfLife;
+import model.GameOfLife;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -16,7 +17,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class TheStripController {
 
-    private ArrayList<ArrayList<AtomicBoolean>> grid;
+
     double cellSize;
 
     int minX;
@@ -30,7 +31,8 @@ public class TheStripController {
     public Canvas canvas;
     GraphicsContext gc;
 
-    private DynamicGameOfLife gol;
+    private GameOfLife originalGol;
+    private  GameOfLife gol;
     private MasterController master;
     private double offsetX;
     private double offsetY;
@@ -47,11 +49,11 @@ public class TheStripController {
      */
     public void updateStrip(){
 
-        gol.deepCopyOnSet(grid);
+        gol = originalGol.clone();
 
-        if(!gol.getRule().toString().equals(master.getCanvasController().gol.getRule().toString())) //for some reason this always returns false :/
+        if(!gol.getRule().toString().equals(originalGol.getRule().toString())) //for some reason this always returns false :/
         {
-            gol.setRule(master.getCanvasController().gol.getRule().toString());
+            gol.setRule(originalGol.getRule().toString());
             System.out.println("changed rule");
         }
 
@@ -148,10 +150,9 @@ public class TheStripController {
     }
 
 
-    public void setGrid(ArrayList<ArrayList<AtomicBoolean>> grid) {
+    public void setGol(GameOfLife gol) {
         gc = canvas.getGraphicsContext2D();
-        this.grid = grid;
-        gol = new DynamicGameOfLife();
+        this.originalGol = gol;
         canvas.heightProperty().addListener(e -> {
             updateStrip();
         });

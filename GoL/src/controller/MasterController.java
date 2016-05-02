@@ -180,7 +180,7 @@ public class MasterController {
      */
     void showTheStrip() {
         theStrip = new TheStrip();
-       // theStrip.display(canvasController.gol.getGrid, this);
+        theStrip.display(this);
         if(stats == null)
             stage.setOnCloseRequest(event -> closeTheStrip());
         else{

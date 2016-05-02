@@ -455,7 +455,7 @@ public class DynamicGameOfLife extends GameOfLife{
      * Updates the rule's references to this class' cell grid and neighbour grid
      */
     /*public void updateRuleGrid() {
-        rule.setGrid(grid);
+        rule.setGol(grid);
         rule.setNeighbours(neighbours);
     }*/
 

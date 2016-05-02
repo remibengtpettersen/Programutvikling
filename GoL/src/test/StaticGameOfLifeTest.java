@@ -46,7 +46,7 @@
 //                new boolean[]{false, false, false, false, false},
 //                new boolean[]{false, false, false, false, false}};
 //
-//        gol.setGrid(grid);
+//        gol.setGol(grid);
 //        gol.aggregateNeighbours();
 //        assertArrayEquals(new byte[][]{
 //                new byte[]{0, 0, 0, 0, 0},
@@ -80,7 +80,7 @@
 //        boolean[][] testGrid = new boolean[3][3];
 //        testGrid[1][1] = true;
 //
-//        gol.setGrid(testGrid);
+//        gol.setGol(testGrid);
 //        gol.clearGrid();
 //
 //        for (int x = 0; x < gol.getGrid().length; x++) {

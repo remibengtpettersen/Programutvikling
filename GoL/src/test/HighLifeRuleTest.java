@@ -61,7 +61,7 @@
 //    }
 //
 //    @Test public void testIfCellIsDeadAndOneLiveNeighbourThenReturnCellWillDie() throws EvolveException {
-//        rule.setGrid(gridBluePrint);
+//        rule.setGol(gridBluePrint);
 //        rule.setNeighbours(neighboursBluePrint);
 //
 //        gridBluePrint[0][0] = true;
@@ -83,10 +83,10 @@
 //    }
 //
 //    @Test public void testIfNeighbourCountHigherThanEight() throws EvolveException {
-//        rule.setGrid(gridBluePrint);
+//        rule.setGol(gridBluePrint);
 //        rule.setNeighbours(neighboursBluePrint);
 //
-//        rule.setGrid(gridBluePrint);
+//        rule.setGol(gridBluePrint);
 //        rule.setNeighbours(neighboursBluePrint);
 //
 //        gridBluePrint[0][0] = true;
@@ -108,7 +108,7 @@
 //        boolean[][] grid = new boolean[3][3];
 //        byte[][] neighbours = new byte[3][3];
 //
-//        rule.setGrid(grid);
+//        rule.setGol(grid);
 //        rule.setNeighbours(neighbours);
 //
 //        grid[0][0] = true;

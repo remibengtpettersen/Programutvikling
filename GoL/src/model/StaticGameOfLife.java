@@ -109,7 +109,7 @@ public class StaticGameOfLife extends GameOfLife{
     @Override
     public StaticGameOfLife clone() {
 
-        StaticGameOfLife staticGameOfLife = new StaticGameOfLife(getGrid().length, getGrid()[0].length);
+        StaticGameOfLife staticGameOfLife = new StaticGameOfLife(getGridWidth(), getGridHeight());
         staticGameOfLife.deepCopyOnSet(grid);
         staticGameOfLife.setRule(getRule().toString());
         staticGameOfLife.setCellCount(cellCount.get());
@@ -125,21 +125,22 @@ public class StaticGameOfLife extends GameOfLife{
      */
     public void deepCopyOnSet(AtomicBoolean[][] grid) {
 
-        AtomicBoolean[][] copiedBoard = new AtomicBoolean[grid.length][grid.length];
-        neighbours = new AtomicInteger[grid.length][grid.length];
-
-        for(int i = 0; i < grid.length; i++){
-            copiedBoard[i] = grid[i].clone();
-        }
-        this.grid = copiedBoard;
+        AtomicBoolean[][] copiedBoard = new AtomicBoolean[grid.length][grid[0].length];
+        neighbours = new AtomicInteger[grid.length][grid[0].length];
         cellCount.set(0);
+
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[0].length; y++) {
-                if(grid[x][y].get()){
+
+                copiedBoard[x][y] = new AtomicBoolean(grid[x][y].get());
+                neighbours[x][y] = new AtomicInteger(0);
+
+                if(grid[x][y].get()) {
                     cellCount.incrementAndGet();
                 }
             }
         }
+        this.grid = copiedBoard;
     }
 
     //region Getters

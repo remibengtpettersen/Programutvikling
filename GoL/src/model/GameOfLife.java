@@ -38,7 +38,7 @@ public abstract class GameOfLife {
     public abstract GameOfLife clone();
 
 
-    //public abstract void setGrid();
+    //public abstract void setGol();
 
 
 
