@@ -6,20 +6,19 @@ import model.rules.HighLifeRule;
 import model.rules.Rule;
 
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created on 12.02.2016.
  *
  * @author The group through pair programing.
  */
-@Deprecated
+
 public class StaticGameOfLife extends GameOfLife{
 
-    private boolean[][] grid;
-    private byte[][] neighbours;
-
-    private Rule rule;
-    private int cellCount = 0;
+    private AtomicBoolean[][] grid;
+    private AtomicInteger[][] neighbours;
 
     /**
      * StaticGameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
@@ -40,8 +39,16 @@ public class StaticGameOfLife extends GameOfLife{
      * array to keep track of the neighbour count to the corresponding cells in the other array
      */
     private void createGameBoard(int width, int height) {
-        grid = new boolean[width][height];
-        neighbours = new byte[width][height];
+        grid = new AtomicBoolean[width][height];
+        neighbours = new AtomicInteger[width][height];
+
+        for (int x = 0; x < width; x++){
+
+            for (int y = 0; y < height; y++){
+                grid[x][y] = new AtomicBoolean(false);
+                neighbours[x][y] = new AtomicInteger(0);
+            }
+        }
     }
     //endregion
 
@@ -51,11 +58,16 @@ public class StaticGameOfLife extends GameOfLife{
      * Evolves the grid one generation
      */
     public void nextGeneration() {
-        aggregateNeighbours();
-
+        createCountingThreads();
         try {
-           rule.evolve(0,1);
-        } catch (EvolveException e) {
+            runThreads();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        createEvolveThreads();
+        try {
+            runThreads();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -71,16 +83,16 @@ public class StaticGameOfLife extends GameOfLife{
      * For each alive cell, it increments the adjacent cells neighbour count.
      * Also calculates the live cell count
      */
-    public void aggregateNeighbours() {
-        cellCount = 0;
-        for (int x = 1; x < grid.length - 1; x++) {
+    public void aggregateNeighbours(int start, int stop) {
+        cellCount.set(0);
+        for (int x = start; x < stop; x++) {
             for (int y = 1; y < grid[x].length - 1; y++) {
-                if (grid[x][y]) {
-                    cellCount++;
+                if (grid[x][y].get()) {
+                    cellCount.incrementAndGet();
                     for (int a = x - 1; a <= x + 1; a++) {
                         for (int b = y - 1; b <= y + 1; b++) {
                             if (a != x || b != y) {
-                                neighbours[a][b]++;
+                                neighbours[a][b].incrementAndGet();
                             }
                         }
                     }
@@ -100,7 +112,7 @@ public class StaticGameOfLife extends GameOfLife{
         StaticGameOfLife staticGameOfLife = new StaticGameOfLife(getGrid().length, getGrid()[0].length);
         staticGameOfLife.deepCopyOnSet(grid);
         staticGameOfLife.setRule(getRule().toString());
-        staticGameOfLife.setCellCount(cellCount);
+        staticGameOfLife.setCellCount(cellCount.get());
 
         //staticGameOfLife.setCell(getCell());
 
@@ -111,20 +123,20 @@ public class StaticGameOfLife extends GameOfLife{
      * Deep copies the grid and sets it.
      * @param grid the grid to be deep copied and set.
      */
-    public void deepCopyOnSet(boolean[][] grid) {
+    public void deepCopyOnSet(AtomicBoolean[][] grid) {
 
-        boolean[][] copiedBoard = new boolean[grid.length][grid.length];
-        neighbours = new byte[grid.length][grid.length];
+        AtomicBoolean[][] copiedBoard = new AtomicBoolean[grid.length][grid.length];
+        neighbours = new AtomicInteger[grid.length][grid.length];
 
         for(int i = 0; i < grid.length; i++){
             copiedBoard[i] = grid[i].clone();
         }
         this.grid = copiedBoard;
-        cellCount = 0;
+        cellCount.set(0);
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[0].length; y++) {
-                if(grid[x][y]){
-                    cellCount++;
+                if(grid[x][y].get()){
+                    cellCount.incrementAndGet();
                 }
             }
         }
@@ -137,7 +149,7 @@ public class StaticGameOfLife extends GameOfLife{
      *
      * @return The neighbour-2D-array
      */
-    public byte[][] getNeighbours() {
+    public AtomicInteger[][] getNeighbours() {
         return neighbours;
     }
 
@@ -146,7 +158,7 @@ public class StaticGameOfLife extends GameOfLife{
      *
      * @return The cell-2D-array
      */
-    public boolean[][] getGrid() {
+    public AtomicBoolean[][] getGrid() {
         return grid;
     }
 
@@ -156,7 +168,7 @@ public class StaticGameOfLife extends GameOfLife{
      * @return The live cell count
      */
     public int getCellCount() {
-        return cellCount;
+        return cellCount.get();
     }
 
     /**
@@ -184,7 +196,7 @@ public class StaticGameOfLife extends GameOfLife{
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if (!grid[i][j]) continue;
+                if (!grid[i][j].get()) continue;
                 if (i < boundingBox[0]) {
                     boundingBox[0] = i;
                 }
@@ -204,22 +216,22 @@ public class StaticGameOfLife extends GameOfLife{
 
     @Override
     public int getGridWidth() {
-        return 0;
+        return grid.length;
     }
 
     @Override
     public int getGridHeight() {
-        return 0;
+        return grid[0].length;
     }
 
     @Override
     public int getNeighboursAt(int x, int y) {
-        return 0;
+        return neighbours[x][y].get();
     }
 
     @Override
     public boolean isCellAlive(int x, int y) {
-        return false;
+        return grid[x][y].get();
     }
 
     public boolean[][] getPatternFromGrid() {
@@ -239,8 +251,8 @@ public class StaticGameOfLife extends GameOfLife{
 
         for (int i = startPoint_x; i < startPoint_x + length_x; i++) {
             for (int j = startPoint_y; j < startPoint_y + length_y; j++) {
-                if (getGrid()[i][j]) {
-                    gridExtracted[k][t] = getGrid()[i][j];
+                if (grid[i][j].get()) {
+                    gridExtracted[k][t] = grid[i][j].get();
                 }
                 t++;
             }
@@ -259,7 +271,7 @@ public class StaticGameOfLife extends GameOfLife{
      *
      * @param grid Cell grid
      */
-    public void setGrid(boolean[][] grid) {
+    public void setGrid(AtomicBoolean[][] grid) {
         this.grid = grid;
     }
 
@@ -292,12 +304,18 @@ public class StaticGameOfLife extends GameOfLife{
      * @param y the y coordinate in the grid.
      */
     public void setCellAlive(int x, int y) {
-        grid[x][y] = true;
+        grid[x][y].set(true);
     }
 
+    /**
+     * Sets cell state to false regardless of current state.
+     *
+     * @param x the x coordinate in the grid.
+     * @param y the y coordinate in the grid.
+     */
     @Override
     public void setCellDead(int x, int y) {
-
+        grid[x][y].set(false);
     }
 
     /**
@@ -307,7 +325,7 @@ public class StaticGameOfLife extends GameOfLife{
      * @param y the y coordinate in the grid.
      */
     public void changeCellState(int x, int y) {
-        grid[x][y] = !grid[x][y];
+        grid[x][y].set(!grid[x][y].get());
     }
 
     /**
@@ -316,7 +334,7 @@ public class StaticGameOfLife extends GameOfLife{
      * If a cell grid is not yet set, use createGameBoard() instead.
      */
     public void createNeighboursGrid() {
-        neighbours = new byte[grid.length][grid[0].length];
+        neighbours = new AtomicInteger[grid.length][grid[0].length];
     }
     /**
      * Clears the grid of live cells
@@ -328,15 +346,15 @@ public class StaticGameOfLife extends GameOfLife{
             Arrays.fill(neighbours[i], (byte) 0);
         }
 
-        cellCount = 0;
+        cellCount.set(0);
     }
     public void setCellCount(int cellCount) {
-        this.cellCount = cellCount;
+        this.cellCount.set(cellCount);
     }
 
     @Override
     public void resetNeighboursAt(int x, int y) {
-
+        neighbours[x][y].set(0);
     }
 
     @Override

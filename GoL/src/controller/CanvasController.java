@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import model.Cell;
 import model.DynamicGameOfLife;
 import model.GameOfLife;
+import model.StaticGameOfLife;
 import s305080.PatternSaver.ToFile;
 
 import java.io.IOException;
@@ -94,7 +95,9 @@ public class CanvasController {
         this.masterController = masterController;
         initializeGameParameters();
 
-        gol = new DynamicGameOfLife();
+        gol = new StaticGameOfLife(2500,2500);
+        //gol = new DynamicGameOfLife();
+
         gc = canvas.getGraphicsContext2D();
         buttonsPressed = new ArrayList<>();
 
@@ -156,7 +159,11 @@ public class CanvasController {
                 if (now / 1000000 - timer > frameDelay) {
 
                     if(!busy) {
+
+                        double timer = System.currentTimeMillis();
                         gol.nextGeneration();
+                        System.out.println(System.currentTimeMillis() - timer);
+
                         renderCanvas();
                         if(!thread.isAlive()){
                             thread = new Thread(() -> {
@@ -486,7 +493,8 @@ public class CanvasController {
      */
     public void renderCanvas() {
 
-        updateView();
+       updateView();
+
         renderLife();
 
         if (importing)
@@ -499,7 +507,7 @@ public class CanvasController {
             renderMarkup();
         }
         //to see where the grid is
-        //gc.strokeRect(-getCommonOffsetX(), -getCommonOffsetY(), grid.size() * cell.getSize(), grid.get(0).size() * cell.getSize());
+        gc.strokeRect(-getCommonOffsetX(), -getCommonOffsetY(), gol.getGridWidth() * cell.getSize(), gol.getGridHeight() * cell.getSize());
 
     }
 
