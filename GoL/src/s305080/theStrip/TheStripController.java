@@ -160,7 +160,7 @@ public class TheStripController {
 
     public void setMaster(MasterController master) {
         this.master = master;
-        cell = master.getCanvasController().cell;
+        cell = master.getCanvasController().getCell();
     }
 
     public double getCommonOffsetX() {

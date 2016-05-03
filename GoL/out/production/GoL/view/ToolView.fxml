@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <ToolBar fx:controller="controller.ToolController" xmlns="http://javafx.com/javafx/8.0.40"
          xmlns:fx="http://javafx.com/fxml" stylesheets="/css/stylesheet.css">
+
     <Button fx:id="btnPlay" text="Pause" onAction="#togglePause" prefWidth="85">
         <graphic>
             <ImageView fx:id="imgViewBtnPlay" fitWidth="15" fitHeight="15">
@@ -13,6 +14,7 @@
             </ImageView>
         </graphic>
     </Button>
+
     <HBox spacing="10">
         <HBox  spacing="5" alignment="CENTER">
             <Label text="Speed"/>
@@ -24,8 +26,8 @@
         </HBox>
     </HBox>
 
-    <ColorPicker fx:id="cellColorPicker" prefWidth="100" onAction="#changeCellColor"/>
-    <ColorPicker fx:id="backgroundColorPicker" prefWidth="100" onAction="#changeBackgroundColor"/>
+    <ColorPicker fx:id="liveCellColorPicker" prefWidth="100" onAction="#changeCellColor"/>
+    <ColorPicker fx:id="deadCellColorPicker" prefWidth="100" onAction="#changeDeadColor"/>
 
     <ChoiceBox fx:id="mouseAction" value="MouseAction">
         <items>
