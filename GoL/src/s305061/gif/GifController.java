@@ -3,6 +3,7 @@ package s305061.gif;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import lieng.GIFWriter;
+import model.DynamicGameOfLife;
 import model.GameOfLife;
 
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.io.IOException;
 
 /**
  * @author Andreas s305061
+ *
  * Controller for GIF window.
  * Handles GIF creation with GIFLib, in addition to GUI control
  */
@@ -39,30 +41,35 @@ public class GifController {
 
     /**
      * Gets the width of the bounding box set through GUI or autoCrop()
+     *
      * @return Width (number of cells)
      */
     private int getBoundaryWidth(){ return right-left; }
 
     /**
      * Gets the height of the bounding box set through GUI or autoCrop()
+     *
      * @return Height (number of cells)
      */
     private int getBoundaryHeight(){ return bottom-top; }
 
     /**
      * Gets the width of the GIF file to be made
+     *
      * @return Width (number of pixels)
      */
     private int getGifWidth(){ return getBoundaryWidth()*scale; }
 
     /**
      * Gets the height of the GIF file to be made
+     *
      * @return Height (number of pixels)
      */
     private int getGifHeight(){ return getBoundaryHeight()*scale; }
 
     /**
      * Sets time delay between each iteration or frame of the GIF to be made
+     *
      * @param timeBetweenFrames Time delay in milliseconds
      */
     private void setTimeBetweenFrames(int timeBetweenFrames){
@@ -72,6 +79,7 @@ public class GifController {
     /**
      * Sets the filename of the GIF to be made.
      * If input filename doesn't end with the .gif file extension, it will be added
+     *
      * @param fileName Filename
      */
     private void setFileName(String fileName){
@@ -86,6 +94,7 @@ public class GifController {
     /**
      * Initialization method.
      * Will set a reference to a game object to be cloned and animated, then automatically crop the board
+     *
      * @param gol Reference to a game object
      */
     public void initialize(GameOfLife gol) {
@@ -94,7 +103,7 @@ public class GifController {
 
         autoCrop();
 
-        pushVariablesToTextFields(false);
+        pushVariablesToTextFields();
     }
 
     /**
@@ -102,14 +111,28 @@ public class GifController {
      */
     public void autoCrop() {
 
-        gol.fitBoardToPattern();
+        // if dynamic game board
+        if(gol instanceof DynamicGameOfLife){
 
-        left = 0;
-        right = gol.getGridWidth();
-        top = 0;
-        bottom = gol.getGridHeight();
+            ((DynamicGameOfLife)gol).fitBoardToPattern();
 
-        pushVariablesToTextFields(true);
+            left = 0;
+            right = gol.getGridWidth();
+            top = 0;
+            bottom = gol.getGridHeight();
+        }
+        // if static game board
+        else {
+
+            int[] boundary = gol.getBoundingBox();
+
+            left = boundary[0];
+            right = boundary[1]++;
+            top = boundary[2];
+            bottom = boundary[3]++;
+        }
+
+        pushBoundaryVariablesToTextFields();
     }
 
     /**
@@ -129,18 +152,22 @@ public class GifController {
 
     /**
      * Sets all text in text fields to reflect their respective variables
-     * @param boundaryOnly If true, only the boundary related variables will be set
      */
-    private void pushVariablesToTextFields(boolean boundaryOnly){
+    private void pushVariablesToTextFields(){
 
-        if(!boundaryOnly) {
-            iterationTextField.setText("" + iterations);
-            scaleTextField.setText("" + scale);
-            fileNameTextField.setText("" + fileName);
-            timeTextField.setText("" + timeBetweenFrames);
-        }
+        iterationTextField.setText("" + iterations);
+        scaleTextField.setText("" + scale);
+        fileNameTextField.setText("" + fileName);
+        timeTextField.setText("" + timeBetweenFrames);
 
-        // boundary
+        pushBoundaryVariablesToTextFields();
+    }
+
+    /**
+     * Sets the boundary related text fields to reflect their respective variables
+     */
+    private void pushBoundaryVariablesToTextFields(){
+
         leftTextField.setText(""+left);
         topTextField.setText(""+top);
         rightTextField.setText(""+right);
@@ -165,6 +192,7 @@ public class GifController {
 
     /**
      * Parses text to int if possible. If not, 0 will be returned
+     *
      * @param string Text to be parsed
      * @return Integer parsed from text, or 0
      */
@@ -180,6 +208,7 @@ public class GifController {
 
     /**
      * Initiates the recursive GIF creation
+     *
      * @param originalGol The game object to be cloned
      * @param iterations Number of iterations to evolve, also number of frames to be added to gif
      * @throws IOException IO exception, thrown by GIFLib
@@ -194,8 +223,9 @@ public class GifController {
     }
 
     /**
-     * Recursive GIF creation. Every instance will add a frame for the current generation,
+     * Recursive GIF creation. Every repetition will add a frame for the current generation,
      * then recursively proceed to the next frame and generation.
+     *
      * @param writer GIFWriter from GIFLib
      * @param game The cloned game class to be animated
      * @param counter Counter to determine when to stop recursive method. Initially set as number of generations/frames
@@ -211,8 +241,8 @@ public class GifController {
             // add new image (frame) to gif
             writer.createNextImage();
 
-            // these are 0 and 0 the first instance (reset in clone() method),
-            // then they will increase according to the movement of the pattern
+            // these are 0 and 0 the first repetition (reset in clone() method),
+            // then they will increase according to the movement of the pattern (if dynamic game board)
             int offsetX = game.getOffsetX();
             int offsetY = game.getOffsetY();
 
@@ -225,8 +255,8 @@ public class GifController {
                         int gifX = (gameX - left - offsetX) * scale;
                         int gifY = (gameY - top - offsetY) * scale;
 
-                        int gifMaxX = gifX + scale-1;
-                        int gifMaxY = gifY + scale-1;
+                        int gifMaxX = gifX + scale -1;
+                        int gifMaxY = gifY + scale -1;
 
                         try {
                             writer.fillRect(gifX, gifMaxX, gifY, gifMaxY, Color.BLACK);

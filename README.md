@@ -137,3 +137,9 @@ Refactored s305061 StatController. Replaced ProgressIndicator with ProgressBar, 
 
 160427 20:15
 Partial implementation of s305061 gif creation. 
+
+160503 12:00
+StaticGameOfLife implemented. StaticGameOfLife and DynamicGameOfLife both extends the now abstract GameOfLife class.
+
+160503 18:08
+s305061 gif creation completed. Now supports both StaticGameOfLife and DynamicGameOfLife. Rules package and ToolController refactored and documented with JavaDoc and comments.

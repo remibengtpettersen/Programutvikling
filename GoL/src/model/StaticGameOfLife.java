@@ -324,14 +324,15 @@ public class StaticGameOfLife extends GameOfLife{
     public void createNeighboursGrid() {
         neighbours = new AtomicInteger[grid.length][grid[0].length];
     }
+
     /**
      * Clears the grid of live cells
      */
     public void clearGrid() {
 
         for (int i = 0; i < grid.length; i++) {
-            Arrays.fill(grid[i], false);
-            Arrays.fill(neighbours[i], (byte) 0);
+            Arrays.fill(grid[i], new AtomicBoolean(false));
+            Arrays.fill(neighbours[i], new AtomicInteger(0));
         }
 
         cellCount.set(0);

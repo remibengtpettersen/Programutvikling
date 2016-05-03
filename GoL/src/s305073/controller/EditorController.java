@@ -96,7 +96,7 @@ public class EditorController {
 
     private Point centerPatternEditor() {
         Point point = new Point();
-        golEditor.fitBoardToPattern();
+        //golEditor.fitBoardToPattern();////////////////////////////////////////
 
         // calculate pattern center in 2D.
         double patternWidthCenter = (golEditor.getGridWidth()) * editorCell.getSize() / 2;
@@ -115,7 +115,7 @@ public class EditorController {
 
     private Point centerPatternFrame() {
         Point point = new Point();
-        golStrip.fitBoardToPattern();
+        //golStrip.fitBoardToPattern();/////////////////////////////////////////
 
         // calculate pattern center in 2D.
         double patternWidthCenter = (golStrip.getGridWidth()) * stripCell.getSize() / 2;
