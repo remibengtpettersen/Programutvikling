@@ -15,6 +15,7 @@ import model.GameOfLife;
 import s305080.Gif.GifSaver;
 import s305080.PatternSaver.ToFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
