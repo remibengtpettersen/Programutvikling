@@ -8,7 +8,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
 
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -221,7 +220,7 @@ public class MenuController {
         masterController.getCanvasController().stopAnimation();
 
         // change icon on control button
-        masterController.getToolController().changeIconToPlay();
+        masterController.getToolController().changeButtonIconToPlay();
 
         // set editor title
         editor.setTitle("Pattern Editor");

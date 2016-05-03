@@ -119,12 +119,12 @@ public class ToolController {
 
         if (Objects.equals(btnPlay.getText(), "Play")) {
 
-            changeIconToPause();
+            changeButtonIconToPause();
             masterController.getCanvasController().startAnimation();
         }
         else {
 
-            changeIconToPlay();
+            changeButtonIconToPlay();
             masterController.getCanvasController().stopAnimation();
         }
     }
@@ -132,7 +132,7 @@ public class ToolController {
     /**
      * Changes the btnPlay image to a play button image.
      */
-    public void changeIconToPlay() {
+    public void changeButtonIconToPlay() {
 
         btnPlay.setText("Play");
         btnPlay.setGraphic(new ImageView(imgPlay));
@@ -141,7 +141,7 @@ public class ToolController {
     /**
      * Changes the btnPlay image to a pause button image.
      */
-    public void changeIconToPause() {
+    public void changeButtonIconToPause() {
 
         btnPlay.setText("Pause");
         btnPlay.setGraphic(new ImageView(imgPause));

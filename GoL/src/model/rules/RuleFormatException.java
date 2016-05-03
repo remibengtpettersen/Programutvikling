@@ -1,14 +1,15 @@
 package model.rules;
 
 /**
- * Created by Andreas on 13.04.2016.
+ * Exception to be thrown in case of problems related to rule formatting or parsing
  */
 public class RuleFormatException extends Exception {
 
-    public String errorMessage;
+    private String errorMessage;
 
     /**
      * RuleFormatException constructor. Will set an error message, which is available from getMessage()
+     *
      * @param ruleText The rule text which couldn't be formatted
      */
     public RuleFormatException(String ruleText) {
@@ -21,7 +22,8 @@ public class RuleFormatException extends Exception {
 
     /**
      * Returns the error message of the exception
-     * @return The error message
+     *
+     * @return Error message
      */
     @Override
     public String getMessage(){

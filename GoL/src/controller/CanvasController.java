@@ -361,11 +361,11 @@ public class CanvasController {
 
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY)
             if (running) {
-                masterController.getToolController().changeIconToPlay();
+                masterController.getToolController().changeButtonIconToPlay();
                 stopAnimation();
                 running = false;
             } else {
-                masterController.getToolController().changeIconToPause();
+                masterController.getToolController().changeButtonIconToPause();
                 startAnimation();
                 running = true;
             }

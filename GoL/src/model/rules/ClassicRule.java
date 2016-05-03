@@ -1,27 +1,21 @@
 package model.rules;
 
-import model.DynamicGameOfLife;
 import model.EvolveException;
 import model.GameOfLife;
 
 /**
- * Created by Truls on 20/04/16.
+ * The original Game of Life rule made by John Conway in 1970. Rulestring: B3/S23
  */
 public class ClassicRule extends Rule {
 
-
-    private final String ruleText;
-    //private ArrayList<ArrayList<AtomicBoolean>> grid;
-    //private ArrayList<ArrayList<AtomicInteger>> neighbours;
-
     /**
-     * ClassicRule constructor
+     * ClassicRule constructor.
+     * Sets the rulestring to "B3/S23"
      */
     public ClassicRule(GameOfLife gol){
-
         super(gol);
 
-        ruleText = "B3/S23";
+        rulestring = "B3/S23";
     }
 
     @Override
@@ -32,17 +26,15 @@ public class ClassicRule extends Rule {
 
                 int neighbourCount = gol.getNeighboursAt(x,y);
 
+                // if a cell has an impossible number of neighbours, throw EvolveException
                 if (neighbourCount < 0 || neighbourCount > 8)
-                {
-                    gol.resetNeighboursAt(x,y);
                     throw new EvolveException("Tried setting " + neighbourCount + " neighbours");
-                }
 
-                    // if a cell has 3 neighbours it wil become alive independent whether it's alive or dead
+                // if a cell has 3 neighbours, it wil become alive or stay alive independent whether it's alive or dead
                 else if (neighbourCount == 3)
                     gol.setCellAlive(x,y);
 
-                    // if a cell has 2 neighbours it should either stay alive or stay dead, else it should die.
+                // if a cell has 2 neighbours, it should either stay alive or stay dead, else it should die.
                 else if (neighbourCount != 2)
                     gol.setCellDead(x,y);
 
@@ -51,6 +43,4 @@ public class ClassicRule extends Rule {
             }
         }
     }
-
-
 }

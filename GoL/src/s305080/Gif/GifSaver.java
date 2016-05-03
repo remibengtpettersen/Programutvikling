@@ -60,7 +60,7 @@ public class GifSaver {
         offsetY = master.getCanvasController().getCommonOffsetY();
         width = (int)master.getCanvasController().getCanvas().getWidth();
         height = (int)master.getCanvasController().getCanvas().getHeight();
-        cellSize = master.getCanvasController().cell.getSize();
+        cellSize = master.getCanvasController().getCell().getSize();
 
         createGif();
 
@@ -82,7 +82,7 @@ public class GifSaver {
         gifWriter = new GIFWriter(width, height, path, 10);
 
         frameNr = 0;
-        cell = master.getCanvasController().cell;
+        cell = master.getCanvasController().getCell();
         drawNextImage();
 
     }

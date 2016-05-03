@@ -1,53 +1,53 @@
 package model.rules;
 
-import model.DynamicGameOfLife;
 import model.EvolveException;
 import model.GameOfLife;
 
 /**
- * A base class for two-dimensional rules
- * Created on 29.02.2016.
- * @author The group through pair programming
+ * An abstract base class for all game rules
  */
 public abstract class Rule {
 
-    //region fields
-    //protected boolean[][] grid;
-    //protected byte[][] neighbours;
     protected GameOfLife gol;
-    protected String ruleText = "";
-    //endregion
+    protected String rulestring = "";
 
-    //region constructor
     /**
-     * Default constructor
+     * Default constructor.
+     * Sets a reference to the GameOfLife object to evolve
      */
     public Rule(GameOfLife gol){
 
         this.gol = gol;
     }
-    //endregion
 
     /**
      * Evolves the board one generation, based on the number of neighbours per cell.
+     * The interval of columns to be evolved is specified through parameters,
+     * to enable concurrent evolution of the game board.
+     *
+     * @param start First column from the left side to be evolved
+     * @param stop Last column on the right side to be evolved
+     * @throws EvolveException
      */
     public abstract void evolve(int start, int stop) throws EvolveException;
 
     /**
-     * Returns the rule text of the rule
-     * @return Rule text
+     * Returns the rulestring of this rule
+     *
+     * @return Rulestring
      */
     @Override
     public String toString(){
-        return ruleText;
+        return rulestring;
     }
 
     /**
      * Returns true if this rule's rule text is equivalent to another rule text
-     * @param otherRuleText the other rule text
-     * @return true if this rule's ruleText is equal to otherRuleText
+     *
+     * @param otherRulestring The other rule text
+     * @return true if this rule's rulestring is equal to otherRulestring
      */
-    public boolean isEqual(String otherRuleText){
-        return ruleText.equalsIgnoreCase(otherRuleText);
+    public boolean isEqual(String otherRulestring){
+        return rulestring.equalsIgnoreCase(otherRulestring);
     }
 }
