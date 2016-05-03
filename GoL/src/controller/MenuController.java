@@ -27,11 +27,8 @@ public class MenuController {
     public MenuItem copy;
     public MenuItem paste;
     private MasterController masterController;
-
-    @FXML
-    private MenuItem openBtn;
-    @FXML
-    RadioMenuItem theStripS305080, statsS305080, markupS305080;
+    
+    @FXML private RadioMenuItem theStripS305080, statsS305080, markupS305080;
 
     /**
      * Stores the reference to the masterController
@@ -43,76 +40,111 @@ public class MenuController {
     }
 
     /**
-     * Opens the fileChooser so the user can choose a pattern to import
+     * Launch fileChooser for importing pattern files.
      */
     public void openFileChooser(){
 
         masterController.choosePattern();
     }
 
+    /**
+     * Save to pattern file.
+     */
     public void saveFile(){
-       masterController.getCanvasController().saveToFile();
+
+        masterController.getCanvasController().saveToFile();
     }
+
+    /**
+     * Launched about window for "Game of Life".
+     * @param actionEvent
+     */
     public void onAbout(ActionEvent actionEvent) {
 
         System.out.println("About clicked");
     }
 
-    public void setConwayRule(ActionEvent actionEvent) {
+    /**
+     * Set Conway Rule - Born 3 / Survive 2 and 3.
+     */
+    public void setConwayRule() {
 
         masterController.getCanvasController().setRule("classic");
     }
 
-    public void setHighLifeRule(ActionEvent actionEvent) {
+    /**
+     * Set High life rule - Born 3 and 6 / Survive 2 and 3.
+     */
+    public void setHighLifeRule() {
 
         masterController.getCanvasController().setRule("highlife");
     }
 
     /**
-     * opens a dialog so the user can choose a custom rule
-     * @param actionEvent
+     *  Dialog for setting custom rule.
      */
-    public void setCustomRule(ActionEvent actionEvent) {
+    public void setCustomRule() {
 
+        // set active rule text in input dialog
         TextInputDialog dialog = new TextInputDialog(masterController.getCanvasController().gol.getRule().toString());
 
+        // set title, header and content text
         dialog.setTitle("Custom rule");
         dialog.setHeaderText("Enter custom rule code");
         dialog.setContentText("B: Neighbours needed for birth\nS: Neighbours needed for survival\n" +
                 "Example: Conway's rule would be B3/S23");
 
+        // launch dialog
         Optional<String> result = dialog.showAndWait();
 
-        // Traditional way to get the response value.
+        // check if result is entered
         if (result.isPresent()){
             System.out.println("Custom rule set: " + result.get());
 
+            // set custom rule
             masterController.getCanvasController().setRule(result.get());
         }
     }
 
-    public void setLWDRule(ActionEvent actionEvent) {
+    /**
+     *  Set LWD-rule - Born 3 / Survive 1, 2, 3, 4, 5, 6, 7 and 8.
+     */
+    public void setLWDRule() {
         masterController.getCanvasController().setRule("B3/S012345678");
     }
 
-    public void setSeedsRule(ActionEvent actionEvent) {
+    /**
+     *  Set Seeds-rule - Born 2 / Survive none
+     */
+    public void setSeedsRule() {
         masterController.getCanvasController().setRule("B2/S");
     }
 
-    public void setDiamoebaRule(ActionEvent actionEvent) {
+    /**
+     *  Set Diamoeba-rule - Borne 3, 5, 6, 7 and 8 / Survive 5, 6, 7 and 8.
+     */
+    public void setDiamoebaRule() {
         masterController.getCanvasController().setRule("B35678/S5678");
     }
 
-    public void setReplicatorRule(ActionEvent actionEvent) {
+    /**
+     *  Set Replicator-rule - Born 1, 3, 5 and 7 /Survive 1, 3, 5 and 7.
+     */
+    public void setReplicatorRule() {
         masterController.getCanvasController().setRule("B1357/S1357");
     }
 
-    public void setDNNRule(ActionEvent actionEvent) {
+    /**
+     *  Set DNN-rule - Born 3, 6, 7 and 8 / Survive 3, 4, 6, 7 and 8.
+     */
+    public void setDNNRule() {
         masterController.getCanvasController().setRule("B3678/S34678");
     }
 
-    public void clearGrid(ActionEvent actionEvent) { masterController.getCanvasController().clearGrid(); }
-
+    /**
+     *  Clear grid - empty´s all arrays, reset cell counter and redraws canvas
+     */
+    public void clearGrid() { masterController.getCanvasController().clearGrid(); }
 
 
     //region s305080
@@ -146,35 +178,62 @@ public class MenuController {
     }
     // endregion
 
-    public void launchEditor(ActionEvent actionEvent) {
+    /**
+     *  Student: s305073
+     *  Launch editor for build new or manipulating existing pattern.
+     */
+    public void launchEditor() {
+        // instantiate stage for editor
         Stage editor = new Stage();
+
+        // load editor fxml view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../s305073/view/EditorView.fxml"));
+
+        // set modality to window and locks primary stage for access
         editor.initModality(Modality.WINDOW_MODAL);
         editor.initOwner(masterController.stage);
 
+        // initialize root
         GridPane root = null;
 
+        // tries to load fxml root object to grid pane reference
         try {
             root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // instantiate new scene, set fxml root and scene width and height
         Scene scene = new Scene(root, 1000, 700);
+        // set scene for editor
         editor.setScene(scene);
 
+        // set control to editorController
         EditorController editorController = loader.getController();
+
+        // deep copy and assign to new reference variable
         editorController.getDeepCopyGol(masterController.getCanvasController().gol);
+
+        // set pattern in editor window
         editorController.setPattern();
 
+        // stop game of life animation
         masterController.getCanvasController().stopAnimation();
+
+        // change icon on control button
         masterController.getToolController().changeIconToPlay();
 
+        // set editor title
         editor.setTitle("Pattern Editor");
 
+        // set location on screen - (x, y)
         editor.setX(550);
         editor.setY(250);
+
+        // launch editor
         editor.showAndWait();
+
+        // removes reference from editor - ready for garbage collection
         editor = null;
     }
 
@@ -191,6 +250,9 @@ public class MenuController {
     }
     //endregion
 
+    /**
+     * Enables selection of area in grid through canvas position.
+     */
     public void activateMarkup() {
         if (markupS305080.isSelected()){
             masterController.getCanvasController().activateMarkup();
@@ -200,14 +262,23 @@ public class MenuController {
         }
     }
 
+    /**
+     * Cut pattern from game board.
+     */
     public void cut() {
         masterController.getCanvasController().cutMarkedArea();
     }
 
+    /**
+     * Copy pattern from game board.
+     */
     public void copy() {
         masterController.getCanvasController().copyMarkedArea();
     }
 
+    /**
+     * Paste pattern to game board.
+     */
     public void paste() {
         masterController.getCanvasController().pasteClipBoard();
     }
