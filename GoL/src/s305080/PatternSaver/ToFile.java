@@ -41,12 +41,11 @@ public class ToFile {
         this.gol = gol;
         int [] boundingBox = gol.getBoundingBox();
 
-        if(boundingBox[0] > boundingBox[1]){
+        if(boundingBox[0] == 1 && boundingBox[1] == 1){
             MessageBox.alert("No pattern to save");
             System.out.println("YOU SHALL NOT SAVE");
             return; //throw exception
         }
-       // this.grid = gol.getGrid();
         this.boundingBox = boundingBox;
 
         list = new ArrayList<>();
@@ -96,7 +95,7 @@ public class ToFile {
                     counter++;
                     firstInLine = false;
                 }
-                else if(lastBit == grid.get(x).get(y).get()){
+                else if(lastBit == gol.isCellAlive(x, y)){
                     counter ++;
                     if (currentLine.length() > 40){
                         list.add(currentLine.toString());
@@ -112,7 +111,7 @@ public class ToFile {
                     }
                     counter = 1;
                 }
-                lastBit = grid.get(x).get(y).get();
+                lastBit = gol.isCellAlive(x, y);
 
             }
 
@@ -150,7 +149,7 @@ public class ToFile {
 
             for(int x = boundingBox[0]; x <= boundingBox[1]; x++){
 
-                if(grid.get(x).get(y).get()){
+                if(gol.isCellAlive(x, y)){
                     currentLine.append('O');
                 }
                 else

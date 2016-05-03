@@ -26,6 +26,8 @@ public class MasterController {
     public Stage stage;
     public Scene scene;
 
+    private FileChooser patternChooser = new FileChooser();
+
     @FXML private CanvasController canvasController;
     @FXML private MenuController menuController;
     @FXML private ToolController toolController;
@@ -39,35 +41,45 @@ public class MasterController {
     TheStrip theStrip;
     Stats stats;
     //endregion
-    private FileChooser patternChooser = new FileChooser();
-
 
     /**
      *
-     * @param stage the primary stage
-     * @param root the border pane with the mainView
+     * Called to initialize master controller after its root element has been completely processed
+     *
+     * @param stage The primary stage
+     * @param root The border pane with the mainView
      * @throws IOException
      */
     public void initialize(Stage stage, BorderPane root) throws IOException {
 
+        // read and loads game of life configurations from file
         configuration = new Configuration("../GoL/resources/config.properties");
 
+        // set stage to field
         this.stage = stage;
+
+        // instantiate scene with root element and size
         scene = new Scene(root, configuration.getWidth(), configuration.getHeight());
 
+        // set title and scene to stage
         stage.setTitle("Game of life - GoL");
         stage.setScene(scene);
+
+        // open GUI
         stage.show();
 
+        // pass reference ,master controller, to toolController, canvasController and menuController
         toolController.initialize(this);
         canvasController.initialize(this);
         menuController.initialize(this);
 
+        // set title for pattern chooser and configure allowed extensions
         patternChooser.setTitle("Choose pattern file");
         patternChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GoL pattern files", "*.rle", "*.lif", "*.life", "*.cells"));
 
         String patternDir = "../../Patterns";
 
+        // bind canvas to scene size
         bindCanvas();
     }
 
@@ -75,27 +87,31 @@ public class MasterController {
      * Binds the canvas size to the scene size
      */
     private void bindCanvas(){
-
+        // binds canvas to scene width
         canvasController.getCanvas().widthProperty().bind(scene.widthProperty());
+        // binds canvas to scene height and subtracts an area for menu- and toolbar
         canvasController.getCanvas().heightProperty().bind(scene.heightProperty().subtract(70));
     }
 
     //region s305061
-
     /**
      * Opens the s305061 statistics window
      */
     public void openStatWindow() {
-
+        // load fxml view for statistics
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("../s305061/statistics/StatView.fxml"));
 
+        // try to load fxml to reference
         try {
             Parent root = loader.load();
+            // set control
             statController = loader.getController();
 
+            // create stage and set scene
             Stage statStage = new Stage();
             statStage.setScene(new Scene(root));
+
 
             statController.setGol(canvasController.gol);
             statStage.setTitle("Statistics");
@@ -137,32 +153,39 @@ public class MasterController {
         }
     }
     //endregion
-    //endregion
 
     /**
      * Opens the file chooser so the user can choose a pattern file to import
      */
     public void choosePattern(){
 
-        canvasController.busy = true;
+        // lock canvas control
+        canvasController.interaction = true;
+        // open pattern chooser
         File file = patternChooser.showOpenDialog(stage);
-        canvasController.busy = false;
+
+        // release canvas control
+        canvasController.interaction = false;
+
+        // check if file is NOT null
         if(file != null) {
 
             try {
-                canvasController.setImportPattern(PatternParser.read(file));
+                // set pattern to canvas
+                canvasController.setClipBoardPattern(PatternParser.read(file));
             }
             catch (PatternFormatException e) {
                 e.printStackTrace();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-
-
+    /**
+     *
+     * @return
+     */
     public CanvasController getCanvasController(){
         return canvasController;
     }
@@ -180,7 +203,7 @@ public class MasterController {
      */
     void showTheStrip() {
         theStrip = new TheStrip();
-       // theStrip.display(canvasController.gol.getGrid, this);
+        theStrip.display(this);
         if(stats == null)
             stage.setOnCloseRequest(event -> closeTheStrip());
         else{

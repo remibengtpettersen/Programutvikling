@@ -13,11 +13,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class DynamicGameOfLife extends GameOfLife{
 
-    private int availableProcessors = Runtime.getRuntime().availableProcessors();
     //int availableProcessors = 1;
 
 
-    private List<Thread> threads = new ArrayList<>();
 
     // Offset to use when grid is expanded to left and upwards
 
@@ -27,8 +25,8 @@ public class DynamicGameOfLife extends GameOfLife{
 
     private ArrayList<ArrayList<AtomicBoolean>> grid;
     private ArrayList<ArrayList<AtomicInteger>> neighbours;
-    private Rule rule;
-    private AtomicInteger cellCount = new AtomicInteger(0);
+
+
 
     /**
      * StaticGameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
@@ -114,43 +112,7 @@ public class DynamicGameOfLife extends GameOfLife{
 
     }
 
-    public void createCountingThreads() {
-        for (int i = 0; i < availableProcessors; i++) {
-            final int finalI = i;
-            threads.add(new Thread(() -> {
-                int start = finalI * grid.size()/ availableProcessors;
-                int stop = (finalI + 1) * grid.size()/ availableProcessors;
-                start = (start == 0)? 1: start;
-                stop = (stop == grid.size() - 1)?grid.size() - 1 : stop;
-                aggregateNeighbours(start, stop);
-            }));
-        }
-    }
 
-    public void createEvolveThreads() {
-        for (int i = 0; i < availableProcessors; i++) {
-            final int finalI = i;
-            threads.add(new Thread(() -> {
-                try {
-                    rule.evolve(finalI * grid.size()/ availableProcessors, (finalI + 1) * grid.size()/ availableProcessors);
-                } catch (EvolveException e) {
-                    e.printStackTrace();
-                }
-            }));
-        }
-    }
-
-    public void runThreads() throws InterruptedException {
-        for (Thread t : threads) {
-            t.start();
-        }
-
-        // vent på at alle trådene har kjørt ferdig før vi returnerer
-        for (Thread t : threads) {
-            t.join();
-        }
-        threads.clear();
-    }
 
     /**
      * For each alive cell, it increments the adjacent cells neighbour count.
@@ -197,23 +159,7 @@ public class DynamicGameOfLife extends GameOfLife{
         return grid;
     }
 
-    /**
-     * Returns the number of live cells in grid
-     *
-     * @return The live cell count
-     */
-    public int getCellCount() {
-        return cellCount.get();
-    }
 
-    /**
-     * Returns the rule used for evolution
-     *
-     * @return The rule
-     */
-    public Rule getRule() {
-        return rule;
-    }
 
     /**
      * We copied getBoundingBox from the assignment
@@ -319,29 +265,6 @@ public class DynamicGameOfLife extends GameOfLife{
      */
     public void setGrid(ArrayList<ArrayList<AtomicBoolean>> grid) {
         this.grid = grid;
-    }
-
-    /**
-     * Sets a specific rule to be used.
-     *
-     * @param ruleText The rule text
-     */
-    public void setRule(String ruleText) {
-
-        //rule = new ClassicRule(this);
-
-        ruleText = ruleText.toLowerCase();
-
-        switch (ruleText) {
-            case "classic":
-                rule = new ClassicRule(this);
-                break;
-            case "highlife":
-                rule = new HighLifeRule(this);
-                break;
-            default:
-                rule = new CustomRule(this, ruleText);
-        }
     }
 
     /**
@@ -532,13 +455,9 @@ public class DynamicGameOfLife extends GameOfLife{
      * Updates the rule's references to this class' cell grid and neighbour grid
      */
     /*public void updateRuleGrid() {
-        rule.setGrid(grid);
+        rule.setGol(grid);
         rule.setNeighbours(neighbours);
     }*/
-
-    public void setCellCount(int cellCount) {
-        this.cellCount.set(cellCount);
-    }
 
     public int getOffsetX() {
         return cellOffsetX;

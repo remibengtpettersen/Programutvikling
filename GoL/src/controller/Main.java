@@ -21,13 +21,18 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
+        // load main fxml view
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("../view/MainView.fxml"));
 
         try {
+            // load root element of fxml to reference
             BorderPane root = loader.load();
+
+            // set control to master controller
             MasterController rootController = loader.getController();
 
+            // passing stage and root to master controller
             rootController.initialize(stage, root);
 
         } catch (IOException e) {
