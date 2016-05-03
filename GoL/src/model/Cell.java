@@ -10,7 +10,7 @@ public class Cell {
     public final static byte MAX_SIZE = 100;
     public final static double MIN_SIZE = 0.1;
 
-    private Color color, deadColor, ghostColor;
+    private Color color = Color.BLACK, deadColor = Color.WHITE, ghostColor;
     private double size;
     private double spacing = 0.1;
 
@@ -18,8 +18,7 @@ public class Cell {
      * Creates a default cell with the default Conway "Game Of Life" style.
      */
     public Cell(){
-        color = Color.BLACK;
-        deadColor = Color.WHITE;
+
         calculateGhostColor();
     }
 

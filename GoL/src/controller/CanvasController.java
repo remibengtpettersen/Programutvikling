@@ -18,6 +18,7 @@ import s305080.PatternSaver.ToFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * The controller that handles everything that happens on the canvas.
