@@ -12,19 +12,19 @@ import javafx.scene.paint.Color;
 import model.Cell;
 import model.DynamicGameOfLife;
 import model.GameOfLife;
+import model.StaticGameOfLife;
 import s305080.Gif.GifSaver;
 import s305080.PatternSaver.ToFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * The controller that handles everything that happens on the canvas.
- * mouse controll
- * zoom controll
- * grid positoning
+ * mouse control
+ * zoom control
+ * grid positioning
  * Draw gameboard on canvas
  * animation
  * keyboard handeling
@@ -51,7 +51,7 @@ public class CanvasController {
     private int frameDelay;
 
     private boolean running = true;
-    public boolean interaction = false;
+    boolean interaction = false;
 
     // Is used to calculate the distance the mouse has traveled since last MouseDragEvent.
     private int currMousePosX;
@@ -86,7 +86,7 @@ public class CanvasController {
     //region s305080
 
     // bounding box for selected area
-    double [] markup;
+    private double [] markup;
 
     //list of buttons being pressed right now
     private List<String> buttonsPressed;
@@ -96,7 +96,7 @@ public class CanvasController {
     /**
      * Sets master controller, creates an instance of the StaticGameOfLife object and prepares the grid and gets the Graphics Content of the canvas.
      * Also it sets up listeners and prepare the animation. Final it launches the animation.
-     * @param masterController
+     * @param masterController The controller that holds the entire program together
      */
     public void initialize(MasterController masterController) {
 
@@ -201,6 +201,13 @@ public class CanvasController {
         };
     }
 
+    public void changeToStatic(){
+        gol = new StaticGameOfLife(500, 500);
+    }
+    public void changeToDynamic(){
+        gol = new DynamicGameOfLife();
+    }
+
     /**
      * Sets up all the listeners needed for the simulation of Game of Life
      */
@@ -248,6 +255,13 @@ public class CanvasController {
         }
         if (code.equals("S")) {
             saveToGif();
+        }
+
+        if (code.equals("D")) {
+            changeToDynamic();
+        }
+        if (code.equals("F")) {
+            changeToStatic();
         }
 
         // checks if "C" is pressed
@@ -538,22 +552,6 @@ public class CanvasController {
         gridLines = cell.getSize() > 5;
     }
 
-
-    //region Clamping
-
-    /**
-     * Keeps the val between min and max
-     *
-     * @param val input to be checked
-     * @param min minimum value
-     * @param max maximum value
-     * @return val in range of min and max
-     */
-    private int clamp(int val, int min, int max) {
-        return Math.max(min, Math.min(max, val));
-    }
-    //endregion
-
     // region canvas to grid converter
     private int getGridPosX(double x) {
         return (int)Math.floor((x + getCommonOffsetX()) / cell.getSize());
@@ -606,7 +604,7 @@ public class CanvasController {
     /**
      * Renders everything on the canvas
      */
-    public void renderCanvas() {
+    void renderCanvas() {
 
         // checks wich cells are inside the canvas view
         updateView();
@@ -757,7 +755,7 @@ public class CanvasController {
     /**
      * Kills all cells on grid
      */
-    public void clearGrid() {
+    void clearGrid() {
 
         // empty board
         gol.clearGrid();
@@ -829,7 +827,7 @@ public class CanvasController {
     /**
      * Start animation
      */
-    public void startAnimation() {
+    void startAnimation() {
 
         animationTimer.start();
         running = true;
@@ -838,7 +836,7 @@ public class CanvasController {
     /**
      * Stop animation
      */
-    public void stopAnimation() {
+    void stopAnimation() {
 
         animationTimer.stop();
         running = false;
@@ -847,13 +845,13 @@ public class CanvasController {
 
     //region Setters
 
-    public void setLiveColor(Color liveColor) { cell.setColor(liveColor); }
+    void setLiveColor(Color liveColor) { cell.setColor(liveColor); }
 
     /**
      * Sets the background color used to render the canvas
      * @param deadColor the color to be set
      */
-    public void setDeadColor(Color deadColor) { cell.setDeadColor(deadColor); }
+    void setDeadColor(Color deadColor) { cell.setDeadColor(deadColor); }
 
 
     /**
@@ -861,7 +859,7 @@ public class CanvasController {
      *
      * @param newCellSize the new cell size
      */
-    public void setCellSize(double newCellSize) {
+    void setCellSize(double newCellSize) {
 
         // stores the exact center of the canvas view
         double canvasCenterX = (getCommonOffsetX() + canvas.getWidth() / 2) / cell.getSize();
@@ -887,7 +885,7 @@ public class CanvasController {
      *
      * @param clipBoardPattern the pattern that is imported from a file
      */
-    public void setClipBoardPattern(boolean[][] clipBoardPattern) {
+    void setClipBoardPattern(boolean[][] clipBoardPattern) {
 
 
         this.clipBoardPattern = clipBoardPattern;
@@ -902,7 +900,7 @@ public class CanvasController {
      * Sets the frame delay
      * @param frameDelay The delay to be set
      */
-    public void setFrameDelay(int frameDelay) {
+    void setFrameDelay(int frameDelay) {
 
         // if framedalay is less than 17, it can be 0
         if (frameDelay < 17) // 60 fps
@@ -932,22 +930,6 @@ public class CanvasController {
     //region getters
     public Canvas getCanvas() {
         return canvas;
-    }
-
-    public int getCurrViewMinX() {
-        return currViewMinX;
-    }
-
-    public int getCurrViewMaxX() {
-        return currViewMaxX;
-    }
-
-    public int getCurrViewMinY() {
-        return currViewMinY;
-    }
-
-    public int getCurrViewMaxY() {
-        return currViewMaxY;
     }
 
     public Cell getCell() {
@@ -980,14 +962,14 @@ public class CanvasController {
     /**
      * Enables selection of area in grid through canvas position
      */
-    public void activateMarkup() {
+    void activateMarkup() {
         canvas.setOnMouseDragged(this::mouseDragMarkup);
     }
 
     /**
      * Disables selection of area in grid through canvas position
      */
-    public void deactivateMarkup() {
+    void deactivateMarkup() {
         canvas.setOnMouseDragged(this::mouseDrag);
         removeMarkedArea();
     }
@@ -1065,54 +1047,72 @@ public class CanvasController {
                 markup = new double[4];
             }
 
-            // checks if not start of drag
+            // checks if start of drag
             if(!mouseDrag){
+
+                // sets market area as current position
                 markup[0] = (mouseEvent.getX() + boardOffsetX) / cell.getSize();
                 markup[1] = (mouseEvent.getY() + boardOffsetY) / cell.getSize();
                 markup[2] = (mouseEvent.getX() + boardOffsetX) / cell.getSize();
                 markup[3] = (mouseEvent.getY() + boardOffsetY) / cell.getSize();
             }
             else{
+                // sets corner of marked area as current position
                 markup[2] = (mouseEvent.getX() + boardOffsetX) / cell.getSize();
                 markup[3] = (mouseEvent.getY() + boardOffsetY) / cell.getSize();
             }
+            // checks if right click
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+
+            // moves board from last mouse position to current mouse position
             moveBoard(currMousePosX, currMousePosY);
         }
+
+        // updates canvas if framerate is low
         if (!running || frameDelay > 0)
             renderCanvas();
+
+        // stores current mouse position for later use
         prevMousePosX = currMousePosX;
         prevMousePosY = currMousePosY;
 
         mouseDrag = true;
     }
 
-    public void pasteClipBoard() {
+    /**
+     * Decides if there is a clipboard pattern to show
+     */
+    void pasteClipBoard() {
         if (clipBoardPattern != null){
             importing = true;
         }
     }
 
-    public void copyMarkedArea() {
+    /**
+     * Copies the pattern inside the selected area
+     */
+    void copyMarkedArea() {
         if (markup == null){
             return;
         }
 
-        int [] cornerCells = getCornerCells();
 
-        boolean[][] clipboard = new boolean[1 + cornerCells[2] - cornerCells[0]][1 + cornerCells[3] - cornerCells[1]];
+        // gets the min and max x and y values inside the marked area
+        int [] minMaxValues = getMinMaxValues();
 
+        // creates a new grid with the same dimensions as the selected area
+        boolean[][] clipboard = new boolean[1 + minMaxValues[2] - minMaxValues[0]][1 + minMaxValues[3] - minMaxValues[1]];
+
+        // current X and Current Y in clipboard
         int cX = 0, cY = 0;
-        for (int x = cornerCells[0]; x <=  cornerCells[2]; x++) {
-            for (int y = cornerCells[1]; y <= cornerCells[3]; y++) {
-                try{
+
+        // runs through every cell inside the selected area
+        for (int x = minMaxValues[0]; x <=  minMaxValues[2]; x++) {
+            for (int y = minMaxValues[1]; y <= minMaxValues[3]; y++) {
                     if (gol.isCellAlive(x, y)){
                         clipboard[cX][cY] = true;
                     }
-                }
-                catch (IndexOutOfBoundsException e){
 
-                }
                 cY++;
             }
             cX++;
@@ -1121,45 +1121,62 @@ public class CanvasController {
 
         clipBoardPattern = clipboard;
 
+        // updates canvas if framerate is low
         if (!running || frameDelay > 0)
             renderCanvas();
 
 
     }
 
-    public void cutMarkedArea() {
+    /**
+     * Same as copyMarkedAre() but it kills the cells in the selected area as well
+     */
+    void cutMarkedArea() {
 
         if (markup == null){
             return;
         }
-        int [] cornerCells = getCornerCells();
 
-        boolean[][] clipboard = new boolean[1 + cornerCells[2] - cornerCells[0]][1 + cornerCells[3] - cornerCells[1]];
+        // gets the min and max x and y values inside the marked area
+        int [] minMaxValues = getMinMaxValues();
 
+        // creates a new grid with the same dimensions as the selected area
+        boolean[][] clipboard = new boolean[1 + minMaxValues[2] - minMaxValues[0]][1 + minMaxValues[3] - minMaxValues[1]];
+
+        // current X and Current Y in clipboard
         int cX = 0, cY = 0;
-        for (int x = cornerCells[0]; x <=  cornerCells[2]; x++) {
-            for (int y = cornerCells[1]; y <= cornerCells[3]; y++) {
-                try{
+
+        // runs through every cell inside the selected area
+        for (int x = minMaxValues[0]; x <=  minMaxValues[2]; x++) {
+            for (int y = minMaxValues[1]; y <= minMaxValues[3]; y++) {
                     if (gol.isCellAlive(x, y)){
                         clipboard[cX][cY] = true;
                     }
-                    gol.setCellDead(x, y);
-                }
-                catch (IndexOutOfBoundsException e){
+                    try {
+                        gol.setCellDead(x, y);
+                    }
+                    catch (IndexOutOfBoundsException ignored){
+                        // the cell is dead
+                    }
 
-                }
                 cY++;
             }
             cX++;
             cY = 0;
         }
 
+        // updates canvas if framerate is low
         clipBoardPattern = clipboard;
         if (!running || frameDelay > 0)
             renderCanvas();
 
     }
-    public int[] getCornerCells() {
+
+    /**
+     * Calculates the minimum and maximum x and y values inside the selected area
+     * @return An array where the first 2 values is min and max x, and the last 2 is min and max y
+     */
+    private int[] getMinMaxValues() {
         int [] cornerCells = new int [4];
         cornerCells[0] = getGridPosX(getCanvasPosXMarkup((markup[0] < markup[2]) ? markup[0] : markup[2]));
         cornerCells[1] = getGridPosY(getCanvasPosYMarkup((markup[1] < markup[3]) ? markup[1] : markup[3]));
@@ -1168,6 +1185,9 @@ public class CanvasController {
         return cornerCells;
     }
 
+    /**
+     * Deletes the markup array
+     */
     private void removeMarkedArea() {
         markup = null;
     }

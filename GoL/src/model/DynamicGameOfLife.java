@@ -305,26 +305,28 @@ public class DynamicGameOfLife extends GameOfLife{
      */
     public void setCellDead(int x, int y) {
 
-        if(isCellAlive(x,y)) {
 
-            cellCount.decrementAndGet();
+            if(isCellAlive(x,y)) {
 
-            try {
-                grid.get(x).get(y).set(false);
+                cellCount.decrementAndGet();
+
+                    grid.get(x).get(y).set(false);
+
+
+
+                    int diffX = x - getGridWidth() + 1;
+                    if(diffX > 0)
+                        increaseXRight(diffX);
+
+                    int diffY = y - getGridHeight() + 1;
+                    if(diffY > 0)
+                        increaseYBottom(diffY);
+
+                    grid.get(x).get(y).set(false);
+
             }
-            catch (IndexOutOfBoundsException e) {
 
-                int diffX = x - getGridWidth() + 1;
-                if(diffX > 0)
-                    increaseXRight(diffX);
 
-                int diffY = y - getGridHeight() + 1;
-                if(diffY > 0)
-                    increaseYBottom(diffY);
-
-                grid.get(x).get(y).set(false);
-            }
-        }
     }
 
     /**
