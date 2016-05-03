@@ -150,7 +150,7 @@ public class MasterController {
         if(file != null) {
 
             try {
-                canvasController.setImportPattern(PatternParser.read(file));
+                canvasController.setClipBoardPattern(PatternParser.read(file));
             }
             catch (PatternFormatException e) {
                 e.printStackTrace();

@@ -12,14 +12,12 @@ import javafx.scene.paint.Color;
 import model.Cell;
 import model.DynamicGameOfLife;
 import model.GameOfLife;
-import model.StaticGameOfLife;
 import s305080.Gif.GifSaver;
 import s305080.PatternSaver.ToFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * The controller that handles everything that happens on the canvas.
@@ -48,7 +46,9 @@ public class CanvasController {
     private short boardWidth;
     private short boardHeight;
 
+    // controlls the framerate
     private int frameDelay;
+
     private boolean running = true;
     public boolean busy = false;
 
@@ -58,39 +58,49 @@ public class CanvasController {
     private int prevMousePosX;
     private int prevMousePosY;
 
+
     private boolean mouseDrag;
     private boolean mouseOnCanvas;
 
+    // tracks board position
     private int boardOffsetX = 50;
     private int boardOffsetY = 50;
 
+    // tracks cells in view.
     private int currViewMinX;
     private int currViewMaxX;
     private int currViewMinY;
     private int currViewMaxY;
 
-    private boolean[][] importPattern;
+    // holds pattern to be imported
+    private boolean[][] clipBoardPattern;
     private boolean importing = false;
+
+    // whether or not to draw grid lines
     private boolean gridLines;
     private boolean userWantsGridLines;
-    private int threads = Runtime.getRuntime().availableProcessors();
+
     private Thread thread;
 
-    //s305080
+    //region s305080
+
+    // bounding box for selected area
     double [] markup;
+
+    //list of buttons being pressed right now
     private List<String> buttonsPressed;
 
-    public Canvas getCanvas() {
-        return canvas;
-    }
+    //endregion
 
     /**
      * Sets master controller, creates an instance of the StaticGameOfLife object and prepares the grid and gets the Graphics Content of the canvas.
      * Also it sets up listeners and prepare the animation. Final it launches the animation.
+     * @param masterController
      */
     public void initialize(MasterController masterController) {
 
         this.masterController = masterController;
+
         initializeGameParameters();
 
         //gol = new StaticGameOfLife(1000,1000);
@@ -100,6 +110,7 @@ public class CanvasController {
         buttonsPressed = new ArrayList<>();
 
         updateView();
+
         initializeListeners();
         initializeAnimation();
         checkIfShouldStillDrawGrid();
@@ -114,6 +125,7 @@ public class CanvasController {
 
         cell = new Cell(masterController.getConfig());
 
+        // gets parameters from config gile
         frameDelay = masterController.configuration.getGameSpeed();
         boardWidth = masterController.configuration.getGameWidth();
         boardHeight = masterController.configuration.getGameHeight();
@@ -184,6 +196,7 @@ public class CanvasController {
      */
     private void initializeListeners() {
 
+        // sets up listeners for mouse actions on canvas
         canvas.setOnMouseReleased(this::mouseClick);
         canvas.setOnMouseDragged(this::mouseDrag);
         canvas.setOnMouseMoved(this::mouseTrace);
@@ -191,44 +204,62 @@ public class CanvasController {
         canvas.setOnMouseExited(this::mouseCanvasExit);
         canvas.setOnMouseEntered(this::mouseCanvasEnter);
 
+        //sets up keyboard listeners
         masterController.scene.setOnKeyPressed(this::keyPressed);
         masterController.scene.setOnKeyReleased(this::keyReleased);
 
+        // binds the canvas to the stage size
         canvas.widthProperty().addListener(evt -> canvasFollowWindow());
         canvas.heightProperty().addListener(evt -> canvasFollowWindow());
     }
 
+    /**
+     * Called when the stage changes size
+     */
     private void canvasFollowWindow() {
         if (!running || frameDelay > 0)
             renderCanvas();
     }
 
     /**
-     * @param keyEvent
+     * Called when key is pressed
+     * @param keyEvent Contains information about which key is pressed
      */
     private void keyPressed(KeyEvent keyEvent) {
 
+        // stores the key code
         String code = keyEvent.getCode().toString();
 
+        // checks if key is already in list
         if (!buttonsPressed.contains(code)){
+
+            // adds key in key list
             buttonsPressed.add(code);
-            System.out.println(code);
         }
         if (code.equals("S")) {
             saveToGif();
         }
 
+        // checks if "C" is pressed
         if (code.equals("C")) {
+
+            // checks if "CONTROL" or "COMMAND" is held
             if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")){
                 copyMarkedArea();
             }
         }
+        // checks if "X" is pressed
         else if (code.equals("X")) {
+
+            // checks if "CONTROL" or "COMMAND" is held
             if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")){
                 cutMarkedArea();
             }
         }
+        // checks if "V" is pressed
         else if (code.equals("V")){
+
+            // checks if "CONTROL" or "COMMAND" is held
             if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")){
                 pasteClipBoard();
             }
@@ -236,22 +267,29 @@ public class CanvasController {
     }
 
 
-
+    /**
+     * Called when key is released
+     * @param keyEvent Contains information about which key is released
+     */
     private void keyReleased(KeyEvent keyEvent) {
+
+        // stores the key code
         String code = keyEvent.getCode().toString();
 
+        // checks if list contains code
         if (buttonsPressed.contains(code)){
+            // removes code from list
             buttonsPressed.remove(code);
         }
     }
 
     /**
      * Stores the position of the event
-     *
      * @param mouseEvent Where the mouse is at the current time
      */
     private void mouseTrace(MouseEvent mouseEvent) {
 
+        
         if (importing) {
             currMousePosX = (int) mouseEvent.getX();
             currMousePosY = (int) mouseEvent.getY();
@@ -562,10 +600,10 @@ public class CanvasController {
 
         gc.setFill(cell.getGhostColor());
 
-        for (int x = 0; x < importPattern.length; x++) {
-            for (int y = 0; y < importPattern[x].length; y++) {
-                if (importPattern[x][y]) {
-                    drawCell(getGridPosX(currMousePosX) - importPattern.length / 2 + x, getGridPosY(currMousePosY) - importPattern[x].length / 2 + y);
+        for (int x = 0; x < clipBoardPattern.length; x++) {
+            for (int y = 0; y < clipBoardPattern[x].length; y++) {
+                if (clipBoardPattern[x][y]) {
+                    drawCell(getGridPosX(currMousePosX) - clipBoardPattern.length / 2 + x, getGridPosY(currMousePosY) - clipBoardPattern[x].length / 2 + y);
                 }
             }
         }
@@ -576,16 +614,16 @@ public class CanvasController {
      */
     private void insertImport() {
 
-        for (int x = 0; x < importPattern.length; x++) {
-            for (int y = 0; y < importPattern[x].length; y++) {
-                if (importPattern[x][y]) {
-                    int posX = getGridPosX(currMousePosX) - importPattern.length / 2 + x;
-                    int posY = getGridPosY(currMousePosY) - importPattern[x].length / 2 + y;
+        for (int x = 0; x < clipBoardPattern.length; x++) {
+            for (int y = 0; y < clipBoardPattern[x].length; y++) {
+                if (clipBoardPattern[x][y]) {
+                    int posX = getGridPosX(currMousePosX) - clipBoardPattern.length / 2 + x;
+                    int posY = getGridPosY(currMousePosY) - clipBoardPattern[x].length / 2 + y;
 
                     if (posX < 0 || posY < 0) {
                         fitTo(posX, posY);
-                        posX = getGridPosX(currMousePosX) - importPattern.length / 2 + x;
-                        posY = getGridPosY(currMousePosY) - importPattern[x].length / 2 + y;
+                        posX = getGridPosX(currMousePosX) - clipBoardPattern.length / 2 + x;
+                        posY = getGridPosY(currMousePosY) - clipBoardPattern[x].length / 2 + y;
                     }
                     gol.setCellAlive(posX, posY);
                 }
@@ -708,13 +746,13 @@ public class CanvasController {
     /**
      * Sets the pattern that is importet from a file
      *
-     * @param importPattern the pattern that is imported from a file
+     * @param clipBoardPattern the pattern that is imported from a file
      */
-    public void setImportPattern(boolean[][] importPattern) {
+    public void setClipBoardPattern(boolean[][] clipBoardPattern) {
 
-        this.importPattern = importPattern;
+        this.clipBoardPattern = clipBoardPattern;
 
-        if (importPattern != null) {
+        if (clipBoardPattern != null) {
             importing = true;
         }
     }
@@ -739,6 +777,10 @@ public class CanvasController {
     //endregion
 
     //region getters
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
     public int getCurrViewMinX() {
         return currViewMinX;
     }
@@ -758,7 +800,6 @@ public class CanvasController {
     public Cell getCell() {
         return cell;
     }
-
     //endregion
 
     // region s305080 extra task
@@ -852,7 +893,7 @@ public class CanvasController {
     }
 
     public void pasteClipBoard() {
-        if (importPattern != null){
+        if (clipBoardPattern != null){
             importing = true;
         }
     }
@@ -883,7 +924,7 @@ public class CanvasController {
             cY = 0;
         }
 
-        importPattern = clipboard;
+        clipBoardPattern = clipboard;
 
         if (!running || frameDelay > 0)
             renderCanvas();
@@ -918,7 +959,7 @@ public class CanvasController {
             cY = 0;
         }
 
-        importPattern = clipboard;
+        clipBoardPattern = clipboard;
         if (!running || frameDelay > 0)
             renderCanvas();
 
