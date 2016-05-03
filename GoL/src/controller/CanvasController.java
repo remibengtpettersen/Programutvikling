@@ -50,7 +50,7 @@ public class CanvasController {
     private int frameDelay;
 
     private boolean running = true;
-    public boolean busy = false;
+    public boolean interaction = false;
 
     // Is used to calculate the distance the mouse has traveled since last MouseDragEvent.
     private int currMousePosX;
@@ -168,7 +168,7 @@ public class CanvasController {
                 //To control game speed
                 if (now / 1000000 - timer > frameDelay) {
 
-                    if(!busy) {
+                    if(!interaction) {
 
                         double timer = System.currentTimeMillis();
                         gol.nextGeneration();
@@ -289,7 +289,7 @@ public class CanvasController {
      */
     private void mouseTrace(MouseEvent mouseEvent) {
 
-        
+
         if (importing) {
             currMousePosX = (int) mouseEvent.getX();
             currMousePosY = (int) mouseEvent.getY();
@@ -813,9 +813,9 @@ public class CanvasController {
     }
 
     void saveToFile() {
-        busy = true;
+        interaction = true;
         new ToFile().writeToFile(gol, masterController.stage);
-        busy = false;
+        interaction = false;
     }
 
 
