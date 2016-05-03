@@ -13,6 +13,7 @@ import model.Cell;
 import model.DynamicGameOfLife;
 import model.GameOfLife;
 import model.StaticGameOfLife;
+import s305080.Gif.GifSaver;
 import s305080.PatternSaver.ToFile;
 
 import java.io.IOException;
@@ -212,6 +213,9 @@ public class CanvasController {
         if (!buttonsPressed.contains(code)){
             buttonsPressed.add(code);
             System.out.println(code);
+        }
+        if (code.equals("S")) {
+            saveToGif();
         }
 
         if (code.equals("C")) {
@@ -758,60 +762,14 @@ public class CanvasController {
     //endregion
 
     // region s305080 extra task
-    /*
-    private void saveToGif() throws IOException {
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose save directory");
-
-        String path = fileChooser.showSaveDialog(masterController.stage).toString() + ".gif";
-
-        int width = (int) canvas.getWidth();
-        int height = (int) canvas.getHeight();
-
-        int milliSeconds = frameDelay;
-
-        boolean[][] gridCopy = new boolean[grid.size()][grid.get(0).size()];
-
-        for (int i = 0; i < grid.size(); i++) {
-            gridCopy[i] = (boolean[]) grid.get(i).clone();
+    private void saveToGif(){
+        try {
+            new GifSaver().saveToGifBeta(masterController);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        GIFWriter gifWriter = new GIFWriter(width, height, path, milliSeconds);
-
-        int gifWidth = currViewMaxX - currViewMinX;
-        int gifHeight = currViewMaxY - currViewMinY;
-
-        for (int i = 0; i < 100; i++) {
-            gifWriter.fillRect(0, width - 1, 0, height - 1, new java.awt.Color((int) (255 * cell.getDeadColor().getRed()), (int) (255 * cell.getDeadColor().getGreen()), (int) (255 * cell.getDeadColor().getBlue())));
-            for (int x = 0; x < gifWidth - 1; x++) {
-                for (int y = 0; y < gifHeight - 1; y++) {
-                    if (grid.get(x + currViewMinX).get(y + currViewMinY)) {
-                        gifWriter.fillRect(
-                                x * width / gifWidth, (x + 1) * width / gifWidth,
-                                y * height / gifHeight, (y + 1) * height / gifHeight,
-                                new java.awt.Color(
-                                        (int) (255 * cell.getColor().getRed()),
-                                        (int) (255 * cell.getColor().getGreen()),
-                                        (int) (255 * cell.getColor().getBlue())));
-                    }
-                }
-            }
-
-            gol.nextGeneration();
-
-
-            gifWriter.insertAndProceed();
-        }
-
-        gifWriter.close();
-
-        for (int i = 0; i < grid.size(); i++) {
-            grid.set(i, gridCopy.get(i));
-        }
-
-        System.out.println("Done");
-    }*/
+    }
 
     void saveToFile() {
         busy = true;
