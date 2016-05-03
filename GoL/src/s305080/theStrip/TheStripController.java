@@ -66,7 +66,6 @@ public class TheStripController {
 
         Affine xform = new Affine();
         double tx = 0;
-        xform.setTx(tx);
         gc.setTransform(xform);
 
         clearCanvasAndSetColors();

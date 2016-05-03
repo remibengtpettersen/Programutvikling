@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class GameOfLife {
 
     private int availableProcessors = Runtime.getRuntime().availableProcessors();
+
     private List<Thread> threads = new ArrayList<>();
 
     AtomicInteger cellCount = new AtomicInteger(0);

@@ -92,8 +92,8 @@ public class CanvasController {
         this.masterController = masterController;
         initializeGameParameters();
 
-        gol = new StaticGameOfLife(250,250);
-        //gol = new DynamicGameOfLife();
+        //gol = new StaticGameOfLife(1000,1000);
+        gol = new DynamicGameOfLife();
 
         gc = canvas.getGraphicsContext2D();
         buttonsPressed = new ArrayList<>();
