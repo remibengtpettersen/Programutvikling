@@ -14,10 +14,8 @@ import model.DynamicGameOfLife;
 import model.GameOfLife;
 import s305080.PatternSaver.ToFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * The controller that handles everything that happens on the canvas.
@@ -44,7 +42,7 @@ public class CanvasController {
     private AnimationTimer animationTimer;
     private long timer;
 
-    public Cell cell;
+    private Cell cell;
 
     private short boardWidth;
     private short boardHeight;
@@ -668,10 +666,9 @@ public class CanvasController {
 
     //region Setters
 
+    public void setLiveColor(Color liveColor) { cell.setColor(liveColor); }
 
-    public void setBackgroundColor(Color backgroundColor) {
-        cell.setDeadColor(backgroundColor);
-    }
+    public void setDeadColor(Color deadColor) { cell.setDeadColor(deadColor); }
 
 
     /**

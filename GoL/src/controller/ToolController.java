@@ -1,7 +1,5 @@
 package controller;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -11,79 +9,79 @@ import model.Cell;
 import java.util.Objects;
 
 /**
- * The controller for the tools on the bottom of the stage
+ * The controller for the tool bar on the bottom of the stage
  */
 public class ToolController {
+
+    private static final byte SPEED_FACTOR = 15; //The empiric factor
 
     private MasterController masterController;
     private Image imgPause;
     private Image imgPlay;
 
-    private byte speedFactor = 15; //The empiric factor
-
-    @FXML
-    private ColorPicker cellColorPicker;
-    @FXML
-    private ColorPicker backgroundColorPicker;
-    @FXML
-    private Label cellCountLabel;
-    @FXML
-    private Slider speedSlider;
-    @FXML
-    private Slider zoomSlider;
-    @FXML
-    private Button btnPlay;
-    @FXML
-    private ImageView imgViewBtnPlay;
-
+    @FXML private ColorPicker liveCellColorPicker;
+    @FXML private ColorPicker deadCellColorPicker;
+    @FXML private Label cellCountLabel;
+    @FXML private Slider speedSlider;
+    @FXML private Slider zoomSlider;
+    @FXML private Button btnPlay;
+    @FXML private ImageView imgViewBtnPlay;
 
     /**
-     * Does the necessary preparations for this controller to be used.
-     * @param masterController the reference to the masterController
+     * Initializes the tool bar.
+     * Sets reference to master controller and loads resources.
+     * @param masterController Reference to the master controller
      */
     public void initialize(MasterController masterController) {
 
+        // sets reference to the master controller
         this.masterController = masterController;
-        cellColorPicker.setValue(Color.BLACK);
 
+        // file paths for finding images for the play/pause button
         String pathImages = "/icons/";
         String pauseImageName = "bars.png";
         String playImageName = "arrows.png";
-        imgPause = new Image(getClass().getResourceAsStream(pathImages + pauseImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
-        imgPlay = new Image(getClass().getResourceAsStream(pathImages + playImageName), imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
+
+        // images to be displayed over the play/pause button
+        imgPause = new Image(getClass().getResourceAsStream(pathImages + pauseImageName),
+                imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
+        imgPlay = new Image(getClass().getResourceAsStream(pathImages + playImageName),
+                imgViewBtnPlay.getFitWidth(), imgViewBtnPlay.getFitHeight(), true, true);
+
+        // sets minimum and maximum values for the zoom slider
         zoomSlider.setMin(Math.log(Cell.MIN_SIZE));
         zoomSlider.setMax(Math.log(Cell.MAX_SIZE));
 
+        // sets default liveCellColor to be black, in case configuration is unreadable
+        liveCellColorPicker.setValue(Color.BLACK);
 
+        // tries to get colors from the configuration, and sets to the color pickers
         try {
-            cellColorPicker.setValue((Color) Color.class.getField(masterController.configuration.getCellColor()).get(null));
-            backgroundColorPicker.setValue((Color) Color.class.getField(masterController.configuration.getBackgroundColor()).get(null));
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+            Color liveCellColor = (Color) Color.class.getField(masterController.configuration.getCellColor()).get(null);
+            Color deadCellColor = (Color) Color.class.getField(masterController.configuration.getBackgroundColor()).get(null);
+
+            liveCellColorPicker.setValue(liveCellColor);
+            deadCellColorPicker.setValue(deadCellColor);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
-
-
     }
 
     /**
-     * Changes the color used to render the cells
-     * @param actionEvent
+     * Changes the color used to render the live cells. Will re-render.
      */
-    public void changeCellColor(ActionEvent actionEvent) {
+    public void changeCellColor() {
 
-        masterController.getCanvasController().getCell().setColor(cellColorPicker.getValue());    //ugly, but temporary
+        masterController.getCanvasController().setLiveColor(liveCellColorPicker.getValue());
         masterController.getCanvasController().renderCanvas();
     }
 
     /**
-     * Changes the color used to render the background
-     * @param actionEvent
+     * Changes the color used to render the dead cells, in other words, the background. Will re-render (
      */
-    public void changeBackgroundColor(ActionEvent actionEvent) {
+    public void changeDeadColor() {
 
-        masterController.getCanvasController().setBackgroundColor(backgroundColorPicker.getValue());    //ugly, but temporary
+        masterController.getCanvasController().setDeadColor(deadCellColorPicker.getValue());
         masterController.getCanvasController().renderCanvas();
     }
 
@@ -92,14 +90,15 @@ public class ToolController {
      */
     public void speedSliderDragged(){
 
-        masterController.getCanvasController().setFrameDelay((int)Math.exp(-speedSlider.getValue()/speedFactor));
+        int speed = (int)Math.exp(-speedSlider.getValue() / SPEED_FACTOR);
+
+        masterController.getCanvasController().setFrameDelay(speed);
     }
 
     /**
      * Changes the cellSize in the simulation when the zoomSlider is dragged
      */
     public void zoomSliderDragged(){
-        System.out.println(zoomSlider.getValue());
 
         masterController.getCanvasController().setCellSize(Math.exp(zoomSlider.getValue()));
     }
@@ -114,23 +113,24 @@ public class ToolController {
     }
 
     /**
-     * Toggles between pause and play game
-     * @param actionEvent
+     * Toggles between pause and play game states.
      */
-    public void togglePause(ActionEvent actionEvent) {
+    public void togglePause() {
 
         if (Objects.equals(btnPlay.getText(), "Play")) {
+
             changeIconToPause();
             masterController.getCanvasController().startAnimation();
         }
         else {
+
             changeIconToPlay();
             masterController.getCanvasController().stopAnimation();
         }
     }
 
     /**
-     * changes the btnPlay image to a play button image
+     * Changes the btnPlay image to a play button image.
      */
     public void changeIconToPlay() {
 
@@ -139,7 +139,7 @@ public class ToolController {
     }
 
     /**
-     * changes the btnPlay image to a pause button image
+     * Changes the btnPlay image to a pause button image.
      */
     public void changeIconToPause() {
 
@@ -148,21 +148,30 @@ public class ToolController {
     }
 
     /**
-     * sets the value of the zoomSLider to match the zoom value
-     * @param zoom the zoom value to match
+     * Sets the value of the zoomSlider to match the zoom value
+     * @param zoom Zoom value to match
      */
     public void setZoom(double zoom) {
+
         zoomSlider.setValue(Math.log(zoom));
-        System.out.println(Math.log(zoom));
     }
 
+    /**
+     * Sets the value of speedSlider to match the speed value
+     * @param speed Game speed value to match
+     */
     public void setSpeed(double speed) {
 
+        // prevents the speedSlider showing a speed below 0
         if(speed < 0) speed = 0;
-        speedSlider.setValue(-Math.log(speed) * speedFactor);
+
+        speedSlider.setValue(-Math.log(speed) * SPEED_FACTOR);
     }
 
-
+    /**
+     * Adds an amount to the speedSlider. Is called when scrolling.
+     * @param deltaX Amount to add to speedSlider
+     */
     public void addSpeedValue(double deltaX) {
 
         speedSlider.setValue(speedSlider.getValue()+deltaX);
