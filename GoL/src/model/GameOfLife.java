@@ -4,62 +4,122 @@ import model.rules.ClassicRule;
 import model.rules.CustomRule;
 import model.rules.HighLifeRule;
 import model.rules.Rule;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by Truls on 02/05/16.
+ *
+ * @author The group through pair programing.
  */
 public abstract class GameOfLife {
 
     private int availableProcessors = Runtime.getRuntime().availableProcessors();
-
     private List<Thread> threads = new ArrayList<>();
 
     AtomicInteger cellCount = new AtomicInteger(0);
     protected Rule rule;
 
-
+    /**
+     * 
+     */
     public abstract void nextGeneration();
 
-    public abstract void fitBoardToPattern();
-
+    /**
+     * Gets the array containing min row, max row, min column and max column for the active cells in game board.
+     * @return
+     */
     public abstract int[] getBoundingBox();
 
+    /**
+     * Gets the value of the property grid width.
+     * @return A integer value for gridWidth
+     */
     public abstract int getGridWidth();
 
+    /**
+     * Gets the value of the property grid height
+     * @return A integer value for gridHeight
+     */
     public abstract int getGridHeight();
 
+    /**
+     * Gets the value for the property neighbours.
+     * @param x the x coordinate in game grid.
+     * @param y the y coordinate in game grid.
+     * @return
+     */
     public abstract int getNeighboursAt(int x, int y);
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public abstract boolean isCellAlive(int x, int y);
 
+    /**
+     *
+     * @return
+     */
     public abstract GameOfLife clone();
 
-
-    //public abstract void setGol();
-
-
-
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public abstract void setCellAlive(int x, int y);
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public abstract void setCellDead(int x, int y);
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public abstract void changeCellState(int x, int y);
 
+    /**
+     *
+     */
     public abstract void clearGrid();
 
-
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public abstract void resetNeighboursAt(int x, int y);
 
+    /**
+     *
+     * @return
+     */
     public abstract  int getOffsetX();
 
+    /**
+     *
+     * @return
+     */
     public abstract  int getOffsetY();
 
+    /**
+     *
+     * @param start
+     * @param stop
+     */
     public abstract void aggregateNeighbours(int start, int stop);
 
+    /**
+     *
+     */
     public void createCountingThreads() {
         for (int i = 0; i < availableProcessors; i++) {
             final int finalI = i;
@@ -73,6 +133,9 @@ public abstract class GameOfLife {
         }
     }
 
+    /**
+     *
+     */
     public void createEvolveThreads() {
         for (int i = 0; i < availableProcessors; i++) {
             final int finalI = i;
@@ -86,6 +149,10 @@ public abstract class GameOfLife {
         }
     }
 
+    /**
+     *
+     * @throws InterruptedException
+     */
     public void runThreads() throws InterruptedException {
         for (Thread t : threads) {
             t.start();
@@ -97,14 +164,13 @@ public abstract class GameOfLife {
         }
         threads.clear();
     }
+
     /**
      * Sets a specific rule to be used.
      *
      * @param ruleText The rule text
      */
     public void setRule(String ruleText) {
-
-        //rule = new ClassicRule(this);
 
         ruleText = ruleText.toLowerCase();
 
@@ -119,10 +185,19 @@ public abstract class GameOfLife {
                 rule = new CustomRule(this, ruleText);
         }
     }
+
+    /**
+     *
+     * @param cellCount
+     */
     public void setCellCount(int cellCount){
         this.cellCount.set(cellCount);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCellCount(){
         return cellCount.get();
     }
@@ -135,6 +210,4 @@ public abstract class GameOfLife {
     public Rule getRule() {
         return rule;
     }
-
-
 }
