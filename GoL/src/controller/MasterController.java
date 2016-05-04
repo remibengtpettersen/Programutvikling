@@ -139,7 +139,7 @@ public class MasterController {
             Stage gifStage = new Stage();
             gifStage.setScene(new Scene(root));
 
-            gifController.initialize(canvasController.gol);
+            gifController.initialize(gifStage, canvasController.gol);
             gifStage.setTitle("Create GIF");
 
             gifStage.show();
