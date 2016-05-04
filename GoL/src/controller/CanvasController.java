@@ -400,11 +400,11 @@ public class CanvasController {
 
             // pause if running, play if paused
             if (running) {
-                masterController.getToolController().changeIconToPlay();
+                masterController.getToolController().changeButtonIconToPlay();
                 stopAnimation();
                 running = false;
             } else {
-                masterController.getToolController().changeIconToPause();
+                masterController.getToolController().changeButtonIconToPause();
                 startAnimation();
                 running = true;
             }

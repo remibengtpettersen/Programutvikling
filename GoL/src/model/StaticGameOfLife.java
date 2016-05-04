@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created on 12.02.2016.
  *
  * @author The group through pair programing.
  */
@@ -32,8 +31,6 @@ public class StaticGameOfLife extends GameOfLife{
         setRule("classic");
     }
 
-    //region startup-sequence
-
     /**
      * Creates the boolean 2D Array to keep track of dead and live cells, and the 2D byte-
      * array to keep track of the neighbour count to the corresponding cells in the other array
@@ -50,12 +47,9 @@ public class StaticGameOfLife extends GameOfLife{
             }
         }
     }
-    //endregion
-
-    //region NextGeneration
 
     /**
-     * Evolves the grid one generation
+     * Evolves the game board one generation.
      */
     public void nextGeneration() {
         createCountingThreads();
@@ -71,13 +65,6 @@ public class StaticGameOfLife extends GameOfLife{
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void fitBoardToPattern() {
-
-    }
-
-    ;
 
     /**
      * For each alive cell, it increments the adjacent cells neighbour count.
@@ -337,6 +324,7 @@ public class StaticGameOfLife extends GameOfLife{
     public void createNeighboursGrid() {
         neighbours = new AtomicInteger[grid.length][grid[0].length];
     }
+
     /**
      * Clears the grid of live cells
      */
