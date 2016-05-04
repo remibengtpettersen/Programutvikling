@@ -13,7 +13,7 @@ import model.GameOfLife;
 
 /**
  * @author Andreas s305061
- * Controller for statistics window.
+ * GifPropertiesController for statistics window.
  * Handles statistics gathering in addition to GUI control
  */
 public class StatController {

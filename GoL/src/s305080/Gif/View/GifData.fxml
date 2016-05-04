@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<HBox alignment="BOTTOM_LEFT" prefHeight="120.0" prefWidth="400.0" spacing="15.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s305080.Gif.Controller.GifPropertiesController">
+   <children>
+      <VBox alignment="CENTER_RIGHT" prefWidth="160.0" spacing="10.0">
+         <children>
+            <Label prefHeight="30.0" text="Iterations:" />
+            <Label prefHeight="30.0" text="Generations per iteration:" />
+            <Label prefHeight="30.0" text="framerate:" />
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </VBox>
+      <VBox alignment="CENTER" prefWidth="50.0" spacing="10.0">
+         <children>
+            <TextField fx:id="iterations" prefHeight="30.0" onKeyReleased="#textField1Typed" onKeyPressed="#checkForTab" onMouseClicked="#checkAllAbove"/>
+            <TextField fx:id="gPerIteration" prefHeight="30.0" onKeyReleased="#textField2Typed" onKeyPressed="#checkForTab" onMouseClicked="#checkAllAbove"/>
+            <TextField fx:id="framerate" prefHeight="30.0" onKeyReleased="#textField3Typed" onKeyPressed="#checkForTab" onMouseClicked="#checkAllAbove"/>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_RIGHT" spacing="10.0">
+         <children>
+            <Label fx:id="info1" prefHeight="30.0"/>
+            <Label fx:id="info2" prefHeight="30.0"/>
+            <Label fx:id="info3" prefHeight="30.0"/>
+         </children>
+      </VBox>
+   </children>
+</HBox>

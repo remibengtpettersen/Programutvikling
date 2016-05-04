@@ -98,8 +98,16 @@ public class Cell {
      * Gets the value for the property spacing.
      * @return A spacing for its cell.
      */
-    public double getSpacing() {
+    public double getSpacingInPixels() {
         return spacing * getSize();
+    }
+
+    /**
+     * Gets the value for the property spacing
+     * @return A spacing for its cell.
+     */
+    public double getSpacingFactor() {
+        return spacing;
     }
 
     /**
@@ -153,4 +161,6 @@ public class Cell {
     public void setSpacing(double spacing) {
         this.spacing = spacing;
     }
+
+
 }

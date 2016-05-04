@@ -90,8 +90,8 @@ public class EditorController {
         gc.fillRect(
                 getStripPosX(x),
                 getStripPosY(y),
-                stripCell.getSize() - stripCell.getSize() * stripCell.getSpacing(),
-                stripCell.getSize() - stripCell.getSize() * stripCell.getSpacing());
+                stripCell.getSize() - stripCell.getSize() * stripCell.getSpacingInPixels(),
+                stripCell.getSize() - stripCell.getSize() * stripCell.getSpacingInPixels());
     }
 
     private Point centerPatternEditor() {
@@ -214,8 +214,8 @@ public class EditorController {
         gc.fillRect(
                 getEditorPosX(x),
                 getEditorPosY(y),
-                editorCell.getSize() - editorCell.getSize() * editorCell.getSpacing(),
-                editorCell.getSize() - editorCell.getSize() * editorCell.getSpacing());
+                editorCell.getSize() - editorCell.getSize() * editorCell.getSpacingInPixels(),
+                editorCell.getSize() - editorCell.getSize() * editorCell.getSpacingInPixels());
     }
 
     private void setGridLines() {
