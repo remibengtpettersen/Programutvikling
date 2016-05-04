@@ -342,9 +342,11 @@ public class StaticGameOfLife extends GameOfLife{
      */
     public void clearGrid() {
 
-        for (int i = 0; i < grid.length; i++) {
-            Arrays.fill(grid[i], false);
-            Arrays.fill(neighbours[i], (byte) 0);
+        for (int x = 0; x < getGridWidth(); x++) {
+            for (int y = 0; y < getGridHeight(); y++) {
+                grid[x][y].set(false);
+                neighbours[x][y].set(0);
+            }
         }
 
         cellCount.set(0);

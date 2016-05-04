@@ -34,7 +34,7 @@ import java.util.List;
 public class CanvasController {
 
     public GameOfLife gol;
-    private MasterController masterController;
+    public MasterController masterController;
     @FXML
     private Canvas canvas;
     private GraphicsContext gc;
@@ -570,7 +570,7 @@ public class CanvasController {
      * @param x a x coordinate in the grid.
      * @return a x coordinate on the canvas.
      */
-    private double getCanvasPosX(int x) {
+    public double getCanvasPosX(int x) {
         return x * cell.getSize() - getCommonOffsetX();
     }
 
@@ -580,7 +580,7 @@ public class CanvasController {
      * @param y a y coordinate in the grid.
      * @return a y coordinate on the canvas.
      */
-    private double getCanvasPosY(int y) {
+    public double getCanvasPosY(int y) {
         return y * cell.getSize() - getCommonOffsetY();
     }
     //endregion
@@ -671,7 +671,7 @@ public class CanvasController {
 
             // draws vertical line number "i" inside the canvas view
             gc.strokeLine(
-                    xCoordinate = -getCommonOffsetX() % cell.getSize() + i - cell.getSpacing() / 2,
+                    xCoordinate = -getCommonOffsetX() % cell.getSize() + i - cell.getSpacingInPixels() / 2,
                     0,
                     xCoordinate,
                     canvas.getHeight());
@@ -684,7 +684,7 @@ public class CanvasController {
             // draws horizontal line number "i" inside the canvas view
             gc.strokeLine(
                     0,
-                    yCoordinate = -getCommonOffsetY() % cell.getSize() + i - cell.getSpacing() / 2,
+                    yCoordinate = -getCommonOffsetY() % cell.getSize() + i - cell.getSpacingInPixels() / 2,
                     canvas.getWidth(),
                     yCoordinate);
         }
@@ -775,7 +775,7 @@ public class CanvasController {
      */
     private void drawCell(int x, int y) {
         // draws the cell at the x, y coordinate in the grid
-        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cell.getSize() - cell.getSpacing(), cell.getSize() - cell.getSpacing());
+        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), cell.getSize() - cell.getSpacingInPixels(), cell.getSize() - cell.getSpacingInPixels());
     }
 
     /**
@@ -942,9 +942,14 @@ public class CanvasController {
     /**
      * Opens the gif saver
      */
-    private void saveToGif(){
+    void saveToGif(){
         try {
-            new GifSaver().saveToGifBeta(masterController);
+            if (markup == null){
+                new GifSaver().saveToGifBeta(this);
+            }
+            else {
+                new GifSaver().saveToGifAlfa(this, getMinMaxValues());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -986,8 +991,8 @@ public class CanvasController {
         gc.setLineWidth(4);
 
         // strokes the rectangle around the marked area
-        gc.strokeRect(getCanvasPosXMarkup(Math.floor((markup[0] < markup[2])?markup[0]:markup[2])) - cell.getSpacing() / 2,
-                getCanvasPosYMarkup(Math.floor((markup[1] < markup[3])?markup[1]:markup[3])) - cell.getSpacing() / 2,
+        gc.strokeRect(getCanvasPosXMarkup(Math.floor((markup[0] < markup[2])?markup[0]:markup[2])) - cell.getSpacingInPixels() / 2,
+                getCanvasPosYMarkup(Math.floor((markup[1] < markup[3])?markup[1]:markup[3])) - cell.getSpacingInPixels() / 2,
                 (Math.abs(Math.floor(markup[0]) - Math.floor(markup[2])) + 1) * cell.getSize(),
                 (Math.abs(Math.floor(markup[1]) - Math.floor(markup[3])) + 1) * cell.getSize());
 

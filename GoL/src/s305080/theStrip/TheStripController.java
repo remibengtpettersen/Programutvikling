@@ -31,12 +31,11 @@ public class TheStripController {
     public Canvas canvas;
     GraphicsContext gc;
 
-    private GameOfLife originalGol;
     private  GameOfLife gol;
+    private GameOfLife originalGol;
     private MasterController master;
     private double offsetX;
     private double offsetY;
-    private double commonOffsetX;
     private double width;
 
     public TheStripController(){
@@ -136,8 +135,8 @@ public class TheStripController {
 
     private void drawCell(int x, int y) {
         double x1 = x * cellSize - getCommonOffsetX();
-        double xWidth = (x1 < 0) ? cellSize - cellSize * cell.getSpacing() + x1 : cellSize - cellSize * cell.getSpacing();
-        gc.fillRect((x1 < 0) ? 0 : x1, y * cellSize - getCommonOffsetY(), xWidth, cellSize - cellSize * cell.getSpacing());
+        double xWidth = (x1 < 0) ? cellSize - cellSize * cell.getSpacingFactor() + x1 : cellSize - cellSize * cell.getSpacingFactor();
+        gc.fillRect((x1 < 0) ? 0 : x1, y * cellSize - getCommonOffsetY(), xWidth, cellSize - cellSize * cell.getSpacingFactor());
     }
 
 

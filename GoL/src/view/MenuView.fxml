@@ -17,6 +17,7 @@
         <MenuItem text="Save - s305080" onAction="#saveFile"/>
         <SeparatorMenuItem/>
         <MenuItem text="Save GIF - s305061" onAction="#openGifWindow"/>
+        <MenuItem text="Save GIF - s305080" onAction="#saveToGif"/>
     </Menu>
     <Menu text="Edit">
         <MenuItem text="Clear board" onAction="#clearGrid"/>

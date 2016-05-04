@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Controller for the menu bars on top of the stage
+ * GifPropertiesController for the menu bars on top of the stage
  * */
 public class MenuController {
 
@@ -281,5 +281,9 @@ public class MenuController {
      */
     public void paste() {
         masterController.getCanvasController().pasteClipBoard();
+    }
+
+    public void saveToGif() {
+        masterController.getCanvasController().saveToGif();
     }
 }

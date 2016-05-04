@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * @author Andreas s305061
- * Controller for GIF window.
+ * GifPropertiesController for GIF window.
  * Handles GIF creation with GIFLib, in addition to GUI control
  */
 public class GifController {
