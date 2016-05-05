@@ -4,18 +4,27 @@ import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import model.*;
+import model.Parser.PatternParser;
+import model.rules.CustomRule;
+import model.rules.RuleFormatException;
+import model.rules.RuleParser;
 import s305080.Gif.GifSaver;
 import s305080.PatternSaver.ToFile;
+import tools.MessageBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The controller that handles everything that happens on the canvas.
@@ -154,13 +163,10 @@ public class CanvasController {
                     if(!interaction) {
 
 
-                        gol.nextGeneration();
+
                         if(!thread.isAlive()){
                             thread = new Thread(() -> {
-                               // double timer1 = System.currentTimeMillis();
-
-                               // System.out.println(System.currentTimeMillis() - timer1);
-
+                                gol.nextGeneration();
                             });
                             thread.start();
                         }
@@ -194,6 +200,7 @@ public class CanvasController {
     }
 
     private void insertOldGrid(GameOfLife gol, GameOfLife newGol, int ... widthAndHeight) {
+        waitForThread();
         for (int x = 0; x < widthAndHeight[0]; x++) {
             for (int y = 0; y < widthAndHeight[1]; y++) {
                 if (gol.isCellAlive(x,y ))
@@ -410,6 +417,9 @@ public class CanvasController {
         // checks if left click
         if (mouseButton == MouseButton.PRIMARY) {
 
+            //lets nextGeneration() finish
+            waitForThread();
+
             // inserts clipboard pattern if in use
             if (importing) {
                 insertImport();
@@ -471,6 +481,8 @@ public class CanvasController {
         // checks if left click
         if (b == MouseButton.PRIMARY) {
 
+            //lets nextGeneration finish
+            waitForThread();
             // checks if not start of drag
             if (prevMousePosX != 0 || prevMousePosY != 0) {
 
@@ -674,10 +686,15 @@ public class CanvasController {
         for (int x = cView.currViewMinX; x <= cView.currViewMaxX; x++) {
             for (int y = cView.currViewMinY; y <= cView.currViewMaxY; y++) {
 
-                // draws the cells that are alive
-                if (gol.isCellAlive(x, y))
-                    drawCell(x, y);
+               try {
+                   // draws the cells that are alive
 
+                   if (gol.isCellAlive(x, y))
+                       drawCell(x, y);
+               }
+                catch (NullPointerException ignored){
+
+                }
             }
         }
     }
@@ -781,6 +798,9 @@ public class CanvasController {
      */
     void clearGrid() {
 
+        //lets nextGeneration() finish
+        waitForThread();
+
         // empty board
         gol.clearGrid();
 
@@ -846,6 +866,14 @@ public class CanvasController {
         }
     }
 
+    public void waitForThread(){
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     //region Animation control
 
     /**
@@ -861,8 +889,11 @@ public class CanvasController {
      * Stop animation
      */
     void stopAnimation() {
-
         animationTimer.stop();
+
+        // lets next generation finish, then draws it on the canvas
+        waitForThread();
+        renderCanvas();
         running = false;
     }
     //endregion
@@ -916,7 +947,47 @@ public class CanvasController {
         // checks if pattern is null
         if (clipBoardPattern != null) {
             importing = true;
+            try {
+                String importedRule = PatternParser.getLastImportedRule();
+
+                if (!RuleParser.formatRuleText(importedRule).equals(gol.getRule().toString())){
+                    showDifferentRule(importedRule);
+                }
+            } catch (RuleFormatException ignored) {
+                // no rule imported
+            }
         }
+    }
+
+    /**
+     * Asks the user if they want to change the rules of the game
+     * @param importedRule The rule the user can change to.
+     */
+    private void showDifferentRule(String importedRule) {
+        interaction = true;
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Wrong rule");
+        alert.setHeaderText("The pattern you imported use a different rule than what you have now");
+        alert.setContentText("Do you want to change rule from " + gol.getRule().toString() + " to " + importedRule + "?");
+
+        ButtonType yesBtn = new ButtonType("Yes");
+        ButtonType noBtn = new ButtonType("No");
+        ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(yesBtn, noBtn, cancelBtn);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == yesBtn){
+            gol.setRule(importedRule);
+        }
+        else if(result.get() == noBtn){
+            // do nothing
+        }
+        else {
+            // ... user chose CANCEL or closed the dialog
+            importing = false;
+        }
+        interaction = false;
     }
 
     /**
@@ -1167,7 +1238,8 @@ public class CanvasController {
         if (markup == null){
             return;
         }
-
+        //lets nextGeneration finish
+        waitForThread();
         // gets the min and max x and y values inside the marked area
         int [] minMaxValues = getMinMaxValues();
 
