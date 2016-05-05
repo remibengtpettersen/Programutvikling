@@ -152,8 +152,6 @@ public class CanvasController {
                 if (now / 1000000 - timer > frameDelay) {
 
                     if(!interaction) {
-
-
                         gol.nextGeneration();
                         if(!thread.isAlive()){
                             thread = new Thread(() -> {
@@ -165,8 +163,7 @@ public class CanvasController {
                             thread.start();
                         }
                         renderCanvas();
-
-
+                        
                         timer = now / 1000000;
 
                         giveCellCount();

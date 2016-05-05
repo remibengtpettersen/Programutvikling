@@ -123,6 +123,7 @@ public abstract class GameOfLife {
     /**
      * Runs all active threads, waits for them to complete their task,
      * and joins them before clearing the thread list.
+     *
      * @throws InterruptedException Thrown if a thread is interrupted
      */
     private void runThreads() throws InterruptedException {
@@ -146,6 +147,7 @@ public abstract class GameOfLife {
      * Gets the smallest possible bounding box around the pattern.
      * The bounding box is an int array containing min row, max row,
      * min column and max column for the active cells in game board.
+     *
      * @return Min row (left), max row (right), min column (top), max column (bottom)
      */
     public int[] getBoundingBox() {
@@ -233,6 +235,7 @@ public abstract class GameOfLife {
 
     /**
      * Clones the StaticGameOfLife object
+     *
      * @return the cloned StaticGameOfLife object
      */
     @Override
@@ -240,7 +243,8 @@ public abstract class GameOfLife {
 
     /**
      * Gets the number of live cells at game board
-     * @return
+     *
+     * @return Number of live cells
      */
     public int getCellCount(){
         return cellCount.get();
@@ -265,7 +269,6 @@ public abstract class GameOfLife {
      * @param y Y coordinate at grid.
      */
     public abstract void setCellAlive(int x, int y);
-
 
     /**
      * Sets cell state to false regardless of current state.
@@ -295,7 +298,6 @@ public abstract class GameOfLife {
      * @param ruleText The rule text
      */
     public void setRule(String ruleText) {
-
         rule = RuleParser.createRule(this, ruleText);
     }
 

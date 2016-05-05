@@ -34,7 +34,7 @@
       <Canvas fx:id="editor" width="800" height="500" GridPane.columnIndex="1"
               onMouseDragged="#onMouseDraggedEditor"
               onMouseClicked="#onMouseClickedEditor"
-              onScroll="#onScrollEditorCanvas" onMouseEntered="#onMouseEnteredEditor" onMouseExited="#onMouseExited">
+              onScroll="#onScrollEditorCanvas" onMouseEntered="#onMouseEnteredEditor" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMovedEditor">
       </Canvas>
    </HBox>
    <VBox fx:id="vBoxScrollPane" GridPane.rowIndex="1">
