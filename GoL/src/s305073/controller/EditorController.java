@@ -67,7 +67,7 @@ public class EditorController {
     public void init(MasterController masterController) {
         this.masterController = masterController;
 
-        parentCameraView = masterController.getCanvasController().cView;
+        parentCameraView = masterController.getCanvasController().getCameraView();
         parentGol = masterController.getCanvasController().gol;
         parentCellSize = masterController.getCanvasController().getCell().getSize();
     }
