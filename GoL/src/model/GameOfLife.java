@@ -352,5 +352,24 @@ public abstract class GameOfLife {
         neighbours.deleteCharAt(neighbours.length() - 1);
         return neighbours.toString();
     }
+
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+
+        for (int i = 0; i < getGridWidth(); i++) {
+            for (int j = 0; j < getGridHeight(); j++) {
+                if (isCellAlive(i, j)) {
+                    string.append(1);
+                }
+                else {
+                    string.append(0);
+                }
+            }
+            string.append(" ");
+        }
+        string.deleteCharAt(string.length() - 1);
+
+        return string.toString();
+    }
     //endregion
 }
