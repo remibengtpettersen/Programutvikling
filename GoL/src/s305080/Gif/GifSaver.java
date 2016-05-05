@@ -66,8 +66,8 @@ public class GifSaver {
             gol.setRule(originalGol.getRule().toString());
             System.out.println("changed rule");
         }
-        offsetX = cController.getCommonOffsetX();
-        offsetY = cController.getCommonOffsetY();
+        offsetX = cController.cView.getCommonOffsetX(originalGol, cell.getSize());
+        offsetY = cController.cView.getCommonOffsetY(originalGol, cell.getSize());
         width = (int)cController.getCanvas().getWidth();
         height = (int)cController.getCanvas().getHeight();
         cellSize = cController.getCell().getSize();
@@ -92,8 +92,8 @@ public class GifSaver {
             System.out.println("changed rule");
         }
 
-        offsetX = cController.getCommonOffsetX() + cController.getCanvasPosX(boundingBox[0]);
-        offsetY = cController.getCommonOffsetY() + cController.getCanvasPosY(boundingBox[1]);
+        offsetX = cController.cView.getCommonOffsetX(originalGol, cell.getSize()) + cController.getCanvasPosX(boundingBox[0]);
+        offsetY = cController.cView.getCommonOffsetY(originalGol, cell.getSize()) + cController.getCanvasPosY(boundingBox[1]);
         cellSize = cController.getCell().getSize();
         System.out.println(boundingBox[0] + " " + boundingBox[1] + " " + boundingBox[2] + " " + boundingBox[3]);
         width = (int) ((boundingBox[2] - boundingBox[0] + 1) * cellSize);

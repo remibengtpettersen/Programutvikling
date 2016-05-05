@@ -57,8 +57,8 @@ public class TheStripController {
         }
 
         cellSize = canvas.getHeight()/(master.getCanvasController().getCanvas().getHeight() / cell.getSize());
-        offsetX = master.getCanvasController().getCommonOffsetX()*cellSize/cell.getSize();
-        offsetY = master.getCanvasController().getCommonOffsetY()*cellSize/cell.getSize();
+        offsetX = master.getCanvasController().cView.getCommonOffsetX(originalGol, cell.getSize())*cellSize/cell.getSize();
+        offsetY = master.getCanvasController().cView.getCommonOffsetY(originalGol, cell.getSize())*cellSize/cell.getSize();
         width = canvas.getHeight() *
                 master.getCanvasController().getCanvas().getWidth() /
                 master.getCanvasController().getCanvas().getHeight();

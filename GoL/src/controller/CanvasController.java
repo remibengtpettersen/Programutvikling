@@ -9,10 +9,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
-import model.Cell;
-import model.DynamicGameOfLife;
-import model.GameOfLife;
-import model.StaticGameOfLife;
+import model.*;
 import s305080.Gif.GifSaver;
 import s305080.PatternSaver.ToFile;
 
@@ -64,14 +61,17 @@ public class CanvasController {
     private boolean mouseOnCanvas;
 
     // tracks board position
-    private int boardOffsetX = 50;
-    private int boardOffsetY = 50;
+
+    //private int boardOffsetX = 50;
+    //private int boardOffsetY = 50;
 
     // tracks cells in view.
-    private int currViewMinX;
-    private int currViewMaxX;
-    private int currViewMinY;
-    private int currViewMaxY;
+    //private int currViewMinX;
+    //private int currViewMaxX;
+    //private int currViewMinY;
+    //private int currViewMaxY;
+
+    public CameraView cView = new CameraView();
 
     // holds pattern to be imported
     private boolean[][] clipBoardPattern;
@@ -110,7 +110,7 @@ public class CanvasController {
         gc = canvas.getGraphicsContext2D();
         buttonsPressed = new ArrayList<>();
 
-        updateView();
+        cView.updateView(gol, canvas, cell.getSize());
 
         initializeListeners();
         initializeAnimation();
@@ -135,32 +135,7 @@ public class CanvasController {
         masterController.getToolController().setSpeed(frameDelay);
     }
 
-    /**
-     * Updates the fields that contains the grid minimum and maximum x and y values displayed on the canvas
-     */
-    private void updateView() {
 
-        // finds minimum x coordinate visible on canvas
-        currViewMinX = (int) (getCommonOffsetX() / cell.getSize());
-        if (currViewMinX < 0)
-            currViewMinX = 0;
-
-        // finds maximum x coordinate visible on canvas
-        currViewMaxX = (int) ((getCommonOffsetX() + canvas.getWidth()) / cell.getSize()) + 1;
-        if (currViewMaxX > gol.getGridWidth())
-            currViewMaxX = gol.getGridWidth();
-
-        // finds minimum y coordinate visible on canvas
-        currViewMinY = (int)(getCommonOffsetY() / cell.getSize());
-        if (currViewMinY < 0)
-            currViewMinY = 0;
-
-        // finds maximum y coordinate visible on canvas
-        currViewMaxY = (int) ((getCommonOffsetY() + canvas.getHeight()) / cell.getSize()) + 1;
-        if (currViewMaxY > gol.getGridHeight())
-            currViewMaxY = gol.getGridHeight();
-
-    }
 
     /**
      * Initializes the animation. The "timer" and "frameDelay" are used for having dynamic frame rate.
@@ -488,8 +463,8 @@ public class CanvasController {
         if (prevMousePosX != 0 || prevMousePosY != 0) {
 
             // moves the board using the offset
-            boardOffsetX += prevMousePosX - currMousePosX;
-            boardOffsetY += prevMousePosY - currMousePosY;
+            cView.boardOffsetX += prevMousePosX - currMousePosX;
+            cView.boardOffsetY += prevMousePosY - currMousePosY;
         }
     }
 
@@ -521,8 +496,8 @@ public class CanvasController {
     private void mouseScroll(ScrollEvent scrollEvent) {
 
         // gets exact cell position at mouse coordinates
-        double absMPosXOnGrid = (getCommonOffsetX() + scrollEvent.getX()) / cell.getSize();
-        double absMPosYOnGrid = (getCommonOffsetY() + scrollEvent.getY()) /  cell.getSize();
+        double absMPosXOnGrid = (cView.getCommonOffsetX(gol, cell.getSize()) + scrollEvent.getX()) / cell.getSize();
+        double absMPosYOnGrid = (cView.getCommonOffsetY(gol, cell.getSize()) + scrollEvent.getY()) /  cell.getSize();
 
         // changes cellsize
         cell.setSize(cell.getSize() * ( 1 + (scrollEvent.getDeltaY() / 150)));
@@ -531,8 +506,8 @@ public class CanvasController {
         masterController.getToolController().setZoom( cell.getSize());
 
         // moves the board so the mouse gets the exact same position on the board as before
-        boardOffsetX = (int) ((absMPosXOnGrid - gol.getOffsetX()) * cell.getSize() - scrollEvent.getX());
-        boardOffsetY = (int) ((absMPosYOnGrid - gol.getOffsetY()) * cell.getSize() - scrollEvent.getY());
+        cView.boardOffsetX = (int) ((absMPosXOnGrid - gol.getOffsetX()) * cell.getSize() - scrollEvent.getX());
+        cView.boardOffsetY = (int) ((absMPosYOnGrid - gol.getOffsetY()) * cell.getSize() - scrollEvent.getY());
 
         // checks if it is necessary to draw grid lines
         checkIfShouldStillDrawGrid();
@@ -554,11 +529,11 @@ public class CanvasController {
 
     // region canvas to grid converter
     private int getGridPosX(double x) {
-        return (int)Math.floor((x + getCommonOffsetX()) / cell.getSize());
+        return (int)Math.floor((x + cView.getCommonOffsetX(gol, cell.getSize())) / cell.getSize());
     }
 
     private int getGridPosY(double y) {
-        return (int) Math.floor((y + getCommonOffsetY()) / cell.getSize());
+        return (int) Math.floor((y + cView.getCommonOffsetY(gol, cell.getSize())) / cell.getSize());
     }
     // endregion
 
@@ -571,7 +546,7 @@ public class CanvasController {
      * @return a x coordinate on the canvas.
      */
     public double getCanvasPosX(int x) {
-        return x * cell.getSize() - getCommonOffsetX();
+        return x * cell.getSize() - cView.getCommonOffsetX(gol, cell.getSize());
     }
 
     /**
@@ -581,25 +556,10 @@ public class CanvasController {
      * @return a y coordinate on the canvas.
      */
     public double getCanvasPosY(int y) {
-        return y * cell.getSize() - getCommonOffsetY();
+        return y * cell.getSize() - cView.getCommonOffsetY(gol, cell.getSize());
     }
     //endregion
 
-    /**
-     * Calculates the x offset for the board with the offset inside the GameOfLife
-     * @return the common offset for the x coordinate
-     */
-    public double getCommonOffsetX(){
-         return (boardOffsetX + gol.getOffsetX() * cell.getSize());
-     }
-
-    /**
-     * Calculates the y offset for the board with the offset inside the GameOfLife
-     * @return the common offset for the y coordinate
-     */
-    public double getCommonOffsetY(){
-        return (boardOffsetY + gol.getOffsetY() * cell.getSize());
-    }
 
     /**
      * Renders everything on the canvas
@@ -607,7 +567,7 @@ public class CanvasController {
     void renderCanvas() {
 
         // checks wich cells are inside the canvas view
-        updateView();
+        cView.updateView(gol, canvas, cell.getSize());
 
         // renders the cells on the canvas
         renderLife();
@@ -628,7 +588,7 @@ public class CanvasController {
             renderMarkup();
         }
         //to see where the grid is
-        gc.strokeRect(-getCommonOffsetX(), -getCommonOffsetY(), gol.getGridWidth() * cell.getSize(), gol.getGridHeight() * cell.getSize());
+        gc.strokeRect(-cView.getCommonOffsetX(gol, cell.getSize()), -cView.getCommonOffsetY(gol, cell.getSize()), gol.getGridWidth() * cell.getSize(), gol.getGridHeight() * cell.getSize());
 
     }
 
@@ -646,8 +606,8 @@ public class CanvasController {
         gc.setFill(cell.getColor());
 
         // runs through the cells inside the view
-        for (int x = currViewMinX; x < currViewMaxX; x++) {
-            for (int y = currViewMinY; y < currViewMaxY; y++) {
+        for (int x = cView.currViewMinX; x < cView.currViewMaxX; x++) {
+            for (int y = cView.currViewMinY; y < cView.currViewMaxY; y++) {
 
                 // draws the cells that are alive
                 if (gol.isCellAlive(x, y))
@@ -671,7 +631,7 @@ public class CanvasController {
 
             // draws vertical line number "i" inside the canvas view
             gc.strokeLine(
-                    xCoordinate = -getCommonOffsetX() % cell.getSize() + i - cell.getSpacingInPixels() / 2,
+                    xCoordinate = -cView .getCommonOffsetX(gol, cell.getSize()) % cell.getSize() + i - cell.getSpacingInPixels() / 2,
                     0,
                     xCoordinate,
                     canvas.getHeight());
@@ -684,7 +644,7 @@ public class CanvasController {
             // draws horizontal line number "i" inside the canvas view
             gc.strokeLine(
                     0,
-                    yCoordinate = -getCommonOffsetY() % cell.getSize() + i - cell.getSpacingInPixels() / 2,
+                    yCoordinate = -cView.getCommonOffsetY(gol, cell.getSize()) % cell.getSize() + i - cell.getSpacingInPixels() / 2,
                     canvas.getWidth(),
                     yCoordinate);
         }
@@ -862,15 +822,15 @@ public class CanvasController {
     void setCellSize(double newCellSize) {
 
         // stores the exact center of the canvas view
-        double canvasCenterX = (getCommonOffsetX() + canvas.getWidth() / 2) / cell.getSize();
-        double canvasCenterY = (getCommonOffsetY() + canvas.getHeight() / 2) / cell.getSize();
+        double canvasCenterX = (cView.getCommonOffsetX(gol, cell.getSize()) + canvas.getWidth() / 2) / cell.getSize();
+        double canvasCenterY = (cView.getCommonOffsetY(gol, cell.getSize()) + canvas.getHeight() / 2) / cell.getSize();
 
         // sets the new cellSize
         cell.setSize(newCellSize);
 
         // moves the board to get the same center of view as before
-        boardOffsetX = (int) (cell.getSize() * canvasCenterX - canvas.getWidth() / 2 - gol.getOffsetX() * cell.getSize());
-        boardOffsetY = (int) (cell.getSize() * canvasCenterY - canvas.getHeight() / 2 - gol.getOffsetY() * cell.getSize());
+        cView.boardOffsetX = (int) (cell.getSize() * canvasCenterX - canvas.getWidth() / 2 - gol.getOffsetX() * cell.getSize());
+        cView.boardOffsetY = (int) (cell.getSize() * canvasCenterY - canvas.getHeight() / 2 - gol.getOffsetY() * cell.getSize());
 
         // checks if still necessary to draw grid lines
         checkIfShouldStillDrawGrid();
@@ -1011,7 +971,7 @@ public class CanvasController {
      * @return The coordinate on the canvas
      */
     private double getCanvasPosXMarkup(double x) {
-        return x * cell.getSize() - boardOffsetX;
+        return x * cell.getSize() - cView.boardOffsetX;
     }
 
     /**
@@ -1020,7 +980,7 @@ public class CanvasController {
      * @return The coordinate on the canvas
      */
     private double getCanvasPosYMarkup(double y) {
-        return y * cell.getSize() - boardOffsetY;
+        return y * cell.getSize() - cView.boardOffsetY;
     }
 
     /**
@@ -1056,15 +1016,15 @@ public class CanvasController {
             if(!mouseDrag){
 
                 // sets market area as current position
-                markup[0] = (mouseEvent.getX() + boardOffsetX) / cell.getSize();
-                markup[1] = (mouseEvent.getY() + boardOffsetY) / cell.getSize();
-                markup[2] = (mouseEvent.getX() + boardOffsetX) / cell.getSize();
-                markup[3] = (mouseEvent.getY() + boardOffsetY) / cell.getSize();
+                markup[0] = (mouseEvent.getX() + cView.boardOffsetX) / cell.getSize();
+                markup[1] = (mouseEvent.getY() + cView.boardOffsetY) / cell.getSize();
+                markup[2] = (mouseEvent.getX() + cView.boardOffsetX) / cell.getSize();
+                markup[3] = (mouseEvent.getY() + cView.boardOffsetY) / cell.getSize();
             }
             else{
                 // sets corner of marked area as current position
-                markup[2] = (mouseEvent.getX() + boardOffsetX) / cell.getSize();
-                markup[3] = (mouseEvent.getY() + boardOffsetY) / cell.getSize();
+                markup[2] = (mouseEvent.getX() + cView.boardOffsetX) / cell.getSize();
+                markup[3] = (mouseEvent.getY() + cView.boardOffsetY) / cell.getSize();
             }
             // checks if right click
         } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
