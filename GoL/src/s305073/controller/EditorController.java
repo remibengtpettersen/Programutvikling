@@ -29,12 +29,11 @@ public class EditorController {
     @FXML private Canvas strip;
     @FXML private ScrollPane scrollPane;
 
-    private Point currentMousePosition = new Point(0, 0);
-    private Point2D previewsMousePosition = new Point2D(0.0, 0.0);
+    private int currentMousePositionX;
+    private int currentMousePositionY;
 
-    private Point cameraViewGridPositionMin = new Point(0, 0); // board offset
-    private Point cameraViewGridPositionMax = new Point(0, 0); // board offset
-    private Point gridOffset = new Point(50, 50);
+    private int previewsMousePositionX;
+    private int previewsMousePositionY;
 
     private GraphicsContext gc;
     private CameraView cameraView = new CameraView();
@@ -151,14 +150,16 @@ public class EditorController {
         mouseDrag = true;
 
         // gets mouse coordinates on canvas.
-        currentMousePosition.setLocation((int) event.getX(), (int) event.getY());
+        currentMousePositionX = (int) event.getX();
+        currentMousePositionY = (int) event.getY();
+
 
         // checks if left click
         if (b == MouseButton.PRIMARY) {
 
             // gets cell on event position
-            int x = getGridPosX(currentMousePosition.getX());
-            int y = getGridPosY(currentMousePosition.getY());
+            int x = getGridPosX(currentMousePositionX);
+            int y = getGridPosY(currentMousePositionY);
 
             // makes sure the cell is on the grid
             fitTo(x, y);
@@ -174,7 +175,7 @@ public class EditorController {
         if (event.getButton() == MouseButton.SECONDARY) {
 
             // moves board to current position
-            moveBoard((int)currentMousePosition.getX(), (int)currentMousePosition.getY());
+            moveBoard(currentMousePositionX, currentMousePositionY);
         }
 
         // clears and render editor canvas
@@ -182,7 +183,8 @@ public class EditorController {
         renderEditor();
 
         // stores current mouse position for later use
-        previewsMousePosition.add(currentMousePosition.getX(), currentMousePosition.getY());
+        previewsMousePositionX = currentMousePositionX;
+        previewsMousePositionY = currentMousePositionY;
     }
 
     /**
@@ -194,14 +196,14 @@ public class EditorController {
     private void moveBoard(int currMousePosX, int currMousePosY) {
 
         // checks if last mouse position is present
-        if (previewsMousePosition.getX() != 0 || previewsMousePosition.getY() != 0) {
+        if (previewsMousePositionX != 0 || previewsMousePositionY != 0) {
 
             // moves the board using the offset
             //boardOffsetX += prevMousePosX - currMousePosX;
             //boardOffsetY += prevMousePosY - currMousePosY;
-            gridOffset.setLocation(
-                    gridOffset.getX() + previewsMousePosition.getX() - currMousePosX,
-                    gridOffset.getY() + previewsMousePosition.getY() - currMousePosY);
+
+            cameraView.boardOffsetX += previewsMousePositionX - currMousePosX;
+            cameraView.boardOffsetY += previewsMousePositionY - currMousePosY;
         }
     }
 
@@ -235,9 +237,8 @@ public class EditorController {
         // if click is end of drag, reset variables used in drag
         if (mouseDrag) {
             mouseDrag = false;
-            previewsMousePosition.add(0, 0);
-            //prevMousePosX = 0;
-            //prevMousePosY = 0;
+            previewsMousePositionX = 0;
+            previewsMousePositionY = 0;
             return;
         }
 
@@ -341,7 +342,8 @@ public class EditorController {
      */
     public void onMouseExited(MouseEvent event) {
         mouseOnCanvas = false;
-        previewsMousePosition.add(0, 0);
+        previewsMousePositionX = 0;
+        previewsMousePositionY = 0;
     }
 
     public void onMouseMovedStrip(MouseEvent event) {
