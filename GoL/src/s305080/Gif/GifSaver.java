@@ -64,8 +64,8 @@ public class GifSaver {
 
         cell = cController.getCell().clone();
 
-        cView.boardOffsetX = (int) cController.cView.getCommonOffsetX(originalGol, cell.getSize());
-        cView.boardOffsetY = (int) cController.cView.getCommonOffsetY(originalGol, cell.getSize());
+        cView.boardOffsetX = cController.getCameraView().getCommonOffsetX(originalGol, cell.getSize());
+        cView.boardOffsetY = cController.getCameraView().getCommonOffsetY(originalGol, cell.getSize());
         width = (int)cController.getCanvas().getWidth();
         height = (int)cController.getCanvas().getHeight();
 
@@ -83,7 +83,7 @@ public class GifSaver {
             return;
         }
 
-        if (!gol.getRule().toString().equals(originalGol.getRule().toString())) //for some reason this always returns false :/
+        if (!gol.getRule().toString().equals(originalGol.getRule().toString()))
         {
             gol.setRule(originalGol.getRule().toString());
             System.out.println("changed rule");
@@ -92,8 +92,8 @@ public class GifSaver {
 
         cell = cController.getCell().clone();
 
-        cView.boardOffsetX  = (int) (cController.cView.getCommonOffsetX(originalGol, cell.getSize()) + cController.getCanvasPosX(boundingBox[0]));
-        cView.boardOffsetY  = (int) (cController.cView.getCommonOffsetY(originalGol, cell.getSize()) + cController.getCanvasPosY(boundingBox[1]));
+        cView.boardOffsetX  = (int) (cController.getCameraView().getCommonOffsetX(originalGol, cell.getSize()) + cController.getCanvasPosX(boundingBox[0]));
+        cView.boardOffsetY  = (int) (cController.getCameraView().getCommonOffsetY(originalGol, cell.getSize()) + cController.getCanvasPosY(boundingBox[1]));
         System.out.println(boundingBox[0] + " " + boundingBox[1] + " " + boundingBox[2] + " " + boundingBox[3]);
         width = (int) ((boundingBox[2] - boundingBox[0] + 1) * cell.getSize());
         height = (int) ((boundingBox[3] - boundingBox[1] + 1) * cell.getSize());

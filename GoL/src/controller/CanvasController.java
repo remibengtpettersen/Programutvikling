@@ -71,7 +71,7 @@ public class CanvasController {
     //private int currViewMinY;
     //private int currViewMaxY;
 
-    public CameraView cView = new CameraView();
+    private CameraView cView = new CameraView();
 
     // holds pattern to be imported
     private boolean[][] clipBoardPattern;
@@ -177,10 +177,32 @@ public class CanvasController {
     }
 
     public void changeToStatic(){
-        gol = new StaticGameOfLife(500, 500);
+        GameOfLife newGol = new StaticGameOfLife(500, 500);
+        insertOldGrid(gol, newGol, newGol.getGridWidth(), newGol.getGridHeight());
+        cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
+        cView.boardOffsetY = cView.getCommonOffsetY(gol, cell.getSize());
+        gol = newGol;
+        renderCanvasIfLowFPS();
+
     }
     public void changeToDynamic(){
-        gol = new DynamicGameOfLife();
+        GameOfLife newGol = new DynamicGameOfLife();
+        insertOldGrid(gol, newGol, gol.getGridWidth(), gol.getGridHeight());
+        cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
+        cView.boardOffsetY = cView.getCommonOffsetY(gol, cell.getSize());
+        gol = newGol;
+        renderCanvasIfLowFPS();
+    }
+
+    private void insertOldGrid(GameOfLife gol, GameOfLife newGol, int ... widthAndHeight) {
+        for (int x = 0; x < widthAndHeight[0]; x++) {
+            for (int y = 0; y < widthAndHeight[1]; y++) {
+                if (gol.isCellAlive(x,y ))
+                {
+                    newGol.setCellAlive(x,y);
+                }
+            }
+        }
     }
 
     /**
@@ -201,14 +223,14 @@ public class CanvasController {
         masterController.scene.setOnKeyReleased(this::keyReleased);
 
         // binds the canvas to the stage size
-        canvas.widthProperty().addListener(evt -> canvasFollowWindow());
-        canvas.heightProperty().addListener(evt -> canvasFollowWindow());
+        canvas.widthProperty().addListener(evt -> renderCanvasIfLowFPS());
+        canvas.heightProperty().addListener(evt -> renderCanvasIfLowFPS());
     }
 
     /**
      * Called when the stage changes size
      */
-    private void canvasFollowWindow() {
+    private void renderCanvasIfLowFPS() {
         if (!running || frameDelay > 0)
             renderCanvas();
     }
@@ -516,8 +538,7 @@ public class CanvasController {
         masterController.getToolController().addSpeedValue(scrollEvent.getDeltaX() / 5);
 
         // updates canvas if framerate is low
-        if (!running || frameDelay > 0)
-            renderCanvas();
+        renderCanvasIfLowFPS();
     }
 
     /**
@@ -709,8 +730,7 @@ public class CanvasController {
         giveCellCount();
 
         // updates canvas if framerate is low
-        if (!running || frameDelay > 0)
-            renderCanvas();
+        renderCanvasIfLowFPS();
     }
 
 
@@ -838,8 +858,7 @@ public class CanvasController {
         checkIfShouldStillDrawGrid();
 
         // updates canvas if framerate is low
-        if (!running || frameDelay > 0)
-            renderCanvas();
+        renderCanvasIfLowFPS();
     }
 
     /**
@@ -892,6 +911,10 @@ public class CanvasController {
     //region getters
     public Canvas getCanvas() {
         return canvas;
+    }
+
+    public CameraView getCameraView(){
+        return cView;
     }
 
     public Cell getCell() {
@@ -1036,8 +1059,7 @@ public class CanvasController {
         }
 
         // updates canvas if framerate is low
-        if (!running || frameDelay > 0)
-            renderCanvas();
+        renderCanvasIfLowFPS();
 
         // stores current mouse position for later use
         prevMousePosX = currMousePosX;
@@ -1089,8 +1111,7 @@ public class CanvasController {
         clipBoardPattern = clipboard;
 
         // updates canvas if framerate is low
-        if (!running || frameDelay > 0)
-            renderCanvas();
+        renderCanvasIfLowFPS();
 
 
     }
@@ -1134,8 +1155,7 @@ public class CanvasController {
 
         // updates canvas if framerate is low
         clipBoardPattern = clipboard;
-        if (!running || frameDelay > 0)
-            renderCanvas();
+        renderCanvasIfLowFPS();
 
     }
 

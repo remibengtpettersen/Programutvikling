@@ -23,9 +23,7 @@ import java.util.Optional;
  * */
 public class MenuController {
 
-    public MenuItem cut;
-    public MenuItem copy;
-    public MenuItem paste;
+    public RadioMenuItem staticButton, dynamicButton;
     private MasterController masterController;
     
     @FXML private RadioMenuItem theStripS305080, statsS305080, markupS305080;
@@ -214,6 +212,8 @@ public class MenuController {
         // deep copy and assign to new reference variable
         editorController.getDeepCopyGol(masterController.getCanvasController().gol);
 
+        editorController.init(masterController);
+
         // set pattern in editor window
         editorController.setPattern();
 
@@ -289,5 +289,25 @@ public class MenuController {
 
     public void openFromUrl() {
         masterController.importFromUrl();
+    }
+
+    public void changeToStaticBoard() {
+        if (!staticButton.isSelected()){
+            staticButton.setSelected(true);
+        }
+        else{
+            dynamicButton.setSelected(false);
+            masterController.getCanvasController().changeToStatic();
+        }
+    }
+
+    public void changeToDynamicBoard() {
+        if (!dynamicButton.isSelected()){
+            dynamicButton.setSelected(true);
+        }
+        else{
+            staticButton.setSelected(false);
+            masterController.getCanvasController().changeToDynamic();
+        }
     }
 }
