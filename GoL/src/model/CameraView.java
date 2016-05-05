@@ -9,8 +9,9 @@ public class CameraView {
     public int currViewMinY;
     public int currViewMaxY;
 
-    public int boardOffsetX = 50;
-    public int boardOffsetY = 50;
+    // must be double, side scroll moves board to the left if int
+    public double boardOffsetX = 50;
+    public double boardOffsetY = 50;
 
     /**
      * Updates the fields that contains the grid minimum and maximum x and y values displayed on the canvas
@@ -45,16 +46,16 @@ public class CameraView {
      * Calculates the x offset for the board with the offset inside the GameOfLife
      * @return the common offset for the x coordinate
      */
-    public int getCommonOffsetX(GameOfLife gol, double cellSize){
-        return (int) (boardOffsetX + gol.getOffsetX() * cellSize);
+    public double getCommonOffsetX(GameOfLife gol, double cellSize){
+        return  (boardOffsetX + gol.getOffsetX() * cellSize);
     }
 
     /**
      * Calculates the y offset for the board with the offset inside the GameOfLife
      * @return the common offset for the y coordinate
      */
-    public int getCommonOffsetY(GameOfLife gol, double cellSize){
-        return (int) (boardOffsetY + gol.getOffsetY() * cellSize);
+    public double getCommonOffsetY(GameOfLife gol, double cellSize){
+        return  (boardOffsetY + gol.getOffsetY() * cellSize);
     }
 
 }
