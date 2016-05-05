@@ -16,6 +16,7 @@ public class RuleParser {
 
     /**
      * Creates a new rule based on a rulestring.
+     *
      * @param gol Sets a reference to the GameOfLife object to evolve
      * @param rulestring Rulestring of the rule
      * @return New rule based on rulestring
@@ -135,9 +136,12 @@ public class RuleParser {
 
             if(Character.isDigit(currentChar)) {
 
-                // add digit to array
+                // get digit from character
                 int digit = Character.getNumericValue(currentChar);
-                parsedDigits[digit] = true;
+
+                // enable digit cell if possible
+                if(digit >= 0 && digit < 9)
+                    parsedDigits[digit] = true;
             }
             else
                 break;

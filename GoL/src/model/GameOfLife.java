@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * @author Pair programming
+ *
  * Game class.
  * Handles logic related to Game of Life. Contains a game board of cells,
  * and evolves these cells according to a specific rule.
@@ -55,7 +57,7 @@ public abstract class GameOfLife {
      * @param startColumn First column from the left
      * @param stopColumn Last column from the right
      */
-    private void aggregateNeighbours(int startColumn, int stopColumn) {
+    public void aggregateNeighbours(int startColumn, int stopColumn) {
 
         for (int x = startColumn; x < stopColumn; x++) {
             for (int y = 1; y < getGridHeight() - 1; y++) {
@@ -123,6 +125,7 @@ public abstract class GameOfLife {
     /**
      * Runs all active threads, waits for them to complete their task,
      * and joins them before clearing the thread list.
+     *
      * @throws InterruptedException Thrown if a thread is interrupted
      */
     private void runThreads() throws InterruptedException {
@@ -146,6 +149,7 @@ public abstract class GameOfLife {
      * Gets the smallest possible bounding box around the pattern.
      * The bounding box is an int array containing min row, max row,
      * min column and max column for the active cells in game board.
+     *
      * @return Min row (left), max row (right), min column (top), max column (bottom)
      */
     public int[] getBoundingBox() {
@@ -233,6 +237,7 @@ public abstract class GameOfLife {
 
     /**
      * Clones the StaticGameOfLife object
+     *
      * @return the cloned StaticGameOfLife object
      */
     @Override
@@ -240,7 +245,8 @@ public abstract class GameOfLife {
 
     /**
      * Gets the number of live cells at game board
-     * @return
+     *
+     * @return Number of live cells
      */
     public int getCellCount(){
         return cellCount.get();
@@ -295,7 +301,6 @@ public abstract class GameOfLife {
      * @param ruleText The rule text
      */
     public void setRule(String ruleText) {
-
         rule = RuleParser.createRule(this, ruleText);
     }
 

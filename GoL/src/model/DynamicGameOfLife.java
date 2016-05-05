@@ -7,6 +7,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * @author Pair programming
+ *
  * Game class with a game board with dynamic size.
  * The game board will expand or shrink to fit around the pattern
  */
@@ -32,6 +34,7 @@ public class DynamicGameOfLife extends GameOfLife{
      * array to keep track of the neighbour count to the corresponding cells in the other array
      */
     private void createGameBoard() {
+
         grid = new ArrayList<>();
         neighbours = new ArrayList<>();
 
@@ -39,7 +42,6 @@ public class DynamicGameOfLife extends GameOfLife{
         neighbours.add(new ArrayList<>());
         grid.get(0).add(new AtomicBoolean(false));
         neighbours.get(0).add(new AtomicInteger(0));
-
     }
     //endregion
 
@@ -87,7 +89,6 @@ public class DynamicGameOfLife extends GameOfLife{
         else if(bBox[3] == grid.get(0).size() - 1){
             increaseYBottom(1);
         }
-
     }
 
     //endregion
@@ -100,11 +101,14 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param diffX Number of columns
      */
     public void increaseXRight(int diffX) {
+
         for (int i = 0; i < diffX; i++){
+
             grid.add(new ArrayList<>());
             neighbours.add(new ArrayList<>());
 
             for (int j = 0; j < grid.get(0).size(); j++) {
+
                 grid.get(grid.size() - 1).add(new AtomicBoolean(false));
                 neighbours.get(grid.size() - 1).add(new AtomicInteger(0));
             }
@@ -117,8 +121,10 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param diffY Number of rows
      */
     public void increaseYBottom(int diffY){
+
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < diffY; j++){
+
                 grid.get(i).add(new AtomicBoolean(false));
                 neighbours.get(i).add(new AtomicInteger(0));
             }
@@ -131,12 +137,16 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param diffX Number of columns
      */
     public void increaseXLeft(int diffX) {
+
         cellOffsetX += diffX;
+
         for (int i = 0; i < diffX; i++){
+
             grid.add(0, new ArrayList<>());
             neighbours.add(0, new ArrayList<>());
 
             for (int j = 0; j < grid.get(1).size(); j++) {
+
                 grid.get(0).add(new AtomicBoolean(false));
                 neighbours.get(0).add(new AtomicInteger(0));
             }
@@ -149,9 +159,12 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param diffY Number of rows
      */
     public void increaseYTop(int diffY){
+
         cellOffsetY += diffY;
+
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < diffY; j++){
+
                 grid.get(i).add(0, new AtomicBoolean(false));
                 neighbours.get(i).add(0, new AtomicInteger(0));
             }
@@ -164,7 +177,9 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param diffX Number of columns
      */
     public void decreaseXRight(int diffX) {
+
         for (int i = 0; i < diffX; i++){
+
             grid.remove(grid.size() - 1);
             neighbours.remove(neighbours.size() - 1);
         }
@@ -176,8 +191,10 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param diffY Number of rows
      */
     public void decreaseYBottom(int diffY){
+
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < diffY; j++){
+
                 grid.get(i).remove(grid.get(i).size() - 1);
                 neighbours.get(i).remove(neighbours.get(i).size() - 1);
             }
@@ -190,8 +207,11 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param diffX Number of columns
      */
     public void decreaseXLeft(int diffX) {
+
         cellOffsetX -= diffX;
+
         for (int i = 0; i < diffX; i++){
+
             grid.remove(0);
             neighbours.remove(0);
         }
@@ -202,9 +222,12 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param diffY Number of rows
      */
     public void decreaseYTop(int diffY){
+
         cellOffsetY -= diffY;
+
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < diffY; j++){
+
                 grid.get(i).remove(0);
                 neighbours.get(i).remove(0);
             }
@@ -368,5 +391,4 @@ public class DynamicGameOfLife extends GameOfLife{
     }
 
     //endregion
-
 }

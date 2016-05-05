@@ -31,8 +31,8 @@
         <MenuItem text="Open editor s305073" onAction="#launchEditor"/>
     </Menu>
     <Menu text="View">
-        <RadioMenuItem text="Static board"/>
-        <RadioMenuItem text="Dynamic board"/>
+        <RadioMenuItem fx:id="staticButton" text="Static board" onAction="#changeToStaticBoard"/>
+        <RadioMenuItem fx:id="dynamicButton" selected="true" text="Dynamic board" onAction="#changeToDynamicBoard"/>
         <SeparatorMenuItem/>
         <RadioMenuItem fx:id="theStripS305080" text="The strip - s305080" onAction="#showTheStrip"/>
     </Menu>

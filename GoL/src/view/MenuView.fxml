@@ -57,6 +57,6 @@
         <MenuItem text="Load file"/>
     </Menu>
     <Menu text="Help">
-        <MenuItem text="Tips"/>
+        <MenuItem text="Tips" onAction="#openTips"/>
     </Menu>
 </MenuBar>
