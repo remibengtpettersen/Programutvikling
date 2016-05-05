@@ -6,6 +6,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * @author Pair programming
+ *
  * Game class with a game board with static size.
  */
 public class StaticGameOfLife extends GameOfLife{

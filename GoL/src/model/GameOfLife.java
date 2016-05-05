@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * @author Pair programming
+ *
  * Game class.
  * Handles logic related to Game of Life. Contains a game board of cells,
  * and evolves these cells according to a specific rule.

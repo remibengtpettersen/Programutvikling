@@ -167,6 +167,7 @@ public class StatController {
         // update progress bar to 100%
         setProgress(1);
 
+        // return
         return stats;
     }
 
