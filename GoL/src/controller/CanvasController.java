@@ -110,7 +110,7 @@ public class CanvasController {
         gc = canvas.getGraphicsContext2D();
         buttonsPressed = new ArrayList<>();
 
-        cView.updateView(gol, canvas, cell.getSize());
+        cView.updateView(gol, cell.getSize(), (int)canvas.getWidth(), (int)canvas.getHeight());
 
         initializeListeners();
         initializeAnimation();
@@ -567,7 +567,7 @@ public class CanvasController {
     void renderCanvas() {
 
         // checks wich cells are inside the canvas view
-        cView.updateView(gol, canvas, cell.getSize());
+        cView.updateView(gol, cell.getSize(), (int)canvas.getWidth(), (int)canvas.getHeight());
 
         // renders the cells on the canvas
         renderLife();

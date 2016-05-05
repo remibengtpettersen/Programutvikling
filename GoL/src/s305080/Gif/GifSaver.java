@@ -9,6 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lieng.GIFWriter;
+import model.CameraView;
 import model.Cell;
 import model.GameOfLife;
 import s305080.Gif.Controller.GifPropertiesController;
@@ -21,13 +22,6 @@ import java.io.IOException;
  */
 public class GifSaver {
 
-    double cellSize;
-
-    int minX;
-    int maxX;
-    int minY;
-    int maxY;
-
     Cell cell;
 
     @FXML
@@ -36,10 +30,10 @@ public class GifSaver {
     private GameOfLife gol;
     private GameOfLife originalGol;
     private CanvasController cController;
-    private double offsetX;
-    private double offsetY;
     private int width;
     private int height;
+
+    CameraView cView = new CameraView();
 
     private GIFWriter gifWriter;
     private int frameNr;
@@ -66,11 +60,14 @@ public class GifSaver {
             gol.setRule(originalGol.getRule().toString());
             System.out.println("changed rule");
         }
-        offsetX = cController.cView.getCommonOffsetX(originalGol, cell.getSize());
-        offsetY = cController.cView.getCommonOffsetY(originalGol, cell.getSize());
+
+
+        cell = cController.getCell().clone();
+
+        cView.boardOffsetX = (int) cController.cView.getCommonOffsetX(originalGol, cell.getSize());
+        cView.boardOffsetY = (int) cController.cView.getCommonOffsetY(originalGol, cell.getSize());
         width = (int)cController.getCanvas().getWidth();
         height = (int)cController.getCanvas().getHeight();
-        cellSize = cController.getCell().getSize();
 
         createGif();
 
@@ -92,12 +89,14 @@ public class GifSaver {
             System.out.println("changed rule");
         }
 
-        offsetX = cController.cView.getCommonOffsetX(originalGol, cell.getSize()) + cController.getCanvasPosX(boundingBox[0]);
-        offsetY = cController.cView.getCommonOffsetY(originalGol, cell.getSize()) + cController.getCanvasPosY(boundingBox[1]);
-        cellSize = cController.getCell().getSize();
+
+        cell = cController.getCell().clone();
+
+        cView.boardOffsetX  = (int) (cController.cView.getCommonOffsetX(originalGol, cell.getSize()) + cController.getCanvasPosX(boundingBox[0]));
+        cView.boardOffsetY  = (int) (cController.cView.getCommonOffsetY(originalGol, cell.getSize()) + cController.getCanvasPosY(boundingBox[1]));
         System.out.println(boundingBox[0] + " " + boundingBox[1] + " " + boundingBox[2] + " " + boundingBox[3]);
-        width = (int) ((boundingBox[2] - boundingBox[0] + 1) * cellSize);
-        height = (int) ((boundingBox[3] - boundingBox[1] + 1) * cellSize);
+        width = (int) ((boundingBox[2] - boundingBox[0] + 1) * cell.getSize());
+        height = (int) ((boundingBox[3] - boundingBox[1] + 1) * cell.getSize());
 
         createGif();
     }
@@ -122,8 +121,6 @@ public class GifSaver {
         gifWriter = new GIFWriter(width, height, path, 1000/framerate);
 
         frameNr = 0;
-        cell = cController.getCell();
-
         new Thread(()->{
             try {
                 drawNextImage();
@@ -152,31 +149,16 @@ public class GifSaver {
     }
 
    private void renderCanvas() {
-       updateView();
+       cView.updateView(gol, cell.getSize(), width, height);
        drawImage();
     }
 
-    private void updateView() {
-        minX = (int) (getCommonOffsetX() / cellSize);
-        maxX = (int) ((getCommonOffsetX() + width) / cellSize) + 1;
-        if (maxX > gol.getGridWidth())
-            maxX = gol.getGridWidth();
 
-        minY = (int) (getCommonOffsetY() / cellSize);
-        maxY = (int) ((getCommonOffsetY() + height) / cellSize) + 1;
-        if (maxY > gol.getGridHeight())
-            maxY = gol.getGridHeight();
-
-        if (minY < 0)
-            minY = 0;
-        if (minX < 0)
-            minX = 0;
-    }
 
     private void drawImage() {
         drawBackground();
-        for (int x = minX; x < maxX ; x++) {
-            for (int y = minY; y < maxY; y++) {
+        for (int x = cView.currViewMinX; x < cView.currViewMaxX ; x++) {
+            for (int y = cView.currViewMinY; y < cView.currViewMaxY; y++) {
 
                 if (gol.isCellAlive(x, y))
                     drawCell(x, y);
@@ -191,11 +173,11 @@ public class GifSaver {
 
     private void drawCell(int x, int y) {
 
-        int x1 =  (int)(x * cellSize - getCommonOffsetX()), y1 =  (int)(y * cellSize - getCommonOffsetY());
+        int x1 =  (int)(x * cell.getSize() - cView.getCommonOffsetX(gol, cell.getSize())), y1 =  (int)(y * cell.getSize() - cView.getCommonOffsetY(gol, cell.getSize()));
         x1 = (x1 < 0) ? 0 : x1;
         y1 = (y1 < 0) ? 0 : y1;
 
-        int x2 = (int) ((x + 1) * cellSize - getCommonOffsetX()), y2 = (int)((y + 1) * cellSize - getCommonOffsetY());
+        int x2 = (int) ((x + 1) * cell.getSize() - cView.getCommonOffsetX(gol, cell.getSize())), y2 = (int)((y + 1) * cell.getSize() - cView.getCommonOffsetY(gol, cell.getSize()));
         x2 = (x2 >= width) ? width - 1 : x2;
         y2 = (y2 >= height) ? height - 1 : y2;
 
@@ -207,14 +189,6 @@ public class GifSaver {
                         (int) (255 * cell.getColor().getGreen()),
                         (int) (255 * cell.getColor().getBlue())));
 
-    }
-
-    public double getCommonOffsetX() {
-        return offsetX + gol.getOffsetX() * cellSize;
-    }
-
-    public double getCommonOffsetY() {
-        return offsetY + gol.getOffsetY() * cellSize;
     }
 
     private boolean collectUserRequest() {

@@ -17,7 +17,7 @@ public class CameraView {
     /**
      * Updates the fields that contains the grid minimum and maximum x and y values displayed on the canvas
      */
-    public void updateView(GameOfLife gol, Canvas canvas, double cellSize) {
+    public void updateView(GameOfLife gol, double cellSize, int ... dimensions) {
 
         // finds minimum x coordinate visible on canvas
         currViewMinX = (int) (getCommonOffsetX(gol, cellSize) / cellSize);
@@ -25,7 +25,7 @@ public class CameraView {
             currViewMinX = 0;
 
         // finds maximum x coordinate visible on canvas
-        currViewMaxX = (int) ((getCommonOffsetX(gol, cellSize) + canvas.getWidth()) / cellSize) + 1;
+        currViewMaxX = (int) ((getCommonOffsetX(gol, cellSize) + dimensions[0]) / cellSize);
         if (currViewMaxX > gol.getGridWidth())
             currViewMaxX = gol.getGridWidth();
 
@@ -35,11 +35,13 @@ public class CameraView {
             currViewMinY = 0;
 
         // finds maximum y coordinate visible on canvas
-        currViewMaxY = (int) ((getCommonOffsetY(gol, cellSize) + canvas.getHeight()) / cellSize) + 1;
+        currViewMaxY = (int) ((getCommonOffsetY(gol, cellSize) + dimensions[1]) / cellSize);
         if (currViewMaxY > gol.getGridHeight())
             currViewMaxY = gol.getGridHeight();
 
     }
+
+
 
     /**
      * Calculates the x offset for the board with the offset inside the GameOfLife
