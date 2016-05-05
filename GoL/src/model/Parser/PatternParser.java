@@ -5,8 +5,10 @@ package model.Parser;
  */
 
 import model.PatternFormatException;
+import tools.MessageBox;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -29,6 +31,7 @@ public class PatternParser {
     static List<String> metaData;
     static char currentCharacter;
     static String lastImportedRule;
+    static URL url;
 
     /**
      * Reads a Game of Life pattern file and returns an array of the pattern
@@ -51,6 +54,8 @@ public class PatternParser {
         else if(patternFile.toString().endsWith(".lif") || patternFile.toString().endsWith(".life")){
             return checkLifeFormat();
         }
+
+        MessageBox.alert("File is not in supported format");
         return null;
     }
 
@@ -64,9 +69,17 @@ public class PatternParser {
 
         lastImportedRule = null;
 
-        fileContentList = new ArrayList<String>();
-        URL url = new URL(pattern);
+        fileContentList = new ArrayList<>();
+        try {
+            url = new URL(pattern);
+        }
+        catch (MalformedURLException ignored){
+            MessageBox.alert("Invalid URL");
+            return null;
+        }
+
         Scanner s = new Scanner(url.openStream());
+
         while (s.hasNext()){
             fileContentList.add(s.nextLine());
         }
@@ -80,6 +93,8 @@ public class PatternParser {
         else if(pattern.endsWith(".lif") || pattern.endsWith(".life")){
             return checkLifeFormat();
         }
+
+        MessageBox.alert("Could not find supported format");
         return null;
     }
 
@@ -89,7 +104,7 @@ public class PatternParser {
      * @return The boolean array produced from the file
      * @throws IOException
      */
-    private static boolean[][] checkLifeFormat() throws IOException {
+    private static boolean[][] checkLifeFormat() throws PatternFormatException {
 
         if(fileContentList.get(FIRST_LINE).contains("Life 1.05")){
             return Life05Parser.parseLife05();

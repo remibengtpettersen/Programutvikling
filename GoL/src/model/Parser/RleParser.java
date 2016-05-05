@@ -16,7 +16,7 @@ class RleParser extends PatternParser {
      * Reads a RLE file
      * @return the boolean array produced from the file
      */
-    static boolean[][] parseRle() throws IOException {
+    static boolean[][] parseRle() throws PatternFormatException {
 
         extractMetaData();
         extractGridProperties();

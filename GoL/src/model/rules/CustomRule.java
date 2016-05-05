@@ -1,5 +1,6 @@
 package model.rules;
 
+import model.DynamicGameOfLife;
 import model.EvolveException;
 import model.GameOfLife;
 

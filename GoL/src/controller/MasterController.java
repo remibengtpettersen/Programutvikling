@@ -179,9 +179,9 @@ public class MasterController {
                 canvasController.setClipBoardPattern(PatternParser.read(file));
             }
             catch (PatternFormatException e) {
-                e.printStackTrace();
+                MessageBox.alert(e.getMessage());
             } catch (IOException e) {
-                e.printStackTrace();
+                MessageBox.alert("Could not read file");
             }
         }
     }
@@ -255,23 +255,23 @@ public class MasterController {
         dialog.setHeaderText(null);
         dialog.setContentText("Paste url to import from:");
 
-// Traditional way to get the response value.
+        canvasController.interaction = true;
+
         Optional<String> result = dialog.showAndWait();
 
 // The Java 8 way to get the response value (with lambda expression).
         result.ifPresent(name -> {
             try {
-                boolean[][] pattern = model.PatternParser.readUrl(result.get());
-                if (pattern == null){
-                    MessageBox.alert("No pattern found");
-                }
-                else {
-                    canvasController.setClipBoardPattern(pattern);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+                canvasController.setClipBoardPattern(PatternParser.readUrl(result.get()));
+            }
+            catch (PatternFormatException e){
+                MessageBox.alert(e.getMessage());
+            }
+            catch (IOException e) {
+                MessageBox.alert("Could not read from URL");
             }
         });
+        canvasController.interaction = false;
     }
 
 

@@ -588,7 +588,9 @@ public class CanvasController {
             renderMarkup();
         }
         //to see where the grid is
-        gc.strokeRect(-cView.getCommonOffsetX(gol, cell.getSize()), -cView.getCommonOffsetY(gol, cell.getSize()), gol.getGridWidth() * cell.getSize(), gol.getGridHeight() * cell.getSize());
+        if (gol instanceof StaticGameOfLife) {
+            gc.strokeRect(-cView.getCommonOffsetX(gol, cell.getSize()), -cView.getCommonOffsetY(gol, cell.getSize()), gol.getGridWidth() * cell.getSize(), gol.getGridHeight() * cell.getSize());
+        }
 
     }
 
