@@ -213,6 +213,8 @@ public class MenuController {
         // deep copy and assign to new reference variable
         editorController.getDeepCopyGol(masterController.getCanvasController().gol);
 
+        editorController.init(masterController);
+
         // set pattern in editor window
         editorController.setPattern();
 
