@@ -300,7 +300,7 @@ public class DynamicGameOfLife extends GameOfLife{
      * Deep copies the grid and sets it.
      * @param grid the grid to be deep copied and set.
      */
-    public void deepCopyOnSet(ArrayList<ArrayList<AtomicBoolean>> grid) {
+    private void deepCopyOnSet(ArrayList<ArrayList<AtomicBoolean>> grid) {
 
         neighbours.clear();
         cellOffsetX = 0;

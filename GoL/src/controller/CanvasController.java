@@ -257,6 +257,12 @@ public class CanvasController {
         if (code.equals("F")) {
             changeToStatic();
         }
+        if (code.equals("Z")) {
+            rotateImportLeft();
+        }
+        if (code.equals("X")) {
+            rotateImportRight();
+        }
 
         // checks if "C" is pressed
         switch (code) {
@@ -284,6 +290,40 @@ public class CanvasController {
                 }
                 break;
         }
+    }
+
+    /**
+     * Rotates the clipboard pattern 90 degrees clockwise.
+     */
+    private void rotateImportRight() {
+        if (clipBoardPattern == null){
+            return;
+        }
+        boolean [][] temp = new boolean[clipBoardPattern[0].length][clipBoardPattern.length];
+        for (int x = 0; x < clipBoardPattern.length; x++) {
+            for (int y = 0; y < clipBoardPattern[0].length; y++) {
+                temp[temp.length - (y +1)][x] = clipBoardPattern[x][y];
+            }
+        }
+        clipBoardPattern = temp;
+        renderCanvasIfLowFPS();
+    }
+
+    /**
+     * Rotates the clipboard pattern 90 degrees counterclockwise.
+     */
+    private void rotateImportLeft() {
+        if (clipBoardPattern == null){
+            return;
+        }
+        boolean [][] temp = new boolean[clipBoardPattern[0].length][clipBoardPattern.length];
+        for (int x = 0; x < clipBoardPattern.length; x++) {
+            for (int y = 0; y < clipBoardPattern[0].length; y++) {
+                temp[y][temp[0].length - (x + 1)] = clipBoardPattern[x][y];
+            }
+        }
+        clipBoardPattern = temp;
+        renderCanvasIfLowFPS();
     }
 
 
@@ -1074,6 +1114,7 @@ public class CanvasController {
     void pasteClipBoard() {
         if (clipBoardPattern != null){
             importing = true;
+            renderCanvasIfLowFPS();
         }
     }
 
@@ -1157,6 +1198,10 @@ public class CanvasController {
         clipBoardPattern = clipboard;
         renderCanvasIfLowFPS();
 
+
+        removeMarkedArea();
+
+        renderCanvasIfLowFPS();
     }
 
     /**
