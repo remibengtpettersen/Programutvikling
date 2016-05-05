@@ -9,6 +9,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import model.DynamicGameOfLife;
+import model.GameOfLife;
 import tools.MessageBox;
 
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class StatsController {
     private XYChart.Series<Integer, Integer> cellCount;
     private XYChart.Series<Integer, Integer> difference;
     private XYChart.Series<Integer, Integer> similarity;
-    private DynamicGameOfLife statsGol;
-    private DynamicGameOfLife gol;
+    private GameOfLife statsGol;
+    private GameOfLife gol;
     private int lastCellCount;
     private int iterations;
     private double alfa = 0.5;
@@ -37,6 +38,10 @@ public class StatsController {
     private double gamma = 0.25;
     private final double maxIntervalLength = 15;
 
+    public void setGameOfLife(GameOfLife gameOfLife) {
+        gol = gameOfLife;
+
+    }
     public void setUp() {
         input.setOnKeyPressed(this::keyPressedInTextBox);
         cellCount = new XYChart.Series();
@@ -80,7 +85,7 @@ public class StatsController {
 
     private void updateStats() {
 
-        statsGol.deepCopyOnSet(gol.getGrid());
+        statsGol = gol.clone();
         setCorrectRule();
 
         int [][] stats = getStats(statsGol, iterations);
@@ -92,15 +97,18 @@ public class StatsController {
         displayStats(stats);
     }
 
-    private int[][] getStats(DynamicGameOfLife gol, int iterations) {
-        int [][] data = new int[4][iterations];
+    private int[][] getStats(GameOfLife gol, int iterations) {
+        int [][] data = new int[3][iterations];
         double[] phies = new double[iterations];
         for (int i = 0; i < iterations; i++) {
 
-            phies[i]  = phi(gol.getGrid());
-            System.out.println(phies[i]);
+
             if(i > 0){
                 data[1][i] = gol.getCellCount() - data[0][i - 1];
+                phies[i]  = phi(gol, data[1][i]);
+            }
+            else{
+                phies[i] = phi(gol, 0);
             }
             data[0][i] = gol.getCellCount();
             lastCellCount = data[0][i];
@@ -142,31 +150,27 @@ public class StatsController {
     private void setCorrectRule() {
         if(!statsGol.getRule().toString().equals(gol.getRule().toString())) {
             statsGol.setRule(gol.getRule().toString());
-        }/*else {
-            statsGol.updateRuleGrid();
-        }*/
+        }
+        System.out.println("\n");
     }
 
-    private double phi(ArrayList<ArrayList<AtomicBoolean>> grid) {
-        return alfa * statsGol.getCellCount()
-                + beta * (statsGol.getCellCount() - lastCellCount)
-                + gamma * g(statsGol.getGrid());
+    private double phi(GameOfLife gol, int difference) {
+        return alfa * gol.getCellCount()
+                + beta * difference
+                + gamma * g(gol);
     }
 
-    public int g(ArrayList<ArrayList<AtomicBoolean>> grid){
+    public int g(GameOfLife gol){
         int count = 0;
-        int[] boundingBox = statsGol.getBoundingBox();
+        int[] boundingBox = gol.getBoundingBox();
         for (int x = boundingBox[0]; x <= boundingBox[1]; x++) {
             for (int y = boundingBox[2]; y <= boundingBox[3]; y++) {
-                if(grid.get(x).get(y).get())
+                if(gol.isCellAlive(x, y))
                     count += (x + y);
             }
         }
         return count;
     }
 
-    public void setGameOfLife(DynamicGameOfLife gameOfLife) {
-        gol = gameOfLife;
 
-    }
 }
