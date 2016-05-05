@@ -11,11 +11,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
+import javafx.stage.FileChooser;
 import model.CameraView;
 import model.Cell;
 
 import model.DynamicGameOfLife;
 import model.GameOfLife;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Created by remibengtpettersen.
@@ -287,10 +292,88 @@ public class EditorController {
         }
     }
 
-    @FXML
-    private void saveToFile(ActionEvent actionEvent) {
-        // to be developed...
+    public void makeGif(GameOfLife gol) throws IOException {
+        // data related to the GIF image file
+        String path = "testgif.gif";
+        int width;
+        int height;
+        int size = 20;
+        int counter = 0;
+
+        int timePerMilliSecond = 1000; // 1 second
+
+        GameOfLife golClone = gol.clone();
+
+        golClone.getBoundingBox();
+
+        width = (golClone.getBoundingBox()[1] - golClone.getBoundingBox()[0] + 1) * size;
+        height = (golClone.getBoundingBox()[3] - golClone.getBoundingBox()[2] + 1) * size;
+
+        // create the GIFWriter object
+        lieng.GIFWriter gifWriter = new lieng.GIFWriter(width, height, path, timePerMilliSecond);
+
+        int value = width / size;
+
+        int lowCol = golClone.getBoundingBox()[0]; //golClone.getMinRowBoundingBox();
+        int length = width;
+        int lowRow = golClone.getBoundingBox()[2];
+        int down = height;
+
+        while (counter < 2) {
+            // iterates through a square of tiles
+            for (int i = lowRow; i < length + lowRow; i++) {
+                for (int j = lowCol; j < down + lowCol; j++) {
+                    if (golClone.isCellAlive(j, i)) {
+                        // fill one tile of the image with orange - (j, i) coordinate
+                        gifWriter.fillRect(
+                                value * (i + 3 - lowRow),
+                                value * ((i + 3 - lowRow) + 1) - 1,
+                                value * (j + 3 - lowCol),
+                                value * ((j + 3 - lowCol) + 1) - 1,
+                                java.awt.Color.BLACK);
+                        // insert the painted image into the animation sequence
+                    }
+                }
+            }
+
+            gifWriter.insertAndProceed();
+
+            golClone.nextGeneration();
+
+            counter++;
+        }
+
+        // insert the painted image into the animation sequence
+        gifWriter.insertCurrentImage();
+
+        // close the GIF stream.
+        gifWriter.close();
+
+        System.out.println("done!");
     }
+
+    @FXML
+    public void saveToFile(ActionEvent actionEvent) throws IOException {
+        String content = golEditor.getPatternFromGrid(golEditor.extractPattern());
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save RLE");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("RLE", "*.rle"));
+
+        File file = fileChooser.showSaveDialog(masterController.stage);
+
+        try {
+            FileWriter fileWriter = null;
+
+            fileWriter = new FileWriter(file);
+            fileWriter.write(content);
+            fileWriter.close();
+        } catch (IOException ex) {
+            //Logger.getLogger(JavaFX_Text.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
     @FXML
     private void onMouseClickedEditor(MouseEvent event) {

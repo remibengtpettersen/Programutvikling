@@ -390,5 +390,167 @@ public class DynamicGameOfLife extends GameOfLife{
         neighbours.get(x).get(y).set(0);
     }
 
+
+    public boolean[][] extractPattern() {
+        getBoundingBox();
+
+        boolean[][] pattern = new boolean[getBoundingBox()[1] - getBoundingBox()[0]][getBoundingBox()[1] - getBoundingBox()[0]];
+
+        for (int i = 0; i < getBoundingBox()[1] - getBoundingBox()[0]; i++) {
+            for (int j = 0; j < getBoundingBox()[1] - getBoundingBox()[0]; j++) {
+                if (isCellAlive(i + getBoundingBox()[1] - getBoundingBox()[0], j + getBoundingBox()[1] - getBoundingBox()[0])) {
+                    pattern[i][j] = isCellAlive(i + getBoundingBox()[1] - getBoundingBox()[0], j + getBoundingBox()[1] - getBoundingBox()[0]);
+                }
+            }
+        }
+
+        return pattern;
+    }
+
+    public String getPatternFromGrid(boolean[][] pattern) {
+        return rleConverter(pattern);
+    }
+
+    private String rleConverter(boolean[][] pattern) {
+        // initialize string builder for containing string - main string
+        StringBuilder lineBuilder = new StringBuilder();
+
+        // will contain alive positions - temporary container
+        StringBuilder alive = new StringBuilder();
+
+        // will contain dead positions - temporary container
+        StringBuilder dead = new StringBuilder();
+
+        // iterates column by column in pattern
+        for (int i = 0; i < pattern.length; i++) {
+
+            // initialize counters for alive and dead positions
+            int aliveCounter = 0;
+            int deadCounter = 0;
+
+            // iterates row by row in pattern
+            for (int j = 0; j < pattern[0].length; j++) {
+
+                // check if position is true or false
+                if (pattern[i][j]) {
+
+                    // increment count for alive positions
+                    aliveCounter++;
+
+                    // reset dead count
+                    deadCounter = 0;
+
+                    // empty string containing dead elements
+                    dead.delete(0, dead.length());
+
+                    // appending 'o' for occupied
+                    alive.append("o");
+
+                    // check if number of alive positions detected, in sequence, is greater then 1
+                    if (alive.length() > 1) {
+
+                        // check if alive count is greater then two
+                        if (aliveCounter > 2) {
+
+                            // remove the two last characters from string
+                            lineBuilder.deleteCharAt(lineBuilder.length() - 1);
+                            lineBuilder.deleteCharAt(lineBuilder.length() - 1);
+
+                            // replace content in alive with new number of alive positions in sequence
+                            alive.replace(0, alive.length(), aliveCounter + "o");
+                        }
+                        else {
+                            // remove last character string
+                            lineBuilder.deleteCharAt(lineBuilder.length() - 1);
+
+                            // replace content in alive with number of alive positions in sequence
+                            alive.replace(0, alive.length(), aliveCounter + "o");
+                        }
+                    }
+
+                    // appends alive string to main string
+                    lineBuilder.append(alive);
+
+                } else {
+                    // increment dead count
+                    deadCounter++;
+
+                    // reset alive count
+                    aliveCounter = 0;
+
+                    // empty string containing alive elements
+                    alive.delete(0, dead.length());
+
+                    // check that pattern row position is not end of row
+                    if (j != pattern[0].length - 1) {
+                        // append 'b' for empty
+                        dead.append("b");
+                    }
+
+                    // check if dead positions detected, in sequence, is greater then 1
+                    if (dead.length() > 1) {
+
+                        // check if alive count is greater then two
+                        if (deadCounter > 2) {
+
+                            // remove the two last characters from string
+                            lineBuilder.deleteCharAt(lineBuilder.length() - 1);
+                            lineBuilder.deleteCharAt(lineBuilder.length() - 1);
+
+                            // replace content in dead with new number of alive positions in sequence
+                            dead.replace(0, dead.length(), deadCounter + "b");
+                        }
+                        else {
+                            // remove last character string
+                            lineBuilder.deleteCharAt(lineBuilder.length() - 1);
+
+                            // replace content in alive with number of alive positions in sequence
+                            dead.replace(0, dead.length(), deadCounter + "b");
+                        }
+                    }
+
+                    // check if position is end of line
+                    if (j != pattern[0].length - 1) {
+                        // append dead string to main string
+                        lineBuilder.append(dead);
+                    }
+
+                    // check if row contains only empty positions
+                    if (deadCounter == pattern[0].length) {
+                        // add line of empty positions
+                        lineBuilder.append(dead);
+                    }
+                }
+            }
+
+            // delete alive and dead string - prepare for new row
+            alive.delete(0, alive.length());
+            dead.delete(0, dead.length());
+
+            // check for end of pattern - last row reached
+            if (i == pattern.length - 1) {
+
+                // append at end of pattern according to RLE-format
+                lineBuilder.append("!");
+            }
+            else {
+                // indicates new pattern row - according to RLE-format
+                lineBuilder.append("$");
+            }
+        }
+
+        // return string of pattern in RLE-format
+        return lineBuilder.toString();
+    }
+
+    public void injectPatternAt(int x, int y, boolean[][] pattern) {
+        for (int i = 0; i < pattern.length; i++) {
+            for (int j = 0; j < pattern[0].length; j++) {
+                if (pattern[i][j]) {
+                    setCellAlive(i + y, j + x);
+                }
+            }
+        }
+    }
     //endregion
 }

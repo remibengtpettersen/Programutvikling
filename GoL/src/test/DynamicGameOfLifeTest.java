@@ -172,4 +172,134 @@ public class DynamicGameOfLifeTest {
         // assert size changed
         assertEquals(3, gol.getGridWidth());
     }
+
+    @Test
+    public void testExtractPattern_ifOneCellAlive_thenReturnArrayContainingOneCell() throws Exception {
+        // set up blue print array
+        boolean[][] bluePrint = new boolean[1][1];
+        bluePrint[0][0] = true;
+
+        // set one alive cell
+        gol.setCellAlive(1, 1);
+
+        // create empty test array
+        boolean[][] testArray;
+
+        // extract pattern
+        testArray = gol.extractPattern();
+
+        // assert that arrays are equal
+        assertArrayEquals(bluePrint, testArray);
+    }
+
+    @Test
+    public void testExtractPattern_ifGlider_thenReturnGliderInAThreeByThreeArray() {
+        // set up blue print array
+        boolean[][] bluePrint = new boolean[3][3];
+        bluePrint[0][1] = true;
+        bluePrint[1][2] = true;
+        bluePrint[2][0] = true;
+        bluePrint[2][1] = true;
+        bluePrint[2][2] = true;
+
+        // set glider in grid
+        gol.setCellAlive(5, 5);
+        gol.setCellAlive(6, 6);
+        gol.setCellAlive(7, 4);
+        gol.setCellAlive(7, 5);
+        gol.setCellAlive(7, 6);
+
+        // create empty test array
+        boolean[][] testArray;
+
+        // extract pattern
+        testArray = gol.extractPattern();
+
+        // assert that extracted glider is equal to blue print
+        assertArrayEquals(bluePrint, testArray);
+    }
+
+    @Test
+    public void testExtractPattern_ifTwoGlidersVertically_thenReturnGliderInAThreeBySix() {
+        // set up blue print array
+        boolean[][] bluePrint = new boolean[6][3];
+
+        // first glider
+        bluePrint[0][1] = true;
+        bluePrint[1][2] = true;
+        bluePrint[2][0] = true;
+        bluePrint[2][1] = true;
+        bluePrint[2][2] = true;
+
+        // second glider
+        bluePrint[3][1] = true;
+        bluePrint[4][2] = true;
+        bluePrint[5][0] = true;
+        bluePrint[5][1] = true;
+        bluePrint[5][2] = true;
+
+        // set glider in grid
+        gol.setCellAlive(9, 13);
+        gol.setCellAlive(10, 14);
+        gol.setCellAlive(11, 12);
+        gol.setCellAlive(11, 13);
+        gol.setCellAlive(11, 14);
+
+        gol.setCellAlive(12, 13);
+        gol.setCellAlive(13, 14);
+        gol.setCellAlive(14, 12);
+        gol.setCellAlive(14, 13);
+        gol.setCellAlive(14, 14);
+
+        // create empty test array
+        boolean[][] testArray;
+
+        // extract pattern
+        testArray = gol.extractPattern();
+
+        // assert that extracted glider is equal to blue print
+        assertArrayEquals(bluePrint, testArray);
+    }
+
+    @Test
+    public void testExtractPattern_ifTwoGlidersHorizontally_thenReturnGliderInAThreeBySix() {
+        // set up blue print array
+        boolean[][] bluePrint = new boolean[3][6];
+
+        // first glider
+        bluePrint[0][1] = true;
+        bluePrint[1][2] = true;
+        bluePrint[2][0] = true;
+        bluePrint[2][1] = true;
+        bluePrint[2][2] = true;
+
+        // second glider
+        bluePrint[0][4] = true;
+        bluePrint[1][5] = true;
+        bluePrint[2][3] = true;
+        bluePrint[2][4] = true;
+        bluePrint[2][5] = true;
+
+        // set glider in grid
+        gol.setCellAlive(12, 10);
+        gol.setCellAlive(13, 11);
+        gol.setCellAlive(14, 9);
+        gol.setCellAlive(14, 10);
+        gol.setCellAlive(14, 11);
+
+        gol.setCellAlive(12, 13);
+        gol.setCellAlive(13, 14);
+        gol.setCellAlive(14, 12);
+        gol.setCellAlive(14, 13);
+        gol.setCellAlive(14, 14);
+
+        // create empty test array
+        boolean[][] testArray;
+
+        // extract pattern
+        testArray = gol.extractPattern();
+
+        // assert that extracted glider is equal to blue print
+        assertArrayEquals(bluePrint, testArray);
+    }
 }
