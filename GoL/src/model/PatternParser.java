@@ -4,8 +4,11 @@ package model;
  * Created by Truls on 18/01/16.
  */
 
+import tools.MessageBox;
+
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ public class PatternParser {
     private static boolean[][] patternArray;
     private static List<String> lineList;
     private static char currentCharacter;
+    private static URL url;
 
     /**
      * Reads a Game of Life pattern file and returns an array of the pattern
@@ -47,22 +51,28 @@ public class PatternParser {
         return null;
     }
 
-    static public boolean[][] readUrl(String pattern) throws IOException {
+    static public boolean[][] readUrl(String patternUrl) throws IOException {
 
-        lineList = new ArrayList<String>();
-        URL url = new URL(pattern);
+        lineList = new ArrayList<>();
+        try {
+            url = new URL(patternUrl);
+        }
+        catch (MalformedURLException ignored){
+            MessageBox.alert("Invalid URL");
+            return null;
+        }
         Scanner s = new Scanner(url.openStream());
         while (s.hasNext()){
             lineList.add(s.nextLine());
         }
 
-        if(pattern.endsWith(".cells")){
+        if(patternUrl.endsWith(".cells")){
             return readPlainText();
         }
-        else if(pattern.endsWith(".rle")){
+        else if(patternUrl.endsWith(".rle")){
             return readRLE();
         }
-        else if(pattern.endsWith(".lif") || pattern.endsWith(".life")){
+        else if(patternUrl.endsWith(".lif") || patternUrl.endsWith(".life")){
             return readLife();
         }
         return null;

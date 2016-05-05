@@ -14,6 +14,7 @@
     </Menu>
     <Menu text="File">
         <MenuItem text="Open" onAction="#openFileChooser"/>
+        <MenuItem text="Open from URL" onAction="#openFromUrl"/>
         <MenuItem text="Save - s305080" onAction="#saveFile"/>
         <SeparatorMenuItem/>
         <MenuItem text="Save GIF - s305061" onAction="#openGifWindow"/>

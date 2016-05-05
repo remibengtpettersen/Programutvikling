@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -14,8 +15,11 @@ import s305061.gif.GifController;
 import s305061.statistics.StatController;
 import s305080.Statistics.Stats;
 import s305080.theStrip.TheStrip;
+import tools.MessageBox;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Created by remibengtpettersen on 12.02.2016.
@@ -243,6 +247,31 @@ public class MasterController {
 
     public Configuration getConfig() {
         return configuration;
+    }
+
+    public void importFromUrl() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Import URL");
+        dialog.setHeaderText(null);
+        dialog.setContentText("Paste url to import from:");
+
+// Traditional way to get the response value.
+        Optional<String> result = dialog.showAndWait();
+
+// The Java 8 way to get the response value (with lambda expression).
+        result.ifPresent(name -> {
+            try {
+                boolean[][] pattern = model.PatternParser.readUrl(result.get());
+                if (pattern == null){
+                    MessageBox.alert("No pattern found");
+                }
+                else {
+                    canvasController.setClipBoardPattern(pattern);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 

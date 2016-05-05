@@ -285,4 +285,8 @@ public class MenuController {
     public void saveToGif() {
         masterController.getCanvasController().saveToGif();
     }
+
+    public void openFromUrl() {
+        masterController.importFromUrl();
+    }
 }

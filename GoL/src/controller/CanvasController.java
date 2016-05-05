@@ -179,12 +179,12 @@ public class CanvasController {
                     if(!interaction) {
 
 
-
+                        gol.nextGeneration();
                         if(!thread.isAlive()){
                             thread = new Thread(() -> {
-                                double timer1 = System.currentTimeMillis();
-                                gol.nextGeneration();
-                                System.out.println(System.currentTimeMillis() - timer1);
+                               // double timer1 = System.currentTimeMillis();
+
+                               // System.out.println(System.currentTimeMillis() - timer1);
 
                             });
                             thread.start();
