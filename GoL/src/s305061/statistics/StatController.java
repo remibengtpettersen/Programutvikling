@@ -19,18 +19,22 @@ import model.GameOfLife;
  */
 public class StatController {
 
+    // constants for calculation of similarity measure
     private static final double ALPHA = 0.5f;
     private static final double BETA = 3.0f;
     private static final double GAMMA = 0.25f;
 
+    // gui components
     @FXML private LineChart<Double, Double> graph;
     @FXML private TextField textField;
     @FXML private ProgressBar progressBar;
 
+    // statistics data
     private LineChart.Series<Double, Double> livingSeries;
     private LineChart.Series<Double, Double> growthSeries;
     private LineChart.Series<Double, Double> similaritySeries;
 
+    //
     private boolean busy = false;
 
     private GameOfLife gol;
@@ -93,7 +97,7 @@ public class StatController {
             int lastIteration = totalIterations - 1;
 
             int currentLiving = clonedGol.getCellCount();
-            int previousGrowth = currentLiving + previousLiving;
+            int previousGrowth = currentLiving - previousLiving;
             double currentGeometricFactor = getGeometricFactor(clonedGol);
 
             stats[0][currentIteration] = currentLiving;
@@ -116,7 +120,7 @@ public class StatController {
             // Needs to be after a nextGeneration() to get the current (not for the game, but for the loop) growth
             if(currentIteration == lastIteration) {
 
-                int currentGrowth = clonedGol.getCellCount() + currentLiving;
+                int currentGrowth = clonedGol.getCellCount() - currentLiving;
 
                 // set growth data for this last iteration
                 stats[1][lastIteration] = currentGrowth;
@@ -197,7 +201,7 @@ public class StatController {
         for(int x = 0; x < gol.getGridWidth(); x++)
             for (int y = 0; y < gol.getGridHeight(); y++)
                 if(gol.isCellAlive(x,y))
-                    geoFactor += x + y;
+                    geoFactor += x - gol.getOffsetX() + y - gol.getOffsetY();
 
         return geoFactor;
     }

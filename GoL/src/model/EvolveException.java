@@ -1,7 +1,6 @@
 package model;
-
 /**
- * Created by remibengtpettersen on 12.04.2016.
+ * Exception to be thrown in case of problems related to evolution of the game board
  */
 public class EvolveException extends Exception {
 

@@ -35,7 +35,7 @@ public class DynamicGameOfLife extends GameOfLife{
     public DynamicGameOfLife() {
 
         createGameBoard();
-        setRule("classic");
+        setRule(RuleParser.CLASSIC_RULESTRING);
     }
 
     //region startup-sequence
@@ -211,6 +211,10 @@ public class DynamicGameOfLife extends GameOfLife{
     }
 
     public boolean isCellAlive(int x, int y){
+
+        if(grid == null)
+            return false;
+
         try{
             return  grid.get(x).get(y).get();
         }
@@ -305,28 +309,12 @@ public class DynamicGameOfLife extends GameOfLife{
      */
     public void setCellDead(int x, int y) {
 
+        if(isCellAlive(x,y)) {
 
-            if(isCellAlive(x,y)) {
+            cellCount.decrementAndGet();
 
-                cellCount.decrementAndGet();
-
-                    grid.get(x).get(y).set(false);
-
-
-
-                    int diffX = x - getGridWidth() + 1;
-                    if(diffX > 0)
-                        increaseXRight(diffX);
-
-                    int diffY = y - getGridHeight() + 1;
-                    if(diffY > 0)
-                        increaseYBottom(diffY);
-
-                    grid.get(x).get(y).set(false);
-
-            }
-
-
+            grid.get(x).get(y).set(false);
+        }
     }
 
     /**
@@ -346,9 +334,6 @@ public class DynamicGameOfLife extends GameOfLife{
     public void resetNeighboursAt(int x, int y){
         neighbours.get(x).get(y).set(0);
     }
-
-
-
 
     public void increaseXRight(int diffX) {
         for (int i = 0; i < diffX; i++){

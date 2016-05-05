@@ -1,5 +1,7 @@
 package model.rules;
 
+import tools.MessageBox;
+
 /**
  * Exception to be thrown in case of problems related to rule formatting or parsing
  */

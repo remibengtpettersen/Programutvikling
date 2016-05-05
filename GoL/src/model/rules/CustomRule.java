@@ -2,6 +2,7 @@ package model.rules;
 
 import model.EvolveException;
 import model.GameOfLife;
+import tools.MessageBox;
 
 /**
  * A custom rule based on a rulestring input from user.
@@ -25,7 +26,7 @@ public class CustomRule extends Rule {
             rulestring = RuleParser.formatRuleText(rawRuleText);
         } catch (RuleFormatException e){
             rulestring = "B3/S23";
-            System.out.println(e.getMessage());
+            MessageBox.alert(e.getMessage());
         }
 
         // parse the rulestring to the two boolean arrays shouldBeBorn and shouldSurvive
