@@ -162,5 +162,15 @@ public class Cell {
         this.spacing = spacing;
     }
 
+    public Cell clone(){
+        Cell cell = new Cell();
+        cell.setSize(size);
+        cell.setColor(color);
+        cell.setDeadColor(deadColor);
+        cell.setSpacing(spacing);
+
+        return cell;
+    }
+
 
 }

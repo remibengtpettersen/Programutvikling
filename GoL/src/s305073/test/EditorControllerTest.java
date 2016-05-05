@@ -1,55 +1,58 @@
-//package s305073.test;
-//
-//import model.Cell;
-//import model.DynamicGameOfLife;
-//import model.StaticGameOfLife;
-//import org.junit.Test;
-//import s305073.controller.EditorController;
-//
-///**
-// * Created by remibengtpettersen on 13.04.2016.
-// */
-//public class EditorControllerTest {
-//
-//
-//    @Test
-//    public void test_ifDiagonalLine_ThenReturnCoordinates() {
-//        EditorController editorController = new EditorController();
-//        DynamicGameOfLife gol = new DynamicGameOfLife();
-//
-//        //gol.getGrid().add()
-//        /*gol.getGrid()[1][2] = true;
-//        gol.getGrid()[2][3] = true;
-//        gol.getGrid()[3][4] = true;
-//        gol.getGrid()[4][5] = true;*/
-//
-//        editorController.getDeepCopyGol(gol);
-//
-//        boolean[][] bluePrint = new boolean[7][7];
-//
-//        bluePrint[1][2] = true;
-//        bluePrint[2][3] = true;
-//        bluePrint[3][4] = true;
-//        bluePrint[4][5] = true;
-//
-//
-//    }
-//
-//    @Test
-//    public void test_SizeofPattern() {
-//        EditorController editorController = new EditorController();
-//        StaticGameOfLife gol = new StaticGameOfLife(7, 7);
-//        Cell cell = new Cell();
-//        cell.setSize(10);
-//
-//        gol.getGrid()[1][2] = true;
-//        gol.getGrid()[2][3] = true;
-//        gol.getGrid()[3][4] = true;
-//        gol.getGrid()[4][5] = true;
-//
-//        //editorController.getDeepCopyGol(gol);
-//
-//        //double size = 4 * cell.getSize();
-//
-//    }
-//}
+package s305073.test;
+
+import model.DynamicGameOfLife;
+import model.GameOfLife;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import s305073.controller.EditorController;
+
+import static org.junit.Assert.*;
+
+public class EditorControllerTest {
+
+    private EditorController editorController;
+    private GameOfLife gol;
+
+    @Before
+    public void setup() {
+        editorController = new EditorController();
+        gol = new DynamicGameOfLife();
+    }
+
+    @After
+    public void tearDown() {
+
+    }
+
+    /**
+     * Checks that test project is configured correctly if pass.
+     */
+    @Test
+    public void testParrot() {
+        assertTrue(true);
+    }
+
+    @Test
+    public void testBoundingBoxReturnsCorrectWidth() {
+        gol.changeCellState(0, 0);
+        gol.changeCellState(0, 1);
+        gol.changeCellState(0, 2);
+
+        int[] patternSize = gol.getBoundingBox();
+
+        assertEquals(3, patternSize[3] - patternSize[2] + 1);
+    }
+
+    @Test
+    public void testBoundingBoxReturnsCorrectHeight() {
+        gol.changeCellState(0, 0);
+        gol.changeCellState(1, 0);
+        gol.changeCellState(2, 0);
+
+        int[] patternSize = gol.getBoundingBox();
+
+        assertEquals(3, patternSize[1] - patternSize[0] + 1);
+    }
+}
