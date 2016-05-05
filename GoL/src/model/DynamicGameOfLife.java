@@ -15,18 +15,13 @@ public class DynamicGameOfLife extends GameOfLife{
 
     //int availableProcessors = 1;
 
-
-
     // Offset to use when grid is expanded to left and upwards
-
 
     private int cellOffsetX = 0;
     private int cellOffsetY = 0;
 
     private ArrayList<ArrayList<AtomicBoolean>> grid;
     private ArrayList<ArrayList<AtomicInteger>> neighbours;
-
-
 
     /**
      * StaticGameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
@@ -112,8 +107,6 @@ public class DynamicGameOfLife extends GameOfLife{
 
     }
 
-
-
     /**
      * For each alive cell, it increments the adjacent cells neighbour count.
      * Also calculates the live cell count
@@ -159,8 +152,6 @@ public class DynamicGameOfLife extends GameOfLife{
         return grid;
     }
 
-
-
     /**
      * We copied getBoundingBox from the assignment
      *
@@ -199,8 +190,6 @@ public class DynamicGameOfLife extends GameOfLife{
         }
         return boundingBox;
     }
-
-
 
     public int getGridWidth(){ return grid.size(); }
 
@@ -244,14 +233,19 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param grid the grid to be deep copied and set.
      */
     public void deepCopyOnSet(ArrayList<ArrayList<AtomicBoolean>> grid) {
+
         neighbours.clear();
         cellOffsetX = 0;
         cellOffsetY = 0;
         this.grid.clear();
+
         for (int x = 0; x < grid.size(); x++) {
+
             this.grid.add(new ArrayList<>());
             neighbours.add(new ArrayList<>());
+
             for (int y = 0; y < grid.get(x).size(); y++) {
+
                 this.grid.get(x).add(new AtomicBoolean(grid.get(x).get(y).get()));
                 neighbours.get(x).add(new AtomicInteger(0));
             }

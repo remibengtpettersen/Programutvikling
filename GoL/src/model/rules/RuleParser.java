@@ -16,9 +16,9 @@ public class RuleParser {
 
     /**
      * Creates a new rule based on a rulestring.
-     * @param gol
-     * @param rulestring
-     * @return
+     * @param gol Sets a reference to the GameOfLife object to evolve
+     * @param rulestring Rulestring of the rule
+     * @return New rule based on rulestring
      */
     public static Rule createRule(GameOfLife gol, String rulestring){
 
@@ -83,7 +83,8 @@ public class RuleParser {
         else
             throw new RuleFormatException(rawRulestring);
 
-        newRuleText = "B" + simplifyDigits(birthDigits) + "/S" + simplifyDigits(survivalDigits);
+        newRuleText = "B" + simplifyDigits(birthDigits) +
+                "/S" + simplifyDigits(survivalDigits);
 
         return newRuleText;
     }

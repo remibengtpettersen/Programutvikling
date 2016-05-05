@@ -40,14 +40,4 @@ public abstract class Rule {
     public String toString(){
         return rulestring;
     }
-
-    /**
-     * Returns true if this rule's rule text is equivalent to another rule text
-     *
-     * @param otherRulestring The other rule text
-     * @return true if this rule's rulestring is equal to otherRulestring
-     */
-    public boolean isEqual(String otherRulestring){
-        return rulestring.equalsIgnoreCase(otherRulestring);
-    }
 }
