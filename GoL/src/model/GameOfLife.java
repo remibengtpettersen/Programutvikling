@@ -55,7 +55,7 @@ public abstract class GameOfLife {
      * @param startColumn First column from the left
      * @param stopColumn Last column from the right
      */
-    public void aggregateNeighbours(int startColumn, int stopColumn) {
+    private void aggregateNeighbours(int startColumn, int stopColumn) {
 
         for (int x = startColumn; x < stopColumn; x++) {
             for (int y = 1; y < getGridHeight() - 1; y++) {
