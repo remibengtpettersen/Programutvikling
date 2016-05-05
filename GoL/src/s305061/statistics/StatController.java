@@ -9,47 +9,31 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
-import model.DynamicGameOfLife;
 import model.GameOfLife;
 
 /**
  * @author Andreas s305061
+ *
  * GifPropertiesController for statistics window.
  * Handles statistics gathering in addition to GUI control
  */
 public class StatController {
 
+    private static final double ALPHA = 0.5f;
+    private static final double BETA = 3.0f;
+    private static final double GAMMA = 0.25f;
+
     @FXML private LineChart<Double, Double> graph;
     @FXML private TextField textField;
     @FXML private ProgressBar progressBar;
-
-    private ObservableList<XYChart.Series<Double, Double>> lineChartData;
 
     private LineChart.Series<Double, Double> livingSeries;
     private LineChart.Series<Double, Double> growthSeries;
     private LineChart.Series<Double, Double> similaritySeries;
 
-    private final float ALPHA = 0.5f;
-    private final float BETA = 3.0f;
-    private final float GAMMA = 0.25f;
-
     private boolean busy = false;
 
     private GameOfLife gol;
-
-    /**
-     * Sets a reference to the DynamicGameOfLife object to be cloned for statistics gathering
-     * @param gol Original DynamicGameOfLife object
-     */
-    public void setGol(GameOfLife gol){
-        this.gol = gol;
-    }
-
-    /**
-     * Sets the progress of the progress bar
-     * @param progress Progress from 0.0 to 1.0
-     */
-    private void setProgress(double progress){ progressBar.setProgress(progress); }
 
     /**
      * Initialization method. Called when statistics window opens
@@ -57,7 +41,7 @@ public class StatController {
     @FXML
     private void initialize() {
 
-        lineChartData = FXCollections.observableArrayList();
+        ObservableList<XYChart.Series<Double, Double>> lineChartData = FXCollections.observableArrayList();
 
         livingSeries = new LineChart.Series<>();
         livingSeries.setName("Live cells");
@@ -77,7 +61,7 @@ public class StatController {
     /**
      * Clears the statistics data elements from the line chart.
      */
-    public void clearStats(){
+    private void clearStats(){
 
         livingSeries.getData().clear();
         growthSeries.getData().clear();
@@ -86,63 +70,97 @@ public class StatController {
 
     /**
      * Collects statistics for a specified number of iterations. Number of live cells, cell growth and similarity measure will be collected
-     * @param iterations Number of iterations to evolve and collect statistics from
+     * @param totalIterations Number of iterations to evolve and collect statistics from
      * @return  An array of integer values representing live cells, cell growth and similarity measure for each iteration
      */
-    public int[][] getStatistics(int iterations){
+    private int[][] getStatistics(int totalIterations){
 
-        int[][] stats = new int[3][iterations];
-        double[] representations = new double[iterations];
+        int[][] stats = new int[3][totalIterations];
+        double[] representations = new double[totalIterations];
 
         GameOfLife clonedGol = gol.clone();
 
         int previousLiving = 0;
+        double previousGeometricFactor = 0;
 
         setProgress(0);
 
         // for each iteration, add live cell count and cell growth to the array stats,
         // then add the iteration's reduced representation to the array representations
-        for(int iteration = 0; iteration < iterations; iteration++){
+        for(int currentIteration = 0; currentIteration < totalIterations; currentIteration++){
+
+            int previousIteration = currentIteration - 1;
+            int lastIteration = totalIterations - 1;
 
             int currentLiving = clonedGol.getCellCount();
-            int growth = 0;
+            int previousGrowth = currentLiving + previousLiving;
+            double currentGeometricFactor = getGeometricFactor(clonedGol);
 
-            if(iteration > 0)
-                growth = currentLiving - previousLiving;
+            stats[0][currentIteration] = currentLiving;
 
-            stats[0][iteration] = currentLiving;
-            stats[1][iteration] = growth;
+            // if current is not first iteration, set previous iteration data
+            if(currentIteration > 0) {
 
-            representations[iteration] = ALPHA*currentLiving + BETA*growth + GAMMA*getGeometricFactor(clonedGol);
+                // set growth data for previous iteration
+                stats[1][previousIteration] = previousGrowth;
 
+                // set a reduced representation for previous iteration
+                representations[previousIteration] = getReducedRepresentation(
+                        previousLiving, previousGrowth, previousGeometricFactor);
+            }
+
+            // next generation
             clonedGol.nextGeneration();
-            previousLiving = currentLiving;
 
-            setProgress(0.9*((double)iteration/(double)iterations));
+            // if current is the last iteration, set current iteration data.
+            // Needs to be after a nextGeneration() to get the current (not for the game, but for the loop) growth
+            if(currentIteration == lastIteration) {
+
+                int currentGrowth = clonedGol.getCellCount() + currentLiving;
+
+                // set growth data for this last iteration
+                stats[1][lastIteration] = currentGrowth;
+
+                // set a reduced representation for this last iteration
+                representations[lastIteration] = getReducedRepresentation(
+                        currentLiving, currentGrowth, currentGeometricFactor);
+            }
+
+            previousLiving = currentLiving;
+            previousGeometricFactor = currentGeometricFactor;
+
+            // update progress bar
+            setProgress(0.9*((double)currentIteration/(double)totalIterations));
         }
 
         // compare all the reduced representations with each other, return the best match for each iteration
-        for(int repA = 0; repA < iterations; repA++) {
+        for(int repA = 0; repA < totalIterations; repA++) {
 
             int maxSimilarity = 0;
 
-            for(int repB = 0; repB < iterations; repB++) {
+            for(int repB = 0; repB < totalIterations; repB++) {
 
+                // don't compare a representation with itself
                 if(repA == repB)
                     continue;
 
+                // get similarity between two representations in percent
                 int similarity = compareRepresentations(representations[repA], representations[repB]);
 
+                // this will get the true maximum similarity after sufficient iterations
                 if (similarity > maxSimilarity){
                     maxSimilarity = similarity;
                 }
             }
 
+            // set the best match as the similarity measure for this iteration
             stats[2][repA] = maxSimilarity;
 
-            setProgress(0.9 + 0.1*((double)repA/(double)(iterations)));
+            // update progress bar
+            setProgress(0.9 + 0.1*((double)repA/(double)(totalIterations)));
         }
 
+        // update progress bar to 100%
         setProgress(1);
 
         return stats;
@@ -156,15 +174,14 @@ public class StatController {
      */
     private int compareRepresentations(double repA, double repB) {
 
-        repA = Math.abs(repA);
-        repB = Math.abs(repB);
-
+        // the smallest of the representations
         double min = Math.min(repA, repB);
+
+        // the biggest of the representations
         double max = Math.max(repA, repB);
 
-        int similarity =(int)(100*min/max);
-
-        return similarity;
+        // similarity in percent
+        return (int)(100*min/max);
     }
 
     /**
@@ -186,16 +203,30 @@ public class StatController {
     }
 
     /**
+     * Calculates the reduced mathematical representation of a game board one iteration
+     * @param living Number of live cells this iteration
+     * @param growth Live cell growth this iteration
+     * @param geoFactor Geometric factor for this iteration
+     * @return Reduced representation
+     */
+    private double getReducedRepresentation(int living, int growth, double geoFactor){
+
+        return ALPHA * living + BETA * growth + GAMMA * geoFactor;
+    }
+
+    /**
      * Displays statistics at the line chart
      * Calls clearStats() to empty the line chart, then loops through getStatistics(iterations) and adds the statistics to line chart
      * @param stats An array of statistic data elements
      */
     private void displayStatistics(int[][] stats){
 
+        // clear all statistics data from line chart
         clearStats();
 
         int iterations = stats[0].length;
 
+        // add new statistics data to line chart
         for(int iteration = 0; iteration < iterations; iteration++){
 
             livingSeries.getData().add(new XYChart.Data<>(
@@ -239,6 +270,7 @@ public class StatController {
      */
     private void getAndDisplayConcurrently(int iterations){
 
+        // checks if already working, return if it is
         if(busy)
             return;
 
@@ -273,4 +305,18 @@ public class StatController {
         int[][] stats = getStatistics(iterations);
         displayStatistics(stats);
     }
+
+    /**
+     * Sets a reference to the DynamicGameOfLife object to be cloned for statistics gathering
+     * @param gol Original DynamicGameOfLife object
+     */
+    public void setGol(GameOfLife gol){
+        this.gol = gol;
+    }
+
+    /**
+     * Sets the progress of the progress bar
+     * @param progress Progress from 0.0 to 1.0
+     */
+    private void setProgress(double progress){ progressBar.setProgress(progress); }
 }
