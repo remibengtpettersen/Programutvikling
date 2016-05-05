@@ -172,6 +172,4 @@ public class DynamicGameOfLifeTest {
         // assert size changed
         assertEquals(3, gol.getGridWidth());
     }
-
-
 }
