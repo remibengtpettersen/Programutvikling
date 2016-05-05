@@ -1,7 +1,5 @@
 package model;
 
-import javafx.scene.canvas.Canvas;
-
 /**
  * Created by Truls on 05/05/16.
  */
@@ -47,16 +45,16 @@ public class CameraView {
      * Calculates the x offset for the board with the offset inside the GameOfLife
      * @return the common offset for the x coordinate
      */
-    public double getCommonOffsetX(GameOfLife gol, double cellSize){
-        return (boardOffsetX + gol.getOffsetX() * cellSize);
+    public int getCommonOffsetX(GameOfLife gol, double cellSize){
+        return (int) (boardOffsetX + gol.getOffsetX() * cellSize);
     }
 
     /**
      * Calculates the y offset for the board with the offset inside the GameOfLife
      * @return the common offset for the y coordinate
      */
-    public double getCommonOffsetY(GameOfLife gol, double cellSize){
-        return (boardOffsetY + gol.getOffsetY() * cellSize);
+    public int getCommonOffsetY(GameOfLife gol, double cellSize){
+        return (int) (boardOffsetY + gol.getOffsetY() * cellSize);
     }
 
 }

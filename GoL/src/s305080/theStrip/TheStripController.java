@@ -7,11 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.transform.Affine;
 import model.CameraView;
 import model.Cell;
-import model.DynamicGameOfLife;
 import model.GameOfLife;
-
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by Truls on 06/04/16.
@@ -22,7 +18,7 @@ public class TheStripController {
     double cellSize;
 
 
-    Cell cell;
+    Cell originalCell;
 
     @FXML
     public Canvas canvas;
@@ -34,6 +30,7 @@ public class TheStripController {
 
     private int width;
     CameraView cView = new CameraView();
+    private CameraView originalCView;
 
     public TheStripController(){
     //    gc = canvas.getGraphicsContext2D();
@@ -55,9 +52,9 @@ public class TheStripController {
             System.out.println("changed rule");
         }
 
-        cellSize = canvas.getHeight()/(master.getCanvasController().getCanvas().getHeight() / cell.getSize());
-        cView.boardOffsetX = (int) (master.getCanvasController().cView.getCommonOffsetX(originalGol, cell.getSize())*cellSize/cell.getSize());
-        cView.boardOffsetY = (int) (master.getCanvasController().cView.getCommonOffsetY(originalGol, cell.getSize())*cellSize/cell.getSize());
+        cellSize = canvas.getHeight()/(master.getCanvasController().getCanvas().getHeight() / originalCell.getSize());
+        cView.boardOffsetX = (int) (originalCView.getCommonOffsetX(originalGol, originalCell.getSize()) * cellSize / originalCell.getSize());
+        cView.boardOffsetY = (int) (originalCView.getCommonOffsetY(originalGol, originalCell.getSize()) * cellSize / originalCell.getSize());
         width = (int) (canvas.getHeight() *
                                 master.getCanvasController().getCanvas().getWidth() /
                                 master.getCanvasController().getCanvas().getHeight());
@@ -102,9 +99,9 @@ public class TheStripController {
     }
 
     private void renderLife() {
-        gc.setFill(cell.getDeadColor());
+        gc.setFill(originalCell.getDeadColor());
         gc.fillRect(0, 0, width, canvas.getHeight());
-        gc.setFill(cell.getColor());
+        gc.setFill(originalCell.getColor());
         for (int x = cView.currViewMinX; x < cView.currViewMaxY; x++) {
             for (int y = cView.currViewMinY; y < cView.currViewMaxY; y++) {
 
@@ -117,15 +114,15 @@ public class TheStripController {
 
     private void drawCell(int x, int y) {
         double x1 = x * cellSize - cView.getCommonOffsetX(gol, cellSize);
-        double xWidth = (x1 < 0) ? cellSize - cellSize * cell.getSpacingFactor() + x1 : cellSize - cellSize * cell.getSpacingFactor();
-        gc.fillRect((x1 < 0) ? 0 : x1, y * cellSize - cView.getCommonOffsetY(gol, cellSize), xWidth, cellSize - cellSize * cell.getSpacingFactor());
+        double xWidth = (x1 < 0) ? cellSize - cellSize * originalCell.getSpacingFactor() + x1 : cellSize - cellSize * originalCell.getSpacingFactor();
+        gc.fillRect((x1 < 0) ? 0 : x1, y * cellSize - cView.getCommonOffsetY(gol, cellSize), xWidth, cellSize - cellSize * originalCell.getSpacingFactor());
     }
 
 
     private void clearCanvasAndSetColors() {
-        gc.setFill(cell.getDeadColor());
+        gc.setFill(originalCell.getDeadColor());
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-        gc.setFill(cell.getColor());
+        gc.setFill(originalCell.getColor());
         gc.setStroke(gc.getFill());
     }
 
@@ -141,7 +138,8 @@ public class TheStripController {
 
     public void setMaster(MasterController master) {
         this.master = master;
-        cell = master.getCanvasController().getCell();
+        originalCell = master.getCanvasController().getCell();
+        originalCView = master.getCanvasController().getCameraView();
     }
 
 }
