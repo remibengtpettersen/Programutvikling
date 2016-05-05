@@ -14,7 +14,7 @@ import model.GameOfLife;
 /**
  * @author Andreas s305061
  *
- * GifPropertiesController for statistics window.
+ * Controller for statistics window.
  * Handles statistics gathering in addition to GUI control
  */
 public class StatController {
@@ -34,9 +34,10 @@ public class StatController {
     private LineChart.Series<Double, Double> growthSeries;
     private LineChart.Series<Double, Double> similaritySeries;
 
-    //
+    // checks if thread is working on getting statistics
     private boolean busy = false;
 
+    // reference to game object to evolve and gather statistics from
     private GameOfLife gol;
 
     /**
