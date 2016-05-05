@@ -1,5 +1,6 @@
 package s305080.theStrip;
 
+import controller.CanvasController;
 import controller.MasterController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -16,8 +17,6 @@ public class TheStripController {
 
 
     double cellSize;
-
-
     Cell originalCell;
 
     @FXML
@@ -26,15 +25,30 @@ public class TheStripController {
 
     private  GameOfLife gol;
     private GameOfLife originalGol;
-    private MasterController master;
-
+    private CanvasController cController;
     private int width;
-    CameraView cView = new CameraView();
+
+    private CameraView cView = new CameraView();
     private CameraView originalCView;
 
     public TheStripController(){
     //    gc = canvas.getGraphicsContext2D();
 
+    }
+
+    public void setGol(GameOfLife gol) {
+        gc = canvas.getGraphicsContext2D();
+        originalGol = gol;
+        canvas.heightProperty().addListener(e -> {
+            updateStrip();
+        });
+
+    }
+
+    public void setCanvasController(CanvasController cController) {
+        this.cController = cController;
+        originalCell = cController.getCell();
+        originalCView = cController.getCameraView();
     }
 
     /**
@@ -44,20 +58,18 @@ public class TheStripController {
 
         gol = originalGol.clone();
 
-        System.out.println(gol.getRule().toString() + " " + originalGol.getRule().toString());
-        System.out.println("Are they the same? " + gol.getRule().toString().equals(originalGol.getRule().toString()));
-        if(!gol.getRule().toString().equals(originalGol.getRule().toString())) //for some reason this always returns false :/
+        if(!gol.getRule().toString().equals(originalGol.getRule().toString()))
         {
             gol.setRule(originalGol.getRule().toString());
             System.out.println("changed rule");
         }
 
-        cellSize = canvas.getHeight()/(master.getCanvasController().getCanvas().getHeight() / originalCell.getSize());
+        cellSize = canvas.getHeight()/(cController.getCanvas().getHeight() / originalCell.getSize());
         cView.boardOffsetX = (int) (originalCView.getCommonOffsetX(originalGol, originalCell.getSize()) * cellSize / originalCell.getSize());
         cView.boardOffsetY = (int) (originalCView.getCommonOffsetY(originalGol, originalCell.getSize()) * cellSize / originalCell.getSize());
         width = (int) (canvas.getHeight() *
-                                master.getCanvasController().getCanvas().getWidth() /
-                                master.getCanvasController().getCanvas().getHeight());
+                               cController.getCanvas().getWidth() /
+                               cController.getCanvas().getHeight());
 
         Affine xform = new Affine();
         double tx = 0;
@@ -102,8 +114,8 @@ public class TheStripController {
         gc.setFill(originalCell.getDeadColor());
         gc.fillRect(0, 0, width, canvas.getHeight());
         gc.setFill(originalCell.getColor());
-        for (int x = cView.currViewMinX; x < cView.currViewMaxY; x++) {
-            for (int y = cView.currViewMinY; y < cView.currViewMaxY; y++) {
+        for (int x = cView.currViewMinX; x <= cView.currViewMaxX; x++) {
+            for (int y = cView.currViewMinY; y <= cView.currViewMaxY; y++) {
 
                 if (gol.isCellAlive(x, y))
                     drawCell(x, y);
@@ -126,20 +138,5 @@ public class TheStripController {
         gc.setStroke(gc.getFill());
     }
 
-
-    public void setGol(GameOfLife gol) {
-        gc = canvas.getGraphicsContext2D();
-        this.originalGol = gol;
-        canvas.heightProperty().addListener(e -> {
-            updateStrip();
-        });
-
-    }
-
-    public void setMaster(MasterController master) {
-        this.master = master;
-        originalCell = master.getCanvasController().getCell();
-        originalCView = master.getCanvasController().getCameraView();
-    }
 
 }

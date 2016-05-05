@@ -163,7 +163,7 @@ public class CanvasController {
                             thread.start();
                         }
                         renderCanvas();
-                        
+
                         timer = now / 1000000;
 
                         giveCellCount();
@@ -351,6 +351,9 @@ public class CanvasController {
      */
     private void mouseClick(MouseEvent mouseEvent) {
 
+        System.out.println(cView.currViewMinX + " " + cView.currViewMaxX);
+
+
         // if click is end of drag, reset variables used in drag
         if (mouseDrag) {
             prevMousePosX = 0;
@@ -525,8 +528,8 @@ public class CanvasController {
         masterController.getToolController().setZoom( cell.getSize());
 
         // moves the board so the mouse gets the exact same position on the board as before
-        cView.boardOffsetX = (int) ((absMPosXOnGrid - gol.getOffsetX()) * cell.getSize() - scrollEvent.getX());
-        cView.boardOffsetY = (int) ((absMPosYOnGrid - gol.getOffsetY()) * cell.getSize() - scrollEvent.getY());
+        cView.boardOffsetX = (absMPosXOnGrid - gol.getOffsetX()) * cell.getSize() - scrollEvent.getX();
+        cView.boardOffsetY = (absMPosYOnGrid - gol.getOffsetY()) * cell.getSize() - scrollEvent.getY();
 
         // checks if it is necessary to draw grid lines
         checkIfShouldStillDrawGrid();
@@ -626,8 +629,8 @@ public class CanvasController {
         gc.setFill(cell.getColor());
 
         // runs through the cells inside the view
-        for (int x = cView.currViewMinX; x < cView.currViewMaxX; x++) {
-            for (int y = cView.currViewMinY; y < cView.currViewMaxY; y++) {
+        for (int x = cView.currViewMinX; x <= cView.currViewMaxX; x++) {
+            for (int y = cView.currViewMinY; y <= cView.currViewMaxY; y++) {
 
                 // draws the cells that are alive
                 if (gol.isCellAlive(x, y))
@@ -927,10 +930,10 @@ public class CanvasController {
     void saveToGif(){
         try {
             if (markup == null){
-                new GifSaver().saveToGifBeta(this);
+                new GifSaver().saveCanvasAsGif(this);
             }
             else {
-                new GifSaver().saveToGifAlfa(this, getMinMaxValues());
+                new GifSaver().saveGifFromSelectedArea(this, getMinMaxValues());
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -18,15 +18,23 @@ public class TheStrip {
     Stage stage;
     MasterController masterController;
 
+    /**
+     * Displays the Strip next to the primary stage
+     * @param masterController contains everything the Strip needs
+     */
     public void display(MasterController masterController){
+
+        // stores for later use
         this.masterController = masterController;
+
+        // loads FXML document
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TheStrip.fxml"));
         try {
             root = loader.load();
 
             theStripController = loader.getController();
             theStripController.setGol(masterController.getCanvasController().gol);
-            theStripController.setMaster(masterController);
+            theStripController.setCanvasController(masterController.getCanvasController());
         } catch (IOException e) {
             e.printStackTrace();
         }
