@@ -329,5 +329,23 @@ public abstract class GameOfLife {
      */
     public abstract void resetNeighboursAt(int x, int y);
 
+    public String getAggregatedNeighbours() throws InterruptedException {
+
+        createCountingThreads();
+
+        runThreads();
+
+        StringBuilder neighbours = new StringBuilder();
+
+        for (int x = 0; x < getGridWidth(); x++){
+            for (int y = 0; y < getGridHeight(); y++) {
+                neighbours.append(getNeighboursAt(x, y));
+                resetNeighboursAt(x, y);
+            }
+            neighbours.append(" ");
+        }
+        neighbours.deleteCharAt(neighbours.length() - 1);
+        return neighbours.toString();
+    }
     //endregion
 }

@@ -43,6 +43,34 @@ public class StaticGameOfLifeTest {
     }
 
     @Test
+    public void testAggregateNeighbours_ifAllNeighboursDead_thenReturnNeighbours() throws Exception {
+        // instantiate gol
+        gol = new StaticGameOfLife(3, 3);
+
+        // aggregate neighbours - column 0 to 2
+       String neighbours= gol.getAggregatedNeighbours();
+
+        // assert if all zero
+        assertEquals("000 000 000", neighbours);
+    }
+
+
+    @Test
+    public void testAggregateNeighbours_ifOneAlive_thenReturnOneNeighbour() throws Exception {
+        // instantiate gol
+        gol = new StaticGameOfLife(3, 3);
+
+        // set alive cell
+        gol.setCellAlive(1, 1);
+
+        // aggregate neighbours - column 0 to 2
+        String neighbours= gol.getAggregatedNeighbours();
+
+        // assert equal
+        assertEquals("111 101 111", neighbours);
+    }
+
+    @Test
     public void testNextGeneration_ifDeadCellWithNoNeighbours_thenStayDead() {
         // instantiate gol
         gol = new StaticGameOfLife(5, 5);
