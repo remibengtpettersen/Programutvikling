@@ -10,7 +10,7 @@ public class PlainTextParser extends PatternParser {
      * Reads a .cells / plain text file
      * @return the boolean array produced from the file
      */
-    static boolean[][] parsePlainText() throws IOException {
+    static boolean[][] parsePlainText(){
 
         while(fileContentList.get(FIRST_LINE).startsWith("!")){
             fileContentList.remove(FIRST_LINE);
