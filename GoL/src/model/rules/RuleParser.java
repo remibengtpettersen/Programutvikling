@@ -1,5 +1,8 @@
 package model.rules;
 
+import model.GameOfLife;
+import tools.MessageBox;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,6 +10,34 @@ import java.util.regex.Pattern;
  * Functions responsible for formatting and parsing of rulestrings
  */
 public class RuleParser {
+
+    public static final String CLASSIC_RULESTRING = "B3/S23";
+    public static final String HIGHLIFE_RULESTRING = "B36/S23";
+
+    /**
+     * Creates a new rule based on a rulestring.
+     * @param gol Sets a reference to the GameOfLife object to evolve
+     * @param rulestring Rulestring of the rule
+     * @return New rule based on rulestring
+     */
+    public static Rule createRule(GameOfLife gol, String rulestring){
+
+        try {
+            rulestring = formatRuleText(rulestring);
+        } catch (RuleFormatException e) {
+            MessageBox.alert(e.getMessage());
+            return new ClassicRule(gol);
+        }
+
+        if(rulestring.equals(CLASSIC_RULESTRING))
+            return new ClassicRule(gol);
+
+        else if(rulestring.equals(HIGHLIFE_RULESTRING))
+            return new HighLifeRule(gol);
+
+        else
+            return new CustomRule(gol, rulestring);
+    }
 
     /**
      * Formats the rulestring to be in the right order, with the B-section (birth)
@@ -52,7 +83,8 @@ public class RuleParser {
         else
             throw new RuleFormatException(rawRulestring);
 
-        newRuleText = "B" + simplifyDigits(birthDigits) + "/S" + simplifyDigits(survivalDigits);
+        newRuleText = "B" + simplifyDigits(birthDigits) +
+                "/S" + simplifyDigits(survivalDigits);
 
         return newRuleText;
     }

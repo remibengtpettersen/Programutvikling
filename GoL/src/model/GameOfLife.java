@@ -1,9 +1,8 @@
 package model;
 
-import model.rules.ClassicRule;
-import model.rules.CustomRule;
-import model.rules.HighLifeRule;
-import model.rules.Rule;
+import model.rules.*;
+import tools.MessageBox;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -143,6 +142,7 @@ public abstract class GameOfLife {
                 try {
                     rule.evolve(finalI * getGridWidth()/ availableProcessors, (finalI + 1) * getGridWidth()/ availableProcessors);
                 } catch (EvolveException e) {
+                    MessageBox.alert(e.getMessage());
                     e.printStackTrace();
                 }
             }));
@@ -172,7 +172,7 @@ public abstract class GameOfLife {
      */
     public void setRule(String ruleText) {
 
-        ruleText = ruleText.toLowerCase();
+        /*ruleText = ruleText.toLowerCase();
 
         switch (ruleText) {
             case "classic":
@@ -183,7 +183,9 @@ public abstract class GameOfLife {
                 break;
             default:
                 rule = new CustomRule(this, ruleText);
-        }
+        }*/
+
+        rule = RuleParser.createRule(this, ruleText);
     }
 
     /**

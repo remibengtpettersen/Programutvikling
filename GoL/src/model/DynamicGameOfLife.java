@@ -15,18 +15,13 @@ public class DynamicGameOfLife extends GameOfLife{
 
     //int availableProcessors = 1;
 
-
-
     // Offset to use when grid is expanded to left and upwards
-
 
     private int cellOffsetX = 0;
     private int cellOffsetY = 0;
 
     private ArrayList<ArrayList<AtomicBoolean>> grid;
     private ArrayList<ArrayList<AtomicInteger>> neighbours;
-
-
 
     /**
      * StaticGameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
@@ -35,7 +30,7 @@ public class DynamicGameOfLife extends GameOfLife{
     public DynamicGameOfLife() {
 
         createGameBoard();
-        setRule("classic");
+        setRule(RuleParser.CLASSIC_RULESTRING);
     }
 
     //region startup-sequence
@@ -112,8 +107,6 @@ public class DynamicGameOfLife extends GameOfLife{
 
     }
 
-
-
     /**
      * For each alive cell, it increments the adjacent cells neighbour count.
      * Also calculates the live cell count
@@ -159,8 +152,6 @@ public class DynamicGameOfLife extends GameOfLife{
         return grid;
     }
 
-
-
     /**
      * We copied getBoundingBox from the assignment
      *
@@ -200,8 +191,6 @@ public class DynamicGameOfLife extends GameOfLife{
         return boundingBox;
     }
 
-
-
     public int getGridWidth(){ return grid.size(); }
 
     public int getGridHeight(){ return grid.get(0).size(); }
@@ -211,6 +200,10 @@ public class DynamicGameOfLife extends GameOfLife{
     }
 
     public boolean isCellAlive(int x, int y){
+
+        if(grid == null)
+            return false;
+
         try{
             return  grid.get(x).get(y).get();
         }
@@ -240,14 +233,19 @@ public class DynamicGameOfLife extends GameOfLife{
      * @param grid the grid to be deep copied and set.
      */
     public void deepCopyOnSet(ArrayList<ArrayList<AtomicBoolean>> grid) {
+
         neighbours.clear();
         cellOffsetX = 0;
         cellOffsetY = 0;
         this.grid.clear();
+
         for (int x = 0; x < grid.size(); x++) {
+
             this.grid.add(new ArrayList<>());
             neighbours.add(new ArrayList<>());
+
             for (int y = 0; y < grid.get(x).size(); y++) {
+
                 this.grid.get(x).add(new AtomicBoolean(grid.get(x).get(y).get()));
                 neighbours.get(x).add(new AtomicInteger(0));
             }
@@ -305,28 +303,12 @@ public class DynamicGameOfLife extends GameOfLife{
      */
     public void setCellDead(int x, int y) {
 
+        if(isCellAlive(x,y)) {
 
-            if(isCellAlive(x,y)) {
+            cellCount.decrementAndGet();
 
-                cellCount.decrementAndGet();
-
-                    grid.get(x).get(y).set(false);
-
-
-
-                    int diffX = x - getGridWidth() + 1;
-                    if(diffX > 0)
-                        increaseXRight(diffX);
-
-                    int diffY = y - getGridHeight() + 1;
-                    if(diffY > 0)
-                        increaseYBottom(diffY);
-
-                    grid.get(x).get(y).set(false);
-
-            }
-
-
+            grid.get(x).get(y).set(false);
+        }
     }
 
     /**
@@ -346,9 +328,6 @@ public class DynamicGameOfLife extends GameOfLife{
     public void resetNeighboursAt(int x, int y){
         neighbours.get(x).get(y).set(0);
     }
-
-
-
 
     public void increaseXRight(int diffX) {
         for (int i = 0; i < diffX; i++){
