@@ -162,8 +162,6 @@ public class CanvasController {
 
                     if(!interaction) {
 
-
-
                         if(!thread.isAlive()){
                             thread = new Thread(() -> {
                                 gol.nextGeneration();

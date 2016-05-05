@@ -6,6 +6,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * @author Pair programming
+ *
  * Game class with a game board with static size.
  */
 public class StaticGameOfLife extends GameOfLife{
@@ -94,6 +96,7 @@ public class StaticGameOfLife extends GameOfLife{
 
     /**
      * Clones the StaticGameOfLife object
+     *
      * @return the cloned StaticGameOfLife object
      */
     @Override
@@ -109,6 +112,7 @@ public class StaticGameOfLife extends GameOfLife{
 
     /**
      * Deep copies the grid and sets it.
+     *
      * @param grid the grid to be deep copied and set.
      */
     public void deepCopyOnSet(AtomicBoolean[][] grid) {
@@ -188,5 +192,5 @@ public class StaticGameOfLife extends GameOfLife{
         neighbours[x][y].set(0);
     }
 
-  //endregion
+    //endregion
 }
