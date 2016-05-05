@@ -1,9 +1,6 @@
 package model;
 
-import model.rules.ClassicRule;
-import model.rules.CustomRule;
-import model.rules.HighLifeRule;
-import model.rules.Rule;
+import model.rules.*;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -28,7 +25,7 @@ public class StaticGameOfLife extends GameOfLife{
     public StaticGameOfLife(int width, int height) {
 
         createGameBoard(width, height);
-        setRule("classic");
+        setRule(RuleParser.CLASSIC_RULESTRING);
     }
 
     /**
@@ -70,6 +67,7 @@ public class StaticGameOfLife extends GameOfLife{
      * For each alive cell, it increments the adjacent cells neighbour count.
      * Also calculates the live cell count
      */
+    @Override
     public void aggregateNeighbours(int start, int stop) {
         cellCount.set(0);
         for (int x = start; x < stop; x++) {
@@ -93,7 +91,6 @@ public class StaticGameOfLife extends GameOfLife{
      * Clones the StaticGameOfLife object
      * @return the cloned StaticGameOfLife object
      */
-    @Override
     public StaticGameOfLife clone() {
 
         StaticGameOfLife staticGameOfLife = new StaticGameOfLife(getGridWidth(), getGridHeight());
@@ -261,28 +258,6 @@ public class StaticGameOfLife extends GameOfLife{
      */
     public void setGrid(AtomicBoolean[][] grid) {
         this.grid = grid;
-    }
-
-    /**
-     * Sets a specific rule to be used.
-     *
-     * @param ruleText The rule text
-     */
-    public void setRule(String ruleText) {
-
-        ruleText = ruleText.toLowerCase();
-
-        switch (ruleText) {
-            case "classic":
-                rule = new ClassicRule(this);
-                break;
-            case "highlife":
-                rule = new HighLifeRule(this);
-                break;
-            default:
-                rule = new CustomRule(this, ruleText);
-                System.out.println("Custom");
-        }
     }
 
     /**

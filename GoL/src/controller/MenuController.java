@@ -11,6 +11,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.rules.RuleParser;
 import s305073.controller.EditorController;
 
 
@@ -68,7 +69,7 @@ public class MenuController {
      */
     public void setConwayRule() {
 
-        masterController.getCanvasController().setRule("classic");
+        masterController.getCanvasController().setRule(RuleParser.CLASSIC_RULESTRING);
     }
 
     /**
@@ -76,7 +77,7 @@ public class MenuController {
      */
     public void setHighLifeRule() {
 
-        masterController.getCanvasController().setRule("highlife");
+        masterController.getCanvasController().setRule(RuleParser.HIGHLIFE_RULESTRING);
     }
 
     /**

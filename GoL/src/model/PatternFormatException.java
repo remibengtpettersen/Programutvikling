@@ -3,7 +3,7 @@ package model;
 import java.io.IOException;
 
 /**
- * Created by remibengtpettersen on 14.03.2016.
+ * Exception to be thrown in case of problems related to pattern parsing or loading
  */
 public class PatternFormatException extends IOException {
 
