@@ -1,39 +1,31 @@
 package model;
 
-import model.rules.*;
+import model.rules.RuleParser;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by Truls on 20/04/16.
+ * Game class with a game board with dynamic size.
+ * The game board will expand or shrink to fit around the pattern
  */
 public class DynamicGameOfLife extends GameOfLife{
 
-    //int availableProcessors = 1;
-
-    // Offset to use when grid is expanded to left and upwards
-
-    private int cellOffsetX = 0;
-    private int cellOffsetY = 0;
-
+    // game board
     private ArrayList<ArrayList<AtomicBoolean>> grid;
     private ArrayList<ArrayList<AtomicInteger>> neighbours;
 
+    //region start up
+
     /**
      * StaticGameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
-     *
      */
     public DynamicGameOfLife() {
 
         createGameBoard();
         setRule(RuleParser.CLASSIC_RULESTRING);
     }
-
-    //region startup-sequence
 
     /**
      * Creates the boolean 2D Array to keep track of dead and live cells, and the 2D byte-
@@ -51,29 +43,20 @@ public class DynamicGameOfLife extends GameOfLife{
     }
     //endregion
 
-    //region NextGeneration
+    //region next generation
 
-    /**
-     * Evolves the grid one generation
-     */
+    @Override
     public void nextGeneration() {
 
         fitBoardToPattern();
-        createCountingThreads();
-        try {
-            runThreads();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        createEvolveThreads();
-        try {
-            runThreads();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        super.nextGeneration();
     }
 
+    /**
+     * Will expand or shrink the game board to fit around the pattern
+     */
     public void fitBoardToPattern() {
+
         int [] bBox = getBoundingBox();
         if (bBox[0] > 1){
             decreaseXLeft(bBox[0] - 1);
@@ -107,32 +90,130 @@ public class DynamicGameOfLife extends GameOfLife{
 
     }
 
-    /**
-     * For each alive cell, it increments the adjacent cells neighbour count.
-     * Also calculates the live cell count
-     * @param start
-     * @param stop
-     */
-    public void aggregateNeighbours(int start, int stop) {
+    //endregion
 
-        for (int x = start; x < stop; x++) {
-            for (int y = 1; y < grid.get(x).size() - 1; y++) {
-                if (grid.get(x).get(y).get()) {
-                    for (int a = x - 1; a <= x + 1; a++) {
-                        for (int b = y - 1; b <= y + 1; b++) {
-                            if (a != x || b != y) {
-                                neighbours.get(a).get(b).incrementAndGet();
-                            }
-                        }
-                    }
-                }
+    //region dynamic board handling
+
+    /**
+     * Will add a number of columns to the right side of the game board
+     *
+     * @param diffX Number of columns
+     */
+    public void increaseXRight(int diffX) {
+        for (int i = 0; i < diffX; i++){
+            grid.add(new ArrayList<>());
+            neighbours.add(new ArrayList<>());
+
+            for (int j = 0; j < grid.get(0).size(); j++) {
+                grid.get(grid.size() - 1).add(new AtomicBoolean(false));
+                neighbours.get(grid.size() - 1).add(new AtomicInteger(0));
+            }
+        }
+    }
+
+    /**
+     * Will add a number of rows to the bottom side of the game board
+     *
+     * @param diffY Number of rows
+     */
+    public void increaseYBottom(int diffY){
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < diffY; j++){
+                grid.get(i).add(new AtomicBoolean(false));
+                neighbours.get(i).add(new AtomicInteger(0));
+            }
+        }
+    }
+
+    /**
+     * Will add a number of columns to the left side of the game board
+     *
+     * @param diffX Number of columns
+     */
+    public void increaseXLeft(int diffX) {
+        cellOffsetX += diffX;
+        for (int i = 0; i < diffX; i++){
+            grid.add(0, new ArrayList<>());
+            neighbours.add(0, new ArrayList<>());
+
+            for (int j = 0; j < grid.get(1).size(); j++) {
+                grid.get(0).add(new AtomicBoolean(false));
+                neighbours.get(0).add(new AtomicInteger(0));
+            }
+        }
+    }
+
+    /**
+     * Will add a number of rows to the top side of the game board
+     *
+     * @param diffY Number of rows
+     */
+    public void increaseYTop(int diffY){
+        cellOffsetY += diffY;
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < diffY; j++){
+                grid.get(i).add(0, new AtomicBoolean(false));
+                neighbours.get(i).add(0, new AtomicInteger(0));
+            }
+        }
+    }
+
+    /**
+     * Will remove a number of columns from the right side of the game board
+     *
+     * @param diffX Number of columns
+     */
+    public void decreaseXRight(int diffX) {
+        for (int i = 0; i < diffX; i++){
+            grid.remove(grid.size() - 1);
+            neighbours.remove(neighbours.size() - 1);
+        }
+    }
+
+    /**
+     * Will remove a number of row from the bottom side of the game board
+     *
+     * @param diffY Number of rows
+     */
+    public void decreaseYBottom(int diffY){
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < diffY; j++){
+                grid.get(i).remove(grid.get(i).size() - 1);
+                neighbours.get(i).remove(neighbours.get(i).size() - 1);
+            }
+        }
+    }
+
+    /**
+     * Will remove a number of columns from the left side of the game board
+     *
+     * @param diffX Number of columns
+     */
+    public void decreaseXLeft(int diffX) {
+        cellOffsetX -= diffX;
+        for (int i = 0; i < diffX; i++){
+            grid.remove(0);
+            neighbours.remove(0);
+        }
+    }
+
+    /**
+     * Will remove a number of row from the top side of the game board
+     * @param diffY Number of rows
+     */
+    public void decreaseYTop(int diffY){
+        cellOffsetY -= diffY;
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < diffY; j++){
+                grid.get(i).remove(0);
+                neighbours.get(i).remove(0);
             }
         }
     }
 
     //endregion
 
-    //region Getters
+    //region getters
 
     /**
      * Getter for neighbour-2D-array
@@ -152,53 +233,18 @@ public class DynamicGameOfLife extends GameOfLife{
         return grid;
     }
 
-    /**
-     * We copied getBoundingBox from the assignment
-     *
-     * @return
-     */
-    public int[] getBoundingBox() {
-        int[] boundingBox = new int[4]; // minrow maxrow mincolumn maxcolumn boundingBox[0] = board.length;
-
-        boundingBox[0] = grid.size();
-        boundingBox[1] = 0;
-        boundingBox[2] = grid.get(0).size();
-        boundingBox[3] = 0;
-
-        for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < grid.get(i).size(); j++) {
-                if (!grid.get(i).get(j).get()) continue;
-                if (i < boundingBox[0]) {
-                    boundingBox[0] = i;
-                }
-                if (i > boundingBox[1]) {
-                    boundingBox[1] = i;
-                }
-                if (j < boundingBox[2]) {
-                    boundingBox[2] = j;
-                }
-                if (j > boundingBox[3]) {
-                    boundingBox[3] = j;
-                }
-            }
-        }
-        if (boundingBox[1] < boundingBox[0]){
-            boundingBox[0] = 1;
-            boundingBox[1] = 1;
-            boundingBox[2] = 1;
-            boundingBox[3] = 1;
-        }
-        return boundingBox;
-    }
-
+    @Override
     public int getGridWidth(){ return grid.size(); }
 
+    @Override
     public int getGridHeight(){ return grid.get(0).size(); }
 
+    @Override
     public int getNeighboursAt(int x, int y){
         return neighbours.get(x).get(y).get();
     }
 
+    @Override
     public boolean isCellAlive(int x, int y){
 
         if(grid == null)
@@ -213,17 +259,16 @@ public class DynamicGameOfLife extends GameOfLife{
     }
 
     /**
-     * Clones the StaticGameOfLife object
-     * @return the cloned StaticGameOfLife object
+     * Clones the DynamicGameOfLife object
+     * @return the cloned DynamicGameOfLife object
      */
     @Override
     public DynamicGameOfLife clone() {
+
         DynamicGameOfLife gameOfLife = new DynamicGameOfLife();
         gameOfLife.deepCopyOnSet(grid);
         gameOfLife.setRule(getRule().toString());
         gameOfLife.setCellCount(cellCount.get());
-
-        //gameOfLife.setCell(getCell());
 
         return gameOfLife;
     }
@@ -250,11 +295,10 @@ public class DynamicGameOfLife extends GameOfLife{
                 neighbours.get(x).add(new AtomicInteger(0));
             }
         }
-
     }
     //endregion
 
-    //region Setters
+    //region setters
 
     /**
      * Sets the cell grid to be used
@@ -265,17 +309,10 @@ public class DynamicGameOfLife extends GameOfLife{
         this.grid = grid;
     }
 
-    /**
-     * Sets cell state to true regardless of current state.
-     *
-     * @param x the x coordinate in the grid.
-     * @param y the y coordinate in the grid.
-     */
+    @Override
     public void setCellAlive(int x, int y) {
 
         if(!isCellAlive(x,y)) {
-
-            cellCount.incrementAndGet();
 
             try {
                 grid.get(x).get(y).set(true);
@@ -292,135 +329,23 @@ public class DynamicGameOfLife extends GameOfLife{
 
                 grid.get(x).get(y).set(true);
             }
+
+            cellCount.incrementAndGet();
         }
     }
 
-    /**
-     * Sets cell state to false regardless of current state.
-     *
-     * @param x the x coordinate in the grid.
-     * @param y the y coordinate in the grid.
-     */
+    @Override
     public void setCellDead(int x, int y) {
 
         if(isCellAlive(x,y)) {
 
-            cellCount.decrementAndGet();
-
             grid.get(x).get(y).set(false);
+            cellCount.decrementAndGet();
         }
     }
 
-    /**
-     * Changes the state of a cell based on the grid coordinate.
-     *
-     * @param x the x coordinate in the grid.
-     * @param y the y coordinate in the grid.
-     */
-    public void changeCellState(int x, int y) {
-
-        if(isCellAlive(x,y))
-            setCellDead(x,y);
-        else
-            setCellAlive(x,y);
-    }
-
-    public void resetNeighboursAt(int x, int y){
-        neighbours.get(x).get(y).set(0);
-    }
-
-    public void increaseXRight(int diffX) {
-        for (int i = 0; i < diffX; i++){
-            grid.add(new ArrayList<>());
-            neighbours.add(new ArrayList<>());
-
-            for (int j = 0; j < grid.get(0).size(); j++) {
-                grid.get(grid.size() - 1).add(new AtomicBoolean(false));
-                neighbours.get(grid.size() - 1).add(new AtomicInteger(0));
-            }
-        }
-    }
-
-    public void increaseYBottom(int diffY){
-        for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < diffY; j++){
-                grid.get(i).add(new AtomicBoolean(false));
-                neighbours.get(i).add(new AtomicInteger(0));
-            }
-        }
-    }
-
-    public void increaseXLeft(int diffX) {
-        cellOffsetX += diffX;
-        for (int i = 0; i < diffX; i++){
-            grid.add(0, new ArrayList<>());
-            neighbours.add(0, new ArrayList<>());
-
-            for (int j = 0; j < grid.get(1).size(); j++) {
-                grid.get(0).add(new AtomicBoolean(false));
-                neighbours.get(0).add(new AtomicInteger(0));
-            }
-        }
-    }
-
-    public void increaseYTop(int diffY){
-        cellOffsetY += diffY;
-        for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < diffY; j++){
-                grid.get(i).add(0, new AtomicBoolean(false));
-                neighbours.get(i).add(0, new AtomicInteger(0));
-            }
-        }
-    }
-
-    public void decreaseXRight(int diffX) {
-        for (int i = 0; i < diffX; i++){
-            grid.remove(grid.size() - 1);
-            neighbours.remove(neighbours.size() - 1);
-        }
-    }
-
-    public void decreaseYBottom(int diffY){
-        for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < diffY; j++){
-                grid.get(i).remove(grid.get(i).size() - 1);
-                neighbours.get(i).remove(neighbours.get(i).size() - 1);
-            }
-        }
-    }
-
-    public void decreaseXLeft(int diffX) {
-        cellOffsetX -= diffX;
-        for (int i = 0; i < diffX; i++){
-            grid.remove(0);
-            neighbours.remove(0);
-        }
-    }
-
-    public void decreaseYTop(int diffY){
-        cellOffsetY -= diffY;
-        for (int i = 0; i < grid.size(); i++) {
-            for (int j = 0; j < diffY; j++){
-                grid.get(i).remove(0);
-                neighbours.get(i).remove(0);
-            }
-        }
-    }
-
-    /**
-     * Creates a new neighbour grid if a cell grid is already set.
-     * The neighbour grid will get the same dimensions as the cell grid
-     * If a cell grid is not yet set, use createGameBoard() instead.
-     */
-    public void createNeighboursGrid() {
-
-    }
-    /**
-     * Clears the grid of live cells
-     */
+    @Override
     public void clearGrid() {
-
-        cellCount.set(0);
 
         grid.clear();
         neighbours.clear();
@@ -430,22 +355,18 @@ public class DynamicGameOfLife extends GameOfLife{
 
         grid.get(0).add(new AtomicBoolean(false));
         neighbours.get(0).add(new AtomicInteger(0));
+
+        cellCount.set(0);
     }
 
-    /**
-     * Updates the rule's references to this class' cell grid and neighbour grid
-     */
-    /*public void updateRuleGrid() {
-        rule.setGol(grid);
-        rule.setNeighbours(neighbours);
-    }*/
+    @Override
+    protected void incrementNeighboursAt(int x, int y){ neighbours.get(x).get(y).incrementAndGet(); }
 
-    public int getOffsetX() {
-        return cellOffsetX;
+    @Override
+    public void resetNeighboursAt(int x, int y){
+        neighbours.get(x).get(y).set(0);
     }
 
-    public int getOffsetY() {
-        return cellOffsetY;
-    }
     //endregion
+
 }
