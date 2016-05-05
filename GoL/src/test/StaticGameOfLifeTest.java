@@ -48,10 +48,10 @@ public class StaticGameOfLifeTest {
         gol = new StaticGameOfLife(3, 3);
 
         // aggregate neighbours - column 0 to 2
-        gol.aggregateNeighbours(0, 2);
+       String neighbours= gol.getAggregatedNeighbours();
 
         // assert if all zero
-        assertEquals("000 000 000", gol.neighboursGridToString());
+        assertEquals("000 000 000", neighbours);
     }
 
 
@@ -64,10 +64,10 @@ public class StaticGameOfLifeTest {
         gol.setCellAlive(1, 1);
 
         // aggregate neighbours - column 0 to 2
-        gol.aggregateNeighbours(0, 2);
+        String neighbours= gol.getAggregatedNeighbours();
 
         // assert equal
-        assertEquals("111 101 111", gol.neighboursGridToString());
+        assertEquals("111 101 111", neighbours);
     }
 
     @Test
