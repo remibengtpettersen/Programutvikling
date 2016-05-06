@@ -1,12 +1,17 @@
 package test;
 
+import model.DynamicGameOfLife;
+import model.GameOfLife;
 import model.StaticGameOfLife;
+import model.rules.ClassicRule;
+import model.rules.RuleParser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  */
@@ -16,7 +21,7 @@ public class ClassicRuleTest {
     public ExpectedException expectedException = ExpectedException.none();
 
 
-    private StaticGameOfLife gol;
+    private GameOfLife gol;
     //private ClassicRule rule;
 
     /**
@@ -25,27 +30,6 @@ public class ClassicRuleTest {
     @Before
     public void setUp(){
 
-        // Creates a mock grid to be tested
-        /*boolean[][] grid = new boolean[][]{
-                new boolean[]{false, false, false, false, false},
-                new boolean[]{false, false, true, false, false},
-                new boolean[]{false, false, true, false, false},
-                new boolean[]{false, false, true, false, false},
-                new boolean[]{false, false, false, false, false}};
-
-        // Creates a neighbour count array manually
-        byte[][] neighbours = new byte[][]{
-                new byte[]{0, 1, 1, 1, 0},
-                new byte[]{0, 2, 1, 2, 0},
-                new byte[]{0, 3, 2, 3, 0},
-                new byte[]{0, 2, 1, 2, 0},
-                new byte[]{0, 1, 1, 1, 0}};
-
-        // Constructs classicRule
-        rule = new ClassicRule(grid, neighbours);
-
-        gridBluePrint = new boolean[3][3];
-        neighboursBluePrint = new byte[3][3];*/
     }
 
     @After
@@ -103,6 +87,38 @@ public class ClassicRuleTest {
         // check if the block is the same
         assertEquals(expectedBeforeAndAfterEvolve, gol.toString());
     }
+
+    @Test
+    public void testEvolve_ifRPentomino_thenGrow(){
+
+        gol = new DynamicGameOfLife();
+
+        // make R-pentomino
+        gol.setCellAlive(0,1);
+        gol.setCellAlive(1,0);
+        gol.setCellAlive(1,1);
+        gol.setCellAlive(1,2);
+        gol.setCellAlive(2,0);
+
+        assertEquals(5, gol.getCellCount());
+
+        for (int i = 0; i < 20; i++) {
+            gol.nextGeneration();
+        }
+
+        assertEquals(32, gol.getCellCount());
+    }
+
+    @Test
+    public void testToString_ifRuleSet_thenRuleReturn(){
+
+        gol = new DynamicGameOfLife();
+
+        String expectedString = "B3/S23";
+
+        assertEquals(expectedString, gol.getRule().toString());
+    }
+
 
 //    @Test public void testEvolve_IfCellIsDeadAndOneLiveNeighbour_ThenReturnCellWillDie() throws EvolveException {
 //
@@ -173,20 +189,6 @@ public class ClassicRuleTest {
 //        rule.evolve();*/
 //    }
 //
-//    /**
-//     * Runs the evolve method once and checks if the array has evolved correctly
-//     */
-//    @Test
-//    public void testEvolveBlinker() throws EvolveException {
-//
-//        /*rule.evolve();
-//
-//        assertArrayEquals(new boolean[][]{
-//                new boolean[]{false, false, false, false, false},
-//                new boolean[]{false, false, false, false, false},
-//                new boolean[]{false, true, true, true, false},
-//                new boolean[]{false, false, false, false, false},
-//                new boolean[]{false, false, false, false, false}}, rule.getGrid());*/
-//    }
+
 
 }
