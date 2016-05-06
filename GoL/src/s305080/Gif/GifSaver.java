@@ -1,6 +1,7 @@
 package s305080.Gif;
 
 import controller.CanvasController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,7 @@ import model.CameraView;
 import model.Cell;
 import model.GameOfLife;
 import s305080.Gif.Controller.GifPropertiesController;
+import tools.MessageBox;
 
 import java.awt.*;
 import java.io.File;
@@ -141,13 +143,22 @@ public class GifSaver {
         // sets the correct background color
 
         // creates a thread to make the actual gif to prevent the gifWriter from halting the program
-        new Thread(()->{
+        Thread t = new Thread(()->{
             try {
                 drawNextImage();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).start();
+
+            Platform.runLater(() -> {
+                MessageBox.close();
+                MessageBox.alert("The gif is done");
+            });
+
+        });
+        t.start();
+
+        MessageBox.alert("Working on gif, we will notify you when it's done...");
 
     }
 

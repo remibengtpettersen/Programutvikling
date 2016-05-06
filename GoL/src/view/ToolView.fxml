@@ -37,7 +37,7 @@
         </items>
     </ChoiceBox>
 
-    <Label fx:id="cellCountLabel"/>
     <Label fx:id="ruleLabel"/>
+    <Label fx:id="cellCountLabel"/>
 
 </ToolBar>

@@ -33,8 +33,7 @@ public class TheStrip {
             root = loader.load();
 
             theStripController = loader.getController();
-            theStripController.setGol(masterController.getCanvasController().gol);
-            theStripController.setCanvasController(masterController.getCanvasController());
+            theStripController.init(masterController.getCanvasController());
         } catch (IOException e) {
             e.printStackTrace();
         }

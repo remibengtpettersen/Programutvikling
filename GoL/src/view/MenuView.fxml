@@ -13,9 +13,9 @@
         <MenuItem text="Hide GoL"/>
     </Menu>
     <Menu text="File">
-        <MenuItem text="Open" onAction="#openFileChooser"/>
-        <MenuItem text="Open from URL" onAction="#openFromUrl"/>
-        <MenuItem text="Save - s305080" onAction="#saveFile"/>
+        <MenuItem text="Open"                    onAction="#openFileChooser"/>
+        <MenuItem text="Open from URL"           onAction="#openFromUrl"/>
+        <MenuItem text="Save - s305080 ctrl + s" onAction="#saveFile"/>
         <SeparatorMenuItem/>
         <MenuItem text="Save GIF - s305061" onAction="#openGifWindow"/>
         <MenuItem text="Save GIF - s305080" onAction="#saveToGif"/>
@@ -24,28 +24,28 @@
         <MenuItem text="Clear board" onAction="#clearGrid"/>
         <SeparatorMenuItem/>
         <RadioMenuItem fx:id="markupS305080" text="Markup - s305080" onAction="#activateMarkup"/>
-        <MenuItem fx:id="cut" text="Cut - ctrl + x" onAction="#cut"/>
-        <MenuItem fx:id="copy" text="Copy - ctrl + c" onAction="#copy"/>
-        <MenuItem fx:id="paste" text="Paste - ctrl + v" onAction="#paste"/>
+        <MenuItem fx:id="cut"                text="Cut - ctrl + x"   onAction="#cut"/>
+        <MenuItem fx:id="copy"               text="Copy - ctrl + c"  onAction="#copy"/>
+        <MenuItem fx:id="paste"              text="Paste - ctrl + v" onAction="#paste"/>
         <SeparatorMenuItem/>
         <MenuItem text="Open editor s305073" onAction="#launchEditor"/>
     </Menu>
     <Menu text="View">
-        <RadioMenuItem fx:id="staticButton" text="Static board" onAction="#changeToStaticBoard"/>
-        <RadioMenuItem fx:id="dynamicButton" selected="true" text="Dynamic board" onAction="#changeToDynamicBoard"/>
+        <RadioMenuItem fx:id="staticButton"    text="Static board"        onAction="#changeToStaticBoard"/>
+        <RadioMenuItem fx:id="dynamicButton"   text="Dynamic board"       onAction="#changeToDynamicBoard"/>
         <SeparatorMenuItem/>
         <RadioMenuItem fx:id="theStripS305080" text="The strip - s305080" onAction="#showTheStrip"/>
     </Menu>
     <Menu text="Rules">
-        <MenuItem text="Conway" onAction="#setConwayRule"/>
-        <MenuItem text="HighLife" onAction="#setHighLifeRule"/>
+        <MenuItem text="Conway"             onAction="#setConwayRule"/>
+        <MenuItem text="HighLife"           onAction="#setHighLifeRule"/>
         <MenuItem text="Life without death" onAction="#setLWDRule"/>
-        <MenuItem text="Seeds" onAction="#setSeedsRule"/>
-        <MenuItem text="Diamoeba" onAction="#setDiamoebaRule"/>
-        <MenuItem text="Replicator" onAction="#setReplicatorRule"/>
-        <MenuItem text="Day and night" onAction="#setDNNRule"/>
+        <MenuItem text="Seeds"              onAction="#setSeedsRule"/>
+        <MenuItem text="Diamoeba"           onAction="#setDiamoebaRule"/>
+        <MenuItem text="Replicator"         onAction="#setReplicatorRule"/>
+        <MenuItem text="Day and night"      onAction="#setDNNRule"/>
         <SeparatorMenuItem/>
-        <MenuItem text="Custom rule" onAction="#setCustomRule"/>
+        <MenuItem text="Custom rule"        onAction="#setCustomRule"/>
     </Menu>
     <Menu text="Stats">
         <MenuItem text="Show statistics - s305061" onAction="#openStatWindow"/>
