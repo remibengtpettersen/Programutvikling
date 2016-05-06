@@ -433,9 +433,6 @@ public class CanvasController {
      */
     private void mouseClick(MouseEvent mouseEvent) {
 
-        System.out.println(cView.currViewMinX + " " + cView.currViewMaxX);
-
-
         // if click is end of drag, reset variables used in drag
         if (mouseDrag) {
             prevMousePosX = 0;

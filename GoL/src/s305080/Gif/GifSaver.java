@@ -189,10 +189,7 @@ public class GifSaver {
 
         // prepares gifWriter for next image
         gifWriter.insertAndProceed();
-
-        // to be removved
-        System.out.println("Done with image nr. " + frameNr);
-
+        
         // draws next image
         drawNextImage();
     }
