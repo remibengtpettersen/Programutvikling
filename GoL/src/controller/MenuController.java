@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * GifPropertiesController for the menu bars on top of the stage
+ * MenuController for menu bar on top of the stage
+ *
+ *
  * */
 public class MenuController {
 
