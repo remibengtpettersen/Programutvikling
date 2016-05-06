@@ -26,8 +26,17 @@ public class StaticGameOfLife extends GameOfLife{
      */
     public StaticGameOfLife(int width, int height) {
 
+        this(width, height, RuleParser.CLASSIC_RULESTRING);
+    }
+
+    /**
+     * StaticGameOfLife Constructor.
+     * Sets the rule based on the parameter rulestring.
+     */
+    public StaticGameOfLife(int width, int height, String rulestring) {
+
         createGameBoard(width, height);
-        setRule(RuleParser.CLASSIC_RULESTRING);
+        setRule(rulestring);
     }
 
     /**
@@ -102,9 +111,9 @@ public class StaticGameOfLife extends GameOfLife{
     @Override
     public StaticGameOfLife clone() {
 
-        StaticGameOfLife staticGameOfLife = new StaticGameOfLife(getGridWidth(), getGridHeight());
+        StaticGameOfLife staticGameOfLife = new StaticGameOfLife(
+                getGridWidth(), getGridHeight(), getRule().toString());
         staticGameOfLife.deepCopyOnSet(grid);
-        staticGameOfLife.setRule(getRule().toString());
         staticGameOfLife.setCellCount(cellCount.get());
 
         return staticGameOfLife;

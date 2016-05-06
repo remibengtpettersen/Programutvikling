@@ -174,7 +174,7 @@ public class CanvasController {
     }
 
     public void changeToStatic(){
-        GameOfLife newGol = new StaticGameOfLife(500, 500);
+        GameOfLife newGol = new StaticGameOfLife(500, 500, gol.getRule().toString());
         insertOldGrid(gol, newGol, newGol.getGridWidth(), newGol.getGridHeight());
         cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
         cView.boardOffsetY = cView.getCommonOffsetY(gol, cell.getSize());
@@ -183,7 +183,7 @@ public class CanvasController {
 
     }
     public void changeToDynamic(){
-        GameOfLife newGol = new DynamicGameOfLife();
+        GameOfLife newGol = new DynamicGameOfLife(gol.getRule().toString());
         insertOldGrid(gol, newGol, gol.getGridWidth(), gol.getGridHeight());
         cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
         cView.boardOffsetY = cView.getCommonOffsetY(gol, cell.getSize());

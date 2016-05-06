@@ -107,37 +107,29 @@ public class MenuController {
     /**
      *  Set LWD-rule - Born 3 / Survive 1, 2, 3, 4, 5, 6, 7 and 8.
      */
-    public void setLWDRule() {
-        masterController.getCanvasController().setRule("B3/S012345678");
-    }
+    public void setLWDRule() { masterController.getCanvasController().setRule(RuleParser.LWD_RULESTRING); }
 
     /**
      *  Set Seeds-rule - Born 2 / Survive none
      */
-    public void setSeedsRule() {
-        masterController.getCanvasController().setRule("B2/S");
-    }
+    public void setSeedsRule() { masterController.getCanvasController().setRule(RuleParser.SEEDS_RULESTRING); }
 
     /**
      *  Set Diamoeba-rule - Borne 3, 5, 6, 7 and 8 / Survive 5, 6, 7 and 8.
      */
     public void setDiamoebaRule() {
-        masterController.getCanvasController().setRule("B35678/S5678");
+        masterController.getCanvasController().setRule(RuleParser.DIAMOEBA_RULESTRING);
     }
 
     /**
      *  Set Replicator-rule - Born 1, 3, 5 and 7 /Survive 1, 3, 5 and 7.
      */
-    public void setReplicatorRule() {
-        masterController.getCanvasController().setRule("B1357/S1357");
-    }
+    public void setReplicatorRule() { masterController.getCanvasController().setRule(RuleParser.REPLICATOR_RULESTRING); }
 
     /**
      *  Set DNN-rule - Born 3, 6, 7 and 8 / Survive 3, 4, 6, 7 and 8.
      */
-    public void setDNNRule() {
-        masterController.getCanvasController().setRule("B3678/S34678");
-    }
+    public void setDNNRule() { masterController.getCanvasController().setRule(RuleParser.DNN_RULESTRING); }
 
     /**
      *  Clear grid - empty´s all arrays, reset cell counter and redraws canvas
