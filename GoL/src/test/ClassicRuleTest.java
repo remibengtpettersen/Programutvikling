@@ -1,8 +1,7 @@
 package test;
 
-import model.DynamicGameOfLife;
-import model.EvolveException;
 import model.StaticGameOfLife;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -11,15 +10,11 @@ import static org.junit.Assert.assertEquals;
 
 /**
  */
-@Deprecated
 public class ClassicRuleTest {
 
     @org.junit.Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-
-    private boolean[][] gridBluePrint;
-    private byte[][] neighboursBluePrint;
 
     private StaticGameOfLife gol;
     //private ClassicRule rule;
@@ -29,8 +24,6 @@ public class ClassicRuleTest {
      */
     @Before
     public void setUp(){
-
-        gol = new StaticGameOfLife(5,5);
 
         // Creates a mock grid to be tested
         /*boolean[][] grid = new boolean[][]{
@@ -55,40 +48,60 @@ public class ClassicRuleTest {
         neighboursBluePrint = new byte[3][3];*/
     }
 
+    @After
+    public void tearDown(){
+
+        gol = null;
+    }
+
     @Test
     public void testEvolve_ifBlinker_thenRotate(){
 
+        gol = new StaticGameOfLife(5,5);
+
         // create blinker
-        gol.setCellAlive(2, 3);
-        gol.setCellAlive(3, 3);
-        gol.setCellAlive(4, 3);
+        gol.setCellAlive(1, 2);
+        gol.setCellAlive(2, 2);
+        gol.setCellAlive(3, 2);
 
         // horizontal
-        String expectedBeforeEvolve = "000 000 111 000 000";
+        String expectedBeforeEvolve = "00000 00000 01110 00000 00000";
 
         // vertical, with expanded board
-        //String expectedAfterEvolve= "000 000 111 000 000";
+        String expectedAfterEvolve= "00000 00100 00100 00100 00000";
 
         // check that the blinker was made
-        //assertEquals(expectedBeforeEvolve, gol.toString());
+        assertEquals(expectedBeforeEvolve, gol.toString());
 
         // evolve
         gol.nextGeneration();
 
         // check that the blinker evolved correctly
-        //assertEquals(expectedAfterEvolve, gol.toString());
+        assertEquals(expectedAfterEvolve, gol.toString());
     }
 
     @Test
     public void testEvolve_ifBlock_thenStayStill(){
 
-        // create block
-        gol.setCellAlive(0, 0);
-        gol.setCellAlive(1, 0);
-        gol.setCellAlive(0, 1);
-        gol.setCellAlive(1, 1);
+        gol = new StaticGameOfLife(4,4);
 
-        //String expectedBeforeEvolve = ""
+        // create block
+        gol.setCellAlive(1, 1);
+        gol.setCellAlive(2, 1);
+        gol.setCellAlive(1, 2);
+        gol.setCellAlive(2, 2);
+
+        // expect the block to stay the same
+        String expectedBeforeAndAfterEvolve = "0000 0110 0110 0000";
+
+        // check is the block was made
+        assertEquals(expectedBeforeAndAfterEvolve, gol.toString());
+
+        // evolve
+        gol.nextGeneration();
+
+        // check if the block is the same
+        assertEquals(expectedBeforeAndAfterEvolve, gol.toString());
     }
 
 //    @Test public void testEvolve_IfCellIsDeadAndOneLiveNeighbour_ThenReturnCellWillDie() throws EvolveException {

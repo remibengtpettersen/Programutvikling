@@ -2,26 +2,23 @@ package test;
 
 import model.DynamicGameOfLife;
 import model.EvolveException;
-import model.rules.HighLifeRule;
+import model.StaticGameOfLife;
 import model.rules.RuleParser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import tools.Utilities;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  */
-@Deprecated
 public class HighLifeRuleTest {
 
     @org.junit.Rule
     public ExpectedException expectedException = ExpectedException.none();
 
     private DynamicGameOfLife gol;
-
-    private boolean[][] gridBluePrint;
-    byte[][] neighboursBluePrint;
 
     /**
      * Creates a grid to be evolved and a neighbour grid that is pre populated with neighbours count. The neighbour aggregator is tested elsewhere.
@@ -58,6 +55,38 @@ public class HighLifeRuleTest {
     @After
     public void tearDown() throws Exception {
 
+    }
+
+    @Test
+    public void testEvolve_ifReplicator_thenCellCountIncreased(){
+
+        // make replicator 3 gen predecessor
+        gol.setCellAlive(0,0);
+        gol.setCellAlive(1,0);
+        gol.setCellAlive(2,0);
+        gol.setCellAlive(3,1);
+        gol.setCellAlive(3,2);
+        gol.setCellAlive(3,3);
+
+        int expectedPredecessorCellCount = 6;
+        int expectedReplicatorCellCount = 12;
+
+        assertEquals(expectedPredecessorCellCount, gol.getCellCount());
+
+        // evolve to replicator
+        for (int i = 0; i < 3; i++) {
+            gol.nextGeneration();
+        }
+
+        // check that the replicator is made
+        assertEquals(12, gol.getCellCount());
+
+        for (int i = 0; i < 12; i++) {
+            gol.nextGeneration();
+        }
+
+        // check that the replicator replicated itself after 12 generation
+        assertEquals(2*expectedReplicatorCellCount, gol.getCellCount());
     }
 
     @Test

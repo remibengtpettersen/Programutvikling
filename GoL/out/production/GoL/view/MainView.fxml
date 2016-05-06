@@ -3,12 +3,12 @@
 <?jfxtras.scene.menu.CornerMenu?>
 <BorderPane fx:controller="controller.MasterController" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml">
     <top>
-        <fx:include fx:id="menu" source="MenuView.fxml"/>
+        <fx:include fx:id="menu"   source="MenuView.fxml"/>
     </top>
     <center>
         <fx:include fx:id="canvas" source="CanvasView.fxml"/>
     </center>
     <bottom>
-        <fx:include fx:id="tool" source="ToolView.fxml"/>
+        <fx:include fx:id="tool"   source="ToolView.fxml"/>
     </bottom>
 </BorderPane>
