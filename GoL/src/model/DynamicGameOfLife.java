@@ -1,5 +1,6 @@
 package model;
 
+import model.rules.Rule;
 import model.rules.RuleParser;
 
 import java.util.ArrayList;
@@ -21,12 +22,23 @@ public class DynamicGameOfLife extends GameOfLife{
     //region start up
 
     /**
-     * StaticGameOfLife Constructor. Sets the classic Conway rule (B3/S23) as default rule.
+     * DynamicGameOfLife Constructor.
+     * Sets the classic Conway rule (B3/S23) as default rule.
      */
     public DynamicGameOfLife() {
 
         createGameBoard();
         setRule(RuleParser.CLASSIC_RULESTRING);
+    }
+
+    /**
+     * DynamicGameOfLife Constructor.
+     * Sets the rule based on the parameter rulestring.
+     */
+    public DynamicGameOfLife(String rulestring) {
+
+        createGameBoard();
+        setRule(rulestring);
     }
 
     /**
@@ -288,9 +300,8 @@ public class DynamicGameOfLife extends GameOfLife{
     @Override
     public DynamicGameOfLife clone() {
 
-        DynamicGameOfLife gameOfLife = new DynamicGameOfLife();
+        DynamicGameOfLife gameOfLife = new DynamicGameOfLife(getRule().toString());
         gameOfLife.deepCopyOnSet(grid);
-        gameOfLife.setRule(getRule().toString());
         gameOfLife.setCellCount(cellCount.get());
 
         return gameOfLife;
@@ -389,6 +400,5 @@ public class DynamicGameOfLife extends GameOfLife{
     public void resetNeighboursAt(int x, int y){
         neighbours.get(x).get(y).set(0);
     }
-
     //endregion
 }

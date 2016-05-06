@@ -11,8 +11,6 @@ import static org.junit.Assert.*;
  *
  * Test class for Game of Life static game board.
  */
-
-@Deprecated
 public class StaticGameOfLifeTest {
 
     private StaticGameOfLife gol;
@@ -53,7 +51,6 @@ public class StaticGameOfLifeTest {
         // assert if all zero
         assertEquals("000 000 000", neighbours);
     }
-
 
     @Test
     public void testAggregateNeighbours_ifOneAlive_thenReturnOneNeighbour() throws Exception {

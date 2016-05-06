@@ -5,6 +5,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static org.junit.Assert.*;
 
 /**
@@ -75,8 +78,8 @@ public class DynamicGameOfLifeTest {
 
         // set alive cells (Blinker)
         gol.setCellAlive(0, 0);
-        gol.setCellAlive(1, 0);
-        gol.setCellAlive(2, 0);
+        gol.setCellAlive(0, 1);
+        gol.setCellAlive(0, 2);
 
         assertEquals("1 1 1", gol.toString());
 
@@ -104,7 +107,7 @@ public class DynamicGameOfLifeTest {
         gol.setCellAlive(2, 0);
 
         // assert grid is populated
-        assertEquals("1 1 1", gol.toString());
+        assertEquals("111", gol.toString());
 
         // assert width and height
         assertEquals(3, gol.getGridWidth());

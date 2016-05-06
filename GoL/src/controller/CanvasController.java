@@ -181,7 +181,7 @@ public class CanvasController {
      * Replaces the existing dynamic game of life board with a static one
      */
     void changeToStatic(){
-        GameOfLife newGol = new StaticGameOfLife(500, 500);
+        GameOfLife newGol = new StaticGameOfLife(500, 500, gol.getRule().toString());
         insertOldGrid(gol, newGol, newGol.getGridWidth(), newGol.getGridHeight());
         cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
         cView.boardOffsetY = cView.getCommonOffsetY(gol, cell.getSize());
@@ -194,7 +194,7 @@ public class CanvasController {
      * Replaces the existing static game of life board with a dynamic one
      */
     void changeToDynamic(){
-        GameOfLife newGol = new DynamicGameOfLife();
+        GameOfLife newGol = new DynamicGameOfLife(gol.getRule().toString());
         insertOldGrid(gol, newGol, gol.getGridWidth(), gol.getGridHeight());
         cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
         cView.boardOffsetY = cView.getCommonOffsetY(gol, cell.getSize());
@@ -909,6 +909,7 @@ public class CanvasController {
      * Stop animation
      */
     void stopAnimation() {
+
         animationTimer.stop();
 
         // lets next generation finish, then draws it on the canvas
@@ -1022,7 +1023,7 @@ public class CanvasController {
      */
     void setFrameDelay(int frameDelay) {
 
-        // if frame daley is less than 17, it can be 0
+        // if frame delay is less than 17, it can be 0
         if (frameDelay < 17) // 60 fps
             this.frameDelay = 0;
         else

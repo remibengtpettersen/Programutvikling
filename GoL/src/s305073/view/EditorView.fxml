@@ -7,40 +7,44 @@
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
 <GridPane fx:controller="s305073.controller.EditorController" xmlns:fx="http://javafx.com/fxml">
-   <HBox GridPane.rowIndex="0" prefWidth="300">
-      <VBox prefHeight="300" spacing="20" alignment="CENTER" GridPane.columnIndex="0" style="-fx-background-color: olivedrab">
+
+    <HBox GridPane.rowIndex="0" prefWidth="300">
+        <!-- Meta data and controls -->
+        <VBox prefHeight="300" spacing="20" alignment="CENTER" GridPane.columnIndex="0" style="-fx-background-color: olivedrab">
 
           <padding>
           <Insets left="10" right="10"/>
           </padding>
 
-          <!--Label-->
+          <!--Header label-->
         <Label text="META DATA" style="-fx-font-weight: bold"></Label>
 
         <!--Text fields -->
-        <TextField promptText="Name" prefWidth="200"></TextField>
-        <TextField promptText="Author" prefWidth="200"></TextField>
-        <TextField promptText="Description" prefWidth="200"></TextField>
-        <TextField promptText="Rule" prefWidth="200"></TextField>
+        <TextField fx:id="txtName" promptText="Pattern name" prefWidth="200"></TextField>
+        <TextField fx:id="txtAuthor" promptText="Author" prefWidth="200"></TextField>
+        <TextField fx:id="txtDescription" promptText="Description" prefWidth="200"></TextField>
+        <TextField fx:id="txtRule" promptText="Rule" prefWidth="200"></TextField>
 
-        <!--Buttons-->
-        <Button fx:id="btnUpdateStrip" onAction="#updateStrip" text="Update strip" prefWidth="200"></Button>
-        <Button fx:id="btnSave" text="Save" prefWidth="200" onAction="#saveToFile"></Button>
-        <Button fx:id="btnGridLines" text="Grid on/off" prefWidth="200"></Button>
-        <Button fx:id="btnReset" text="Clear" onAction="#clear" prefWidth="200"></Button>
+        <!--Control buttons-->
+        <Button fx:id="btnUpdate" text="Update strip" onAction="#updateStrip" prefWidth="200" focusTraversable="true"></Button>
+        <Button fx:id="btnSave" text="Save as RLE" prefWidth="200" onAction="#saveToFile"></Button>
+        <Button fx:id="btnMakeGif" text="Save as GIF" onAction="#closeEditor" prefWidth="200"></Button>
+        <Button fx:id="btnReset" text="Clear" onAction="#clear" prefWidth="200" focusTraversable="true"></Button>
         <Button fx:id="btnClose" text="Close" onAction="#closeEditor" prefWidth="200"></Button>
 
-      </VBox>
-      <Canvas fx:id="editor" width="800" height="500" GridPane.columnIndex="1"
-              onMouseDragged="#onMouseDraggedEditor"
-              onMouseClicked="#onMouseClickedEditor"
-              onScroll="#onScrollEditorCanvas" onMouseEntered="#onMouseEnteredEditor" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMovedEditor">
-      </Canvas>
-   </HBox>
-   <VBox fx:id="vBoxScrollPane" GridPane.rowIndex="1">
-      <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="208" vbarPolicy="NEVER">
-         <Canvas fx:id="strip" width="6000" height="188"
-                 onMouseMoved="#onMouseMovedStrip"></Canvas>
-      </ScrollPane>
-   </VBox>
+        <!-- Editor canvas -->
+        </VBox>
+          <Canvas fx:id="editor" width="800" height="500" GridPane.columnIndex="1"
+                  onMouseDragged="#onMouseDraggedEditor"
+                  onMouseClicked="#onMouseClickedEditor"
+                  onScroll="#onScrollEditorCanvas" onMouseEntered="#onMouseEnteredEditor" onMouseExited="#onMouseExited" onMouseMoved="#onMouseMovedEditor">
+          </Canvas>
+    <!-- Strip canvas, in a scroll pane -->
+    </HBox>
+       <VBox fx:id="vBoxScrollPane" GridPane.rowIndex="1">
+          <ScrollPane fx:id="scrollPane" prefWidth="1000" prefHeight="208" vbarPolicy="NEVER">
+             <Canvas fx:id="strip" width="8000" height="188"
+                     onMouseMoved="#onMouseMovedStrip"></Canvas>
+          </ScrollPane>
+       </VBox>
 </GridPane>

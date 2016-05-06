@@ -13,6 +13,11 @@ public class RuleParser {
 
     public static final String CLASSIC_RULESTRING = "B3/S23";
     public static final String HIGHLIFE_RULESTRING = "B36/S23";
+    public static final String SEEDS_RULESTRING = "B2/S";
+    public static final String DIAMOEBA_RULESTRING = "B35678/S5678";
+    public static final String LWD_RULESTRING = "B3/S012345678";
+    public static final String REPLICATOR_RULESTRING = "B1357/S1357";
+    public static final String DNN_RULESTRING = "B3678/S34678";
 
     /**
      * Creates a new rule based on a rulestring.

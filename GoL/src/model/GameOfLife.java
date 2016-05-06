@@ -130,9 +130,7 @@ public abstract class GameOfLife {
      */
     private void runThreads() throws InterruptedException {
 
-        for (Thread t : threads) {
-            t.start();
-        }
+        threads.forEach(Thread::start);
 
         // wait for all the threads to finish before joining
         for (Thread t : threads) {
@@ -342,23 +340,25 @@ public abstract class GameOfLife {
 
         StringBuilder neighbours = new StringBuilder();
 
-        for (int x = 0; x < getGridWidth(); x++){
-            for (int y = 0; y < getGridHeight(); y++) {
+        for (int y = 0; y < getGridHeight(); y++) {
+            for (int x = 0; x < getGridWidth(); x++){
                 neighbours.append(getNeighboursAt(x, y));
                 resetNeighboursAt(x, y);
             }
             neighbours.append(" ");
         }
         neighbours.deleteCharAt(neighbours.length() - 1);
+
         return neighbours.toString();
     }
 
     public String toString() {
+
         StringBuilder string = new StringBuilder();
 
-        for (int i = 0; i < getGridWidth(); i++) {
-            for (int j = 0; j < getGridHeight(); j++) {
-                if (isCellAlive(i, j)) {
+        for (int y = 0; y < getGridHeight(); y++) {
+            for (int x = 0; x < getGridWidth(); x++) {
+                if (isCellAlive(x, y)) {
                     string.append(1);
                 }
                 else {
