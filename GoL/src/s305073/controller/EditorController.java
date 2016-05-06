@@ -19,7 +19,7 @@ import model.GameOfLife;
 /**
  * Created by s305073
  *
- * Editor class for standalone editor for manipulating pattern and get feedback evolution.
+ * Editor class for standalone editor for manipulating pattern and get feedback on evolution of pattern.
  */
 public class EditorController {
 
@@ -251,6 +251,7 @@ public class EditorController {
     }
 
     /**
+     * Handles mouse drag event.
      *
      * @param event
      */
@@ -338,16 +339,10 @@ public class EditorController {
         }
     }
 
-    private String setRleContentString(int[] size, String pattern) {
-        return  "#N " + txtName.getText() + "\n" +
-                "#C " + txtDescription.getText() + "\n"+
-                "#O " + txtAuthor.getText() + "\n" +
-                "#r " + txtRule.getText() + "\n" +
-                "x = " + size[1] + " , " + "y = " + size[0] + "\n" +
-                pattern;
-    }
-
-
+    /**
+     * Handles mouse click on canvas
+     * @param event
+     */
     @FXML
     private void onMouseClickedEditor(MouseEvent event) {
 
@@ -389,6 +384,9 @@ public class EditorController {
         gcEditor.clearRect(0, 0, editor.widthProperty().doubleValue(), editor.heightProperty().doubleValue());
     }
 
+    /**
+     * Clear editor and strip canvas
+     */
     @FXML
     private void clear() {
         clearEditor();
@@ -399,10 +397,20 @@ public class EditorController {
     }
 
 
+    /**
+     * Gets editor grid position based on camera offset and mouse position on grid.
+     * @param x position on editor canvas.
+     * @return grid position.
+     */
     private int getEditorGridPosX(double x) {
         return (int)Math.floor((x + cameraEditorView.getCommonOffsetX(golEditor, editorCell.getSize())) / editorCell.getSize());
     }
 
+    /**
+     * Gets editor grid position based on camera offset and mouse position on grid
+     * @param y position on editor canvas.
+     * @return grid position
+     */
     private int getEditorGridPosY(double y) {
         return (int) Math.floor((y + cameraEditorView.getCommonOffsetY(golEditor, editorCell.getSize())) / editorCell.getSize());
     }
