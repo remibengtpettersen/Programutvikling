@@ -16,7 +16,7 @@ public class EvolveException extends Exception {
     }
 
     /**
-     * Returns the error message of the exception
+     * Returns the error message of the expectedException
      * @return The error message
      */
     @Override

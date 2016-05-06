@@ -8,6 +8,11 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Pair programmed.
+ *
+ * Test class for RuleParser.
+ */
 public class RuleParserTest {
 
     private static final String CLASSIC_RULESTRING = "B3/S23";
@@ -17,18 +22,12 @@ public class RuleParserTest {
     private StaticGameOfLife gol;
 
     @org.junit.Rule
-    public final ExpectedException exception = ExpectedException.none();
+    public final ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setUp() throws Exception {
 
         gol = new StaticGameOfLife(10, 10);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
-        gol = null;
     }
 
     /**
@@ -68,7 +67,7 @@ public class RuleParserTest {
 
         String rawRulestring = "asfasfmkd";
 
-        exception.expect(RuleFormatException.class);
+        expectedException.expect(RuleFormatException.class);
         RuleParser.formatRuleText(rawRulestring);
     }
 

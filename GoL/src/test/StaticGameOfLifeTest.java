@@ -15,14 +15,6 @@ public class StaticGameOfLifeTest {
 
     private StaticGameOfLife gol;
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
     /**
      * Verify that test project is correctly configured.
      */

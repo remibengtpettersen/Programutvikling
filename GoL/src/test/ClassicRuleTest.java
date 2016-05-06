@@ -3,15 +3,12 @@ package test;
 import model.DynamicGameOfLife;
 import model.GameOfLife;
 import model.StaticGameOfLife;
-import model.rules.ClassicRule;
-import model.rules.RuleParser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  */
@@ -20,23 +17,7 @@ public class ClassicRuleTest {
     @org.junit.Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-
     private GameOfLife gol;
-    //private ClassicRule rule;
-
-    /**
-     * Creates a grid to be evolved and a neighbour grid that is pre populated with neighbours count. The neighbour aggregator is tested elsewhere.
-     */
-    @Before
-    public void setUp(){
-
-    }
-
-    @After
-    public void tearDown(){
-
-        gol = null;
-    }
 
     @Test
     public void testEvolve_ifBlinker_thenRotate(){
@@ -60,8 +41,14 @@ public class ClassicRuleTest {
         // evolve
         gol.nextGeneration();
 
-        // check that the blinker evolved correctly
+        // check that the blinker evolved correctly, and rotated 90 degrees
         assertEquals(expectedAfterEvolve, gol.toString());
+
+        // evolve again
+        gol.nextGeneration();
+
+        // check that the blinker rotated another 90 degrees, and becoming equal to the initial blinker
+        assertEquals(expectedBeforeEvolve, gol.toString());
     }
 
     @Test
@@ -110,7 +97,7 @@ public class ClassicRuleTest {
     }
 
     @Test
-    public void testToString_ifRuleSet_thenRuleReturn(){
+    public void testToString_ifClassicRuleSet_thenClassicRuleReturn(){
 
         gol = new DynamicGameOfLife();
 
@@ -118,77 +105,6 @@ public class ClassicRuleTest {
 
         assertEquals(expectedString, gol.getRule().toString());
     }
-
-
-//    @Test public void testEvolve_IfCellIsDeadAndOneLiveNeighbour_ThenReturnCellWillDie() throws EvolveException {
-//
-//        gol.setCellAlive(0,0);
-//
-//        for (int x = 0; x < gol.getGridWidth(); x++) {
-//            for (int y = 0; y < gol.getGridHeight(); y++) {
-//
-//            }
-//        }
-//
-//        gridBluePrint[0][1] = true;
-//
-//        for (int i = 0; i < neighboursBluePrint.length; i++) {
-//            for (int j = 0; j < neighboursBluePrint[0].length; j++) {
-//                neighboursBluePrint[i][j] = 1;
-//            }
-//        }
-//
-//        neighboursBluePrint[1][1] = 0;
-//
-//        /*rule.evolve();
-//
-//        assertArrayEquals(new boolean[][]{
-//                new boolean[]{false, false, false},
-//                new boolean[]{false, false, false},
-//                new boolean[]{false, false, false}},rule.getGrid());*/
-//    }
-//
-//    @Test public void testIfNeighbourCountHigherThanEight() throws EvolveException {
-//        /*rule.setGol(gridBluePrint);
-//        rule.setNeighbours(neighboursBluePrint);
-//
-//        rule.setGol(gridBluePrint);
-//        rule.setNeighbours(neighboursBluePrint);
-//
-//        gridBluePrint[0][1] = true;
-//
-//        for (int i = 0; i < neighboursBluePrint.length; i++) {
-//            for (int j = 0; j < neighboursBluePrint[0].length; j++) {
-//                neighboursBluePrint[i][j] = 1;
-//            }
-//        }
-//
-//        neighboursBluePrint[1][1] = 9;
-//
-//        expectedException.expect(EvolveException.class);
-//        rule.evolve();*/
-//    }
-//
-//    @Test public void testIfNeighbourCountLowerThanZero() throws EvolveException {
-//
-//        /*boolean[][] grid = new boolean[3][3];
-//        byte[][] neighbours = new byte[3][3];
-//
-//        rule.setGol(grid);
-//        rule.setNeighbours(neighbours);
-//
-//        for (int i = 0; i < neighbours.length; i++) {
-//            for (int j = 0; j <neighbours[0].length; j++) {
-//                neighbours[i][j] = 1;
-//            }
-//        }
-//
-//        neighbours[1][1] = -1;
-//
-//        expectedException.expect(EvolveException.class);
-//        rule.evolve();*/
-//    }
-//
 
 
 }

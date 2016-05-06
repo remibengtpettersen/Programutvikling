@@ -23,7 +23,7 @@ public class RuleFormatException extends Exception {
     }
 
     /**
-     * Returns the error message of the exception
+     * Returns the error message of the expectedException
      *
      * @return Error message
      */

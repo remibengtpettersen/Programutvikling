@@ -44,7 +44,7 @@ public class ToFile {
         if(boundingBox[0] == 1 && boundingBox[1] == 1){
             MessageBox.alert("No pattern to save");
             System.out.println("YOU SHALL NOT SAVE");
-            return; //throw exception
+            return; //throw expectedException
         }
         this.boundingBox = boundingBox;
 
@@ -63,7 +63,7 @@ public class ToFile {
 
         File file = saveFileChooser.showSaveDialog(stage);
         if(file == null){
-            return; //throw exception
+            return; //throw expectedException
         }
 
         if(format == LagringsFormat.RLE)

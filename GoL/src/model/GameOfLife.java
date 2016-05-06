@@ -372,7 +372,5 @@ public abstract class GameOfLife {
 
         return string.toString();
     }
-
-    public abstract boolean[][] extractPattern();
     //endregion
 }

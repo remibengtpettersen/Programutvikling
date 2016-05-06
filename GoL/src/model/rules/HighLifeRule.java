@@ -15,7 +15,7 @@ public class HighLifeRule extends Rule {
     public HighLifeRule(GameOfLife gol) {
         super(gol);
 
-        rulestring = "B36/S23";
+        rulestring = RuleParser.HIGHLIFE_RULESTRING;
     }
 
     @Override

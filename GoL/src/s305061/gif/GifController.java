@@ -15,6 +15,7 @@ import java.io.IOException;
 
 /**
  * @author Andreas s305061
+ *
  * Controller for GIF window.
  * Handles GIF creation with GIFLib, in addition to GUI control
  */
@@ -104,6 +105,7 @@ public class GifController {
 
         if(file != null) {
 
+            // get the file path selected through save dialog
             String path = file.toString();
 
             try {
@@ -116,7 +118,7 @@ public class GifController {
 
     /**
      * Opens a fileChooser window, returns the file path selected by user
-     * @return File path
+     * @return File path selected by user
      */
     private File chooseSavePath(){
 
@@ -206,7 +208,7 @@ public class GifController {
      *
      * @param originalGol The game object to be cloned
      * @param iterations Number of iterations to evolve, also number of frames to be added to gif
-     * @throws IOException IO exception, thrown by GIFLib
+     * @throws IOException IO expectedException, thrown by GIFLib
      */
     private void startWriteGolSequenceToGIF(GameOfLife originalGol, int iterations, String path) throws IOException {
 
@@ -224,7 +226,7 @@ public class GifController {
      * @param writer GIFWriter from GIFLib
      * @param game The cloned game class to be animated
      * @param counter Counter to determine when to stop recursive method. Initially set as number of generations/frames
-     * @throws IOException IO exception, thrown by GIFLib
+     * @throws IOException IO expectedException, thrown by GIFLib
      */
     private void writeGoLSequenceToGIF(GIFWriter writer, GameOfLife game, int counter) throws IOException {
 

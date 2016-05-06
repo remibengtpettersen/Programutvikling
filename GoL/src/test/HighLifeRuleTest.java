@@ -13,6 +13,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
+ *  * @author Pair programmed.
+ *
+ * Test class for HighLifeRule
  */
 public class HighLifeRuleTest {
 
@@ -36,13 +39,7 @@ public class HighLifeRuleTest {
     public void setUp() throws Exception {
 
         gol = new DynamicGameOfLife();
-        gol.setRule(RuleParser.HIGHLIFE_RULESTRING);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
-        gol = null;
+        gol.setRule("B36/S23");
     }
 
     @Test

@@ -201,10 +201,5 @@ public class StaticGameOfLife extends GameOfLife{
         neighbours[x][y].set(0);
     }
 
-    @Override
-    public boolean[][] extractPattern() {
-        return new boolean[0][];
-    }
-
     //endregion
 }

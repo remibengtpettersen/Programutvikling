@@ -19,7 +19,7 @@ public class PatternFormatException extends IOException {
     }
 
     /**
-     * Returns the error message of the exception
+     * Returns the error message of the expectedException
      * @return The error message
      */
     @Override

@@ -125,7 +125,7 @@ public class MasterController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Failed to load the statistics (s305061) FXML document, IO exception");
+            System.out.println("Failed to load the statistics (s305061) FXML document, IO expectedException");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to load the statistics (s305061) FXML document");
@@ -151,7 +151,7 @@ public class MasterController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Failed to load the gif (s305061) FXML document, IO exception");
+            System.out.println("Failed to load the gif (s305061) FXML document, IO expectedException");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to load the gif (s305061) FXML document");
