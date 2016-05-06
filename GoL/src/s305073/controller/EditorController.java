@@ -1,43 +1,34 @@
 package s305073.controller;
 
 import controller.MasterController;
-import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
-import javafx.stage.FileChooser;
 import model.CameraView;
 import model.Cell;
 
 import model.DynamicGameOfLife;
 import model.GameOfLife;
-import s305073.model.PatternConverter;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
- * Created by remibengtpettersen.
+ * Created by s305073
+ *
+ * Editor class for standalone editor for manipulating pattern and get feedback on evolution of pattern.
  */
 public class EditorController {
 
     @FXML private Canvas editor;
     @FXML private Canvas strip;
-    @FXML private ScrollPane scrollPane;
     @FXML private TextField txtName;
     @FXML private TextField txtDescription;
     @FXML private TextField txtAuthor;
     @FXML private TextField txtRule;
-    @FXML private Button btnSave;
 
     private int currentMousePositionX;
     private int currentMousePositionY;
@@ -63,8 +54,12 @@ public class EditorController {
     private MasterController masterController;
     private GameOfLife parentGol;
     private double parentCellSize;
-    private Thread thread = new Thread();
 
+    /**
+     * Constructor for Editor controller.
+     *
+     * Instantiate cells used to represent grid position in editor and strip.
+     */
     public EditorController() {
         // instantiate cell for editor and setting size and color
         editorCell = new Cell();
@@ -76,27 +71,47 @@ public class EditorController {
         stripCell.setSize(10);
         stripCell.setColor(Color.GREEN);
 
+        // camera view for displaying grid
         cameraEditorView = new CameraView();
     }
 
+    /**
+     * Passes master controller to editor to enable communication between controllers.
+     *
+     * @param masterController container for references connected to master controller object.
+     */
     public void initialize(MasterController masterController) {
         this.masterController = masterController;
 
+        // gets view parameters for main Game of life window
         parentCameraView = masterController.getCanvasController().getCameraView();
-        parentGol = masterController.getCanvasController().getGol();
+
+        // gets gol reference used in main window
+        parentGol = masterController.getCanvasController().gol;
+
+        // gets cell size from main window
         parentCellSize = masterController.getCanvasController().getCell().getSize();
 
-        txtRule.setText(masterController.getCanvasController().getGol().getRule().toString());
-        btnSave.requestFocus();
+        // gets current rule from main program
+        txtRule.setText(masterController.getCanvasController().gol.getRule().toString());
+
+        //btnSave.requestFocus();
 
         gcEditor = editor.getGraphicsContext2D();
         gcStrip = strip.getGraphicsContext2D();
     }
 
+    /**
+     * Gets a deep copy of game board grid
+     * @param gol
+     */
     public void getDeepCopyGol(GameOfLife gol) {
         this.golEditor = gol.clone();
     }
 
+    /**
+     * Populates editor canvas with the same pattern as present in main GUI.
+     */
     public void setPattern() {
         // set offset
         setBoardOffset();
@@ -108,6 +123,10 @@ public class EditorController {
         updateStrip();
     }
 
+    /**
+     * Sets the board offset according to offset in main window at the time editor is launched.
+     * Content will be scalled to fit current canvas.
+     */
     private void setBoardOffset() {
         // get board offset horizontally from parent view
         cameraEditorView.boardOffsetX = (int) (parentCameraView.getCommonOffsetX(
@@ -120,29 +139,44 @@ public class EditorController {
                                                                     parentCellSize) * editorCell.getSize() / parentCellSize);
     }
 
+    /**
+     * Render alive and dead cells in game board to canvas.
+     */
     private void renderEditor() {
-
         // set canvas view for editor equal to game of life canvas
         cameraEditorView.updateView(golEditor, editorCell.getSize(), (int)editor.getWidth(), (int)editor.getHeight());
 
+        // set color
         gcEditor.setFill(editorCell.getColor());
-        for (int i = cameraEditorView.currViewMinX; i < cameraEditorView.currViewMaxX; i++) {
-            for (int j = cameraEditorView.currViewMinY; j < cameraEditorView.currViewMaxY; j++) {
-                if (golEditor.isCellAlive(i, j))
-                    fillEditorPositionAt(i, j);
+
+        // draws alive cells that are inside camera view
+        for (int x = cameraEditorView.currViewMinX; x < cameraEditorView.currViewMaxX; x++) {
+            for (int y = cameraEditorView.currViewMinY; y < cameraEditorView.currViewMaxY; y++) {
+
+                if (golEditor.isCellAlive(x, y))
+                    // draw one cell at position (x, y)
+                    fillEditorPositionAt(x, y);
             }
         }
     }
 
-    private void fillEditorPositionAt(int i, int j) {
-        drawEditorAt(i, j);
+    /**
+     *
+     * Will fill one grid cell on canvas.
+     *
+     * @param x_coordinate x position on canvas.
+     * @param y_coordinate y position on canvas.
+     */
+    private void fillEditorPositionAt(int x_coordinate, int y_coordinate) {
+        drawEditorAt(x_coordinate, y_coordinate);
     }
 
-    public void drawEditorAt(int x, int y) {
+
+    private void drawEditorAt(int x, int y) {
         gcEditor.fillRect(getEditorCanvasPosX(x), getEditorCanvasPosY(y), editorCell.getSize() - editorCell.getSpacingInPixels(), editorCell.getSize() - editorCell.getSpacingInPixels());
     }
 
-    public void drawStripAt(int x, int y) {
+    private void drawStripAt(int x, int y) {
         gcStrip.fillRect(getStripCanvasPosX(x), getStripCanvasPosY(y), stripCell.getSize() - stripCell.getSpacingInPixels(), stripCell.getSize() - stripCell.getSpacingInPixels());
     }
 
@@ -152,12 +186,16 @@ public class EditorController {
         golStrip = golEditor.clone();
 
         // calculate width and height for strip view
-        double number = editor.getHeight() / editorCell.getSize();
-        double size = strip.getHeight() / number;
-        int width = (int)(size * (editor.getWidth() / editorCell.getSize()));
+        double horizontalCells = editor.getHeight() / editorCell.getSize();
+
+        // calculate strip cell size
+        double cellSizeStrip = strip.getHeight() / horizontalCells;
+
+        // calculate strip width for one generation
+        int width = (int)(cellSizeStrip * (editor.getWidth() / editorCell.getSize()));
 
         // set cell size for strip
-        stripCell.setSize(strip.getHeight() / number);
+        stripCell.setSize(strip.getHeight() / horizontalCells);
 
         // set offset X and Y
         cameraViewStrip.boardOffsetX = (int) (cameraEditorView.getCommonOffsetX(golEditor, editorCell.getSize()) * stripCell.getSize() / editorCell.getSize());
@@ -171,28 +209,40 @@ public class EditorController {
 
         for (int i = 0; i < 20; i++) {
             form.setTx(tx);
-
             gcStrip.setTransform(form);
+
+            // increment one generation
             golStrip.nextGeneration();
 
             clearStrip();
-            fillStrip();
 
+            // render strip with alive cells
+            renderStrip();
+
+            // set transformation
             tx += 400;
         }
 
+        // reset
         form.setTx(0.0);
         gcStrip.setTransform(form);
     }
 
+    /**
+     * Clear strip - prepare for new update.
+     */
     private void clearStrip() {
         gcStrip.clearRect(0, 0, strip.widthProperty().doubleValue(), strip.heightProperty().doubleValue());
     }
 
-    private void fillStrip() {
+    /**
+     * Render alive cells in grid to strip canvas.
+     */
+    private void renderStrip() {
         gcStrip.setFill(stripCell.getColor());
         for (int i = cameraViewStrip.currViewMinX; i < cameraViewStrip.currViewMaxX; i++) {
             for (int j = cameraViewStrip.currViewMinY; j < cameraViewStrip.currViewMaxY; j++) {
+
                 if (golStrip.isCellAlive(i, j)) {
                     drawStripAt(i, j);
                 }
@@ -200,11 +250,11 @@ public class EditorController {
         }
     }
 
-    @FXML
-    private void closeEditor(ActionEvent actionEvent) {
-
-    }
-
+    /**
+     * Handles mouse drag event.
+     *
+     * @param event
+     */
     @FXML
     private void onMouseDraggedEditor(MouseEvent event) {
         // checks if mouse is on canvas
@@ -289,107 +339,10 @@ public class EditorController {
         }
     }
 
-    public void makeGif(GameOfLife gol) throws IOException {
-        // data related to the GIF image file
-        String path = "testgif.gif";
-        int width;
-        int height;
-        int size = 20;
-        int counter = 0;
-
-        int timePerMilliSecond = 1000; // 1 second
-
-        GameOfLife golClone = gol.clone();
-
-        golClone.getBoundingBox();
-
-        width = (golClone.getBoundingBox()[1] - golClone.getBoundingBox()[0] + 1) * size;
-        height = (golClone.getBoundingBox()[3] - golClone.getBoundingBox()[2] + 1) * size;
-
-        // create the GIFWriter object
-        lieng.GIFWriter gifWriter = new lieng.GIFWriter(width, height, path, timePerMilliSecond);
-
-        int value = width / size;
-
-        int lowCol = golClone.getBoundingBox()[0]; //golClone.getMinRowBoundingBox();
-        int length = width;
-        int lowRow = golClone.getBoundingBox()[2];
-        int down = height;
-
-        while (counter < 2) {
-            // iterates through a square of tiles
-            for (int i = lowRow; i < length + lowRow; i++) {
-                for (int j = lowCol; j < down + lowCol; j++) {
-                    if (golClone.isCellAlive(j, i)) {
-                        // fill one tile of the image with orange - (j, i) coordinate
-                        gifWriter.fillRect(
-                                value * (i + 3 - lowRow),
-                                value * ((i + 3 - lowRow) + 1) - 1,
-                                value * (j + 3 - lowCol),
-                                value * ((j + 3 - lowCol) + 1) - 1,
-                                java.awt.Color.BLACK);
-                        // insert the painted image into the animation sequence
-                    }
-                }
-            }
-
-            gifWriter.insertAndProceed();
-
-            golClone.nextGeneration();
-
-            counter++;
-        }
-
-        // insert the painted image into the animation sequence
-        gifWriter.insertCurrentImage();
-
-        // close the GIF stream.
-        gifWriter.close();
-
-        System.out.println("done!");
-    }
-
-    @FXML
-    private void saveToFile(ActionEvent actionEvent) throws IOException {
-        String content = "";
-
-        // get pattern size
-        int[] patternSize = PatternConverter.getPatternSize(golEditor);
-
-        // get pattern as string
-        String pattern = PatternConverter.ConvertPatternToRle(golEditor);
-
-        // build content string
-        content = setRleContentString(patternSize , pattern);
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save RLE");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("RLE", "*.rle"));
-
-        File file = fileChooser.showSaveDialog(masterController.getStage());
-
-        try {
-            FileWriter fileWriter = null;
-
-            fileWriter = new FileWriter(file);
-            fileWriter.write(content);
-            fileWriter.close();
-        } catch (IOException ex) {
-            //Logger.getLogger(JavaFX_Text.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private String setRleContentString(int[] size, String pattern) {
-        return  "#N " + txtName.getText() + "\n" +
-                "#C " + txtDescription.getText() + "\n"+
-                "#O " + txtAuthor.getText() + "\n" +
-                "#r " + txtRule.getText() + "\n" +
-                "x = " + size[1] + " , " + "y = " + size[0] + "\n" +
-                pattern;
-    }
-
-
+    /**
+     * Handles mouse click on canvas
+     * @param event
+     */
     @FXML
     private void onMouseClickedEditor(MouseEvent event) {
 
@@ -431,6 +384,9 @@ public class EditorController {
         gcEditor.clearRect(0, 0, editor.widthProperty().doubleValue(), editor.heightProperty().doubleValue());
     }
 
+    /**
+     * Clear editor and strip canvas
+     */
     @FXML
     private void clear() {
         clearEditor();
@@ -441,10 +397,20 @@ public class EditorController {
     }
 
 
+    /**
+     * Gets editor grid position based on camera offset and mouse position on grid.
+     * @param x position on editor canvas.
+     * @return grid position.
+     */
     private int getEditorGridPosX(double x) {
         return (int)Math.floor((x + cameraEditorView.getCommonOffsetX(golEditor, editorCell.getSize())) / editorCell.getSize());
     }
 
+    /**
+     * Gets editor grid position based on camera offset and mouse position on grid
+     * @param y position on editor canvas.
+     * @return grid position
+     */
     private int getEditorGridPosY(double y) {
         return (int) Math.floor((y + cameraEditorView.getCommonOffsetY(golEditor, editorCell.getSize())) / editorCell.getSize());
     }
@@ -531,12 +497,5 @@ public class EditorController {
         mouseOnCanvas = false;
         previewsMousePositionX = 0;
         previewsMousePositionY = 0;
-    }
-
-    public void onMouseMovedStrip(MouseEvent event) {
-    }
-
-    public void onMouseMovedEditor(MouseEvent event) {
-        //System.out.println(event.getX());
     }
 }
