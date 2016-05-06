@@ -257,6 +257,7 @@ public class CanvasController {
      */
     private void keyPressed(KeyEvent keyEvent) {
 
+
         // stores the key code
         String code = keyEvent.getCode().toString();
 
@@ -304,13 +305,7 @@ public class CanvasController {
                 if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")) {
                     pasteClipBoard();
                 }
-                break;
-            case "S":
 
-                // checks if "CONTROL" or "COMMAND" is held
-                if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")) {
-                    saveToFile();
-                }
                 break;
         }
     }

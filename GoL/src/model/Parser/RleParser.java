@@ -3,6 +3,7 @@ package model.Parser;
 import model.PatternFormatException;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -23,10 +24,10 @@ class RleParser extends PatternParser {
 
         patternArray = new boolean[patternHeight][patternWidth];
 
-        if (buildPatternArray())
-            return patternArray;
-        else
-            throw new PatternFormatException("Couldn't parse RLE file");
+            if (buildPatternArray())
+                return patternArray;
+            else
+                throw new PatternFormatException("Missing exclamation mark");
     }
 
     /**
@@ -87,7 +88,7 @@ class RleParser extends PatternParser {
      * Runs through the String list and builds the Pattern array.
      * @return True if build is successful, false if not.
      */
-    private static boolean buildPatternArray() {
+    private static boolean buildPatternArray() throws PatternFormatException {
 
         int tagOccurrence = 0;
         int x = 0;
@@ -104,11 +105,11 @@ class RleParser extends PatternParser {
                     tagOccurrence = tagOccurrence * 10 + (currentCharacter - '0');
                 } else if (currentCharacter == 'b') {
                     if (tagOccurrence == 0) {
-                        patternArray[x][y] = false;
+                        setPatternArray(x, y, false);
                         x++;
                     } else {
                         for (int i = 0; i < tagOccurrence; i++) {
-                            patternArray[x][y] = false;
+                            setPatternArray(x, y, false);
                             x++;
                         }
                         tagOccurrence = 0;
@@ -116,12 +117,12 @@ class RleParser extends PatternParser {
                 } else if (currentCharacter == 'o') {
 
                     if (tagOccurrence == 0) {
-                        patternArray[x][y] = true;
+                        setPatternArray(x, y, true);
                         x++;
                         cellsAdded++;
                     } else {
                         for (int i = 0; i < tagOccurrence; i++) {
-                            patternArray[x][y] = true;
+                            setPatternArray(x, y, true);
                             x++;
                             cellsAdded++;
                         }
@@ -144,5 +145,12 @@ class RleParser extends PatternParser {
             }
         }
         return false;
+    }
+
+    private static void setPatternArray(int x, int y, boolean state) throws PatternFormatException {
+        if(x >= patternArray.length || y >= patternArray[x].length){
+            throw new PatternFormatException("Pattern properties too small");
+        }
+        patternArray[x][y] = state;
     }
 }
