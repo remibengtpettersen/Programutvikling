@@ -40,8 +40,7 @@ public class CanvasController {
 
     public GameOfLife gol;
     public MasterController masterController;
-    @FXML
-    private Canvas canvas;
+    @FXML private Canvas canvas;
     private GraphicsContext gc;
 
     private AnimationTimer animationTimer;
@@ -210,14 +209,24 @@ public class CanvasController {
      * @param widthAndHeight dimensions of pattern to be moved, usualy the size of the smallest GameOfLife
      */
     private void insertOldGrid(GameOfLife gol, GameOfLife newGol, int ... widthAndHeight) {
+
         waitForThread();
+        boolean isEmpty = true;
         for (int x = 0; x < widthAndHeight[0]; x++) {
             for (int y = 0; y < widthAndHeight[1]; y++) {
                 if (gol.isCellAlive(x,y ))
                 {
                     newGol.setCellAlive(x,y);
+                    if (isEmpty){
+                        isEmpty = false;
+                    }
                 }
             }
+        }
+
+        if (isEmpty){
+            cView.boardOffsetX = 0;
+            cView.boardOffsetY = 0;
         }
     }
 
@@ -673,6 +682,7 @@ public class CanvasController {
         }
         //to see where the grid is
         if (gol instanceof StaticGameOfLife) {
+            gc.setLineWidth(2);
             gc.strokeRect(-cView.getCommonOffsetX(gol, cell.getSize()), -cView.getCommonOffsetY(gol, cell.getSize()), gol.getGridWidth() * cell.getSize(), gol.getGridHeight() * cell.getSize());
         }
 
@@ -715,6 +725,7 @@ public class CanvasController {
 
         // sets the correct color
         gc.setStroke(cell.getGhostColor());
+        gc.setLineWidth(1);
 
         // stores the x coordinate of the line that is used for drawing grid lines
         double xCoordinate;
@@ -1100,7 +1111,7 @@ public class CanvasController {
     private void renderMarkup() {
 
         // sets teh correct color
-        gc.setStroke(Color.RED);
+        gc.setStroke(cell.getGhostColor());
 
         // sets the correct line width
         gc.setLineWidth(4);
@@ -1110,11 +1121,6 @@ public class CanvasController {
                 getCanvasPosYMarkup(Math.floor((markup[1] < markup[3])?markup[1]:markup[3])) - cell.getSpacingInPixels() / 2,
                 (Math.abs(Math.floor(markup[0]) - Math.floor(markup[2])) + 1) * cell.getSize(),
                 (Math.abs(Math.floor(markup[1]) - Math.floor(markup[3])) + 1) * cell.getSize());
-
-        // sets line width back to 1
-        gc.setLineWidth(1);
-
-
 
         //getCanvasPosX(markup[1])
         //getCanvasPosY(markup[3])

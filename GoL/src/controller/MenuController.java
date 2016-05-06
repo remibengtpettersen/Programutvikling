@@ -4,19 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
-
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.rules.RuleParser;
 import s305073.controller.EditorController;
-import tools.MessageBox;
-
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -57,9 +51,8 @@ public class MenuController {
 
     /**
      * Launched about window for "Game of Life".
-     * @param actionEvent
      */
-    public void onAbout(ActionEvent actionEvent) {
+    public void onAbout() {
 
         System.out.println("About clicked");
     }
@@ -234,19 +227,16 @@ public class MenuController {
 
         // launch editor
         editor.showAndWait();
-
-        // removes reference from editor - ready for garbage collection
-        editor = null;
     }
 
 
     //region s305061
-    public void openStatWindow(ActionEvent actionEvent) {
+    public void openStatWindow() {
 
         masterController.openStatWindow();
     }
 
-    public void openGifWindow(ActionEvent actionEvent) {
+    public void openGifWindow() {
 
         masterController.openGifWindow();
     }

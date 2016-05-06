@@ -138,7 +138,6 @@ public class ToFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void writePlainText(File file) {

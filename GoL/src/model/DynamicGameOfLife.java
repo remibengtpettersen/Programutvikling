@@ -100,7 +100,7 @@ public class DynamicGameOfLife extends GameOfLife{
      *
      * @param diffX Number of columns
      */
-    public void increaseXRight(int diffX) {
+    private void increaseXRight(int diffX) {
 
         for (int i = 0; i < diffX; i++){
 
@@ -120,7 +120,7 @@ public class DynamicGameOfLife extends GameOfLife{
      *
      * @param diffY Number of rows
      */
-    public void increaseYBottom(int diffY){
+    private void increaseYBottom(int diffY){
 
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < diffY; j++){
@@ -176,7 +176,7 @@ public class DynamicGameOfLife extends GameOfLife{
      *
      * @param diffX Number of columns
      */
-    public void decreaseXRight(int diffX) {
+    private void decreaseXRight(int diffX) {
 
         for (int i = 0; i < diffX; i++){
 
@@ -190,7 +190,7 @@ public class DynamicGameOfLife extends GameOfLife{
      *
      * @param diffY Number of rows
      */
-    public void decreaseYBottom(int diffY){
+    private void decreaseYBottom(int diffY){
 
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < diffY; j++){
@@ -206,7 +206,7 @@ public class DynamicGameOfLife extends GameOfLife{
      *
      * @param diffX Number of columns
      */
-    public void decreaseXLeft(int diffX) {
+    private void decreaseXLeft(int diffX) {
 
         cellOffsetX -= diffX;
 
@@ -221,7 +221,7 @@ public class DynamicGameOfLife extends GameOfLife{
      * Will remove a number of row from the top side of the game board
      * @param diffY Number of rows
      */
-    public void decreaseYTop(int diffY){
+    private void decreaseYTop(int diffY){
 
         cellOffsetY -= diffY;
 

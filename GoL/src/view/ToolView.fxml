@@ -10,7 +10,7 @@
     <Button fx:id="btnPlay" text="Pause" onAction="#togglePause" prefWidth="85">
         <graphic>
             <ImageView fx:id="imgViewBtnPlay" fitWidth="15" fitHeight="15">
-                <Image fx:id="imgBtnPlay" url="/icons/bars.png"/>
+                <Image url="/icons/bars.png"/>
             </ImageView>
         </graphic>
     </Button>
@@ -28,14 +28,6 @@
 
     <ColorPicker fx:id="liveCellColorPicker" prefWidth="100" onAction="#changeCellColor"/>
     <ColorPicker fx:id="deadCellColorPicker" prefWidth="100" onAction="#changeDeadColor"/>
-
-    <ChoiceBox fx:id="mouseAction" value="MouseAction">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Cell"/>
-            </FXCollections>
-        </items>
-    </ChoiceBox>
 
     <Label fx:id="ruleLabel"/>
     <Label fx:id="cellCountLabel"/>
