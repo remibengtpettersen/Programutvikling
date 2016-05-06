@@ -206,7 +206,7 @@ public class MenuController {
         // deep copy and assign to new reference variable
         editorController.getDeepCopyGol(masterController.getCanvasController().gol);
 
-        editorController.init(masterController);
+        editorController.initialize(masterController);
 
         // set pattern in editor window
         editorController.setPattern();
@@ -226,9 +226,6 @@ public class MenuController {
 
         // launch editor
         editor.showAndWait();
-
-        // removes reference from editor - ready for garbage collection
-        editor = null;
     }
 
 
