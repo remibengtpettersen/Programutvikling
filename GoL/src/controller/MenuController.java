@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
@@ -13,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.rules.RuleParser;
 import s305073.controller.EditorController;
+import tools.MessageBox;
 
 
 import java.io.IOException;
@@ -194,7 +196,7 @@ public class MenuController {
         }
 
         // instantiate new scene, set fxml root and scene width and height
-        Scene scene = new Scene(root, 1000, 700);
+        Scene scene = new Scene(root, 1000, 710);
         // set scene for editor
         editor.setScene(scene);
 
@@ -301,5 +303,9 @@ public class MenuController {
             staticButton.setSelected(false);
             masterController.getCanvasController().changeToDynamic();
         }
+    }
+
+    public void openTips() {
+        //MessageBox.alert();
     }
 }

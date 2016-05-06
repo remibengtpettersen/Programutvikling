@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import model.Cell;
+import model.rules.Rule;
+
 import java.util.Objects;
 
 /**
@@ -14,6 +16,7 @@ import java.util.Objects;
 public class ToolController {
 
     private static final byte SPEED_FACTOR = 15; //The empiric factor
+    public Label ruleLabel;
 
     private MasterController masterController;
     private Image imgPause;
@@ -176,6 +179,10 @@ public class ToolController {
 
         speedSlider.setValue(speedSlider.getValue()+deltaX);
         speedSliderDragged();
+    }
+
+    public void setRuleLabel(Rule rule){
+        ruleLabel.setText(rule.toString());
     }
 
 }

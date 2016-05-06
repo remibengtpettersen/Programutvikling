@@ -4,18 +4,26 @@ import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import model.*;
+import model.Parser.PatternParser;
+import model.rules.RuleFormatException;
+import model.rules.RuleParser;
 import s305080.Gif.GifSaver;
 import s305080.PatternSaver.ToFile;
+import tools.MessageBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The controller that handles everything that happens on the canvas.
@@ -40,9 +48,6 @@ public class CanvasController {
     private long timer;
 
     private Cell cell;
-
-    private short boardWidth;
-    private short boardHeight;
 
     // controlls the framerate
     private int frameDelay;
@@ -104,10 +109,13 @@ public class CanvasController {
 
         initializeGameParameters();
 
-        //gol = new StaticGameOfLife(1000,1000);
         gol = new DynamicGameOfLife();
 
+        // displays the rule in the toolbar
+        masterController.getToolController().setRuleLabel(gol.getRule());
         gc = canvas.getGraphicsContext2D();
+
+        // to store buttons being pressed
         buttonsPressed = new ArrayList<>();
 
         cView.updateView(gol, cell.getSize(), (int)canvas.getWidth(), (int)canvas.getHeight());
@@ -129,8 +137,6 @@ public class CanvasController {
 
         // gets parameters from config file
         frameDelay = masterController.configuration.getGameSpeed();
-        boardWidth = masterController.configuration.getGameWidth();
-        boardHeight = masterController.configuration.getGameHeight();
         userWantsGridLines = masterController.configuration.isGridLinesOn();
         masterController.getToolController().setSpeed(frameDelay);
     }
@@ -152,13 +158,12 @@ public class CanvasController {
                 if (now / 1000000 - timer > frameDelay) {
 
                     if(!interaction) {
-                        gol.nextGeneration();
+
+                        // to be able to pan the board without lag during large simulations nextGeneration()
+                        // is put inside a thread
                         if(!thread.isAlive()){
                             thread = new Thread(() -> {
-                               // double timer1 = System.currentTimeMillis();
-
-                               // System.out.println(System.currentTimeMillis() - timer1);
-
+                                gol.nextGeneration();
                             });
                             thread.start();
                         }
@@ -173,7 +178,10 @@ public class CanvasController {
         };
     }
 
-    public void changeToStatic(){
+    /**
+     * Replaces the existing dynamic game of life board with a static one
+     */
+    void changeToStatic(){
         GameOfLife newGol = new StaticGameOfLife(500, 500, gol.getRule().toString());
         insertOldGrid(gol, newGol, newGol.getGridWidth(), newGol.getGridHeight());
         cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
@@ -182,7 +190,11 @@ public class CanvasController {
         renderCanvasIfLowFPS();
 
     }
-    public void changeToDynamic(){
+
+    /**
+     * Replaces the existing static game of life board with a dynamic one
+     */
+    void changeToDynamic(){
         GameOfLife newGol = new DynamicGameOfLife(gol.getRule().toString());
         insertOldGrid(gol, newGol, gol.getGridWidth(), gol.getGridHeight());
         cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
@@ -191,7 +203,14 @@ public class CanvasController {
         renderCanvasIfLowFPS();
     }
 
+    /**
+     * Moves pattern with dimensions widthAndHeight from gol to newGol
+     * @param gol board with pattern
+     * @param newGol board without pattern
+     * @param widthAndHeight dimensions of pattern to be moved, usualy the size of the smallest GameOfLife
+     */
     private void insertOldGrid(GameOfLife gol, GameOfLife newGol, int ... widthAndHeight) {
+        waitForThread();
         for (int x = 0; x < widthAndHeight[0]; x++) {
             for (int y = 0; y < widthAndHeight[1]; y++) {
                 if (gol.isCellAlive(x,y ))
@@ -247,9 +266,6 @@ public class CanvasController {
             // adds key in key list
             buttonsPressed.add(code);
         }
-        if (code.equals("S")) {
-            saveToGif();
-        }
 
         if (code.equals("D")) {
             changeToDynamic();
@@ -287,6 +303,13 @@ public class CanvasController {
                 // checks if "CONTROL" or "COMMAND" is held
                 if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")) {
                     pasteClipBoard();
+                }
+                break;
+            case "S":
+
+                // checks if "CONTROL" or "COMMAND" is held
+                if (buttonsPressed.contains("CONTROL") || buttonsPressed.contains("COMMAND")) {
+                    saveToFile();
                 }
                 break;
         }
@@ -408,6 +431,9 @@ public class CanvasController {
         // checks if left click
         if (mouseButton == MouseButton.PRIMARY) {
 
+            //lets nextGeneration() finish
+            waitForThread();
+
             // inserts clipboard pattern if in use
             if (importing) {
                 insertImport();
@@ -469,6 +495,8 @@ public class CanvasController {
         // checks if left click
         if (b == MouseButton.PRIMARY) {
 
+            //lets nextGeneration finish
+            waitForThread();
             // checks if not start of drag
             if (prevMousePosX != 0 || prevMousePosY != 0) {
 
@@ -672,10 +700,15 @@ public class CanvasController {
         for (int x = cView.currViewMinX; x <= cView.currViewMaxX; x++) {
             for (int y = cView.currViewMinY; y <= cView.currViewMaxY; y++) {
 
-                // draws the cells that are alive
-                if (gol.isCellAlive(x, y))
-                    drawCell(x, y);
+               try {
+                   // draws the cells that are alive
 
+                   if (gol.isCellAlive(x, y))
+                       drawCell(x, y);
+               }
+                catch (NullPointerException ignored){
+
+                }
             }
         }
     }
@@ -779,6 +812,9 @@ public class CanvasController {
      */
     void clearGrid() {
 
+        //lets nextGeneration() finish
+        waitForThread();
+
         // empty board
         gol.clearGrid();
 
@@ -844,6 +880,14 @@ public class CanvasController {
         }
     }
 
+    private void waitForThread(){
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     //region Animation control
 
     /**
@@ -861,6 +905,10 @@ public class CanvasController {
     void stopAnimation() {
 
         animationTimer.stop();
+
+        // lets next generation finish, then draws it on the canvas
+        waitForThread();
+        renderCanvas();
         running = false;
     }
     //endregion
@@ -914,7 +962,53 @@ public class CanvasController {
         // checks if pattern is null
         if (clipBoardPattern != null) {
             importing = true;
+
+            String importedRule = PatternParser.getLastImportedRule();
+
+            if (importedRule != null) {
+                try {
+
+                    if (!RuleParser.formatRuleText(importedRule).equals(gol.getRule().toString())) {
+                        showDifferentRule(importedRule);
+                    }
+
+                } catch (RuleFormatException ignored) {
+                    MessageBox.alert("Unknown rule: " + importedRule);
+                }
+            }
         }
+    }
+
+    /**
+     * Asks the user if they want to change the rules of the game
+     * @param importedRule The rule the user can change to.
+     */
+    private void showDifferentRule(String importedRule) {
+        interaction = true;
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Wrong rule");
+        alert.setHeaderText("The pattern you imported use a different rule than what you have now");
+        alert.setContentText("Do you want to change rule from " + gol.getRule().toString() + " to " + importedRule + "?");
+
+        ButtonType yesBtn = new ButtonType("Yes");
+        ButtonType noBtn = new ButtonType("No");
+        ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(yesBtn, noBtn, cancelBtn);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        //noinspection OptionalGetWithoutIsPresent
+        if (result.get() == yesBtn){
+            setRule(importedRule);
+        }
+        else if(result.get() == noBtn){
+            // do nothing
+        }
+        else {
+            // ... user chose CANCEL or closed the dialog
+            importing = false;
+        }
+        interaction = false;
     }
 
     /**
@@ -923,7 +1017,7 @@ public class CanvasController {
      */
     void setFrameDelay(int frameDelay) {
 
-        // if framedalay is less than 17, it can be 0
+        // if frame delay is less than 17, it can be 0
         if (frameDelay < 17) // 60 fps
             this.frameDelay = 0;
         else
@@ -937,6 +1031,8 @@ public class CanvasController {
     public void setRule(String ruleText) {
         // sets the rule
         gol.setRule(ruleText);
+        masterController.getToolController().setRuleLabel(gol.getRule());
+
     }
 
     /**
@@ -1165,7 +1261,8 @@ public class CanvasController {
         if (markup == null){
             return;
         }
-
+        //lets nextGeneration finish
+        waitForThread();
         // gets the min and max x and y values inside the marked area
         int [] minMaxValues = getMinMaxValues();
 
@@ -1222,6 +1319,10 @@ public class CanvasController {
      */
     private void removeMarkedArea() {
         markup = null;
+    }
+
+    public GameOfLife getGol() {
+        return gol;
     }
 
 

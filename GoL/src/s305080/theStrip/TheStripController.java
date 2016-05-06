@@ -33,23 +33,21 @@ public class TheStripController {
 
     public TheStripController(){
     //    gc = canvas.getGraphicsContext2D();
-
     }
 
-    public void setGol(GameOfLife gol) {
-        gc = canvas.getGraphicsContext2D();
-        originalGol = gol;
-        canvas.heightProperty().addListener(e -> {
-            updateStrip();
-        });
 
-    }
-
-    public void setCanvasController(CanvasController cController) {
+    public void init(CanvasController cController) {
         this.cController = cController;
         originalCell = cController.getCell();
         originalCView = cController.getCameraView();
+        gc = canvas.getGraphicsContext2D();
+        originalGol = cController.getGol();
+        canvas.heightProperty().addListener(e -> {
+
+            updateStrip();
+        });
     }
+
 
     /**
      * Updates the Strip with the information from the current board
@@ -88,20 +86,6 @@ public class TheStripController {
             tx += width;
         }
 
-        /*
-        for(int i = 0; i < canvas.getWidth(); i += (maxX - minX) * cellSize){
-            for(int x = minX; x < maxX; x++){
-                for(int y = minY; y < maxY; y++){
-                    if(gol.getGrid()[x][y]){
-                        gc.fillRect(i + cellSize * x - minX * cellSize, cellSize * y - minY * cellSize, cellSize * 0.9, cellSize * 0.9);
-                    }
-                }
-            }
-            gol.nextGeneration();
-            gc.strokeLine(i,0,i,canvas.getHeight());
-        }
-        */
-
     }
 
     private void renderCanvas() {
@@ -137,6 +121,5 @@ public class TheStripController {
         gc.setFill(originalCell.getColor());
         gc.setStroke(gc.getFill());
     }
-
 
 }

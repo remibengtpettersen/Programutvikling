@@ -58,7 +58,7 @@ class RleParser extends PatternParser {
      */
     private static void extractGridProperties() throws PatternFormatException {
 
-        patternParameters = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+),[ ]*rule[ ]*=[ ]*(.+)$");
+        patternParameters = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+),[ ]*.*[ ]*=[ ]*(.+)$");
         patternParametersXLife = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+)$");
 
         patternMatcher = patternParametersXLife.matcher(fileContentList.get(FIRST_LINE));
