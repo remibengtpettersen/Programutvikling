@@ -204,7 +204,7 @@ public class MenuController {
         }
 
         // instantiate new scene, set fxml root and scene width and height
-        Scene scene = new Scene(root, 1000, 700);
+        Scene scene = new Scene(root, 1000, 710);
         // set scene for editor
         editor.setScene(scene);
 

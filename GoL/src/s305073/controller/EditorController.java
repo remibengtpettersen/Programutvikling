@@ -2,9 +2,7 @@ package s305073.controller;
 
 import controller.MasterController;
 import javafx.event.*;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
@@ -12,13 +10,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Affine;
 import model.CameraView;
 import model.Cell;
 
 import model.DynamicGameOfLife;
 import model.GameOfLife;
-
-import java.awt.*;
 
 /**
  * Created by remibengtpettersen.
@@ -37,6 +34,7 @@ public class EditorController {
 
     private GraphicsContext gc;
     private CameraView cameraView = new CameraView();
+    private CameraView cameraViewStrip = new CameraView();
     private CameraView parentCameraView;
 
     private boolean mouseOnCanvas;
@@ -48,11 +46,6 @@ public class EditorController {
     private Cell editorCell;
     private Cell stripCell;
 
-    private int viewPadding = 10;
-    private int frameWidth = 300;
-    private double lineWeight = 10;
-    private int padding = 6;
-
     private MasterController masterController;
     private GameOfLife parentGol;
     private double parentCellSize;
@@ -60,7 +53,11 @@ public class EditorController {
     public EditorController() {
         editorCell = new Cell();
         editorCell.setSize(20.0);
-        editorCell.setColor(Color.GREEN);
+        editorCell.setColor(Color.BLUE);
+
+        stripCell = new Cell();
+        stripCell.setSize(10);
+        stripCell.setColor(Color.LIGHTBLUE);
     }
 
     public void init(MasterController masterController) {
@@ -78,25 +75,29 @@ public class EditorController {
     }
 
     public void setPattern() {
+        // set offset
+        setBoardOffset();
 
+        // set canvas view for editor equal to game of life canvas
+        cameraView.updateView(golEditor, editorCell.getSize(), (int)editor.getWidth(), (int)editor.getHeight());
+
+        // display alive cell on canvas
+        renderEditor();
+
+        // display generation strip
+        updateStrip();
+    }
+
+    private void setBoardOffset() {
+        // get board offset horizontally from parent view
         cameraView.boardOffsetX = (int) (parentCameraView.getCommonOffsetX(
                                                                     parentGol,
                                                                     parentCellSize) * editorCell.getSize() / parentCellSize);
 
+        // get board offset vertically from parent view
         cameraView.boardOffsetY = (int) (parentCameraView.getCommonOffsetY(
                                                                     parentGol,
                                                                     parentCellSize) * editorCell.getSize() / parentCellSize);
-
-        cameraView.updateView(golEditor, editorCell.getSize(), (int)editor.getWidth(), (int)editor.getHeight());
-
-        // set Graphics content
-        setGraphicsContentToEditor();
-
-        // set color
-        setColorToGC(Color.GREEN);
-
-        // display alive cell on canvas
-        renderEditor();
     }
 
     private void setColorToGC(Color color) {
@@ -104,6 +105,8 @@ public class EditorController {
     }
 
     private void renderEditor() {
+        setGraphicsContentToEditor();
+        gc.setFill(editorCell.getColor());
         for (int i = 0; i < golEditor.getGridWidth(); i++) {
             for (int j = 0; j < golEditor.getGridHeight(); j++) {
                 if (golEditor.isCellAlive(i, j))
@@ -117,13 +120,69 @@ public class EditorController {
     }
 
     public void drawAt(int x, int y, GraphicsContext gc) {
-        gc.fillRect(getCanvasPosX(x), getCanvasPosY(y), editorCell.getSize() - editorCell.getSpacingInPixels(), editorCell.getSize() - editorCell.getSpacingInPixels());
+        gc.fillRect(getEditorCanvasPosX(x), getEditorCanvasPosY(y), editorCell.getSize() - editorCell.getSpacingInPixels(), editorCell.getSize() - editorCell.getSpacingInPixels());
+    }
 
+    public void drawStripAt(int x, int y, GraphicsContext gc) {
+        gc.fillRect(getStripCanvasPosX(x), getStripCanvasPosY(y), stripCell.getSize() - stripCell.getSpacingInPixels(), stripCell.getSize() - stripCell.getSpacingInPixels());
     }
 
     @FXML
     private void updateStrip() {
+        // clone gol used for editor to strip
+        golStrip = golEditor.clone();
 
+        // calculate width and height for strip view
+        double number = editor.getHeight() / editorCell.getSize();
+        double size = strip.getHeight() / number;
+        int width = (int)(size * (editor.getWidth() / editorCell.getSize()));
+
+        // set cell size for strip
+        stripCell.setSize(strip.getHeight() / number);
+
+        // set offset X and Y
+        cameraViewStrip.boardOffsetX = (int) (cameraView.getCommonOffsetX(golEditor, editorCell.getSize()) * stripCell.getSize() / editorCell.getSize());
+        cameraViewStrip.boardOffsetY = (int) (cameraView.getCommonOffsetY(golEditor, editorCell.getSize()) * stripCell.getSize() / editorCell.getSize());
+
+        // show same view as editor controller
+        cameraViewStrip.updateView(golStrip, stripCell.getSize(), width, (int)strip.getHeight());
+
+        Affine form = new Affine();
+        double tx = 0;
+
+        setGraphicsContextToStrip();
+
+        for (int i = 0; i < 20; i++) {
+            form.setTx(tx);
+
+            gc.setTransform(form);
+            golStrip.nextGeneration();
+
+            clearStrip();
+            fillStrip();
+
+            tx += 400;
+        }
+
+        form.setTx(0.0);
+        gc.setTransform(form);
+
+        setGraphicsContentToEditor();
+    }
+
+    private void clearStrip() {
+        gc.clearRect(0, 0, strip.widthProperty().doubleValue(), strip.heightProperty().doubleValue());
+    }
+
+    private void fillStrip() {
+        gc.setFill(stripCell.getColor());
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 25; j++) {
+                if (golStrip.isCellAlive(i, j)) {
+                    drawStripAt(i, j, gc);
+                }
+            }
+        }
     }
 
     private void setGraphicsContentToEditor() {
@@ -158,8 +217,8 @@ public class EditorController {
         if (b == MouseButton.PRIMARY) {
 
             // gets cell on event position
-            int x = getGridPosX(currentMousePositionX);
-            int y = getGridPosY(currentMousePositionY);
+            int x = getEditorGridPosX(currentMousePositionX);
+            int y = getEditorGridPosY(currentMousePositionY);
 
             // makes sure the cell is on the grid
             fitTo(x, y);
@@ -179,6 +238,8 @@ public class EditorController {
         }
 
         // clears and render editor canvas
+        clearStrip();
+        updateStrip();
         clearEditor();
         renderEditor();
 
@@ -249,8 +310,8 @@ public class EditorController {
         if (mouseButton == MouseButton.PRIMARY) {
 
             // gets position of cell on click position
-            int gridClickX = getGridPosX(event.getX());
-            int gridClickY = getGridPosY(event.getY());
+            int gridClickX = getEditorGridPosX(event.getX());
+            int gridClickY = getEditorGridPosY(event.getY());
 
             // makes sure the cell is on the grid
             fitTo(gridClickX, gridClickY);
@@ -261,6 +322,7 @@ public class EditorController {
 
         clearEditor();
         renderEditor();
+        updateStrip();
     }
 
     private void clearEditor() {
@@ -271,14 +333,18 @@ public class EditorController {
     private void clear() {
         clearEditor();
         golEditor.clearGrid();
+        setGraphicsContextToStrip();
+        clearStrip();
+        golStrip.clearGrid();
+        setGraphicsContentToEditor();
     }
 
 
-    private int getGridPosX(double x) {
+    private int getEditorGridPosX(double x) {
         return (int)Math.floor((x + cameraView.getCommonOffsetX(golEditor, editorCell.getSize())) / editorCell.getSize());
     }
 
-    private int getGridPosY(double y) {
+    private int getEditorGridPosY(double y) {
         return (int) Math.floor((y + cameraView.getCommonOffsetY(golEditor, editorCell.getSize())) / editorCell.getSize());
     }
 
@@ -289,7 +355,7 @@ public class EditorController {
      * @param x a x coordinate in the grid.
      * @return a x coordinate on the canvas.
      */
-    private double getCanvasPosX(int x) {
+    private double getEditorCanvasPosX(int x) {
         return x * editorCell.getSize() - cameraView.getCommonOffsetX(golEditor, editorCell.getSize());
     }
 
@@ -299,8 +365,28 @@ public class EditorController {
      * @param y a y coordinate in the grid.
      * @return a y coordinate on the canvas.
      */
-    private double getCanvasPosY(int y) {
+    private double getEditorCanvasPosY(int y) {
         return y * editorCell.getSize() - cameraView.getCommonOffsetY(golEditor, editorCell.getSize());
+    }
+
+    /**
+     * Converts grid coordinate x to canvas coordinate x.
+     *
+     * @param x a x coordinate in the grid.
+     * @return a x coordinate on the canvas.
+     */
+    private double getStripCanvasPosX(int x) {
+        return x * stripCell.getSize() - cameraViewStrip.getCommonOffsetX(golStrip, stripCell.getSize());
+    }
+
+    /**
+     * Converts grid coordinate y to canvas coordinate y.
+     *
+     * @param y a y coordinate in the grid.
+     * @return a y coordinate on the canvas.
+     */
+    private double getStripCanvasPosY(int y) {
+        return y * stripCell.getSize() - cameraViewStrip.getCommonOffsetY(golStrip, stripCell.getSize());
     }
     //endregion
 
@@ -316,7 +402,7 @@ public class EditorController {
         double absMPosYOnGrid = (cameraView.getCommonOffsetY(golEditor, editorCell.getSize()) + scrollEvent.getY()) / editorCell.getSize();
 
         // changes cell size
-        editorCell.setSize(editorCell.getSize() * ( 1 + (scrollEvent.getDeltaY() / 150)));
+        editorCell.setSize(editorCell.getSize() * (1 + (scrollEvent.getDeltaY() / 150)));
 
         // moves the board so the mouse gets the exact same position on the board as before
 
@@ -324,6 +410,8 @@ public class EditorController {
         cameraView.boardOffsetY = (int) ((absMPosYOnGrid - golEditor.getOffsetY()) * editorCell.getSize() - scrollEvent.getY());
 
         clearEditor();
+        clearStrip();
+        updateStrip();
         renderEditor();
     }
 
@@ -351,6 +439,6 @@ public class EditorController {
     }
 
     public void onMouseMovedEditor(MouseEvent event) {
-        System.out.println(event.getX());
+        //System.out.println(event.getX());
     }
 }
