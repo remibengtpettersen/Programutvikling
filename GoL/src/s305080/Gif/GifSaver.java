@@ -189,7 +189,7 @@ public class GifSaver {
 
         // prepares gifWriter for next image
         gifWriter.insertAndProceed();
-        
+
         // draws next image
         drawNextImage();
     }

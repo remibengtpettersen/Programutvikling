@@ -207,24 +207,6 @@ public class PatternParserTest {
         Files.delete(file.toPath());
     }
 
-    @Test
-    public void testIfTwoDifferentRulesPresentRleThenPatternFormatException() throws IOException {
-        String error = "#r 32/3";
-        String rleFormat =
-                error + "\n"+
-                "x = 3, y = 3, rule = s23/b3\n" +
-                        "bo$2bo$3o$!\n";
-
-        List lineList = new ArrayList<>();
-        lineList.add(rleFormat);
-        File file = new File("test.rle");
-        Files.write(file.toPath(), lineList);
-
-        expectedException.expect(PatternFormatException.class);
-        PatternParser.read(file);
-        Files.delete(file.toPath());
-    }
-
     /**
      * Reads a threeEnginecordershiprake in Life 1.05 and Life 1.06 an compares them to each other.
      */
