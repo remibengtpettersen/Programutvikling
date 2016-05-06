@@ -120,7 +120,7 @@ public class ToFile {
                 currentLine.append((counter == 1) ? "" : counter).append("o");
             }
 
-
+            if(y != boundingBox[3])
             currentLine.append("$");
 
             counter = 0;
