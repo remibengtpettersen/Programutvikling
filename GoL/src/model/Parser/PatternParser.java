@@ -31,13 +31,13 @@ public class PatternParser {
     static List<String> metaData;
     static char currentCharacter;
     static String lastImportedRule;
-    static URL url;
+    private static URL url;
 
     /**
      * Reads a Game of Life pattern file and returns an array of the pattern
      * @param patternFile the file to read from
      * @return the boolean array produced from the file
-     * @throws IOException
+     * @throws IOException if the file could not be red
      */
     static public boolean[][] read(File patternFile) throws IOException {
 
@@ -63,7 +63,7 @@ public class PatternParser {
      * Reads a Game of Life pattern file from the web and returns an array of the pattern
      * @param pattern The web file to read from
      * @return The boolean array produced from the file
-     * @throws IOException
+     * @throws IOException if the url could not be red
      */
     static public boolean[][] readUrl(String pattern) throws IOException {
 
@@ -102,7 +102,7 @@ public class PatternParser {
      * Checks if a file with .lif or .life file types, is either Life 1.05 or Life 1.06,
      * then parses the file with the appropriate parser
      * @return The boolean array produced from the file
-     * @throws IOException
+     * @throws PatternFormatException if the format is violated
      */
     private static boolean[][] checkLifeFormat() throws PatternFormatException {
 

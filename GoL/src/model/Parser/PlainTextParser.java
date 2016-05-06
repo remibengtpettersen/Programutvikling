@@ -1,7 +1,5 @@
 package model.Parser;
 
-import java.io.IOException;
-
 /**
  * Created by Truls on 12/04/16.
  */

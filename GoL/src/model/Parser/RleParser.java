@@ -2,8 +2,6 @@ package model.Parser;
 
 import model.PatternFormatException;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -11,7 +9,6 @@ import java.util.regex.Pattern;
  * Created by Truls on 12/04/16.
  */
 class RleParser extends PatternParser {
-    private static Pattern patternParametersXLife;
 
     /**
      * Reads a RLE file
@@ -60,7 +57,7 @@ class RleParser extends PatternParser {
     private static void extractGridProperties() throws PatternFormatException {
 
         patternParameters = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+),[ ]*.*[ ]*=[ ]*(.+)$");
-        patternParametersXLife = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+)$");
+        Pattern patternParametersXLife = Pattern.compile("^x[ ]*=[ ]*([0-9]+),[ ]*y[ ]*=[ ]*([0-9]+)$");
 
         patternMatcher = patternParametersXLife.matcher(fileContentList.get(FIRST_LINE));
 

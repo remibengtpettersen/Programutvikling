@@ -42,8 +42,8 @@ public class MasterController {
     //endregion
 
     //region s305080
-    TheStrip theStrip;
-    Stats stats;
+    private TheStrip theStrip;
+    private Stats stats;
     //endregion
 
     /**
@@ -187,14 +187,10 @@ public class MasterController {
         }
     }
 
-    /**
-     *
-     * @return
-     */
     public CanvasController getCanvasController(){
         return canvasController;
     }
-    public ToolController getToolController(){
+    ToolController getToolController(){
         return toolController;
     }
     public MenuController getMenuController(){
@@ -218,7 +214,7 @@ public class MasterController {
             });
         }
     }
-    public void showStats() {
+    void showStats() {
         stats = new Stats();
         stats.display(canvasController.gol, this);
         if(theStrip == null)
@@ -241,26 +237,25 @@ public class MasterController {
     }
 
 
-    public void closeStats() {
+    void closeStats() {
         stats.close();
         stats = null;
     }
 
-    public Configuration getConfig() {
+    Configuration getConfig() {
         return configuration;
     }
 
-    public void importFromUrl() {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Import URL");
-        dialog.setHeaderText(null);
-        dialog.setContentText("Paste url to import from:");
+    void importFromUrl() {
+        TextInputDialog urlImportDialog = new TextInputDialog();
+        urlImportDialog.setTitle("Import URL");
+        urlImportDialog.setHeaderText(null);
+        urlImportDialog.setContentText("Paste url to import from:");
 
         canvasController.interaction = true;
 
-        Optional<String> result = dialog.showAndWait();
+        Optional<String> result = urlImportDialog.showAndWait();
 
-// The Java 8 way to get the response value (with lambda expression).
         result.ifPresent(name -> {
             try {
                 canvasController.setClipBoardPattern(PatternParser.readUrl(result.get()));

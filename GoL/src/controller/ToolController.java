@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import model.Cell;
 import model.rules.Rule;
-
 import java.util.Objects;
 
 /**
@@ -110,10 +109,19 @@ public class ToolController {
      * Updates the cellCount label in the toolView
      * @param cellCount the numbers of live cells in the grid
      */
-    public void giveCellCount(int cellCount) {
+    void giveCellCount(int cellCount) {
 
         cellCountLabel.setText("Cellcount: "+cellCount);
     }
+
+    /**
+     * Updates the rule label in the toolView
+     * @param rule the rule used to simulate game of life
+     */
+    void setRuleLabel(Rule rule){
+        ruleLabel.setText(rule.toString());
+    }
+
 
     /**
      * Toggles between pause and play game states.
@@ -135,7 +143,7 @@ public class ToolController {
     /**
      * Changes the btnPlay image to a play button image.
      */
-    public void changeButtonIconToPlay() {
+    void changeButtonIconToPlay() {
 
         btnPlay.setText("Play");
         btnPlay.setGraphic(new ImageView(imgPlay));
@@ -144,7 +152,7 @@ public class ToolController {
     /**
      * Changes the btnPlay image to a pause button image.
      */
-    public void changeButtonIconToPause() {
+    void changeButtonIconToPause() {
 
         btnPlay.setText("Pause");
         btnPlay.setGraphic(new ImageView(imgPause));
@@ -154,7 +162,7 @@ public class ToolController {
      * Sets the value of the zoomSlider to match the zoom value
      * @param zoom Zoom value to match
      */
-    public void setZoom(double zoom) {
+    void setZoom(double zoom) {
 
         zoomSlider.setValue(Math.log(zoom));
     }
@@ -175,14 +183,10 @@ public class ToolController {
      * Adds an amount to the speedSlider. Is called when scrolling.
      * @param deltaX Amount to add to speedSlider
      */
-    public void addSpeedValue(double deltaX) {
+    void addSpeedValue(double deltaX) {
 
         speedSlider.setValue(speedSlider.getValue()+deltaX);
         speedSliderDragged();
-    }
-
-    public void setRuleLabel(Rule rule){
-        ruleLabel.setText(rule.toString());
     }
 
 }
