@@ -352,6 +352,7 @@ public abstract class GameOfLife {
         return neighbours.toString();
     }
 
+    @Override
     public String toString() {
 
         StringBuilder string = new StringBuilder();

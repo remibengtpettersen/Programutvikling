@@ -22,13 +22,13 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Created by remibengtpettersen on 12.02.2016.
+ * Master controller. Responsible for handling the different controllers, as well as enabling communication between them
  */
 public class MasterController {
 
-    Configuration configuration;
-    public Stage stage;
-    public Scene scene;
+    private Configuration configuration;
+    private Stage stage;
+    private Scene scene;
 
     private FileChooser patternChooser = new FileChooser();
 
@@ -47,12 +47,11 @@ public class MasterController {
     //endregion
 
     /**
-     *
      * Called to initialize master controller after its root element has been completely processed
      *
      * @param stage The primary stage
      * @param root The border pane with the mainView
-     * @throws IOException
+     * @throws IOException Thrown
      */
     public void initialize(Stage stage, BorderPane root) throws IOException {
 
@@ -118,14 +117,14 @@ public class MasterController {
             statStage.setScene(new Scene(root));
 
 
-            statController.setGol(canvasController.gol);
+            statController.setGol(canvasController.getGol());
             statStage.setTitle("Statistics");
 
             statStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Failed to load the statistics (s305061) FXML document, IO exception");
+            System.out.println("Failed to load the statistics (s305061) FXML document, IO expectedException");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to load the statistics (s305061) FXML document");
@@ -144,14 +143,14 @@ public class MasterController {
             Stage gifStage = new Stage();
             gifStage.setScene(new Scene(root));
 
-            gifController.initialize(gifStage, canvasController.gol);
+            gifController.initialize(gifStage, canvasController.getGol());
             gifStage.setTitle("Create GIF");
 
             gifStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Failed to load the gif (s305061) FXML document, IO exception");
+            System.out.println("Failed to load the gif (s305061) FXML document, IO expectedException");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to load the gif (s305061) FXML document");
@@ -165,12 +164,12 @@ public class MasterController {
     public void choosePattern(){
 
         // lock canvas control
-        canvasController.interaction = true;
+        canvasController.setInteraction(true);
         // open pattern chooser
         File file = patternChooser.showOpenDialog(stage);
 
         // release canvas control
-        canvasController.interaction = false;
+        canvasController.setInteraction(false);
 
         // check if file is NOT null
         if(file != null) {
@@ -190,12 +189,18 @@ public class MasterController {
     public CanvasController getCanvasController(){
         return canvasController;
     }
-    ToolController getToolController(){
+    public ToolController getToolController(){
         return toolController;
     }
     public MenuController getMenuController(){
         return menuController;
     }
+
+    public Scene getScene() { return scene; }
+
+    public Configuration getConfiguration() { return configuration; }
+
+    public Stage getStage() { return stage; }
 
     //region s305080
 
@@ -216,7 +221,7 @@ public class MasterController {
     }
     void showStats() {
         stats = new Stats();
-        stats.display(canvasController.gol, this);
+        stats.display(canvasController.getGol(), this);
         if(theStrip == null)
             stage.setOnCloseRequest(event -> closeStats());
         else{
@@ -257,7 +262,7 @@ public class MasterController {
         urlImportDialog.setHeaderText(null);
         urlImportDialog.setContentText("Paste url to import from:");
 
-        canvasController.interaction = true;
+        canvasController.setInteraction(true);
 
         Optional<String> result = urlImportDialog.showAndWait();
 
@@ -272,7 +277,7 @@ public class MasterController {
                 MessageBox.alert("Could not read from URL");
             }
         });
-        canvasController.interaction = false;
+        canvasController.setInteraction(false);
     }
 
 

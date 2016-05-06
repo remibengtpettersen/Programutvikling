@@ -41,7 +41,7 @@ public class Stats {
 
         stage.setOnCloseRequest(event -> masterController.getMenuController().setStatsShowing(false));
         stage.setX(0);
-        stage.setWidth(masterController.stage.getX());
+        stage.setWidth(masterController.getStage().getX());
 
     }
 

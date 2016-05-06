@@ -87,13 +87,13 @@ public class EditorController {
         parentCameraView = masterController.getCanvasController().getCameraView();
 
         // gets gol reference used in main window
-        parentGol = masterController.getCanvasController().gol;
+        parentGol = masterController.getCanvasController().getGol();
 
         // gets cell size from main window
         parentCellSize = masterController.getCanvasController().getCell().getSize();
 
         // gets current rule from main program
-        txtRule.setText(masterController.getCanvasController().gol.getRule().toString());
+        txtRule.setText(masterController.getCanvasController().getGol().getRule().toString());
 
         //btnSave.requestFocus();
 

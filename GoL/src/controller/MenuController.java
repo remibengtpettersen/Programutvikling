@@ -84,7 +84,7 @@ public class MenuController {
     public void setCustomRule() {
 
         // set active rule text in input dialog
-        TextInputDialog dialog = new TextInputDialog(masterController.getCanvasController().gol.getRule().toString());
+        TextInputDialog dialog = new TextInputDialog(masterController.getCanvasController().getGol().getRule().toString());
 
         // set title, header and content text
         dialog.setTitle("Custom rule");
@@ -181,7 +181,7 @@ public class MenuController {
 
         // set modality to window and locks primary stage for access
         editor.initModality(Modality.WINDOW_MODAL);
-        editor.initOwner(masterController.stage);
+        editor.initOwner(masterController.getStage());
 
         // initialize root
         GridPane root = null;
@@ -202,7 +202,7 @@ public class MenuController {
         EditorController editorController = loader.getController();
 
         // deep copy and assign to new reference variable
-        editorController.getDeepCopyGol(masterController.getCanvasController().gol);
+        editorController.getDeepCopyGol(masterController.getCanvasController().getGol());
 
         editorController.initialize(masterController);
 

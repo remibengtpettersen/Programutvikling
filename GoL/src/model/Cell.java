@@ -24,7 +24,7 @@ public class Cell {
 
     /**
      * Creates a default cell with the default Conway "Game Of Life" style with a specific configuration.
-     * @param configuration
+     * @param configuration Configuration file
      */
     public Cell(Configuration configuration){
 

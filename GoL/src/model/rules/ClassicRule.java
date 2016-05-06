@@ -15,7 +15,7 @@ public class ClassicRule extends Rule {
     public ClassicRule(GameOfLife gol){
         super(gol);
 
-        rulestring = "B3/S23";
+        rulestring = RuleParser.CLASSIC_RULESTRING;
     }
 
     @Override

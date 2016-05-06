@@ -47,8 +47,8 @@ public class TheStrip {
 
         bindCanvasToStage(stage);
 
-        stage.setX(masterController.stage.getX()+masterController.stage.getWidth());
-        stage.setY(masterController.stage.getY());
+        stage.setX(masterController.getStage().getX()+ masterController.getStage().getWidth());
+        stage.setY(masterController.getStage().getY());
 
 
         masterController.getCanvasController().getCanvas().setOnMouseClicked(event -> theStripController.updateStrip());

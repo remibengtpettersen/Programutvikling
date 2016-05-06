@@ -56,7 +56,7 @@ public class GifSaver {
     public void saveCanvasAsGif(CanvasController cController) throws IOException {
         this.cController = cController;
 
-        originalGol = cController.gol;
+        originalGol = cController.getGol();
         gol = originalGol.clone();
 
         // les user decide length and speed of gif
@@ -88,7 +88,7 @@ public class GifSaver {
     public void saveGifFromSelectedArea(CanvasController cController, int[] boundingBox) throws IOException {
         this.cController = cController;
 
-        originalGol = cController.gol;
+        originalGol = cController.getGol();
         gol = originalGol.clone();
 
         // les user decide length and speed of gif
@@ -121,7 +121,7 @@ public class GifSaver {
         // lets the user decide where to save the gif
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose save directory");
-        File file = fileChooser.showSaveDialog(cController.masterController.stage);
+        File file = fileChooser.showSaveDialog(cController.getMasterController().getStage());
 
         // quits if user canceled or didn't choose location
         if (file == null){
