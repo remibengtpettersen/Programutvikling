@@ -8,9 +8,13 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import model.rules.RuleParser;
 import s305073.controller.EditorController;
+import tools.MessageBox;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -53,8 +57,7 @@ public class MenuController {
      * Launched about window for "Game of Life".
      */
     public void onAbout() {
-
-        System.out.println("About clicked");
+        MessageBox.alert("This is game of life");
     }
 
     /**
@@ -296,6 +299,15 @@ public class MenuController {
     }
 
     public void openTips() {
-        //MessageBox.alert();
+        MessageBox.alert("Move around wit right-click + drag\n" +
+                "Draw cells with left-click\n" +
+                "Zoom with scroll or slider\n" +
+                "control speed with vertical scroll or slider\n" +
+                "Pause game with right-click or pause button.\n" +
+                "\n" +
+                "Rotate import-pattern with 'z' and 'x'\n" +
+                "\n" +
+                "Last imported pattern is in clipboard, insert with 'ctrl + V'");
     }
+
 }

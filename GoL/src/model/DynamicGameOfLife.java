@@ -1,6 +1,5 @@
 package model;
 
-import model.rules.Rule;
 import model.rules.RuleParser;
 
 import java.util.ArrayList;

@@ -26,7 +26,7 @@ import java.util.Optional;
  */
 public class MasterController {
 
-    public Configuration configuration;
+    Configuration configuration;
     public Stage stage;
     public Scene scene;
 
@@ -236,7 +236,9 @@ public class MasterController {
         theStrip = null;
     }
 
-
+    /**
+     * Closes Stats
+     */
     void closeStats() {
         stats.close();
         stats = null;
@@ -246,6 +248,9 @@ public class MasterController {
         return configuration;
     }
 
+    /**
+     * Opens prompt so user can insert url, and imports pattern from url
+     */
     void importFromUrl() {
         TextInputDialog urlImportDialog = new TextInputDialog();
         urlImportDialog.setTitle("Import URL");

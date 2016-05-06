@@ -158,7 +158,7 @@ public class CanvasController {
 
                     if(!interaction) {
 
-                        // to be able to pan the board without lag during large simulations nextGeneration()
+                        // to be able to pan the board without lag during large simulations, nextGeneration()
                         // is put inside a thread
                         if(!thread.isAlive()){
                             thread = new Thread(() -> {
@@ -181,23 +181,38 @@ public class CanvasController {
      * Replaces the existing dynamic game of life board with a static one
      */
     void changeToStatic(){
+        // creates new static grid
         GameOfLife newGol = new StaticGameOfLife(500, 500, gol.getRule().toString());
-        insertOldGrid(gol, newGol, newGol.getGridWidth(), newGol.getGridHeight());
-        cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
-        cView.boardOffsetY = cView.getCommonOffsetY(gol, cell.getSize());
-        gol = newGol;
-        renderCanvasIfLowFPS();
-
+        // sets it as primary gol
+        changeGol(newGol);
     }
 
     /**
      * Replaces the existing static game of life board with a dynamic one
      */
     void changeToDynamic(){
+        // creates new dynamic gol
         GameOfLife newGol = new DynamicGameOfLife(gol.getRule().toString());
+        //sets it as primary gol
+        changeGol(newGol);
+    }
+
+    /**
+     * Does necessary calculations to set newGol in the position as primary gol
+     * @param newGol the GameOfLife object to set as primary gol
+     */
+    private void changeGol(GameOfLife newGol) {
+
+        // inserts the old pattern
         insertOldGrid(gol, newGol, gol.getGridWidth(), gol.getGridHeight());
+
+        // sets the same offset as before
         cView.boardOffsetX = cView.getCommonOffsetX(gol, cell.getSize());
         cView.boardOffsetY = cView.getCommonOffsetY(gol, cell.getSize());
+
+        // sets the same rule as before
+        newGol.setRule(gol.getRule().toString());
+
         gol = newGol;
         renderCanvasIfLowFPS();
     }
