@@ -83,10 +83,10 @@ public class EditorController {
         this.masterController = masterController;
 
         parentCameraView = masterController.getCanvasController().getCameraView();
-        parentGol = masterController.getCanvasController().gol;
+        parentGol = masterController.getCanvasController().getGol();
         parentCellSize = masterController.getCanvasController().getCell().getSize();
 
-        txtRule.setText(masterController.getCanvasController().gol.getRule().toString());
+        txtRule.setText(masterController.getCanvasController().getGol().getRule().toString());
         btnSave.requestFocus();
 
         gcEditor = editor.getGraphicsContext2D();
@@ -367,7 +367,7 @@ public class EditorController {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("RLE", "*.rle"));
 
-        File file = fileChooser.showSaveDialog(masterController.stage);
+        File file = fileChooser.showSaveDialog(masterController.getStage());
 
         try {
             FileWriter fileWriter = null;

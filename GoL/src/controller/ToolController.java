@@ -59,8 +59,8 @@ public class ToolController {
 
         // tries to get colors from the configuration, and sets to the color pickers
         try {
-            Color liveCellColor = (Color) Color.class.getField(masterController.configuration.getCellColor()).get(null);
-            Color deadCellColor = (Color) Color.class.getField(masterController.configuration.getBackgroundColor()).get(null);
+            Color liveCellColor = (Color) Color.class.getField(masterController.getConfiguration().getCellColor()).get(null);
+            Color deadCellColor = (Color) Color.class.getField(masterController.getConfiguration().getBackgroundColor()).get(null);
 
             liveCellColorPicker.setValue(liveCellColor);
             deadCellColorPicker.setValue(deadCellColor);

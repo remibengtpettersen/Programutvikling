@@ -24,9 +24,6 @@ public class CellTest {
     @Test
     public void testCalculateGhostColor() throws Exception {
 
-        // get the default ghost color (gray)
-        Color defaultGhostColor = cell.getGhostColor();
-
         // set initial color to be red
         Color initialColor = new Color(1, 0, 0, 1);
         cell.setColor(initialColor);

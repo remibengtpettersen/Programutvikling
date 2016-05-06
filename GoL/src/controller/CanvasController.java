@@ -38,21 +38,9 @@ import java.util.Optional;
  */
 public class CanvasController {
 
-    public GameOfLife gol;
-    public MasterController masterController;
-    @FXML private Canvas canvas;
-    private GraphicsContext gc;
+    private MasterController masterController;
 
-    private AnimationTimer animationTimer;
-    private long timer;
-
-    private Cell cell;
-
-    // controlls the framerate
-    private int frameDelay;
-
-    private boolean running = true;
-    boolean interaction = false;
+    //region mouse input
 
     // Is used to calculate the distance the mouse has traveled since last MouseDragEvent.
     private int currMousePosX;
@@ -60,32 +48,48 @@ public class CanvasController {
     private int prevMousePosX;
     private int prevMousePosY;
 
-
     private boolean mouseDrag;
     private boolean mouseOnCanvas;
 
-    // tracks board position
+    //endregion
 
-    //private int boardOffsetX = 50;
-    //private int boardOffsetY = 50;
+    //region visuals
 
-    // tracks cells in view.
-    //private int currViewMinX;
-    //private int currViewMaxX;
-    //private int currViewMinY;
-    //private int currViewMaxY;
+    @FXML private Canvas canvas;
+    private GraphicsContext gc;
 
+    private Cell cell;
     private CameraView cView = new CameraView();
-
-    // holds pattern to be imported
-    private boolean[][] clipBoardPattern;
-    private boolean importing = false;
 
     // whether or not to draw grid lines
     private boolean gridLines;
     private boolean userWantsGridLines;
 
+    //endregion
+
+    //region animation
+
     private Thread thread;
+
+    private AnimationTimer animationTimer;
+    private long timer;
+
+    // controls the framerate
+    private int frameDelay;
+    private boolean running = true;
+    private boolean interaction = false;
+    //endregion
+
+    //region game
+
+    private GameOfLife gol;
+
+    // holds pattern to be imported
+    private boolean[][] clipBoardPattern;
+
+    private boolean importing = false;
+
+    //endregion
 
     //region s305080
 
@@ -135,12 +139,10 @@ public class CanvasController {
         cell = new Cell(masterController.getConfig());
 
         // gets parameters from config file
-        frameDelay = masterController.configuration.getGameSpeed();
-        userWantsGridLines = masterController.configuration.isGridLinesOn();
+        frameDelay = masterController.getConfiguration().getGameSpeed();
+        userWantsGridLines = masterController.getConfiguration().isGridLinesOn();
         masterController.getToolController().setSpeed(frameDelay);
     }
-
-
 
     /**
      * Initializes the animation. The "timer" and "frameDelay" are used for having dynamic frame rate.
@@ -187,7 +189,6 @@ public class CanvasController {
         cView.boardOffsetY = cView.getCommonOffsetY(gol, cell.getSize());
         gol = newGol;
         renderCanvasIfLowFPS();
-
     }
 
     /**
@@ -244,8 +245,8 @@ public class CanvasController {
         canvas.setOnMouseEntered(this::mouseCanvasEnter);
 
         //sets up keyboard listeners
-        masterController.scene.setOnKeyPressed(this::keyPressed);
-        masterController.scene.setOnKeyReleased(this::keyReleased);
+        masterController.getScene().setOnKeyPressed(this::keyPressed);
+        masterController.getScene().setOnKeyReleased(this::keyReleased);
 
         // binds the canvas to the stage size
         canvas.widthProperty().addListener(evt -> renderCanvasIfLowFPS());
@@ -265,7 +266,6 @@ public class CanvasController {
      * @param keyEvent Contains information about which key is pressed
      */
     private void keyPressed(KeyEvent keyEvent) {
-
 
         // stores the key code
         String code = keyEvent.getCode().toString();
@@ -323,6 +323,7 @@ public class CanvasController {
      * Rotates the clipboard pattern 90 degrees clockwise.
      */
     private void rotateImportRight() {
+
         if (clipBoardPattern == null){
             return;
         }
@@ -340,6 +341,7 @@ public class CanvasController {
      * Rotates the clipboard pattern 90 degrees counterclockwise.
      */
     private void rotateImportLeft() {
+
         if (clipBoardPattern == null){
             return;
         }
@@ -352,7 +354,6 @@ public class CanvasController {
         clipBoardPattern = temp;
         renderCanvasIfLowFPS();
     }
-
 
     /**
      * Called when key is released
@@ -420,7 +421,6 @@ public class CanvasController {
 
         System.out.println(cView.currViewMinX + " " + cView.currViewMaxX);
 
-
         // if click is end of drag, reset variables used in drag
         if (mouseDrag) {
             prevMousePosX = 0;
@@ -463,7 +463,7 @@ public class CanvasController {
                 renderCanvas();
 
             // checks if right click
-        } else if (mouseEvent.getButton() == MouseButton.SECONDARY)
+        } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
 
             // pause if running, play if paused
             if (running) {
@@ -475,6 +475,7 @@ public class CanvasController {
                 startAnimation();
                 running = true;
             }
+        }
     }
 
     /**
@@ -505,7 +506,8 @@ public class CanvasController {
             if (prevMousePosX != 0 || prevMousePosY != 0) {
 
                 // draws a line from last mouse position to current position
-                drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY), getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
+                drawLine(getGridPosX(currMousePosX), getGridPosY(currMousePosY),
+                        getGridPosX(prevMousePosX), getGridPosY(prevMousePosY));
 
                 // updates the cell counter
                 giveCellCount();
@@ -541,8 +543,6 @@ public class CanvasController {
         // stores current mouse position for later use
         prevMousePosX = currMousePosX;
         prevMousePosY = currMousePosY;
-
-
     }
 
     /**
@@ -568,6 +568,7 @@ public class CanvasController {
      * @param y The Y coordinate of the cell to fit the board to
      */
     private void fitTo(int x, int y) {
+
         // checks x is negative
         if(x < 0){
             // extends the board to fit to x
@@ -580,7 +581,6 @@ public class CanvasController {
             ((DynamicGameOfLife)gol).increaseYTop(Math.abs(y));
             //boardOffsetY -= (y - 1) * cell.getSize();
         }
-
     }
 
     /**
@@ -590,8 +590,11 @@ public class CanvasController {
     private void mouseScroll(ScrollEvent scrollEvent) {
 
         // gets exact cell position at mouse coordinates
-        double absMPosXOnGrid = (cView.getCommonOffsetX(gol, cell.getSize()) + scrollEvent.getX()) / cell.getSize();
-        double absMPosYOnGrid = (cView.getCommonOffsetY(gol, cell.getSize()) + scrollEvent.getY()) /  cell.getSize();
+        double absMPosXOnGrid = (cView.getCommonOffsetX(gol, cell.getSize())
+                + scrollEvent.getX()) / cell.getSize();
+
+        double absMPosYOnGrid = (cView.getCommonOffsetY(gol, cell.getSize())
+                + scrollEvent.getY()) /  cell.getSize();
 
         // changes cellsize
         cell.setSize(cell.getSize() * ( 1 + (scrollEvent.getDeltaY() / 150)));
@@ -621,11 +624,24 @@ public class CanvasController {
     }
 
     // region canvas to grid converter
+
+    /**
+     * Converts horizontal mouse position on canvas to horizontal cell position on grid
+     * @param x X coordinate for mouse
+     * @return X coordinate on grid
+     */
     private int getGridPosX(double x) {
+
         return (int)Math.floor((x + cView.getCommonOffsetX(gol, cell.getSize())) / cell.getSize());
     }
 
+    /**
+     * Converts vertical mouse position on canvas to vertical cell position on grid
+     * @param y Y coordinate for mouse
+     * @return Y coordinate on grid
+     */
     private int getGridPosY(double y) {
+
         return (int) Math.floor((y + cView.getCommonOffsetY(gol, cell.getSize())) / cell.getSize());
     }
     // endregion
@@ -639,7 +655,9 @@ public class CanvasController {
      * @return a x coordinate on the canvas.
      */
     public double getCanvasPosX(int x) {
-        return x * cell.getSize() - cView.getCommonOffsetX(gol, cell.getSize());
+
+        return x * cell.getSize() -
+                cView.getCommonOffsetX(gol, cell.getSize());
     }
 
     /**
@@ -649,10 +667,11 @@ public class CanvasController {
      * @return a y coordinate on the canvas.
      */
     public double getCanvasPosY(int y) {
-        return y * cell.getSize() - cView.getCommonOffsetY(gol, cell.getSize());
+
+        return y * cell.getSize() -
+                cView.getCommonOffsetY(gol, cell.getSize());
     }
     //endregion
-
 
     /**
      * Renders everything on the canvas
@@ -685,9 +704,7 @@ public class CanvasController {
             gc.setLineWidth(2);
             gc.strokeRect(-cView.getCommonOffsetX(gol, cell.getSize()), -cView.getCommonOffsetY(gol, cell.getSize()), gol.getGridWidth() * cell.getSize(), gol.getGridHeight() * cell.getSize());
         }
-
     }
-
 
     /**
      * Renders the current state of the game of life simulation to the canvas.
@@ -712,7 +729,6 @@ public class CanvasController {
                        drawCell(x, y);
                }
                 catch (NullPointerException ignored){
-
                 }
             }
         }
@@ -732,11 +748,10 @@ public class CanvasController {
         for (double i = 0; i < canvas.getWidth(); i += cell.getSize()){
 
             // draws vertical line number "i" inside the canvas view
-            gc.strokeLine(
-                    xCoordinate = -cView .getCommonOffsetX(gol, cell.getSize()) % cell.getSize() + i - cell.getSpacingInPixels() / 2,
-                    0,
-                    xCoordinate,
-                    canvas.getHeight());
+            gc.strokeLine(xCoordinate = -cView.getCommonOffsetX(gol,
+                    cell.getSize()) % cell.getSize() +
+                    i - cell.getSpacingInPixels() / 2, 0,
+                    xCoordinate, canvas.getHeight());
         }
 
         // stores the y coordinate of the line that is used for drawing grid lines
@@ -744,13 +759,11 @@ public class CanvasController {
         for (double i = 0; i < canvas.getHeight(); i += cell.getSize()){
 
             // draws horizontal line number "i" inside the canvas view
-            gc.strokeLine(
-                    0,
-                    yCoordinate = -cView.getCommonOffsetY(gol, cell.getSize()) % cell.getSize() + i - cell.getSpacingInPixels() / 2,
-                    canvas.getWidth(),
-                    yCoordinate);
+            gc.strokeLine(0, yCoordinate = -cView.getCommonOffsetY(gol,
+                    cell.getSize()) % cell.getSize() +
+                    i - cell.getSpacingInPixels() / 2,
+                    canvas.getWidth(), yCoordinate);
         }
-
     }
 
     /**
@@ -776,7 +789,6 @@ public class CanvasController {
      */
     private void insertImport() {
 
-
         for (int x = 0; x < clipBoardPattern.length; x++) {
             for (int y = 0; y < clipBoardPattern[x].length; y++) {
 
@@ -799,7 +811,6 @@ public class CanvasController {
                     // sets the cell alive
                     gol.setCellAlive(posX, posY);
                 }
-
             }
         }
         // import should no longer be rendered
@@ -811,7 +822,6 @@ public class CanvasController {
         // updates canvas if framerate is low
         renderCanvasIfLowFPS();
     }
-
 
     /**
      * Kills all cells on grid
@@ -929,7 +939,6 @@ public class CanvasController {
      */
     void setDeadColor(Color deadColor) { cell.setDeadColor(deadColor); }
 
-
     /**
      * Setts the cell size to be the newCellSize
      *
@@ -938,15 +947,21 @@ public class CanvasController {
     void setCellSize(double newCellSize) {
 
         // stores the exact center of the canvas view
-        double canvasCenterX = (cView.getCommonOffsetX(gol, cell.getSize()) + canvas.getWidth() / 2) / cell.getSize();
-        double canvasCenterY = (cView.getCommonOffsetY(gol, cell.getSize()) + canvas.getHeight() / 2) / cell.getSize();
+        double canvasCenterX = (cView.getCommonOffsetX(gol, cell.getSize()) +
+                canvas.getWidth() / 2) / cell.getSize();
+
+        double canvasCenterY = (cView.getCommonOffsetY(gol, cell.getSize()) +
+                canvas.getHeight() / 2) / cell.getSize();
 
         // sets the new cellSize
         cell.setSize(newCellSize);
 
         // moves the board to get the same center of view as before
-        cView.boardOffsetX = (int) (cell.getSize() * canvasCenterX - canvas.getWidth() / 2 - gol.getOffsetX() * cell.getSize());
-        cView.boardOffsetY = (int) (cell.getSize() * canvasCenterY - canvas.getHeight() / 2 - gol.getOffsetY() * cell.getSize());
+        cView.boardOffsetX = (int) (cell.getSize() * canvasCenterX -
+                canvas.getWidth() / 2 - gol.getOffsetX() * cell.getSize());
+
+        cView.boardOffsetY = (int) (cell.getSize() * canvasCenterY -
+                canvas.getHeight() / 2 - gol.getOffsetY() * cell.getSize());
 
         // checks if still necessary to draw grid lines
         checkIfShouldStillDrawGrid();
@@ -961,7 +976,6 @@ public class CanvasController {
      * @param clipBoardPattern the pattern that is imported from a file
      */
     void setClipBoardPattern(boolean[][] clipBoardPattern) {
-
 
         this.clipBoardPattern = clipBoardPattern;
 
@@ -990,6 +1004,7 @@ public class CanvasController {
      * @param importedRule The rule the user can change to.
      */
     private void showDifferentRule(String importedRule) {
+
         interaction = true;
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Wrong rule");
@@ -1038,14 +1053,18 @@ public class CanvasController {
         // sets the rule
         gol.setRule(ruleText);
         masterController.getToolController().setRuleLabel(gol.getRule());
-
     }
 
     /**
      * Sends the cellCount to the cell counter in toolController
      */
     private void giveCellCount() {
+
         masterController.getToolController().giveCellCount(gol.getCellCount());
+    }
+
+    public void setInteraction(boolean interaction) {
+        this.interaction = interaction;
     }
 
     //endregion
@@ -1062,6 +1081,11 @@ public class CanvasController {
     public Cell getCell() {
         return cell;
     }
+
+    public MasterController getMasterController() {
+        return masterController;
+    }
+
     //endregion
 
     // region s305080 extra task
@@ -1087,7 +1111,7 @@ public class CanvasController {
      */
     void saveToFile() {
         interaction = true;
-        new ToFile().writeToFile(gol, masterController.stage);
+        new ToFile().writeToFile(gol, masterController.getStage());
         interaction = false;
     }
 
@@ -1158,8 +1182,6 @@ public class CanvasController {
         // stores the button
         MouseButton b = mouseEvent.getButton();
 
-
-
         // gets mouse coordinates on canvas.
         currMousePosX = (int) mouseEvent.getX();
         currMousePosY = (int) mouseEvent.getY();
@@ -1223,7 +1245,6 @@ public class CanvasController {
             return;
         }
 
-
         // gets the min and max x and y values inside the marked area
         int [] minMaxValues = getMinMaxValues();
 
@@ -1250,8 +1271,6 @@ public class CanvasController {
 
         // updates canvas if framerate is low
         renderCanvasIfLowFPS();
-
-
     }
 
     /**
@@ -1296,7 +1315,6 @@ public class CanvasController {
         clipBoardPattern = clipboard;
         renderCanvasIfLowFPS();
 
-
         removeMarkedArea();
 
         renderCanvasIfLowFPS();
@@ -1326,7 +1344,5 @@ public class CanvasController {
         return gol;
     }
 
-
     //endregion
-
 }
