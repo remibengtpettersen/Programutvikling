@@ -56,7 +56,7 @@ public class MetaDataController {
         if(!rules.getText().matches("[ ]*")){
             list.add("!Recomended rule : " + rules.getText());
         }
-        toFile.setFormat(ToFile.LagringsFormat.PlainText);
+        toFile.setFormat(ToFile.Format.PlainText);
 
     }
 
@@ -74,7 +74,7 @@ public class MetaDataController {
         if(!rules.getText().matches("[ ]*")){
             toFile.setRuleText(rules.getText());
         }
-        toFile.setFormat(ToFile.LagringsFormat.RLE);
+        toFile.setFormat(ToFile.Format.RLE);
     }
 
     public void setList(List<String> list){

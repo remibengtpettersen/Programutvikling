@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -9,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.collections.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<VBox alignment="CENTER"
       prefHeight="362.0" prefWidth="200.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.40"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="s305080.PatternSaver.MetaDataController">
     <children>
@@ -19,13 +17,11 @@
                 <Font name="System Bold" size="30.0"/>
             </font>
         </Label>
-        <TextField fx:id="name" alignment="CENTER" maxWidth="150.0" prefHeight="30.0" prefWidth="50.0"
-                   promptText="Name"/>
-        <TextField fx:id="author" alignment="CENTER" maxWidth="150.0" prefHeight="30.0" prefWidth="150.0"
-                   promptText="Author"/>
-        <TextField fx:id="description" alignment="CENTER" maxWidth="150.0" promptText="Description"/>
-        <TextField fx:id="rules" alignment="CENTER" maxWidth="150.0" promptText="Rules"/>
-        <ComboBox fx:id="format" promptText="Choose format">
+        <TextField fx:id="name"        alignment="CENTER" maxWidth="150.0" prefHeight="30.0" prefWidth="50.0"  promptText="Name"/>
+        <TextField fx:id="author"      alignment="CENTER" maxWidth="150.0" prefHeight="30.0" prefWidth="150.0" promptText="Author"/>
+        <TextField fx:id="description" alignment="CENTER" maxWidth="150.0" prefHeight="30.0" prefWidth="50.0"  promptText="Description"/>
+        <TextField fx:id="rules"       alignment="CENTER" maxWidth="150.0" prefHeight="30.0" prefWidth="50.0"  promptText="Rules"/>
+        <ComboBox  fx:id="format" promptText="Choose format">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Plain text"/>
@@ -33,6 +29,6 @@
                 </FXCollections>
             </items>
         </ComboBox>
-        <Button fx:id="saveBtn" onAction="#insertMetaData" mnemonicParsing="false" text="Save"/>
+        <Button onAction="#insertMetaData" text="Save"/>
     </children>
 </VBox>
